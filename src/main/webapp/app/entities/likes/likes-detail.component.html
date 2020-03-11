@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="likes">
+            <h2><span jhiTranslate="hahuApp.likes.detail.title">Likes</span> {{ likes.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.likes.registeredTime">Registered Time</span></dt>
+                <dd>
+                    <span>{{ likes.registeredTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.likes.user">User</span></dt>
+                <dd>
+                    {{ likes.userLogin }}
+                </dd>
+                <dt><span jhiTranslate="hahuApp.likes.post">Post</span></dt>
+                <dd>
+                    <div *ngIf="likes.postId">
+                        <a [routerLink]="['/post', likes.postId, 'view']">{{ likes.postId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.likes.comment">Comment</span></dt>
+                <dd>
+                    <div *ngIf="likes.commentId">
+                        <a [routerLink]="['/comment', likes.commentId, 'view']">{{ likes.commentId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/likes', likes.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

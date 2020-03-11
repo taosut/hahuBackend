@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="usersConnection">
+            <h2><span jhiTranslate="hahuApp.usersConnection.detail.title">Users Connection</span> {{ usersConnection.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.usersConnection.registeredTime">Registered Time</span></dt>
+                <dd>
+                    <span>{{ usersConnection.registeredTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.usersConnection.follower">Follower</span></dt>
+                <dd>
+                    <div *ngIf="usersConnection.followerId">
+                        <a [routerLink]="['/additional-user-info', usersConnection.followerId, 'view']">{{ usersConnection.followerId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.usersConnection.following">Following</span></dt>
+                <dd>
+                    <div *ngIf="usersConnection.followingId">
+                        <a [routerLink]="['/additional-user-info', usersConnection.followingId, 'view']">{{ usersConnection.followingId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/users-connection', usersConnection.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

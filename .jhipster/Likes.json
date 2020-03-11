@@ -1,0 +1,44 @@
+{
+    "name": "Likes",
+    "fields": [
+        {
+            "fieldName": "registeredTime",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "likes",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "like",
+            "relationshipName": "post",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "comment",
+            "otherEntityRelationshipName": "like",
+            "relationshipName": "comment",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200311215400",
+    "javadoc": "The Likes entity contain likes for user, comment, posts.\\n@author A true hailemaryam",
+    "entityTableName": "likes",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

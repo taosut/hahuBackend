@@ -14,6 +14,34 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215000_added_entity_Category.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215100_added_entity_Tag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215200_added_entity_Post.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215300_added_entity_Comment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215400_added_entity_Likes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215500_added_entity_UsersConnection.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215600_added_entity_Album.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215700_added_entity_Image.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215800_added_entity_UserGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215900_added_entity_Notification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220000_added_entity_SchoolProgress.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220100_added_entity_Schedule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220200_added_entity_Preference.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220300_added_entity_Setting.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220400_added_entity_Profile.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220500_added_entity_AdditionalUserInfo.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20200311215200_added_entity_constraints_Post.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215300_added_entity_constraints_Comment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215400_added_entity_constraints_Likes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215500_added_entity_constraints_UsersConnection.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215700_added_entity_constraints_Image.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311215900_added_entity_constraints_Notification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220000_added_entity_constraints_SchoolProgress.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220100_added_entity_constraints_Schedule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220200_added_entity_constraints_Preference.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220300_added_entity_constraints_Setting.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220400_added_entity_constraints_Profile.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311220500_added_entity_constraints_AdditionalUserInfo.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

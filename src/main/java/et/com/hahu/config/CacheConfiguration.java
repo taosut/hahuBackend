@@ -42,6 +42,34 @@ public class CacheConfiguration {
             createCache(cm, et.com.hahu.domain.User.class.getName());
             createCache(cm, et.com.hahu.domain.Authority.class.getName());
             createCache(cm, et.com.hahu.domain.User.class.getName() + ".authorities");
+            createCache(cm, et.com.hahu.domain.Category.class.getName());
+            createCache(cm, et.com.hahu.domain.Category.class.getName() + ".posts");
+            createCache(cm, et.com.hahu.domain.Tag.class.getName());
+            createCache(cm, et.com.hahu.domain.Tag.class.getName() + ".posts");
+            createCache(cm, et.com.hahu.domain.Post.class.getName());
+            createCache(cm, et.com.hahu.domain.Post.class.getName() + ".comments");
+            createCache(cm, et.com.hahu.domain.Post.class.getName() + ".likes");
+            createCache(cm, et.com.hahu.domain.Post.class.getName() + ".categories");
+            createCache(cm, et.com.hahu.domain.Post.class.getName() + ".tags");
+            createCache(cm, et.com.hahu.domain.Comment.class.getName());
+            createCache(cm, et.com.hahu.domain.Comment.class.getName() + ".replies");
+            createCache(cm, et.com.hahu.domain.Comment.class.getName() + ".likes");
+            createCache(cm, et.com.hahu.domain.Likes.class.getName());
+            createCache(cm, et.com.hahu.domain.UsersConnection.class.getName());
+            createCache(cm, et.com.hahu.domain.Album.class.getName());
+            createCache(cm, et.com.hahu.domain.Album.class.getName() + ".images");
+            createCache(cm, et.com.hahu.domain.Image.class.getName());
+            createCache(cm, et.com.hahu.domain.UserGroup.class.getName());
+            createCache(cm, et.com.hahu.domain.UserGroup.class.getName() + ".additionalUserInfos");
+            createCache(cm, et.com.hahu.domain.Notification.class.getName());
+            createCache(cm, et.com.hahu.domain.SchoolProgress.class.getName());
+            createCache(cm, et.com.hahu.domain.Schedule.class.getName());
+            createCache(cm, et.com.hahu.domain.Preference.class.getName());
+            createCache(cm, et.com.hahu.domain.Setting.class.getName());
+            createCache(cm, et.com.hahu.domain.Profile.class.getName());
+            createCache(cm, et.com.hahu.domain.AdditionalUserInfo.class.getName());
+            createCache(cm, et.com.hahu.domain.AdditionalUserInfo.class.getName() + ".followings");
+            createCache(cm, et.com.hahu.domain.AdditionalUserInfo.class.getName() + ".followers");
             // jhipster-needle-ehcache-add-entry
         };
     }

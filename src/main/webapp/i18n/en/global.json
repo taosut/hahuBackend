@@ -7,6 +7,22 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "category": "Category",
+        "tag": "Tag",
+        "post": "Post",
+        "comment": "Comment",
+        "likes": "Likes",
+        "usersConnection": "Users Connection",
+        "album": "Album",
+        "image": "Image",
+        "userGroup": "User Group",
+        "notification": "Notification",
+        "schoolProgress": "School Progress",
+        "schedule": "Schedule",
+        "preference": "Preference",
+        "setting": "Setting",
+        "profile": "Profile",
+        "additionalUserInfo": "Additional User Info",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="comment">
+            <h2><span jhiTranslate="hahuApp.comment.detail.title">Comment</span> {{ comment.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.comment.content">Content</span></dt>
+                <dd>
+                    <span>{{ comment.content }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.comment.postedDate">Posted Date</span></dt>
+                <dd>
+                    <span>{{ comment.postedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.comment.modifiedDate">Modified Date</span></dt>
+                <dd>
+                    <span>{{ comment.modifiedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.comment.post">Post</span></dt>
+                <dd>
+                    <div *ngIf="comment.postId">
+                        <a [routerLink]="['/post', comment.postId, 'view']">{{ comment.postId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.comment.comment">Comment</span></dt>
+                <dd>
+                    <div *ngIf="comment.commentId">
+                        <a [routerLink]="['/comment', comment.commentId, 'view']">{{ comment.commentId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/comment', comment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+{
+    "name": "UserGroup",
+    "fields": [
+        {
+            "fieldName": "groupName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "additionalUserInfo",
+            "otherEntityRelationshipName": "userGroup",
+            "relationshipName": "additionalUserInfo"
+        }
+    ],
+    "changelogDate": "20200311215800",
+    "javadoc": "The UserGroup entity will store user groups.\\n@author A true hailemaryam",
+    "entityTableName": "user_group",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

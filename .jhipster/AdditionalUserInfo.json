@@ -1,0 +1,58 @@
+{
+    "name": "AdditionalUserInfo",
+    "fields": [
+        {
+            "fieldName": "phone",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^\\+[0-9]{12}$"
+        },
+        {
+            "fieldName": "profilePicture",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "additionalUserInfo",
+            "relationshipName": "user",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "useJPADerivedIdentifier": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "usersConnection",
+            "otherEntityRelationshipName": "follower",
+            "relationshipName": "following"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "usersConnection",
+            "otherEntityRelationshipName": "following",
+            "relationshipName": "follower"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "userGroup",
+            "otherEntityRelationshipName": "additionalUserInfo",
+            "relationshipName": "userGroup",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200311220500",
+    "entityTableName": "additional_user_info",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
