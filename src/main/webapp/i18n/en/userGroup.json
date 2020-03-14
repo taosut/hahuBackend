@@ -16,9 +16,11 @@
       "detail": {
         "title": "User Group"
       },
-      "groupName": "Group Name",
-      "owner": "Owner",
-      "user": "User"
+      "name": "Name",
+      "detail": "Detail",
+      "profilePic": "Profile Pic",
+      "user": "User",
+      "owner": "Owner"
     }
   }
 }

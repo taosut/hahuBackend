@@ -26,20 +26,20 @@ public class UserGroupCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter groupName;
-
-    private StringFilter owner;
+    private StringFilter name;
 
     private LongFilter userId;
+
+    private LongFilter ownerId;
 
     public UserGroupCriteria() {
     }
 
     public UserGroupCriteria(UserGroupCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
-        this.groupName = other.groupName == null ? null : other.groupName.copy();
-        this.owner = other.owner == null ? null : other.owner.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
+        this.ownerId = other.ownerId == null ? null : other.ownerId.copy();
     }
 
     @Override
@@ -55,20 +55,12 @@ public class UserGroupCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getGroupName() {
-        return groupName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setGroupName(StringFilter groupName) {
-        this.groupName = groupName;
-    }
-
-    public StringFilter getOwner() {
-        return owner;
-    }
-
-    public void setOwner(StringFilter owner) {
-        this.owner = owner;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public LongFilter getUserId() {
@@ -77,6 +69,14 @@ public class UserGroupCriteria implements Serializable, Criteria {
 
     public void setUserId(LongFilter userId) {
         this.userId = userId;
+    }
+
+    public LongFilter getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(LongFilter ownerId) {
+        this.ownerId = ownerId;
     }
 
 
@@ -91,18 +91,18 @@ public class UserGroupCriteria implements Serializable, Criteria {
         final UserGroupCriteria that = (UserGroupCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(groupName, that.groupName) &&
-            Objects.equals(owner, that.owner) &&
-            Objects.equals(userId, that.userId);
+            Objects.equals(name, that.name) &&
+            Objects.equals(userId, that.userId) &&
+            Objects.equals(ownerId, that.ownerId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        groupName,
-        owner,
-        userId
+        name,
+        userId,
+        ownerId
         );
     }
 
@@ -110,9 +110,9 @@ public class UserGroupCriteria implements Serializable, Criteria {
     public String toString() {
         return "UserGroupCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (groupName != null ? "groupName=" + groupName + ", " : "") +
-                (owner != null ? "owner=" + owner + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
+                (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
             "}";
     }
 

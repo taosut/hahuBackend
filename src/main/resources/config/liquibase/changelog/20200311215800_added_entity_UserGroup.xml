@@ -15,10 +15,16 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="group_name" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="owner" type="varchar(255)">
+            <column name="detail" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="profile_pic" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="profile_pic_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
@@ -38,6 +44,17 @@
 
         <addPrimaryKey columnNames="user_group_id, user_id" tableName="user_group_user"/>
         
+        <createTable tableName="user_group_owner">
+            <column name="owner_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_group_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="user_group_id, owner_id" tableName="user_group_owner"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
@@ -55,8 +72,10 @@
                   separator=";"
                   tableName="user_group">
             <column name="id" type="numeric"/>
-            <column name="group_name" type="string"/>
-            <column name="owner" type="string"/>
+            <column name="name" type="string"/>
+            <column name="detail" type="clob"/>
+            <column name="profile_pic" type="blob"/>
+            <column name="profile_pic_content_type" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

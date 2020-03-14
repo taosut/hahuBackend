@@ -23,16 +23,23 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="groupName"><span jhiTranslate="hahuApp.userGroup.groupName">Group Name</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="owner"><span jhiTranslate="hahuApp.userGroup.owner">Owner</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="hahuApp.userGroup.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="detail"><span jhiTranslate="hahuApp.userGroup.detail">Detail</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="profilePic"><span jhiTranslate="hahuApp.userGroup.profilePic">Profile Pic</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let userGroup of userGroups ;trackBy: trackId">
                     <td><a [routerLink]="['/user-group', userGroup.id, 'view']">{{ userGroup.id }}</a></td>
-                    <td>{{ userGroup.groupName }}</td>
-                    <td>{{ userGroup.owner }}</td>
+                    <td>{{ userGroup.name }}</td>
+                    <td>{{ userGroup.detail }}</td>
+                    <td>
+                        <a *ngIf="userGroup.profilePic" (click)="openFile(userGroup.profilePicContentType, userGroup.profilePic)">
+                            <img [src]="'data:' + userGroup.profilePicContentType + ';base64,' + userGroup.profilePic" style="max-height: 30px;" alt="userGroup image"/>
+                        </a>
+                        <span *ngIf="userGroup.profilePic">{{ userGroup.profilePicContentType }}, {{ byteSize(userGroup.profilePic) }}</span>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

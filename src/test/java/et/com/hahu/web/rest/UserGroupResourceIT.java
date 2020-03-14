@@ -24,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +44,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class UserGroupResourceIT {
 
-    private static final String DEFAULT_GROUP_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_GROUP_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_OWNER = "AAAAAAAAAA";
-    private static final String UPDATED_OWNER = "BBBBBBBBBB";
+    private static final String DEFAULT_DETAIL = "AAAAAAAAAA";
+    private static final String UPDATED_DETAIL = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_PROFILE_PIC = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_PROFILE_PIC = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_PROFILE_PIC_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_PROFILE_PIC_CONTENT_TYPE = "image/png";
 
     @Autowired
     private UserGroupRepository userGroupRepository;
@@ -83,8 +89,10 @@ public class UserGroupResourceIT {
      */
     public static UserGroup createEntity(EntityManager em) {
         UserGroup userGroup = new UserGroup()
-            .groupName(DEFAULT_GROUP_NAME)
-            .owner(DEFAULT_OWNER);
+            .name(DEFAULT_NAME)
+            .detail(DEFAULT_DETAIL)
+            .profilePic(DEFAULT_PROFILE_PIC)
+            .profilePicContentType(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
         return userGroup;
     }
     /**
@@ -95,8 +103,10 @@ public class UserGroupResourceIT {
      */
     public static UserGroup createUpdatedEntity(EntityManager em) {
         UserGroup userGroup = new UserGroup()
-            .groupName(UPDATED_GROUP_NAME)
-            .owner(UPDATED_OWNER);
+            .name(UPDATED_NAME)
+            .detail(UPDATED_DETAIL)
+            .profilePic(UPDATED_PROFILE_PIC)
+            .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE);
         return userGroup;
     }
 
@@ -121,8 +131,10 @@ public class UserGroupResourceIT {
         List<UserGroup> userGroupList = userGroupRepository.findAll();
         assertThat(userGroupList).hasSize(databaseSizeBeforeCreate + 1);
         UserGroup testUserGroup = userGroupList.get(userGroupList.size() - 1);
-        assertThat(testUserGroup.getGroupName()).isEqualTo(DEFAULT_GROUP_NAME);
-        assertThat(testUserGroup.getOwner()).isEqualTo(DEFAULT_OWNER);
+        assertThat(testUserGroup.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testUserGroup.getDetail()).isEqualTo(DEFAULT_DETAIL);
+        assertThat(testUserGroup.getProfilePic()).isEqualTo(DEFAULT_PROFILE_PIC);
+        assertThat(testUserGroup.getProfilePicContentType()).isEqualTo(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
     }
 
     @Test
@@ -157,8 +169,10 @@ public class UserGroupResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(userGroup.getId().intValue())))
-            .andExpect(jsonPath("$.[*].groupName").value(hasItem(DEFAULT_GROUP_NAME)))
-            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].detail").value(hasItem(DEFAULT_DETAIL.toString())))
+            .andExpect(jsonPath("$.[*].profilePicContentType").value(hasItem(DEFAULT_PROFILE_PIC_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -192,8 +206,10 @@ public class UserGroupResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(userGroup.getId().intValue()))
-            .andExpect(jsonPath("$.groupName").value(DEFAULT_GROUP_NAME))
-            .andExpect(jsonPath("$.owner").value(DEFAULT_OWNER));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.detail").value(DEFAULT_DETAIL.toString()))
+            .andExpect(jsonPath("$.profilePicContentType").value(DEFAULT_PROFILE_PIC_CONTENT_TYPE))
+            .andExpect(jsonPath("$.profilePic").value(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC)));
     }
 
 
@@ -218,157 +234,79 @@ public class UserGroupResourceIT {
 
     @Test
     @Transactional
-    public void getAllUserGroupsByGroupNameIsEqualToSomething() throws Exception {
+    public void getAllUserGroupsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         userGroupRepository.saveAndFlush(userGroup);
 
-        // Get all the userGroupList where groupName equals to DEFAULT_GROUP_NAME
-        defaultUserGroupShouldBeFound("groupName.equals=" + DEFAULT_GROUP_NAME);
+        // Get all the userGroupList where name equals to DEFAULT_NAME
+        defaultUserGroupShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the userGroupList where groupName equals to UPDATED_GROUP_NAME
-        defaultUserGroupShouldNotBeFound("groupName.equals=" + UPDATED_GROUP_NAME);
+        // Get all the userGroupList where name equals to UPDATED_NAME
+        defaultUserGroupShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUserGroupsByGroupNameIsNotEqualToSomething() throws Exception {
+    public void getAllUserGroupsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         userGroupRepository.saveAndFlush(userGroup);
 
-        // Get all the userGroupList where groupName not equals to DEFAULT_GROUP_NAME
-        defaultUserGroupShouldNotBeFound("groupName.notEquals=" + DEFAULT_GROUP_NAME);
+        // Get all the userGroupList where name not equals to DEFAULT_NAME
+        defaultUserGroupShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the userGroupList where groupName not equals to UPDATED_GROUP_NAME
-        defaultUserGroupShouldBeFound("groupName.notEquals=" + UPDATED_GROUP_NAME);
+        // Get all the userGroupList where name not equals to UPDATED_NAME
+        defaultUserGroupShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUserGroupsByGroupNameIsInShouldWork() throws Exception {
+    public void getAllUserGroupsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         userGroupRepository.saveAndFlush(userGroup);
 
-        // Get all the userGroupList where groupName in DEFAULT_GROUP_NAME or UPDATED_GROUP_NAME
-        defaultUserGroupShouldBeFound("groupName.in=" + DEFAULT_GROUP_NAME + "," + UPDATED_GROUP_NAME);
+        // Get all the userGroupList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultUserGroupShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the userGroupList where groupName equals to UPDATED_GROUP_NAME
-        defaultUserGroupShouldNotBeFound("groupName.in=" + UPDATED_GROUP_NAME);
+        // Get all the userGroupList where name equals to UPDATED_NAME
+        defaultUserGroupShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUserGroupsByGroupNameIsNullOrNotNull() throws Exception {
+    public void getAllUserGroupsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         userGroupRepository.saveAndFlush(userGroup);
 
-        // Get all the userGroupList where groupName is not null
-        defaultUserGroupShouldBeFound("groupName.specified=true");
+        // Get all the userGroupList where name is not null
+        defaultUserGroupShouldBeFound("name.specified=true");
 
-        // Get all the userGroupList where groupName is null
-        defaultUserGroupShouldNotBeFound("groupName.specified=false");
+        // Get all the userGroupList where name is null
+        defaultUserGroupShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllUserGroupsByGroupNameContainsSomething() throws Exception {
+    public void getAllUserGroupsByNameContainsSomething() throws Exception {
         // Initialize the database
         userGroupRepository.saveAndFlush(userGroup);
 
-        // Get all the userGroupList where groupName contains DEFAULT_GROUP_NAME
-        defaultUserGroupShouldBeFound("groupName.contains=" + DEFAULT_GROUP_NAME);
+        // Get all the userGroupList where name contains DEFAULT_NAME
+        defaultUserGroupShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the userGroupList where groupName contains UPDATED_GROUP_NAME
-        defaultUserGroupShouldNotBeFound("groupName.contains=" + UPDATED_GROUP_NAME);
+        // Get all the userGroupList where name contains UPDATED_NAME
+        defaultUserGroupShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUserGroupsByGroupNameNotContainsSomething() throws Exception {
+    public void getAllUserGroupsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         userGroupRepository.saveAndFlush(userGroup);
 
-        // Get all the userGroupList where groupName does not contain DEFAULT_GROUP_NAME
-        defaultUserGroupShouldNotBeFound("groupName.doesNotContain=" + DEFAULT_GROUP_NAME);
+        // Get all the userGroupList where name does not contain DEFAULT_NAME
+        defaultUserGroupShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the userGroupList where groupName does not contain UPDATED_GROUP_NAME
-        defaultUserGroupShouldBeFound("groupName.doesNotContain=" + UPDATED_GROUP_NAME);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllUserGroupsByOwnerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        userGroupRepository.saveAndFlush(userGroup);
-
-        // Get all the userGroupList where owner equals to DEFAULT_OWNER
-        defaultUserGroupShouldBeFound("owner.equals=" + DEFAULT_OWNER);
-
-        // Get all the userGroupList where owner equals to UPDATED_OWNER
-        defaultUserGroupShouldNotBeFound("owner.equals=" + UPDATED_OWNER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllUserGroupsByOwnerIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        userGroupRepository.saveAndFlush(userGroup);
-
-        // Get all the userGroupList where owner not equals to DEFAULT_OWNER
-        defaultUserGroupShouldNotBeFound("owner.notEquals=" + DEFAULT_OWNER);
-
-        // Get all the userGroupList where owner not equals to UPDATED_OWNER
-        defaultUserGroupShouldBeFound("owner.notEquals=" + UPDATED_OWNER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllUserGroupsByOwnerIsInShouldWork() throws Exception {
-        // Initialize the database
-        userGroupRepository.saveAndFlush(userGroup);
-
-        // Get all the userGroupList where owner in DEFAULT_OWNER or UPDATED_OWNER
-        defaultUserGroupShouldBeFound("owner.in=" + DEFAULT_OWNER + "," + UPDATED_OWNER);
-
-        // Get all the userGroupList where owner equals to UPDATED_OWNER
-        defaultUserGroupShouldNotBeFound("owner.in=" + UPDATED_OWNER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllUserGroupsByOwnerIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        userGroupRepository.saveAndFlush(userGroup);
-
-        // Get all the userGroupList where owner is not null
-        defaultUserGroupShouldBeFound("owner.specified=true");
-
-        // Get all the userGroupList where owner is null
-        defaultUserGroupShouldNotBeFound("owner.specified=false");
-    }
-                @Test
-    @Transactional
-    public void getAllUserGroupsByOwnerContainsSomething() throws Exception {
-        // Initialize the database
-        userGroupRepository.saveAndFlush(userGroup);
-
-        // Get all the userGroupList where owner contains DEFAULT_OWNER
-        defaultUserGroupShouldBeFound("owner.contains=" + DEFAULT_OWNER);
-
-        // Get all the userGroupList where owner contains UPDATED_OWNER
-        defaultUserGroupShouldNotBeFound("owner.contains=" + UPDATED_OWNER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllUserGroupsByOwnerNotContainsSomething() throws Exception {
-        // Initialize the database
-        userGroupRepository.saveAndFlush(userGroup);
-
-        // Get all the userGroupList where owner does not contain DEFAULT_OWNER
-        defaultUserGroupShouldNotBeFound("owner.doesNotContain=" + DEFAULT_OWNER);
-
-        // Get all the userGroupList where owner does not contain UPDATED_OWNER
-        defaultUserGroupShouldBeFound("owner.doesNotContain=" + UPDATED_OWNER);
+        // Get all the userGroupList where name does not contain UPDATED_NAME
+        defaultUserGroupShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -391,6 +329,26 @@ public class UserGroupResourceIT {
         defaultUserGroupShouldNotBeFound("userId.equals=" + (userId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsByOwnerIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+        User owner = UserResourceIT.createEntity(em);
+        em.persist(owner);
+        em.flush();
+        userGroup.addOwner(owner);
+        userGroupRepository.saveAndFlush(userGroup);
+        Long ownerId = owner.getId();
+
+        // Get all the userGroupList where owner equals to ownerId
+        defaultUserGroupShouldBeFound("ownerId.equals=" + ownerId);
+
+        // Get all the userGroupList where owner equals to ownerId + 1
+        defaultUserGroupShouldNotBeFound("ownerId.equals=" + (ownerId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -399,8 +357,10 @@ public class UserGroupResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(userGroup.getId().intValue())))
-            .andExpect(jsonPath("$.[*].groupName").value(hasItem(DEFAULT_GROUP_NAME)))
-            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].detail").value(hasItem(DEFAULT_DETAIL.toString())))
+            .andExpect(jsonPath("$.[*].profilePicContentType").value(hasItem(DEFAULT_PROFILE_PIC_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))));
 
         // Check, that the count call also returns 1
         restUserGroupMockMvc.perform(get("/api/user-groups/count?sort=id,desc&" + filter))
@@ -448,8 +408,10 @@ public class UserGroupResourceIT {
         // Disconnect from session so that the updates on updatedUserGroup are not directly saved in db
         em.detach(updatedUserGroup);
         updatedUserGroup
-            .groupName(UPDATED_GROUP_NAME)
-            .owner(UPDATED_OWNER);
+            .name(UPDATED_NAME)
+            .detail(UPDATED_DETAIL)
+            .profilePic(UPDATED_PROFILE_PIC)
+            .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE);
         UserGroupDTO userGroupDTO = userGroupMapper.toDto(updatedUserGroup);
 
         restUserGroupMockMvc.perform(put("/api/user-groups")
@@ -461,8 +423,10 @@ public class UserGroupResourceIT {
         List<UserGroup> userGroupList = userGroupRepository.findAll();
         assertThat(userGroupList).hasSize(databaseSizeBeforeUpdate);
         UserGroup testUserGroup = userGroupList.get(userGroupList.size() - 1);
-        assertThat(testUserGroup.getGroupName()).isEqualTo(UPDATED_GROUP_NAME);
-        assertThat(testUserGroup.getOwner()).isEqualTo(UPDATED_OWNER);
+        assertThat(testUserGroup.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testUserGroup.getDetail()).isEqualTo(UPDATED_DETAIL);
+        assertThat(testUserGroup.getProfilePic()).isEqualTo(UPDATED_PROFILE_PIC);
+        assertThat(testUserGroup.getProfilePicContentType()).isEqualTo(UPDATED_PROFILE_PIC_CONTENT_TYPE);
     }
 
     @Test

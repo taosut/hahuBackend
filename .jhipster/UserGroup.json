@@ -2,12 +2,18 @@
     "name": "UserGroup",
     "fields": [
         {
-            "fieldName": "groupName",
+            "fieldName": "name",
             "fieldType": "String"
         },
         {
-            "fieldName": "owner",
-            "fieldType": "String"
+            "fieldName": "detail",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "profilePic",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         }
     ],
     "relationships": [
@@ -16,6 +22,14 @@
             "otherEntityName": "user",
             "otherEntityRelationshipName": "userGroup",
             "relationshipName": "user",
+            "otherEntityField": "login",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "userGroup",
+            "relationshipName": "owner",
             "otherEntityField": "login",
             "ownerSide": true
         }

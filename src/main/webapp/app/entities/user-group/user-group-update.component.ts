@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { IUserGroup, UserGroup } from 'app/shared/model/user-group.model';
 import { UserGroupService } from './user-group.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 
@@ -20,14 +22,20 @@ export class UserGroupUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    groupName: [],
-    owner: [],
-    users: []
+    name: [],
+    detail: [],
+    profilePic: [],
+    profilePicContentType: [],
+    users: [],
+    owners: []
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
+    protected eventManager: JhiEventManager,
     protected userGroupService: UserGroupService,
     protected userService: UserService,
+    protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -43,10 +51,39 @@ export class UserGroupUpdateComponent implements OnInit {
   updateForm(userGroup: IUserGroup): void {
     this.editForm.patchValue({
       id: userGroup.id,
-      groupName: userGroup.groupName,
-      owner: userGroup.owner,
-      users: userGroup.users
+      name: userGroup.name,
+      detail: userGroup.detail,
+      profilePic: userGroup.profilePic,
+      profilePicContentType: userGroup.profilePicContentType,
+      users: userGroup.users,
+      owners: userGroup.owners
     });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
+  }
+
+  setFileData(event: Event, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
+      this.eventManager.broadcast(
+        new JhiEventWithContent<AlertError>('hahuApp.error', { ...err, key: 'error.file.' + err.key })
+      );
+    });
+  }
+
+  clearInputImage(field: string, fieldContentType: string, idInput: string): void {
+    this.editForm.patchValue({
+      [field]: null,
+      [fieldContentType]: null
+    });
+    if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
+      this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
+    }
   }
 
   previousState(): void {
@@ -67,9 +104,12 @@ export class UserGroupUpdateComponent implements OnInit {
     return {
       ...new UserGroup(),
       id: this.editForm.get(['id'])!.value,
-      groupName: this.editForm.get(['groupName'])!.value,
-      owner: this.editForm.get(['owner'])!.value,
-      users: this.editForm.get(['users'])!.value
+      name: this.editForm.get(['name'])!.value,
+      detail: this.editForm.get(['detail'])!.value,
+      profilePicContentType: this.editForm.get(['profilePicContentType'])!.value,
+      profilePic: this.editForm.get(['profilePic'])!.value,
+      users: this.editForm.get(['users'])!.value,
+      owners: this.editForm.get(['owners'])!.value
     };
   }
 

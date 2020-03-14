@@ -8,18 +8,33 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="hahuApp.userGroup.groupName">Group Name</span></dt>
+                <dt><span jhiTranslate="hahuApp.userGroup.name">Name</span></dt>
                 <dd>
-                    <span>{{ userGroup.groupName }}</span>
+                    <span>{{ userGroup.name }}</span>
                 </dd>
-                <dt><span jhiTranslate="hahuApp.userGroup.owner">Owner</span></dt>
+                <dt><span jhiTranslate="hahuApp.userGroup.detail">Detail</span></dt>
                 <dd>
-                    <span>{{ userGroup.owner }}</span>
+                    <span>{{ userGroup.detail }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.userGroup.profilePic">Profile Pic</span></dt>
+                <dd>
+                    <div *ngIf="userGroup.profilePic">
+                        <a (click)="openFile(userGroup?.profilePicContentType!, userGroup?.profilePic)">
+                            <img [src]="'data:' + userGroup.profilePicContentType + ';base64,' + userGroup.profilePic" style="max-width: 100%;" alt="userGroup image"/>
+                        </a>
+                        {{ userGroup.profilePicContentType }}, {{ byteSize(userGroup.profilePic) }}
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="hahuApp.userGroup.user">User</span></dt>
                 <dd>
                     <span *ngFor="let user of userGroup.users; let last = last">
                         {{ user.login }}{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.userGroup.owner">Owner</span></dt>
+                <dd>
+                    <span *ngFor="let owner of userGroup.owners; let last = last">
+                        {{ owner.login }}{{ last ? '' : ', ' }}
                     </span>
                 </dd>
             </dl>

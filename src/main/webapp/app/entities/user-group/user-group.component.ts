@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IUserGroup } from 'app/shared/model/user-group.model';
@@ -28,6 +28,7 @@ export class UserGroupComponent implements OnInit, OnDestroy {
   constructor(
     protected userGroupService: UserGroupService,
     protected activatedRoute: ActivatedRoute,
+    protected dataUtils: JhiDataUtils,
     protected router: Router,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
@@ -68,6 +69,14 @@ export class UserGroupComponent implements OnInit, OnDestroy {
   trackId(index: number, item: IUserGroup): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return item.id!;
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    return this.dataUtils.openFile(contentType, base64String);
   }
 
   registerChangeInUserGroups(): void {

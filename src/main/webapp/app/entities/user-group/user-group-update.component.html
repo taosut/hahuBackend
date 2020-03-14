@@ -12,21 +12,46 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.groupName" for="field_groupName">Group Name</label>
-                    <input type="text" class="form-control" name="groupName" id="field_groupName"
-                           formControlName="groupName"/>
+                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.owner" for="field_owner">Owner</label>
-                    <input type="text" class="form-control" name="owner" id="field_owner"
-                           formControlName="owner"/>
+                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.detail" for="field_detail">Detail</label>
+                    <textarea class="form-control" name="detail" id="field_detail"
+                              formControlName="detail"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.profilePic" for="field_profilePic">Profile Pic</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('profilePicContentType')!.value + ';base64,' + editForm.get('profilePic')!.value" style="max-height: 100px;" *ngIf="editForm.get('profilePic')!.value" alt="userGroup image"/>
+                        <div *ngIf="editForm.get('profilePic')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('profilePicContentType')!.value }}, {{ byteSize(editForm.get('profilePic')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('profilePic', 'profilePicContentType', 'file_profilePic')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_profilePic" (change)="setFileData($event, 'profilePic', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="profilePic" id="field_profilePic"
+                           formControlName="profilePic"/>
+                    <input type="hidden" class="form-control" name="profilePicContentType" id="field_profilePicContentType"
+                           formControlName="profilePicContentType" />
                 </div>
 
                 <div class="form-group">
                     <label jhiTranslate="hahuApp.userGroup.user" for="field_users">User</label>
                     <select class="form-control" id="field_users" multiple name="users" formControlName="users">
                         <option [ngValue]="getSelected(editForm.get('users')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="hahuApp.userGroup.owner" for="field_owners">Owner</label>
+                    <select class="form-control" id="field_owners" multiple name="owners" formControlName="owners">
+                        <option [ngValue]="getSelected(editForm.get('owners')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
                     </select>
                 </div>
             </div>

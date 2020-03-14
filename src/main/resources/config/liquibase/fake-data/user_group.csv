@@ -1,11 +1,11 @@
-id;group_name;owner
-1;Ports;open-source Customer SQL
-2;Bedfordshire;mobile killer
-3;Forward Ethiopia;Personal Loan Account Direct
-4;back up;XML British Indian Ocean Territory (Chagos Archipelago) digital
-5;web-enabled;Licensed Intranet
-6;Personal Loan Account Wyoming Rue;Direct Chief
-7;Movies infrastructures;Money Market Account
-8;Sao Tome and Principe;Wisconsin matrix real-time
-9;Optional;Hong Kong system visualize
-10;Data initiative tertiary;cyan Central
+id;name;detail;profile_pic;profile_pic_content_type
+1;Ports;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png
+2;open-source Customer SQL;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png
+3;Bedfordshire;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png
+4;mobile killer;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png
+5;Forward Ethiopia;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png
+6;Personal Loan Account Direct;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png
+7;back up;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png
+8;XML British Indian Ocean Territory (Chagos Archipelago) digital;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png
+9;web-enabled;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png
+10;Licensed Intranet;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png

@@ -2,6 +2,7 @@ package et.com.hahu.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -25,11 +26,20 @@ public class UserGroup implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "group_name")
-    private String groupName;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "owner")
-    private String owner;
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(name = "detail")
+    private String detail;
+
+    @Lob
+    @Column(name = "profile_pic")
+    private byte[] profilePic;
+
+    @Column(name = "profile_pic_content_type")
+    private String profilePicContentType;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -37,6 +47,13 @@ public class UserGroup implements Serializable {
                joinColumns = @JoinColumn(name = "user_group_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private Set<User> users = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "user_group_owner",
+               joinColumns = @JoinColumn(name = "user_group_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "owner_id", referencedColumnName = "id"))
+    private Set<User> owners = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -47,30 +64,56 @@ public class UserGroup implements Serializable {
         this.id = id;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getName() {
+        return name;
     }
 
-    public UserGroup groupName(String groupName) {
-        this.groupName = groupName;
+    public UserGroup name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getDetail() {
+        return detail;
     }
 
-    public UserGroup owner(String owner) {
-        this.owner = owner;
+    public UserGroup detail(String detail) {
+        this.detail = detail;
         return this;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public byte[] getProfilePic() {
+        return profilePic;
+    }
+
+    public UserGroup profilePic(byte[] profilePic) {
+        this.profilePic = profilePic;
+        return this;
+    }
+
+    public void setProfilePic(byte[] profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public String getProfilePicContentType() {
+        return profilePicContentType;
+    }
+
+    public UserGroup profilePicContentType(String profilePicContentType) {
+        this.profilePicContentType = profilePicContentType;
+        return this;
+    }
+
+    public void setProfilePicContentType(String profilePicContentType) {
+        this.profilePicContentType = profilePicContentType;
     }
 
     public Set<User> getUsers() {
@@ -95,6 +138,29 @@ public class UserGroup implements Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
+    public Set<User> getOwners() {
+        return owners;
+    }
+
+    public UserGroup owners(Set<User> users) {
+        this.owners = users;
+        return this;
+    }
+
+    public UserGroup addOwner(User user) {
+        this.owners.add(user);
+        return this;
+    }
+
+    public UserGroup removeOwner(User user) {
+        this.owners.remove(user);
+        return this;
+    }
+
+    public void setOwners(Set<User> users) {
+        this.owners = users;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -117,8 +183,10 @@ public class UserGroup implements Serializable {
     public String toString() {
         return "UserGroup{" +
             "id=" + getId() +
-            ", groupName='" + getGroupName() + "'" +
-            ", owner='" + getOwner() + "'" +
+            ", name='" + getName() + "'" +
+            ", detail='" + getDetail() + "'" +
+            ", profilePic='" + getProfilePic() + "'" +
+            ", profilePicContentType='" + getProfilePicContentType() + "'" +
             "}";
     }
 }

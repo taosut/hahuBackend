@@ -20,5 +20,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
         
+        <addForeignKeyConstraint baseColumnNames="user_group_id"
+                                 baseTableName="user_group_owner"
+                                 constraintName="fk_user_group_owner_user_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="user_group_owner"
+                                 constraintName="fk_user_group_owner_owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
     </changeSet>
 </databaseChangeLog>

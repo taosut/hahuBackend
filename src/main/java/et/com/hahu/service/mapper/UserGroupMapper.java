@@ -14,6 +14,7 @@ public interface UserGroupMapper extends EntityMapper<UserGroupDTO, UserGroup> {
 
 
     @Mapping(target = "removeUser", ignore = true)
+    @Mapping(target = "removeOwner", ignore = true)
 
     default UserGroup fromId(Long id) {
         if (id == null) {

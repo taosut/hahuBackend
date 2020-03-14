@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.UserGroup} entity.
@@ -14,11 +15,17 @@ public class UserGroupDTO implements Serializable {
     
     private Long id;
 
-    private String groupName;
+    private String name;
 
-    private String owner;
+    @Lob
+    private String detail;
 
+    @Lob
+    private byte[] profilePic;
+
+    private String profilePicContentType;
     private Set<UserDTO> users = new HashSet<>();
+    private Set<UserDTO> owners = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -28,20 +35,36 @@ public class UserGroupDTO implements Serializable {
         this.id = id;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getName() {
+        return name;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public byte[] getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(byte[] profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public String getProfilePicContentType() {
+        return profilePicContentType;
+    }
+
+    public void setProfilePicContentType(String profilePicContentType) {
+        this.profilePicContentType = profilePicContentType;
     }
 
     public Set<UserDTO> getUsers() {
@@ -50,6 +73,14 @@ public class UserGroupDTO implements Serializable {
 
     public void setUsers(Set<UserDTO> users) {
         this.users = users;
+    }
+
+    public Set<UserDTO> getOwners() {
+        return owners;
+    }
+
+    public void setOwners(Set<UserDTO> users) {
+        this.owners = users;
     }
 
     @Override
@@ -77,9 +108,11 @@ public class UserGroupDTO implements Serializable {
     public String toString() {
         return "UserGroupDTO{" +
             "id=" + getId() +
-            ", groupName='" + getGroupName() + "'" +
-            ", owner='" + getOwner() + "'" +
+            ", name='" + getName() + "'" +
+            ", detail='" + getDetail() + "'" +
+            ", profilePic='" + getProfilePic() + "'" +
             ", users='" + getUsers() + "'" +
+            ", owners='" + getOwners() + "'" +
             "}";
     }
 }
