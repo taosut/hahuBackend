@@ -19,6 +19,13 @@
             "otherEntityRelationshipName": "notification",
             "relationshipName": "user",
             "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "userGroup",
+            "otherEntityRelationshipName": "notification",
+            "relationshipName": "userGroup",
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20200311215900",

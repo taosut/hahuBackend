@@ -72,6 +72,8 @@ public class CacheConfiguration {
             createCache(cm, et.com.hahu.domain.UserGroup.class.getName() + ".users");
             createCache(cm, et.com.hahu.domain.Profile.class.getName() + ".families");
             createCache(cm, et.com.hahu.domain.UserGroup.class.getName() + ".owners");
+            createCache(cm, et.com.hahu.domain.UserGroup.class.getName() + ".notifications");
+            createCache(cm, et.com.hahu.domain.UserGroup.class.getName() + ".schedules");
             // jhipster-needle-ehcache-add-entry
         };
     }

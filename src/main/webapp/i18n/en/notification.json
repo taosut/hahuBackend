@@ -18,7 +18,8 @@
       },
       "content": "Content",
       "contentType": "Content Type",
-      "user": "User"
+      "user": "User",
+      "userGroup": "User Group"
     }
   }
 }

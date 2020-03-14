@@ -11,6 +11,10 @@ import { NotificationService } from './notification.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { IUserGroup } from 'app/shared/model/user-group.model';
+import { UserGroupService } from 'app/entities/user-group/user-group.service';
+
+type SelectableEntity = IUser | IUserGroup;
 
 @Component({
   selector: 'jhi-notification-update',
@@ -19,12 +23,14 @@ import { UserService } from 'app/core/user/user.service';
 export class NotificationUpdateComponent implements OnInit {
   isSaving = false;
   users: IUser[] = [];
+  usergroups: IUserGroup[] = [];
 
   editForm = this.fb.group({
     id: [],
     content: [],
     contentType: [],
-    userId: []
+    userId: [],
+    userGroupId: []
   });
 
   constructor(
@@ -32,6 +38,7 @@ export class NotificationUpdateComponent implements OnInit {
     protected eventManager: JhiEventManager,
     protected notificationService: NotificationService,
     protected userService: UserService,
+    protected userGroupService: UserGroupService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -41,6 +48,8 @@ export class NotificationUpdateComponent implements OnInit {
       this.updateForm(notification);
 
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.userGroupService.query().subscribe((res: HttpResponse<IUserGroup[]>) => (this.usergroups = res.body || []));
     });
   }
 
@@ -49,7 +58,8 @@ export class NotificationUpdateComponent implements OnInit {
       id: notification.id,
       content: notification.content,
       contentType: notification.contentType,
-      userId: notification.userId
+      userId: notification.userId,
+      userGroupId: notification.userGroupId
     });
   }
 
@@ -89,7 +99,8 @@ export class NotificationUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       content: this.editForm.get(['content'])!.value,
       contentType: this.editForm.get(['contentType'])!.value,
-      userId: this.editForm.get(['userId'])!.value
+      userId: this.editForm.get(['userId'])!.value,
+      userGroupId: this.editForm.get(['userGroupId'])!.value
     };
   }
 
@@ -109,7 +120,7 @@ export class NotificationUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IUser): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
 }

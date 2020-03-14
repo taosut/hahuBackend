@@ -19,7 +19,8 @@
       "title": "Title",
       "startTime": "Start Time",
       "endTime": "End Time",
-      "user": "User"
+      "user": "User",
+      "userGroup": "User Group"
     }
   }
 }

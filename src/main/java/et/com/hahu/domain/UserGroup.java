@@ -41,6 +41,14 @@ public class UserGroup implements Serializable {
     @Column(name = "profile_pic_content_type")
     private String profilePicContentType;
 
+    @OneToMany(mappedBy = "userGroup")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Notification> notifications = new HashSet<>();
+
+    @OneToMany(mappedBy = "userGroup")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Schedule> schedules = new HashSet<>();
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "user_group_user",
@@ -114,6 +122,56 @@ public class UserGroup implements Serializable {
 
     public void setProfilePicContentType(String profilePicContentType) {
         this.profilePicContentType = profilePicContentType;
+    }
+
+    public Set<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public UserGroup notifications(Set<Notification> notifications) {
+        this.notifications = notifications;
+        return this;
+    }
+
+    public UserGroup addNotification(Notification notification) {
+        this.notifications.add(notification);
+        notification.setUserGroup(this);
+        return this;
+    }
+
+    public UserGroup removeNotification(Notification notification) {
+        this.notifications.remove(notification);
+        notification.setUserGroup(null);
+        return this;
+    }
+
+    public void setNotifications(Set<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public Set<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public UserGroup schedules(Set<Schedule> schedules) {
+        this.schedules = schedules;
+        return this;
+    }
+
+    public UserGroup addSchedule(Schedule schedule) {
+        this.schedules.add(schedule);
+        schedule.setUserGroup(this);
+        return this;
+    }
+
+    public UserGroup removeSchedule(Schedule schedule) {
+        this.schedules.remove(schedule);
+        schedule.setUserGroup(null);
+        return this;
+    }
+
+    public void setSchedules(Set<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
     public Set<User> getUsers() {

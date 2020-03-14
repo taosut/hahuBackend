@@ -1,3 +1,5 @@
+import { INotification } from 'app/shared/model/notification.model';
+import { ISchedule } from 'app/shared/model/schedule.model';
 import { IUser } from 'app/core/user/user.model';
 
 export interface IUserGroup {
@@ -6,6 +8,8 @@ export interface IUserGroup {
   detail?: any;
   profilePicContentType?: string;
   profilePic?: any;
+  notifications?: INotification[];
+  schedules?: ISchedule[];
   users?: IUser[];
   owners?: IUser[];
 }
@@ -17,6 +21,8 @@ export class UserGroup implements IUserGroup {
     public detail?: any,
     public profilePicContentType?: string,
     public profilePic?: any,
+    public notifications?: INotification[],
+    public schedules?: ISchedule[],
     public users?: IUser[],
     public owners?: IUser[]
   ) {}

@@ -3,6 +3,7 @@ package et.com.hahu.web.rest;
 import et.com.hahu.HahuApp;
 import et.com.hahu.domain.Notification;
 import et.com.hahu.domain.User;
+import et.com.hahu.domain.UserGroup;
 import et.com.hahu.repository.NotificationRepository;
 import et.com.hahu.service.NotificationService;
 import et.com.hahu.service.dto.NotificationDTO;
@@ -254,6 +255,26 @@ public class NotificationResourceIT {
 
         // Get all the notificationList where user equals to userId + 1
         defaultNotificationShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllNotificationsByUserGroupIsEqualToSomething() throws Exception {
+        // Initialize the database
+        notificationRepository.saveAndFlush(notification);
+        UserGroup userGroup = UserGroupResourceIT.createEntity(em);
+        em.persist(userGroup);
+        em.flush();
+        notification.setUserGroup(userGroup);
+        notificationRepository.saveAndFlush(notification);
+        Long userGroupId = userGroup.getId();
+
+        // Get all the notificationList where userGroup equals to userGroupId
+        defaultNotificationShouldBeFound("userGroupId.equals=" + userGroupId);
+
+        // Get all the notificationList where userGroup equals to userGroupId + 1
+        defaultNotificationShouldNotBeFound("userGroupId.equals=" + (userGroupId + 1));
     }
 
     /**

@@ -20,6 +20,12 @@
                 <dd>
                     {{ notification.userLogin }}
                 </dd>
+                <dt><span jhiTranslate="hahuApp.notification.userGroup">User Group</span></dt>
+                <dd>
+                    <div *ngIf="notification.userGroupId">
+                        <a [routerLink]="['/user-group', notification.userGroupId, 'view']">{{ notification.userGroupName }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

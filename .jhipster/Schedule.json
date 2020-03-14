@@ -21,6 +21,13 @@
             "otherEntityRelationshipName": "schedule",
             "relationshipName": "user",
             "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "userGroup",
+            "otherEntityRelationshipName": "schedule",
+            "relationshipName": "userGroup",
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20200311220100",

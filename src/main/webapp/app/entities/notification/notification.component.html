@@ -26,6 +26,7 @@
                     <th scope="col"  jhiSortBy="content"><span jhiTranslate="hahuApp.notification.content">Content</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="contentType"><span jhiTranslate="hahuApp.notification.contentType">Content Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="hahuApp.notification.user">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userGroupName"><span jhiTranslate="hahuApp.notification.userGroup">User Group</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -36,6 +37,11 @@
                     <td jhiTranslate="{{ 'hahuApp.ContentType.' + notification.contentType }}">{{ notification.contentType }}</td>
                     <td>
                         {{ notification.userLogin }}
+                    </td>
+                    <td>
+                        <div *ngIf="notification.userGroupId">
+                            <a [routerLink]="['/user-group', notification.userGroupId , 'view']" >{{ notification.userGroupName }}</a>
+                        </div>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

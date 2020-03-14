@@ -21,6 +21,10 @@ public class ScheduleDTO implements Serializable {
     private Long userId;
 
     private String userLogin;
+
+    private Long userGroupId;
+
+    private String userGroupName;
     
     public Long getId() {
         return id;
@@ -70,6 +74,22 @@ public class ScheduleDTO implements Serializable {
         this.userLogin = userLogin;
     }
 
+    public Long getUserGroupId() {
+        return userGroupId;
+    }
+
+    public void setUserGroupId(Long userGroupId) {
+        this.userGroupId = userGroupId;
+    }
+
+    public String getUserGroupName() {
+        return userGroupName;
+    }
+
+    public void setUserGroupName(String userGroupName) {
+        this.userGroupName = userGroupName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -100,6 +120,8 @@ public class ScheduleDTO implements Serializable {
             ", endTime='" + getEndTime() + "'" +
             ", userId=" + getUserId() +
             ", userLogin='" + getUserLogin() + "'" +
+            ", userGroupId=" + getUserGroupId() +
+            ", userGroupName='" + getUserGroupName() + "'" +
             "}";
     }
 }

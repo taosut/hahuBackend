@@ -6,6 +6,8 @@ export interface INotification {
   contentType?: ContentType;
   userLogin?: string;
   userId?: number;
+  userGroupName?: string;
+  userGroupId?: number;
 }
 
 export class Notification implements INotification {
@@ -14,6 +16,8 @@ export class Notification implements INotification {
     public content?: any,
     public contentType?: ContentType,
     public userLogin?: string,
-    public userId?: number
+    public userId?: number,
+    public userGroupName?: string,
+    public userGroupId?: number
   ) {}
 }

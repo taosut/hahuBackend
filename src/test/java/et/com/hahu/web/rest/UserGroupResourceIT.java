@@ -2,6 +2,8 @@ package et.com.hahu.web.rest;
 
 import et.com.hahu.HahuApp;
 import et.com.hahu.domain.UserGroup;
+import et.com.hahu.domain.Notification;
+import et.com.hahu.domain.Schedule;
 import et.com.hahu.domain.User;
 import et.com.hahu.repository.UserGroupRepository;
 import et.com.hahu.service.UserGroupService;
@@ -307,6 +309,46 @@ public class UserGroupResourceIT {
 
         // Get all the userGroupList where name does not contain UPDATED_NAME
         defaultUserGroupShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsByNotificationIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+        Notification notification = NotificationResourceIT.createEntity(em);
+        em.persist(notification);
+        em.flush();
+        userGroup.addNotification(notification);
+        userGroupRepository.saveAndFlush(userGroup);
+        Long notificationId = notification.getId();
+
+        // Get all the userGroupList where notification equals to notificationId
+        defaultUserGroupShouldBeFound("notificationId.equals=" + notificationId);
+
+        // Get all the userGroupList where notification equals to notificationId + 1
+        defaultUserGroupShouldNotBeFound("notificationId.equals=" + (notificationId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsByScheduleIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+        Schedule schedule = ScheduleResourceIT.createEntity(em);
+        em.persist(schedule);
+        em.flush();
+        userGroup.addSchedule(schedule);
+        userGroupRepository.saveAndFlush(userGroup);
+        Long scheduleId = schedule.getId();
+
+        // Get all the userGroupList where schedule equals to scheduleId
+        defaultUserGroupShouldBeFound("scheduleId.equals=" + scheduleId);
+
+        // Get all the userGroupList where schedule equals to scheduleId + 1
+        defaultUserGroupShouldNotBeFound("scheduleId.equals=" + (scheduleId + 1));
     }
 
 

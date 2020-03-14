@@ -49,6 +49,8 @@ public class NotificationCriteria implements Serializable, Criteria {
 
     private LongFilter userId;
 
+    private LongFilter userGroupId;
+
     public NotificationCriteria() {
     }
 
@@ -56,6 +58,7 @@ public class NotificationCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.contentType = other.contentType == null ? null : other.contentType.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
+        this.userGroupId = other.userGroupId == null ? null : other.userGroupId.copy();
     }
 
     @Override
@@ -87,6 +90,14 @@ public class NotificationCriteria implements Serializable, Criteria {
         this.userId = userId;
     }
 
+    public LongFilter getUserGroupId() {
+        return userGroupId;
+    }
+
+    public void setUserGroupId(LongFilter userGroupId) {
+        this.userGroupId = userGroupId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -100,7 +111,8 @@ public class NotificationCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(contentType, that.contentType) &&
-            Objects.equals(userId, that.userId);
+            Objects.equals(userId, that.userId) &&
+            Objects.equals(userGroupId, that.userGroupId);
     }
 
     @Override
@@ -108,7 +120,8 @@ public class NotificationCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         contentType,
-        userId
+        userId,
+        userGroupId
         );
     }
 
@@ -118,6 +131,7 @@ public class NotificationCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (contentType != null ? "contentType=" + contentType + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
+                (userGroupId != null ? "userGroupId=" + userGroupId + ", " : "") +
             "}";
     }
 

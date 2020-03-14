@@ -19,6 +19,8 @@
       "name": "Name",
       "detail": "Detail",
       "profilePic": "Profile Pic",
+      "notification": "Notification",
+      "schedule": "Schedule",
       "user": "User",
       "owner": "Owner"
     }

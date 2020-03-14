@@ -13,8 +13,13 @@ import org.mapstruct.*;
 public interface UserGroupMapper extends EntityMapper<UserGroupDTO, UserGroup> {
 
 
+    @Mapping(target = "notifications", ignore = true)
+    @Mapping(target = "removeNotification", ignore = true)
+    @Mapping(target = "schedules", ignore = true)
+    @Mapping(target = "removeSchedule", ignore = true)
     @Mapping(target = "removeUser", ignore = true)
     @Mapping(target = "removeOwner", ignore = true)
+    UserGroup toEntity(UserGroupDTO userGroupDTO);
 
     default UserGroup fromId(Long id) {
         if (id == null) {

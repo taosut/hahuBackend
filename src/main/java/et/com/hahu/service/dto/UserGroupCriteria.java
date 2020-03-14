@@ -28,6 +28,10 @@ public class UserGroupCriteria implements Serializable, Criteria {
 
     private StringFilter name;
 
+    private LongFilter notificationId;
+
+    private LongFilter scheduleId;
+
     private LongFilter userId;
 
     private LongFilter ownerId;
@@ -38,6 +42,8 @@ public class UserGroupCriteria implements Serializable, Criteria {
     public UserGroupCriteria(UserGroupCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
+        this.notificationId = other.notificationId == null ? null : other.notificationId.copy();
+        this.scheduleId = other.scheduleId == null ? null : other.scheduleId.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
         this.ownerId = other.ownerId == null ? null : other.ownerId.copy();
     }
@@ -61,6 +67,22 @@ public class UserGroupCriteria implements Serializable, Criteria {
 
     public void setName(StringFilter name) {
         this.name = name;
+    }
+
+    public LongFilter getNotificationId() {
+        return notificationId;
+    }
+
+    public void setNotificationId(LongFilter notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    public LongFilter getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(LongFilter scheduleId) {
+        this.scheduleId = scheduleId;
     }
 
     public LongFilter getUserId() {
@@ -92,6 +114,8 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
+            Objects.equals(notificationId, that.notificationId) &&
+            Objects.equals(scheduleId, that.scheduleId) &&
             Objects.equals(userId, that.userId) &&
             Objects.equals(ownerId, that.ownerId);
     }
@@ -101,6 +125,8 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         name,
+        notificationId,
+        scheduleId,
         userId,
         ownerId
         );
@@ -111,6 +137,8 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return "UserGroupCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
+                (notificationId != null ? "notificationId=" + notificationId + ", " : "") +
+                (scheduleId != null ? "scheduleId=" + scheduleId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
             "}";

@@ -98,6 +98,10 @@ public class NotificationQueryService extends QueryService<Notification> {
                 specification = specification.and(buildSpecification(criteria.getUserId(),
                     root -> root.join(Notification_.user, JoinType.LEFT).get(User_.id)));
             }
+            if (criteria.getUserGroupId() != null) {
+                specification = specification.and(buildSpecification(criteria.getUserGroupId(),
+                    root -> root.join(Notification_.userGroup, JoinType.LEFT).get(UserGroup_.id)));
+            }
         }
         return specification;
     }

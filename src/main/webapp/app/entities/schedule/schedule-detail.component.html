@@ -24,6 +24,12 @@
                 <dd>
                     {{ schedule.userLogin }}
                 </dd>
+                <dt><span jhiTranslate="hahuApp.schedule.userGroup">User Group</span></dt>
+                <dd>
+                    <div *ngIf="schedule.userGroupId">
+                        <a [routerLink]="['/user-group', schedule.userGroupId, 'view']">{{ schedule.userGroupName }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

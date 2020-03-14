@@ -18,6 +18,18 @@
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "notification",
+            "otherEntityRelationshipName": "userGroup",
+            "relationshipName": "notification"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "schedule",
+            "otherEntityRelationshipName": "userGroup",
+            "relationshipName": "schedule"
+        },
+        {
             "relationshipType": "many-to-many",
             "otherEntityName": "user",
             "otherEntityRelationshipName": "userGroup",

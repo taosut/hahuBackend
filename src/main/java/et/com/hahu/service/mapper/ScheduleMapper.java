@@ -9,14 +9,17 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Schedule} and its DTO {@link ScheduleDTO}.
  */
-@Mapper(componentModel = "spring", uses = {UserMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class, UserGroupMapper.class})
 public interface ScheduleMapper extends EntityMapper<ScheduleDTO, Schedule> {
 
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.login", target = "userLogin")
+    @Mapping(source = "userGroup.id", target = "userGroupId")
+    @Mapping(source = "userGroup.name", target = "userGroupName")
     ScheduleDTO toDto(Schedule schedule);
 
     @Mapping(source = "userId", target = "user")
+    @Mapping(source = "userGroupId", target = "userGroup")
     Schedule toEntity(ScheduleDTO scheduleDTO);
 
     default Schedule fromId(Long id) {

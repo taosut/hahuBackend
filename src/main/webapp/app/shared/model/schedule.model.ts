@@ -7,6 +7,8 @@ export interface ISchedule {
   endTime?: Moment;
   userLogin?: string;
   userId?: number;
+  userGroupName?: string;
+  userGroupId?: number;
 }
 
 export class Schedule implements ISchedule {
@@ -16,6 +18,8 @@ export class Schedule implements ISchedule {
     public startTime?: Moment,
     public endTime?: Moment,
     public userLogin?: string,
-    public userId?: number
+    public userId?: number,
+    public userGroupName?: string,
+    public userGroupId?: number
   ) {}
 }

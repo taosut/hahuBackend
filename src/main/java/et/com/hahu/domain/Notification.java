@@ -40,6 +40,10 @@ public class Notification implements Serializable {
     @JsonIgnoreProperties("notifications")
     private User user;
 
+    @ManyToOne
+    @JsonIgnoreProperties("notifications")
+    private UserGroup userGroup;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -86,6 +90,19 @@ public class Notification implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public UserGroup getUserGroup() {
+        return userGroup;
+    }
+
+    public Notification userGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
+        return this;
+    }
+
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
