@@ -9,14 +9,14 @@
     <changeSet id="20200311215800-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="user_group_id"
-                                 baseTableName="user_group_additional_user_info"
-                                 constraintName="fk_user_group_additional_user_info_user_group_id"
+                                 baseTableName="user_group_user"
+                                 constraintName="fk_user_group_user_user_group_id"
                                  referencedColumnNames="id"
                                  referencedTableName="user_group"/>
 
-        <addForeignKeyConstraint baseColumnNames="additional_user_info_id"
-                                 baseTableName="user_group_additional_user_info"
-                                 constraintName="fk_user_group_additional_user_info_additional_user_info_id"
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_group_user"
+                                 constraintName="fk_user_group_user_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
         

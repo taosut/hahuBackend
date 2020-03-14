@@ -288,21 +288,21 @@ public class UserGroupResourceIT {
 
     @Test
     @Transactional
-    public void getAllUserGroupsByAdditionalUserInfoIsEqualToSomething() throws Exception {
+    public void getAllUserGroupsByUserIsEqualToSomething() throws Exception {
         // Initialize the database
         userGroupRepository.saveAndFlush(userGroup);
-        User additionalUserInfo = UserResourceIT.createEntity(em);
-        em.persist(additionalUserInfo);
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
         em.flush();
-        userGroup.addAdditionalUserInfo(additionalUserInfo);
+        userGroup.addUser(user);
         userGroupRepository.saveAndFlush(userGroup);
-        Long additionalUserInfoId = additionalUserInfo.getId();
+        Long userId = user.getId();
 
-        // Get all the userGroupList where additionalUserInfo equals to additionalUserInfoId
-        defaultUserGroupShouldBeFound("additionalUserInfoId.equals=" + additionalUserInfoId);
+        // Get all the userGroupList where user equals to userId
+        defaultUserGroupShouldBeFound("userId.equals=" + userId);
 
-        // Get all the userGroupList where additionalUserInfo equals to additionalUserInfoId + 1
-        defaultUserGroupShouldNotBeFound("additionalUserInfoId.equals=" + (additionalUserInfoId + 1));
+        // Get all the userGroupList where user equals to userId + 1
+        defaultUserGroupShouldNotBeFound("userId.equals=" + (userId + 1));
     }
 
     /**

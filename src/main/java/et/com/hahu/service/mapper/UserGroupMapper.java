@@ -13,7 +13,7 @@ import org.mapstruct.*;
 public interface UserGroupMapper extends EntityMapper<UserGroupDTO, UserGroup> {
 
 
-    @Mapping(target = "removeAdditionalUserInfo", ignore = true)
+    @Mapping(target = "removeUser", ignore = true)
 
     default UserGroup fromId(Long id) {
         if (id == null) {

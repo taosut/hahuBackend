@@ -17,7 +17,7 @@
         "title": "User Group"
       },
       "groupName": "Group Name",
-      "additionalUserInfo": "Additional User Info"
+      "user": "User"
     }
   }
 }

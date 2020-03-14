@@ -28,7 +28,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
 
     private StringFilter groupName;
 
-    private LongFilter additionalUserInfoId;
+    private LongFilter userId;
 
     public UserGroupCriteria() {
     }
@@ -36,7 +36,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
     public UserGroupCriteria(UserGroupCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.groupName = other.groupName == null ? null : other.groupName.copy();
-        this.additionalUserInfoId = other.additionalUserInfoId == null ? null : other.additionalUserInfoId.copy();
+        this.userId = other.userId == null ? null : other.userId.copy();
     }
 
     @Override
@@ -60,12 +60,12 @@ public class UserGroupCriteria implements Serializable, Criteria {
         this.groupName = groupName;
     }
 
-    public LongFilter getAdditionalUserInfoId() {
-        return additionalUserInfoId;
+    public LongFilter getUserId() {
+        return userId;
     }
 
-    public void setAdditionalUserInfoId(LongFilter additionalUserInfoId) {
-        this.additionalUserInfoId = additionalUserInfoId;
+    public void setUserId(LongFilter userId) {
+        this.userId = userId;
     }
 
 
@@ -81,7 +81,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(groupName, that.groupName) &&
-            Objects.equals(additionalUserInfoId, that.additionalUserInfoId);
+            Objects.equals(userId, that.userId);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         groupName,
-        additionalUserInfoId
+        userId
         );
     }
 
@@ -98,7 +98,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return "UserGroupCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (groupName != null ? "groupName=" + groupName + ", " : "") +
-                (additionalUserInfoId != null ? "additionalUserInfoId=" + additionalUserInfoId + ", " : "") +
+                (userId != null ? "userId=" + userId + ", " : "") +
             "}";
     }
 

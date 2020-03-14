@@ -69,6 +69,7 @@ public class CacheConfiguration {
             createCache(cm, et.com.hahu.domain.PostMetaData.class.getName());
             createCache(cm, et.com.hahu.domain.Image.class.getName() + ".imageMetaData");
             createCache(cm, et.com.hahu.domain.ImageMetaData.class.getName());
+            createCache(cm, et.com.hahu.domain.UserGroup.class.getName() + ".users");
             // jhipster-needle-ehcache-add-entry
         };
     }

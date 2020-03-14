@@ -21,7 +21,7 @@ export class UserGroupUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     groupName: [],
-    additionalUserInfos: []
+    users: []
   });
 
   constructor(
@@ -43,7 +43,7 @@ export class UserGroupUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: userGroup.id,
       groupName: userGroup.groupName,
-      additionalUserInfos: userGroup.additionalUserInfos
+      users: userGroup.users
     });
   }
 
@@ -66,7 +66,7 @@ export class UserGroupUpdateComponent implements OnInit {
       ...new UserGroup(),
       id: this.editForm.get(['id'])!.value,
       groupName: this.editForm.get(['groupName'])!.value,
-      additionalUserInfos: this.editForm.get(['additionalUserInfos'])!.value
+      users: this.editForm.get(['users'])!.value
     };
   }
 

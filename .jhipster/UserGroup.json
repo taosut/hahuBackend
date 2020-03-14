@@ -11,8 +11,8 @@
             "relationshipType": "many-to-many",
             "otherEntityName": "user",
             "otherEntityRelationshipName": "userGroup",
-            "relationshipName": "additionalUserInfo",
-            "otherEntityField": "id",
+            "relationshipName": "user",
+            "otherEntityField": "login",
             "ownerSide": true
         }
     ],

@@ -17,13 +17,13 @@ import java.util.Optional;
 @Repository
 public interface UserGroupRepository extends JpaRepository<UserGroup, Long>, JpaSpecificationExecutor<UserGroup> {
 
-    @Query(value = "select distinct userGroup from UserGroup userGroup left join fetch userGroup.additionalUserInfos",
+    @Query(value = "select distinct userGroup from UserGroup userGroup left join fetch userGroup.users",
         countQuery = "select count(distinct userGroup) from UserGroup userGroup")
     Page<UserGroup> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query("select distinct userGroup from UserGroup userGroup left join fetch userGroup.additionalUserInfos")
+    @Query("select distinct userGroup from UserGroup userGroup left join fetch userGroup.users")
     List<UserGroup> findAllWithEagerRelationships();
 
-    @Query("select userGroup from UserGroup userGroup left join fetch userGroup.additionalUserInfos where userGroup.id =:id")
+    @Query("select userGroup from UserGroup userGroup left join fetch userGroup.users where userGroup.id =:id")
     Optional<UserGroup> findOneWithEagerRelationships(@Param("id") Long id);
 }

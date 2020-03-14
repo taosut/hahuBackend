@@ -30,10 +30,10 @@ public class UserGroup implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "user_group_additional_user_info",
+    @JoinTable(name = "user_group_user",
                joinColumns = @JoinColumn(name = "user_group_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "additional_user_info_id", referencedColumnName = "id"))
-    private Set<User> additionalUserInfos = new HashSet<>();
+               inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    private Set<User> users = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -57,27 +57,27 @@ public class UserGroup implements Serializable {
         this.groupName = groupName;
     }
 
-    public Set<User> getAdditionalUserInfos() {
-        return additionalUserInfos;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public UserGroup additionalUserInfos(Set<User> users) {
-        this.additionalUserInfos = users;
+    public UserGroup users(Set<User> users) {
+        this.users = users;
         return this;
     }
 
-    public UserGroup addAdditionalUserInfo(User user) {
-        this.additionalUserInfos.add(user);
+    public UserGroup addUser(User user) {
+        this.users.add(user);
         return this;
     }
 
-    public UserGroup removeAdditionalUserInfo(User user) {
-        this.additionalUserInfos.remove(user);
+    public UserGroup removeUser(User user) {
+        this.users.remove(user);
         return this;
     }
 
-    public void setAdditionalUserInfos(Set<User> users) {
-        this.additionalUserInfos = users;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

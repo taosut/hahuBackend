@@ -1,0 +1,345 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="hailemaryam (generated)" id="1584189926118-1">
+        <createSequence incrementBy="50" sequenceName="sequence_generator" startValue="1"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-2">
+        <createTable tableName="album">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="albumPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-3">
+        <createTable tableName="category">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="categoryPK"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-4">
+        <createTable tableName="comment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="commentPK"/>
+            </column>
+            <column name="content" type="VARCHAR(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="TIMESTAMP"/>
+            <column name="posted_date" type="TIMESTAMP"/>
+            <column name="comment_id" type="BIGINT"/>
+            <column name="post_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-5">
+        <createTable tableName="image">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="imagePK"/>
+            </column>
+            <column name="image" type="BLOB"/>
+            <column name="image_content_type" type="VARCHAR(255)"/>
+            <column name="album_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-6">
+        <createTable tableName="image_meta_data">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="image_meta_dataPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="image_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-7">
+        <createTable tableName="jhi_authority">
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_authorityPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-8">
+        <createTable tableName="jhi_persistent_audit_event">
+            <column autoIncrement="true" name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_persistent_audit_eventPK"/>
+            </column>
+            <column name="event_date" type="TIMESTAMP"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+            <column name="principal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-9">
+        <createTable tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-10">
+        <createTable tableName="jhi_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_userPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP"/>
+            <column name="activated" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="activation_key" type="VARCHAR(20)"/>
+            <column name="email" type="VARCHAR(254)"/>
+            <column name="first_name" type="VARCHAR(50)"/>
+            <column name="image_url" type="VARCHAR(256)"/>
+            <column name="lang_key" type="VARCHAR(10)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reset_date" type="TIMESTAMP"/>
+            <column name="reset_key" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-11">
+        <createTable tableName="jhi_user_authority">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-12">
+        <createTable tableName="likes">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="likesPK"/>
+            </column>
+            <column name="registered_time" type="TIMESTAMP"/>
+            <column name="comment_id" type="BIGINT"/>
+            <column name="post_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-13">
+        <createTable tableName="notification">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="notificationPK"/>
+            </column>
+            <column name="content" type="VARCHAR(2147483647)"/>
+            <column name="content_type" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-14">
+        <createTable tableName="post">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="postPK"/>
+            </column>
+            <column name="content" type="VARCHAR(2147483647)"/>
+            <column name="content_type" type="VARCHAR(255)"/>
+            <column name="featured_image" type="BLOB"/>
+            <column name="featured_image_content_type" type="VARCHAR(255)"/>
+            <column name="modified_date" type="TIMESTAMP"/>
+            <column name="posted_date" type="TIMESTAMP"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-15">
+        <createTable tableName="post_category">
+            <column name="post_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-16">
+        <createTable tableName="post_meta_data">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="post_meta_dataPK"/>
+            </column>
+            <column name="blob_value" type="BLOB"/>
+            <column name="blob_value_content_type" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="post_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-17">
+        <createTable tableName="post_tag">
+            <column name="post_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="tag_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-18">
+        <createTable tableName="profile">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="profilePK"/>
+            </column>
+            <column name="phone" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-19">
+        <createTable tableName="schedule">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="schedulePK"/>
+            </column>
+            <column name="end_time" type="TIMESTAMP"/>
+            <column name="start_time" type="TIMESTAMP"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-20">
+        <createTable tableName="school_progress">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="school_progressPK"/>
+            </column>
+            <column name="result" type="DOUBLE"/>
+            <column name="semester" type="VARCHAR(255)"/>
+            <column name="subject" type="VARCHAR(255)"/>
+            <column name="year" type="INT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-21">
+        <createTable tableName="tag">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tagPK"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-22">
+        <createTable tableName="user_group">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_groupPK"/>
+            </column>
+            <column name="group_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-23">
+        <createTable tableName="user_group_additional_user_info">
+            <column name="user_group_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="additional_user_info_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-24">
+        <createTable tableName="users_connection">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="users_connectionPK"/>
+            </column>
+            <column name="registered_time" type="TIMESTAMP"/>
+            <column name="follower_id" type="BIGINT"/>
+            <column name="following_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-25">
+        <addUniqueConstraint columnNames="email" constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-26">
+        <addUniqueConstraint columnNames="login" constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-27">
+        <addForeignKeyConstraint baseColumnNames="additional_user_info_id" baseTableName="user_group_additional_user_info" constraintName="FK22t1b9lxo4axeyyjhibi3ttji" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-28">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="jhi_user_authority" constraintName="FK290okww5jujghp4el5i7mgwu0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-29">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="FK2ehnyx2si4tjd2nt4q7y40v8m" deferrable="false" initiallyDeferred="false" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-30">
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="jhi_user_authority" constraintName="FK4psxl0jtx6nr7rhqbynr6itoc" deferrable="false" initiallyDeferred="false" referencedColumnNames="name" referencedTableName="jhi_authority" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-31">
+        <addForeignKeyConstraint baseColumnNames="follower_id" baseTableName="users_connection" constraintName="FK7xsodlvvpwo6oitww7lmvfqt1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-32">
+        <addForeignKeyConstraint baseColumnNames="comment_id" baseTableName="likes" constraintName="FK8arpx7i3g3e5dammtdsira2m6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="comment" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-33">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="post" constraintName="FK8sl2niu9dv9ff3o1dk5k1ssbp" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-34">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="schedule" constraintName="FK91iqjaw2r1jr6q7r022vp9aqn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-35">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="notification" constraintName="FK9cjqfbjf8u01gewfjckcn2651" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-36">
+        <addForeignKeyConstraint baseColumnNames="tag_id" baseTableName="post_tag" constraintName="FKac1wdchd2pnur3fl225obmlg0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tag" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-37">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="post_tag" constraintName="FKc2auetuvsec0k566l0eyvr9cs" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="post" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-38">
+        <addForeignKeyConstraint baseColumnNames="user_group_id" baseTableName="user_group_additional_user_info" constraintName="FKgphss0sun8a8s9aqykckdoxtm" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_group" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-39">
+        <addForeignKeyConstraint baseColumnNames="following_id" baseTableName="users_connection" constraintName="FKjdefd7wm8ruwe325tob87jahi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-40">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="school_progress" constraintName="FKjpnf1wi24q47ap4wbeutbsd3v" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-41">
+        <addForeignKeyConstraint baseColumnNames="image_id" baseTableName="image_meta_data" constraintName="FKkjjo1fbxcsq4y6t7q3rikxag0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="image" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-42">
+        <addForeignKeyConstraint baseColumnNames="album_id" baseTableName="image" constraintName="FKklgd5pxhpuh3nwik115myord" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="album" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-43">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="album" constraintName="FKlr4cpuxkxraom3em9n9xyd4rn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-44">
+        <addForeignKeyConstraint baseColumnNames="comment_id" baseTableName="comment" constraintName="FKmk3c8pbvysjndxywunibl2voc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="comment" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-45">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="likes" constraintName="FKnwihy4mocoe3mo7yuglh0un9r" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-46">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="likes" constraintName="FKowd6f4s7x9f3w50pvlo6x3b41" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="post" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-47">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="profile" constraintName="FKpvv055wnkpyqw3awfbw63ynke" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-48">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="post_meta_data" constraintName="FKq3e3slj3xyi8ec89p4xgswhys" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="post" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-49">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="post_category" constraintName="FKqly0d5oc4npxdig2fjfoshhxg" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="category" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-50">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="post_category" constraintName="FKqr4dx4cx1lh4jfjchabytcakl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="post" validate="true"/>
+    </changeSet>
+    <changeSet author="hailemaryam (generated)" id="1584189926118-51">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="comment" constraintName="FKs1slvnkuemjsq2kj4h3vhx7i1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="post" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

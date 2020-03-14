@@ -26,10 +26,7 @@
     <include file="config/liquibase/changelog/20200311215900_added_entity_Notification.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200311220000_added_entity_SchoolProgress.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200311220100_added_entity_Schedule.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200311220200_added_entity_Preference.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200311220300_added_entity_Setting.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200311220400_added_entity_Profile.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200311220500_added_entity_AdditionalUserInfo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200314100500_added_entity_PostMetaData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200314101100_added_entity_ImageMetaData.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
@@ -41,10 +38,7 @@
     <include file="config/liquibase/changelog/20200311215900_added_entity_constraints_Notification.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200311220000_added_entity_constraints_SchoolProgress.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200311220100_added_entity_constraints_Schedule.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200311220200_added_entity_constraints_Preference.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200311220300_added_entity_constraints_Setting.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200311220400_added_entity_constraints_Profile.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200311220500_added_entity_constraints_AdditionalUserInfo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200314100500_added_entity_constraints_PostMetaData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200311215600_added_entity_constraints_Album.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200314101100_added_entity_constraints_ImageMetaData.xml" relativeToChangelogFile="false"/>
