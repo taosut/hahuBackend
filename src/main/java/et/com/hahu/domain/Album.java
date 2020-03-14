@@ -1,5 +1,6 @@
 package et.com.hahu.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -31,6 +32,10 @@ public class Album implements Serializable {
     @OneToMany(mappedBy = "album")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Image> images = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("albums")
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -77,6 +82,19 @@ public class Album implements Serializable {
 
     public void setImages(Set<Image> images) {
         this.images = images;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Album user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

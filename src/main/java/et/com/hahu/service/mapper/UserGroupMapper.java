@@ -9,13 +9,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link UserGroup} and its DTO {@link UserGroupDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface UserGroupMapper extends EntityMapper<UserGroupDTO, UserGroup> {
 
 
-    @Mapping(target = "additionalUserInfos", ignore = true)
     @Mapping(target = "removeAdditionalUserInfo", ignore = true)
-    UserGroup toEntity(UserGroupDTO userGroupDTO);
 
     default UserGroup fromId(Long id) {
         if (id == null) {

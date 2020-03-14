@@ -26,9 +26,7 @@ public class ProfileCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter name;
-
-    private StringFilter value;
+    private StringFilter phone;
 
     private LongFilter userId;
 
@@ -37,8 +35,7 @@ public class ProfileCriteria implements Serializable, Criteria {
 
     public ProfileCriteria(ProfileCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
-        this.name = other.name == null ? null : other.name.copy();
-        this.value = other.value == null ? null : other.value.copy();
+        this.phone = other.phone == null ? null : other.phone.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
     }
 
@@ -55,20 +52,12 @@ public class ProfileCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getName() {
-        return name;
+    public StringFilter getPhone() {
+        return phone;
     }
 
-    public void setName(StringFilter name) {
-        this.name = name;
-    }
-
-    public StringFilter getValue() {
-        return value;
-    }
-
-    public void setValue(StringFilter value) {
-        this.value = value;
+    public void setPhone(StringFilter phone) {
+        this.phone = phone;
     }
 
     public LongFilter getUserId() {
@@ -91,8 +80,7 @@ public class ProfileCriteria implements Serializable, Criteria {
         final ProfileCriteria that = (ProfileCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(name, that.name) &&
-            Objects.equals(value, that.value) &&
+            Objects.equals(phone, that.phone) &&
             Objects.equals(userId, that.userId);
     }
 
@@ -100,8 +88,7 @@ public class ProfileCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        name,
-        value,
+        phone,
         userId
         );
     }
@@ -110,8 +97,7 @@ public class ProfileCriteria implements Serializable, Criteria {
     public String toString() {
         return "ProfileCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (name != null ? "name=" + name + ", " : "") +
-                (value != null ? "value=" + value + ", " : "") +
+                (phone != null ? "phone=" + phone + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
             "}";
     }

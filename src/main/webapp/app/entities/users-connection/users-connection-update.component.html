@@ -22,7 +22,7 @@
                     <label class="form-control-label" jhiTranslate="hahuApp.usersConnection.follower" for="field_follower">Follower</label>
                     <select class="form-control" id="field_follower" name="follower" formControlName="followerId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="additionalUserInfoOption.id" *ngFor="let additionalUserInfoOption of additionaluserinfos; trackBy: trackById">{{ additionalUserInfoOption.id }}</option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
                     </select>
                 </div>
 
@@ -30,7 +30,7 @@
                     <label class="form-control-label" jhiTranslate="hahuApp.usersConnection.following" for="field_following">Following</label>
                     <select class="form-control" id="field_following" name="following" formControlName="followingId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="additionalUserInfoOption.id" *ngFor="let additionalUserInfoOption of additionaluserinfos; trackBy: trackById">{{ additionalUserInfoOption.id }}</option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
                     </select>
                 </div>
             </div>

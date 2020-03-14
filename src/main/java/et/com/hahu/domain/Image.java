@@ -8,6 +8,8 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The Image entity will store images for user.\n@author A true hailemaryam
@@ -30,6 +32,10 @@ public class Image implements Serializable {
 
     @Column(name = "image_content_type")
     private String imageContentType;
+
+    @OneToMany(mappedBy = "image")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<ImageMetaData> imageMetaData = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("images")
@@ -68,6 +74,31 @@ public class Image implements Serializable {
 
     public void setImageContentType(String imageContentType) {
         this.imageContentType = imageContentType;
+    }
+
+    public Set<ImageMetaData> getImageMetaData() {
+        return imageMetaData;
+    }
+
+    public Image imageMetaData(Set<ImageMetaData> imageMetaData) {
+        this.imageMetaData = imageMetaData;
+        return this;
+    }
+
+    public Image addImageMetaData(ImageMetaData imageMetaData) {
+        this.imageMetaData.add(imageMetaData);
+        imageMetaData.setImage(this);
+        return this;
+    }
+
+    public Image removeImageMetaData(ImageMetaData imageMetaData) {
+        this.imageMetaData.remove(imageMetaData);
+        imageMetaData.setImage(null);
+        return this;
+    }
+
+    public void setImageMetaData(Set<ImageMetaData> imageMetaData) {
+        this.imageMetaData = imageMetaData;
     }
 
     public Album getAlbum() {

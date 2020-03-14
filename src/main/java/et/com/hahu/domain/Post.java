@@ -57,6 +57,10 @@ public class Post implements Serializable {
 
     @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PostMetaData> postMetaData = new HashSet<>();
+
+    @OneToMany(mappedBy = "post")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Comment> comments = new HashSet<>();
 
     @OneToMany(mappedBy = "post")
@@ -179,6 +183,31 @@ public class Post implements Serializable {
 
     public void setModifiedDate(Instant modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public Set<PostMetaData> getPostMetaData() {
+        return postMetaData;
+    }
+
+    public Post postMetaData(Set<PostMetaData> postMetaData) {
+        this.postMetaData = postMetaData;
+        return this;
+    }
+
+    public Post addPostMetaData(PostMetaData postMetaData) {
+        this.postMetaData.add(postMetaData);
+        postMetaData.setPost(this);
+        return this;
+    }
+
+    public Post removePostMetaData(PostMetaData postMetaData) {
+        this.postMetaData.remove(postMetaData);
+        postMetaData.setPost(null);
+        return this;
+    }
+
+    public void setPostMetaData(Set<PostMetaData> postMetaData) {
+        this.postMetaData = postMetaData;
     }
 
     public Set<Comment> getComments() {

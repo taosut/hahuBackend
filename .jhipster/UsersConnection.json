@@ -9,17 +9,17 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "additionalUserInfo",
-            "otherEntityRelationshipName": "following",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "usersConnection",
             "relationshipName": "follower",
-            "otherEntityField": "id"
+            "otherEntityField": "login"
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "additionalUserInfo",
-            "otherEntityRelationshipName": "follower",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "usersConnection",
             "relationshipName": "following",
-            "otherEntityField": "id"
+            "otherEntityField": "login"
         }
     ],
     "changelogDate": "20200311215500",

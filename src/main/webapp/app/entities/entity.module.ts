@@ -53,20 +53,16 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./schedule/schedule.module').then(m => m.HahuScheduleModule)
       },
       {
-        path: 'preference',
-        loadChildren: () => import('./preference/preference.module').then(m => m.HahuPreferenceModule)
-      },
-      {
-        path: 'setting',
-        loadChildren: () => import('./setting/setting.module').then(m => m.HahuSettingModule)
-      },
-      {
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then(m => m.HahuProfileModule)
       },
       {
-        path: 'additional-user-info',
-        loadChildren: () => import('./additional-user-info/additional-user-info.module').then(m => m.HahuAdditionalUserInfoModule)
+        path: 'post-meta-data',
+        loadChildren: () => import('./post-meta-data/post-meta-data.module').then(m => m.HahuPostMetaDataModule)
+      },
+      {
+        path: 'image-meta-data',
+        loadChildren: () => import('./image-meta-data/image-meta-data.module').then(m => m.HahuImageMetaDataModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

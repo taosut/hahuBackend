@@ -91,6 +91,10 @@ public class ImageQueryService extends QueryService<Image> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getId(), Image_.id));
             }
+            if (criteria.getImageMetaDataId() != null) {
+                specification = specification.and(buildSpecification(criteria.getImageMetaDataId(),
+                    root -> root.join(Image_.imageMetaData, JoinType.LEFT).get(ImageMetaData_.id)));
+            }
             if (criteria.getAlbumId() != null) {
                 specification = specification.and(buildSpecification(criteria.getAlbumId(),
                     root -> root.join(Image_.album, JoinType.LEFT).get(Album_.id)));

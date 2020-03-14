@@ -24,6 +24,7 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="hahuApp.album.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="hahuApp.album.user">User</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -31,6 +32,9 @@
                 <tr *ngFor="let album of albums ;trackBy: trackId">
                     <td><a [routerLink]="['/album', album.id, 'view']">{{ album.id }}</a></td>
                     <td>{{ album.name }}</td>
+                    <td>
+                        {{ album.userLogin }}
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

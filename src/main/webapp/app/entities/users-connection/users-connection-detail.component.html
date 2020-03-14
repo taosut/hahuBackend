@@ -14,15 +14,11 @@
                 </dd>
                 <dt><span jhiTranslate="hahuApp.usersConnection.follower">Follower</span></dt>
                 <dd>
-                    <div *ngIf="usersConnection.followerId">
-                        <a [routerLink]="['/additional-user-info', usersConnection.followerId, 'view']">{{ usersConnection.followerId }}</a>
-                    </div>
+                    {{ usersConnection.followerLogin }}
                 </dd>
                 <dt><span jhiTranslate="hahuApp.usersConnection.following">Following</span></dt>
                 <dd>
-                    <div *ngIf="usersConnection.followingId">
-                        <a [routerLink]="['/additional-user-info', usersConnection.followingId, 'view']">{{ usersConnection.followingId }}</a>
-                    </div>
+                    {{ usersConnection.followingLogin }}
                 </dd>
             </dl>
 

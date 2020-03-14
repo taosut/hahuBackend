@@ -2,6 +2,7 @@ package et.com.hahu.web.rest;
 
 import et.com.hahu.HahuApp;
 import et.com.hahu.domain.Image;
+import et.com.hahu.domain.ImageMetaData;
 import et.com.hahu.domain.Album;
 import et.com.hahu.repository.ImageRepository;
 import et.com.hahu.service.ImageService;
@@ -180,6 +181,26 @@ public class ImageResourceIT {
 
         defaultImageShouldBeFound("id.lessThanOrEqual=" + id);
         defaultImageShouldNotBeFound("id.lessThan=" + id);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllImagesByImageMetaDataIsEqualToSomething() throws Exception {
+        // Initialize the database
+        imageRepository.saveAndFlush(image);
+        ImageMetaData imageMetaData = ImageMetaDataResourceIT.createEntity(em);
+        em.persist(imageMetaData);
+        em.flush();
+        image.addImageMetaData(imageMetaData);
+        imageRepository.saveAndFlush(image);
+        Long imageMetaDataId = imageMetaData.getId();
+
+        // Get all the imageList where imageMetaData equals to imageMetaDataId
+        defaultImageShouldBeFound("imageMetaDataId.equals=" + imageMetaDataId);
+
+        // Get all the imageList where imageMetaData equals to imageMetaDataId + 1
+        defaultImageShouldNotBeFound("imageMetaDataId.equals=" + (imageMetaDataId + 1));
     }
 
 

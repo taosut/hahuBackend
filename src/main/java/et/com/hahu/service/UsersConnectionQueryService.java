@@ -96,11 +96,11 @@ public class UsersConnectionQueryService extends QueryService<UsersConnection> {
             }
             if (criteria.getFollowerId() != null) {
                 specification = specification.and(buildSpecification(criteria.getFollowerId(),
-                    root -> root.join(UsersConnection_.follower, JoinType.LEFT).get(AdditionalUserInfo_.id)));
+                    root -> root.join(UsersConnection_.follower, JoinType.LEFT).get(User_.id)));
             }
             if (criteria.getFollowingId() != null) {
                 specification = specification.and(buildSpecification(criteria.getFollowingId(),
-                    root -> root.join(UsersConnection_.following, JoinType.LEFT).get(AdditionalUserInfo_.id)));
+                    root -> root.join(UsersConnection_.following, JoinType.LEFT).get(User_.id)));
             }
         }
         return specification;

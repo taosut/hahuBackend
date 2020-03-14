@@ -3,6 +3,7 @@ package et.com.hahu.web.rest;
 import et.com.hahu.HahuApp;
 import et.com.hahu.domain.Album;
 import et.com.hahu.domain.Image;
+import et.com.hahu.domain.User;
 import et.com.hahu.repository.AlbumRepository;
 import et.com.hahu.service.AlbumService;
 import et.com.hahu.service.dto.AlbumDTO;
@@ -270,6 +271,26 @@ public class AlbumResourceIT {
 
         // Get all the albumList where image equals to imageId + 1
         defaultAlbumShouldNotBeFound("imageId.equals=" + (imageId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllAlbumsByUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        albumRepository.saveAndFlush(album);
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        album.setUser(user);
+        albumRepository.saveAndFlush(album);
+        Long userId = user.getId();
+
+        // Get all the albumList where user equals to userId
+        defaultAlbumShouldBeFound("userId.equals=" + userId);
+
+        // Get all the albumList where user equals to userId + 1
+        defaultAlbumShouldNotBeFound("userId.equals=" + (userId + 1));
     }
 
     /**

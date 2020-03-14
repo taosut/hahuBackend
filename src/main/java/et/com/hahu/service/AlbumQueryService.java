@@ -98,6 +98,10 @@ public class AlbumQueryService extends QueryService<Album> {
                 specification = specification.and(buildSpecification(criteria.getImageId(),
                     root -> root.join(Album_.images, JoinType.LEFT).get(Image_.id)));
             }
+            if (criteria.getUserId() != null) {
+                specification = specification.and(buildSpecification(criteria.getUserId(),
+                    root -> root.join(Album_.user, JoinType.LEFT).get(User_.id)));
+            }
         }
         return specification;
     }

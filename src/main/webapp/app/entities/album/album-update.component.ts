@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IAlbum, Album } from 'app/shared/model/album.model';
 import { AlbumService } from './album.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-album-update',
@@ -14,24 +16,34 @@ import { AlbumService } from './album.service';
 })
 export class AlbumUpdateComponent implements OnInit {
   isSaving = false;
+  users: IUser[] = [];
 
   editForm = this.fb.group({
     id: [],
-    name: []
+    name: [],
+    userId: []
   });
 
-  constructor(protected albumService: AlbumService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected albumService: AlbumService,
+    protected userService: UserService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ album }) => {
       this.updateForm(album);
+
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
     });
   }
 
   updateForm(album: IAlbum): void {
     this.editForm.patchValue({
       id: album.id,
-      name: album.name
+      name: album.name,
+      userId: album.userId
     });
   }
 
@@ -53,7 +65,8 @@ export class AlbumUpdateComponent implements OnInit {
     return {
       ...new Album(),
       id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value
+      name: this.editForm.get(['name'])!.value,
+      userId: this.editForm.get(['userId'])!.value
     };
   }
 
@@ -71,5 +84,9 @@ export class AlbumUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: IUser): any {
+    return item.id;
   }
 }

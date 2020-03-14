@@ -96,7 +96,7 @@ public class UserGroupQueryService extends QueryService<UserGroup> {
             }
             if (criteria.getAdditionalUserInfoId() != null) {
                 specification = specification.and(buildSpecification(criteria.getAdditionalUserInfoId(),
-                    root -> root.join(UserGroup_.additionalUserInfos, JoinType.LEFT).get(AdditionalUserInfo_.id)));
+                    root -> root.join(UserGroup_.additionalUserInfos, JoinType.LEFT).get(User_.id)));
             }
         }
         return specification;

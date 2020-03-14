@@ -32,6 +32,12 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
+            "otherEntityName": "postMetaData",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "postMetaData"
+        },
+        {
+            "relationshipType": "one-to-many",
             "otherEntityName": "comment",
             "otherEntityRelationshipName": "post",
             "relationshipName": "comment"

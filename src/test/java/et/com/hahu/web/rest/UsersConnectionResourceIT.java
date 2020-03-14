@@ -2,7 +2,7 @@ package et.com.hahu.web.rest;
 
 import et.com.hahu.HahuApp;
 import et.com.hahu.domain.UsersConnection;
-import et.com.hahu.domain.AdditionalUserInfo;
+import et.com.hahu.domain.User;
 import et.com.hahu.repository.UsersConnectionRepository;
 import et.com.hahu.service.UsersConnectionService;
 import et.com.hahu.service.dto.UsersConnectionDTO;
@@ -234,7 +234,7 @@ public class UsersConnectionResourceIT {
     public void getAllUsersConnectionsByFollowerIsEqualToSomething() throws Exception {
         // Initialize the database
         usersConnectionRepository.saveAndFlush(usersConnection);
-        AdditionalUserInfo follower = AdditionalUserInfoResourceIT.createEntity(em);
+        User follower = UserResourceIT.createEntity(em);
         em.persist(follower);
         em.flush();
         usersConnection.setFollower(follower);
@@ -254,7 +254,7 @@ public class UsersConnectionResourceIT {
     public void getAllUsersConnectionsByFollowingIsEqualToSomething() throws Exception {
         // Initialize the database
         usersConnectionRepository.saveAndFlush(usersConnection);
-        AdditionalUserInfo following = AdditionalUserInfoResourceIT.createEntity(em);
+        User following = UserResourceIT.createEntity(em);
         em.persist(following);
         em.flush();
         usersConnection.setFollowing(following);

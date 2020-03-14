@@ -18,7 +18,11 @@ public class UsersConnectionDTO implements Serializable {
 
     private Long followerId;
 
+    private String followerLogin;
+
     private Long followingId;
+
+    private String followingLogin;
     
     public Long getId() {
         return id;
@@ -40,16 +44,32 @@ public class UsersConnectionDTO implements Serializable {
         return followerId;
     }
 
-    public void setFollowerId(Long additionalUserInfoId) {
-        this.followerId = additionalUserInfoId;
+    public void setFollowerId(Long userId) {
+        this.followerId = userId;
+    }
+
+    public String getFollowerLogin() {
+        return followerLogin;
+    }
+
+    public void setFollowerLogin(String userLogin) {
+        this.followerLogin = userLogin;
     }
 
     public Long getFollowingId() {
         return followingId;
     }
 
-    public void setFollowingId(Long additionalUserInfoId) {
-        this.followingId = additionalUserInfoId;
+    public void setFollowingId(Long userId) {
+        this.followingId = userId;
+    }
+
+    public String getFollowingLogin() {
+        return followingLogin;
+    }
+
+    public void setFollowingLogin(String userLogin) {
+        this.followingLogin = userLogin;
     }
 
     @Override
@@ -79,7 +99,9 @@ public class UsersConnectionDTO implements Serializable {
             "id=" + getId() +
             ", registeredTime='" + getRegisteredTime() + "'" +
             ", followerId=" + getFollowerId() +
+            ", followerLogin='" + getFollowerLogin() + "'" +
             ", followingId=" + getFollowingId() +
+            ", followingLogin='" + getFollowingLogin() + "'" +
             "}";
     }
 }

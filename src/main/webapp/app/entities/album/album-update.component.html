@@ -16,6 +16,14 @@
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hahuApp.album.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" formControlName="userId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
+                    </select>
+                </div>
             </div>
 
             <div>

@@ -36,11 +36,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ProfileResourceIT {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
-    private static final String UPDATED_VALUE = "BBBBBBBBBB";
+    private static final String DEFAULT_PHONE = "+164353837757";
+    private static final String UPDATED_PHONE = "+386380583768";
 
     @Autowired
     private ProfileRepository profileRepository;
@@ -70,8 +67,7 @@ public class ProfileResourceIT {
      */
     public static Profile createEntity(EntityManager em) {
         Profile profile = new Profile()
-            .name(DEFAULT_NAME)
-            .value(DEFAULT_VALUE);
+            .phone(DEFAULT_PHONE);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -87,8 +83,7 @@ public class ProfileResourceIT {
      */
     public static Profile createUpdatedEntity(EntityManager em) {
         Profile profile = new Profile()
-            .name(UPDATED_NAME)
-            .value(UPDATED_VALUE);
+            .phone(UPDATED_PHONE);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -118,8 +113,7 @@ public class ProfileResourceIT {
         List<Profile> profileList = profileRepository.findAll();
         assertThat(profileList).hasSize(databaseSizeBeforeCreate + 1);
         Profile testProfile = profileList.get(profileList.size() - 1);
-        assertThat(testProfile.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testProfile.getValue()).isEqualTo(DEFAULT_VALUE);
+        assertThat(testProfile.getPhone()).isEqualTo(DEFAULT_PHONE);
 
         // Validate the id for MapsId, the ids must be same
         assertThat(testProfile.getId()).isEqualTo(testProfile.getUser().getId());
@@ -194,8 +188,7 @@ public class ProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(profile.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)));
     }
     
     @Test
@@ -209,8 +202,7 @@ public class ProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(profile.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE));
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE));
     }
 
 
@@ -235,157 +227,79 @@ public class ProfileResourceIT {
 
     @Test
     @Transactional
-    public void getAllProfilesByNameIsEqualToSomething() throws Exception {
+    public void getAllProfilesByPhoneIsEqualToSomething() throws Exception {
         // Initialize the database
         profileRepository.saveAndFlush(profile);
 
-        // Get all the profileList where name equals to DEFAULT_NAME
-        defaultProfileShouldBeFound("name.equals=" + DEFAULT_NAME);
+        // Get all the profileList where phone equals to DEFAULT_PHONE
+        defaultProfileShouldBeFound("phone.equals=" + DEFAULT_PHONE);
 
-        // Get all the profileList where name equals to UPDATED_NAME
-        defaultProfileShouldNotBeFound("name.equals=" + UPDATED_NAME);
+        // Get all the profileList where phone equals to UPDATED_PHONE
+        defaultProfileShouldNotBeFound("phone.equals=" + UPDATED_PHONE);
     }
 
     @Test
     @Transactional
-    public void getAllProfilesByNameIsNotEqualToSomething() throws Exception {
+    public void getAllProfilesByPhoneIsNotEqualToSomething() throws Exception {
         // Initialize the database
         profileRepository.saveAndFlush(profile);
 
-        // Get all the profileList where name not equals to DEFAULT_NAME
-        defaultProfileShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
+        // Get all the profileList where phone not equals to DEFAULT_PHONE
+        defaultProfileShouldNotBeFound("phone.notEquals=" + DEFAULT_PHONE);
 
-        // Get all the profileList where name not equals to UPDATED_NAME
-        defaultProfileShouldBeFound("name.notEquals=" + UPDATED_NAME);
+        // Get all the profileList where phone not equals to UPDATED_PHONE
+        defaultProfileShouldBeFound("phone.notEquals=" + UPDATED_PHONE);
     }
 
     @Test
     @Transactional
-    public void getAllProfilesByNameIsInShouldWork() throws Exception {
+    public void getAllProfilesByPhoneIsInShouldWork() throws Exception {
         // Initialize the database
         profileRepository.saveAndFlush(profile);
 
-        // Get all the profileList where name in DEFAULT_NAME or UPDATED_NAME
-        defaultProfileShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+        // Get all the profileList where phone in DEFAULT_PHONE or UPDATED_PHONE
+        defaultProfileShouldBeFound("phone.in=" + DEFAULT_PHONE + "," + UPDATED_PHONE);
 
-        // Get all the profileList where name equals to UPDATED_NAME
-        defaultProfileShouldNotBeFound("name.in=" + UPDATED_NAME);
+        // Get all the profileList where phone equals to UPDATED_PHONE
+        defaultProfileShouldNotBeFound("phone.in=" + UPDATED_PHONE);
     }
 
     @Test
     @Transactional
-    public void getAllProfilesByNameIsNullOrNotNull() throws Exception {
+    public void getAllProfilesByPhoneIsNullOrNotNull() throws Exception {
         // Initialize the database
         profileRepository.saveAndFlush(profile);
 
-        // Get all the profileList where name is not null
-        defaultProfileShouldBeFound("name.specified=true");
+        // Get all the profileList where phone is not null
+        defaultProfileShouldBeFound("phone.specified=true");
 
-        // Get all the profileList where name is null
-        defaultProfileShouldNotBeFound("name.specified=false");
+        // Get all the profileList where phone is null
+        defaultProfileShouldNotBeFound("phone.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllProfilesByNameContainsSomething() throws Exception {
+    public void getAllProfilesByPhoneContainsSomething() throws Exception {
         // Initialize the database
         profileRepository.saveAndFlush(profile);
 
-        // Get all the profileList where name contains DEFAULT_NAME
-        defaultProfileShouldBeFound("name.contains=" + DEFAULT_NAME);
+        // Get all the profileList where phone contains DEFAULT_PHONE
+        defaultProfileShouldBeFound("phone.contains=" + DEFAULT_PHONE);
 
-        // Get all the profileList where name contains UPDATED_NAME
-        defaultProfileShouldNotBeFound("name.contains=" + UPDATED_NAME);
+        // Get all the profileList where phone contains UPDATED_PHONE
+        defaultProfileShouldNotBeFound("phone.contains=" + UPDATED_PHONE);
     }
 
     @Test
     @Transactional
-    public void getAllProfilesByNameNotContainsSomething() throws Exception {
+    public void getAllProfilesByPhoneNotContainsSomething() throws Exception {
         // Initialize the database
         profileRepository.saveAndFlush(profile);
 
-        // Get all the profileList where name does not contain DEFAULT_NAME
-        defaultProfileShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
+        // Get all the profileList where phone does not contain DEFAULT_PHONE
+        defaultProfileShouldNotBeFound("phone.doesNotContain=" + DEFAULT_PHONE);
 
-        // Get all the profileList where name does not contain UPDATED_NAME
-        defaultProfileShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllProfilesByValueIsEqualToSomething() throws Exception {
-        // Initialize the database
-        profileRepository.saveAndFlush(profile);
-
-        // Get all the profileList where value equals to DEFAULT_VALUE
-        defaultProfileShouldBeFound("value.equals=" + DEFAULT_VALUE);
-
-        // Get all the profileList where value equals to UPDATED_VALUE
-        defaultProfileShouldNotBeFound("value.equals=" + UPDATED_VALUE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProfilesByValueIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        profileRepository.saveAndFlush(profile);
-
-        // Get all the profileList where value not equals to DEFAULT_VALUE
-        defaultProfileShouldNotBeFound("value.notEquals=" + DEFAULT_VALUE);
-
-        // Get all the profileList where value not equals to UPDATED_VALUE
-        defaultProfileShouldBeFound("value.notEquals=" + UPDATED_VALUE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProfilesByValueIsInShouldWork() throws Exception {
-        // Initialize the database
-        profileRepository.saveAndFlush(profile);
-
-        // Get all the profileList where value in DEFAULT_VALUE or UPDATED_VALUE
-        defaultProfileShouldBeFound("value.in=" + DEFAULT_VALUE + "," + UPDATED_VALUE);
-
-        // Get all the profileList where value equals to UPDATED_VALUE
-        defaultProfileShouldNotBeFound("value.in=" + UPDATED_VALUE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProfilesByValueIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        profileRepository.saveAndFlush(profile);
-
-        // Get all the profileList where value is not null
-        defaultProfileShouldBeFound("value.specified=true");
-
-        // Get all the profileList where value is null
-        defaultProfileShouldNotBeFound("value.specified=false");
-    }
-                @Test
-    @Transactional
-    public void getAllProfilesByValueContainsSomething() throws Exception {
-        // Initialize the database
-        profileRepository.saveAndFlush(profile);
-
-        // Get all the profileList where value contains DEFAULT_VALUE
-        defaultProfileShouldBeFound("value.contains=" + DEFAULT_VALUE);
-
-        // Get all the profileList where value contains UPDATED_VALUE
-        defaultProfileShouldNotBeFound("value.contains=" + UPDATED_VALUE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProfilesByValueNotContainsSomething() throws Exception {
-        // Initialize the database
-        profileRepository.saveAndFlush(profile);
-
-        // Get all the profileList where value does not contain DEFAULT_VALUE
-        defaultProfileShouldNotBeFound("value.doesNotContain=" + DEFAULT_VALUE);
-
-        // Get all the profileList where value does not contain UPDATED_VALUE
-        defaultProfileShouldBeFound("value.doesNotContain=" + UPDATED_VALUE);
+        // Get all the profileList where phone does not contain UPDATED_PHONE
+        defaultProfileShouldBeFound("phone.doesNotContain=" + UPDATED_PHONE);
     }
 
 
@@ -412,8 +326,7 @@ public class ProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(profile.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)));
 
         // Check, that the count call also returns 1
         restProfileMockMvc.perform(get("/api/profiles/count?sort=id,desc&" + filter))
@@ -461,8 +374,7 @@ public class ProfileResourceIT {
         // Disconnect from session so that the updates on updatedProfile are not directly saved in db
         em.detach(updatedProfile);
         updatedProfile
-            .name(UPDATED_NAME)
-            .value(UPDATED_VALUE);
+            .phone(UPDATED_PHONE);
         ProfileDTO profileDTO = profileMapper.toDto(updatedProfile);
 
         restProfileMockMvc.perform(put("/api/profiles")
@@ -474,8 +386,7 @@ public class ProfileResourceIT {
         List<Profile> profileList = profileRepository.findAll();
         assertThat(profileList).hasSize(databaseSizeBeforeUpdate);
         Profile testProfile = profileList.get(profileList.size() - 1);
-        assertThat(testProfile.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testProfile.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testProfile.getPhone()).isEqualTo(UPDATED_PHONE);
     }
 
     @Test

@@ -2,6 +2,8 @@ package et.com.hahu.service.dto;
 
 import io.swagger.annotations.ApiModel;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -14,6 +16,7 @@ public class UserGroupDTO implements Serializable {
 
     private String groupName;
 
+    private Set<UserDTO> additionalUserInfos = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -29,6 +32,14 @@ public class UserGroupDTO implements Serializable {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public Set<UserDTO> getAdditionalUserInfos() {
+        return additionalUserInfos;
+    }
+
+    public void setAdditionalUserInfos(Set<UserDTO> users) {
+        this.additionalUserInfos = users;
     }
 
     @Override
@@ -57,6 +68,7 @@ public class UserGroupDTO implements Serializable {
         return "UserGroupDTO{" +
             "id=" + getId() +
             ", groupName='" + getGroupName() + "'" +
+            ", additionalUserInfos='" + getAdditionalUserInfos() + "'" +
             "}";
     }
 }

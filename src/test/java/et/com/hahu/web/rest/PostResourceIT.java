@@ -2,6 +2,7 @@ package et.com.hahu.web.rest;
 
 import et.com.hahu.HahuApp;
 import et.com.hahu.domain.Post;
+import et.com.hahu.domain.PostMetaData;
 import et.com.hahu.domain.Comment;
 import et.com.hahu.domain.Likes;
 import et.com.hahu.domain.User;
@@ -496,6 +497,26 @@ public class PostResourceIT {
         // Get all the postList where modifiedDate is null
         defaultPostShouldNotBeFound("modifiedDate.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPostMetaDataIsEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+        PostMetaData postMetaData = PostMetaDataResourceIT.createEntity(em);
+        em.persist(postMetaData);
+        em.flush();
+        post.addPostMetaData(postMetaData);
+        postRepository.saveAndFlush(post);
+        Long postMetaDataId = postMetaData.getId();
+
+        // Get all the postList where postMetaData equals to postMetaDataId
+        defaultPostShouldBeFound("postMetaDataId.equals=" + postMetaDataId);
+
+        // Get all the postList where postMetaData equals to postMetaDataId + 1
+        defaultPostShouldNotBeFound("postMetaDataId.equals=" + (postMetaDataId + 1));
+    }
+
 
     @Test
     @Transactional

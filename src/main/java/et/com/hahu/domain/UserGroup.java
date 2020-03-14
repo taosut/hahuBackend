@@ -28,9 +28,12 @@ public class UserGroup implements Serializable {
     @Column(name = "group_name")
     private String groupName;
 
-    @OneToMany(mappedBy = "userGroup")
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<AdditionalUserInfo> additionalUserInfos = new HashSet<>();
+    @JoinTable(name = "user_group_additional_user_info",
+               joinColumns = @JoinColumn(name = "user_group_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "additional_user_info_id", referencedColumnName = "id"))
+    private Set<User> additionalUserInfos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -54,29 +57,27 @@ public class UserGroup implements Serializable {
         this.groupName = groupName;
     }
 
-    public Set<AdditionalUserInfo> getAdditionalUserInfos() {
+    public Set<User> getAdditionalUserInfos() {
         return additionalUserInfos;
     }
 
-    public UserGroup additionalUserInfos(Set<AdditionalUserInfo> additionalUserInfos) {
-        this.additionalUserInfos = additionalUserInfos;
+    public UserGroup additionalUserInfos(Set<User> users) {
+        this.additionalUserInfos = users;
         return this;
     }
 
-    public UserGroup addAdditionalUserInfo(AdditionalUserInfo additionalUserInfo) {
-        this.additionalUserInfos.add(additionalUserInfo);
-        additionalUserInfo.setUserGroup(this);
+    public UserGroup addAdditionalUserInfo(User user) {
+        this.additionalUserInfos.add(user);
         return this;
     }
 
-    public UserGroup removeAdditionalUserInfo(AdditionalUserInfo additionalUserInfo) {
-        this.additionalUserInfos.remove(additionalUserInfo);
-        additionalUserInfo.setUserGroup(null);
+    public UserGroup removeAdditionalUserInfo(User user) {
+        this.additionalUserInfos.remove(user);
         return this;
     }
 
-    public void setAdditionalUserInfos(Set<AdditionalUserInfo> additionalUserInfos) {
-        this.additionalUserInfos = additionalUserInfos;
+    public void setAdditionalUserInfos(Set<User> users) {
+        this.additionalUserInfos = users;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

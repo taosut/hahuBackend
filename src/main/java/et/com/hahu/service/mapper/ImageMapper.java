@@ -15,6 +15,8 @@ public interface ImageMapper extends EntityMapper<ImageDTO, Image> {
     @Mapping(source = "album.id", target = "albumId")
     ImageDTO toDto(Image image);
 
+    @Mapping(target = "imageMetaData", ignore = true)
+    @Mapping(target = "removeImageMetaData", ignore = true)
     @Mapping(source = "albumId", target = "album")
     Image toEntity(ImageDTO imageDTO);
 

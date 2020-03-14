@@ -1,11 +1,10 @@
 export interface IProfile {
   id?: number;
-  name?: string;
-  value?: string;
+  phone?: string;
   userLogin?: string;
   userId?: number;
 }
 
 export class Profile implements IProfile {
-  constructor(public id?: number, public name?: string, public value?: string, public userLogin?: string, public userId?: number) {}
+  constructor(public id?: number, public phone?: string, public userLogin?: string, public userId?: number) {}
 }

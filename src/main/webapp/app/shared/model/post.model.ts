@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IPostMetaData } from 'app/shared/model/post-meta-data.model';
 import { IComment } from 'app/shared/model/comment.model';
 import { ILikes } from 'app/shared/model/likes.model';
 import { ICategory } from 'app/shared/model/category.model';
@@ -14,6 +15,7 @@ export interface IPost {
   featuredImage?: any;
   postedDate?: Moment;
   modifiedDate?: Moment;
+  postMetaData?: IPostMetaData[];
   comments?: IComment[];
   likes?: ILikes[];
   userLogin?: string;
@@ -32,6 +34,7 @@ export class Post implements IPost {
     public featuredImage?: any,
     public postedDate?: Moment,
     public modifiedDate?: Moment,
+    public postMetaData?: IPostMetaData[],
     public comments?: IComment[],
     public likes?: ILikes[],
     public userLogin?: string,

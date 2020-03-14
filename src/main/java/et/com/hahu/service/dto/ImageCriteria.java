@@ -26,6 +26,8 @@ public class ImageCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
+    private LongFilter imageMetaDataId;
+
     private LongFilter albumId;
 
     public ImageCriteria() {
@@ -33,6 +35,7 @@ public class ImageCriteria implements Serializable, Criteria {
 
     public ImageCriteria(ImageCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
+        this.imageMetaDataId = other.imageMetaDataId == null ? null : other.imageMetaDataId.copy();
         this.albumId = other.albumId == null ? null : other.albumId.copy();
     }
 
@@ -47,6 +50,14 @@ public class ImageCriteria implements Serializable, Criteria {
 
     public void setId(LongFilter id) {
         this.id = id;
+    }
+
+    public LongFilter getImageMetaDataId() {
+        return imageMetaDataId;
+    }
+
+    public void setImageMetaDataId(LongFilter imageMetaDataId) {
+        this.imageMetaDataId = imageMetaDataId;
     }
 
     public LongFilter getAlbumId() {
@@ -69,6 +80,7 @@ public class ImageCriteria implements Serializable, Criteria {
         final ImageCriteria that = (ImageCriteria) o;
         return
             Objects.equals(id, that.id) &&
+            Objects.equals(imageMetaDataId, that.imageMetaDataId) &&
             Objects.equals(albumId, that.albumId);
     }
 
@@ -76,6 +88,7 @@ public class ImageCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
+        imageMetaDataId,
         albumId
         );
     }
@@ -84,6 +97,7 @@ public class ImageCriteria implements Serializable, Criteria {
     public String toString() {
         return "ImageCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
+                (imageMetaDataId != null ? "imageMetaDataId=" + imageMetaDataId + ", " : "") +
                 (albumId != null ? "albumId=" + albumId + ", " : "") +
             "}";
     }

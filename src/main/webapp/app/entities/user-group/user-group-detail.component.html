@@ -12,6 +12,12 @@
                 <dd>
                     <span>{{ userGroup.groupName }}</span>
                 </dd>
+                <dt><span jhiTranslate="hahuApp.userGroup.additionalUserInfo">Additional User Info</span></dt>
+                <dd>
+                    <span *ngFor="let additionalUserInfo of userGroup.additionalUserInfos; let last = last">
+                        {{ additionalUserInfo.id }}{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"

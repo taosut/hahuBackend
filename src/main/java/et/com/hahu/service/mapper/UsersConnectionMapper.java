@@ -9,11 +9,13 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link UsersConnection} and its DTO {@link UsersConnectionDTO}.
  */
-@Mapper(componentModel = "spring", uses = {AdditionalUserInfoMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface UsersConnectionMapper extends EntityMapper<UsersConnectionDTO, UsersConnection> {
 
     @Mapping(source = "follower.id", target = "followerId")
+    @Mapping(source = "follower.login", target = "followerLogin")
     @Mapping(source = "following.id", target = "followingId")
+    @Mapping(source = "following.login", target = "followingLogin")
     UsersConnectionDTO toDto(UsersConnection usersConnection);
 
     @Mapping(source = "followerId", target = "follower")

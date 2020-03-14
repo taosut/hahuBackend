@@ -29,6 +29,13 @@ public interface UserGroupService {
     Page<UserGroupDTO> findAll(Pageable pageable);
 
     /**
+     * Get all the userGroups with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    Page<UserGroupDTO> findAllWithEagerRelationships(Pageable pageable);
+
+    /**
      * Get the "id" userGroup.
      *
      * @param id the id of the entity.

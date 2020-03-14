@@ -2,7 +2,7 @@ package et.com.hahu.web.rest;
 
 import et.com.hahu.HahuApp;
 import et.com.hahu.domain.UserGroup;
-import et.com.hahu.domain.AdditionalUserInfo;
+import et.com.hahu.domain.User;
 import et.com.hahu.repository.UserGroupRepository;
 import et.com.hahu.service.UserGroupService;
 import et.com.hahu.service.dto.UserGroupDTO;
@@ -12,18 +12,25 @@ import et.com.hahu.service.UserGroupQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -31,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link UserGroupResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class UserGroupResourceIT {
@@ -42,8 +49,14 @@ public class UserGroupResourceIT {
     @Autowired
     private UserGroupRepository userGroupRepository;
 
+    @Mock
+    private UserGroupRepository userGroupRepositoryMock;
+
     @Autowired
     private UserGroupMapper userGroupMapper;
+
+    @Mock
+    private UserGroupService userGroupServiceMock;
 
     @Autowired
     private UserGroupService userGroupService;
@@ -141,6 +154,26 @@ public class UserGroupResourceIT {
             .andExpect(jsonPath("$.[*].groupName").value(hasItem(DEFAULT_GROUP_NAME)));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllUserGroupsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(userGroupServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restUserGroupMockMvc.perform(get("/api/user-groups?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(userGroupServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllUserGroupsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(userGroupServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restUserGroupMockMvc.perform(get("/api/user-groups?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(userGroupServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getUserGroup() throws Exception {
@@ -258,7 +291,7 @@ public class UserGroupResourceIT {
     public void getAllUserGroupsByAdditionalUserInfoIsEqualToSomething() throws Exception {
         // Initialize the database
         userGroupRepository.saveAndFlush(userGroup);
-        AdditionalUserInfo additionalUserInfo = AdditionalUserInfoResourceIT.createEntity(em);
+        User additionalUserInfo = UserResourceIT.createEntity(em);
         em.persist(additionalUserInfo);
         em.flush();
         userGroup.addAdditionalUserInfo(additionalUserInfo);

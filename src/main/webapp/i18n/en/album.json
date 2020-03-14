@@ -17,7 +17,8 @@
         "title": "Album"
       },
       "name": "Name",
-      "image": "Image"
+      "image": "Image",
+      "user": "User"
     }
   }
 }

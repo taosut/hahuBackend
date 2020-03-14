@@ -14,6 +14,10 @@ public class AlbumDTO implements Serializable {
 
     private String name;
 
+
+    private Long userId;
+
+    private String userLogin;
     
     public Long getId() {
         return id;
@@ -29,6 +33,22 @@ public class AlbumDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     @Override
@@ -57,6 +77,8 @@ public class AlbumDTO implements Serializable {
         return "AlbumDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", userId=" + getUserId() +
+            ", userLogin='" + getUserLogin() + "'" +
             "}";
     }
 }

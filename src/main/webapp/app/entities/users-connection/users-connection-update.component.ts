@@ -9,8 +9,8 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IUsersConnection, UsersConnection } from 'app/shared/model/users-connection.model';
 import { UsersConnectionService } from './users-connection.service';
-import { IAdditionalUserInfo } from 'app/shared/model/additional-user-info.model';
-import { AdditionalUserInfoService } from 'app/entities/additional-user-info/additional-user-info.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-users-connection-update',
@@ -18,7 +18,7 @@ import { AdditionalUserInfoService } from 'app/entities/additional-user-info/add
 })
 export class UsersConnectionUpdateComponent implements OnInit {
   isSaving = false;
-  additionaluserinfos: IAdditionalUserInfo[] = [];
+  users: IUser[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -29,7 +29,7 @@ export class UsersConnectionUpdateComponent implements OnInit {
 
   constructor(
     protected usersConnectionService: UsersConnectionService,
-    protected additionalUserInfoService: AdditionalUserInfoService,
+    protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -43,9 +43,7 @@ export class UsersConnectionUpdateComponent implements OnInit {
 
       this.updateForm(usersConnection);
 
-      this.additionalUserInfoService
-        .query()
-        .subscribe((res: HttpResponse<IAdditionalUserInfo[]>) => (this.additionaluserinfos = res.body || []));
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
     });
   }
 
@@ -100,7 +98,7 @@ export class UsersConnectionUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IAdditionalUserInfo): any {
+  trackById(index: number, item: IUser): any {
     return item.id;
   }
 }

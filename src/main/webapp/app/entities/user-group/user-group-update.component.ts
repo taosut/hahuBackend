@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IUserGroup, UserGroup } from 'app/shared/model/user-group.model';
 import { UserGroupService } from './user-group.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-user-group-update',
@@ -14,24 +16,34 @@ import { UserGroupService } from './user-group.service';
 })
 export class UserGroupUpdateComponent implements OnInit {
   isSaving = false;
+  users: IUser[] = [];
 
   editForm = this.fb.group({
     id: [],
-    groupName: []
+    groupName: [],
+    additionalUserInfos: []
   });
 
-  constructor(protected userGroupService: UserGroupService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected userGroupService: UserGroupService,
+    protected userService: UserService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ userGroup }) => {
       this.updateForm(userGroup);
+
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
     });
   }
 
   updateForm(userGroup: IUserGroup): void {
     this.editForm.patchValue({
       id: userGroup.id,
-      groupName: userGroup.groupName
+      groupName: userGroup.groupName,
+      additionalUserInfos: userGroup.additionalUserInfos
     });
   }
 
@@ -53,7 +65,8 @@ export class UserGroupUpdateComponent implements OnInit {
     return {
       ...new UserGroup(),
       id: this.editForm.get(['id'])!.value,
-      groupName: this.editForm.get(['groupName'])!.value
+      groupName: this.editForm.get(['groupName'])!.value,
+      additionalUserInfos: this.editForm.get(['additionalUserInfos'])!.value
     };
   }
 
@@ -71,5 +84,20 @@ export class UserGroupUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: IUser): any {
+    return item.id;
+  }
+
+  getSelected(selectedVals: IUser[], option: IUser): IUser {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

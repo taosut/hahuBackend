@@ -1,5 +1,6 @@
 package et.com.hahu.service.dto;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -10,9 +11,8 @@ public class ProfileDTO implements Serializable {
     
     private Long id;
 
-    private String name;
-
-    private String value;
+    @Pattern(regexp = "^\\+[0-9]{12}$")
+    private String phone;
 
 
     private Long userId;
@@ -27,20 +27,12 @@ public class ProfileDTO implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Long getUserId() {
@@ -84,8 +76,7 @@ public class ProfileDTO implements Serializable {
     public String toString() {
         return "ProfileDTO{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", value='" + getValue() + "'" +
+            ", phone='" + getPhone() + "'" +
             ", userId=" + getUserId() +
             ", userLogin='" + getUserLogin() + "'" +
             "}";

@@ -9,6 +9,12 @@
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "imageMetaData",
+            "otherEntityRelationshipName": "image",
+            "relationshipName": "imageMetaData"
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "album",
             "otherEntityRelationshipName": "image",

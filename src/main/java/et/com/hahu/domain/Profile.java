@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -21,11 +22,9 @@ public class Profile implements Serializable {
     @Id
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "value")
-    private String value;
+    @Pattern(regexp = "^\\+[0-9]{12}$")
+    @Column(name = "phone")
+    private String phone;
 
     @OneToOne
 
@@ -42,30 +41,17 @@ public class Profile implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPhone() {
+        return phone;
     }
 
-    public Profile name(String name) {
-        this.name = name;
+    public Profile phone(String phone) {
+        this.phone = phone;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public Profile value(String value) {
-        this.value = value;
-        return this;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public User getUser() {
@@ -102,8 +88,7 @@ public class Profile implements Serializable {
     public String toString() {
         return "Profile{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", value='" + getValue() + "'" +
+            ", phone='" + getPhone() + "'" +
             "}";
     }
 }

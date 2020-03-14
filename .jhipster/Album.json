@@ -12,6 +12,13 @@
             "otherEntityName": "image",
             "otherEntityRelationshipName": "album",
             "relationshipName": "image"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "album",
+            "relationshipName": "user",
+            "otherEntityField": "login"
         }
     ],
     "changelogDate": "20200311215600",

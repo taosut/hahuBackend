@@ -23,6 +23,8 @@
         "setting": "Setting",
         "profile": "Profile",
         "additionalUserInfo": "Additional User Info",
+        "postMetaData": "Post Meta Data",
+        "imageMetaData": "Image Meta Data",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

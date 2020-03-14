@@ -20,8 +20,7 @@ export class ProfileUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    name: [],
-    value: [],
+    phone: [null, [Validators.pattern('^\\+[0-9]{12}$')]],
     userId: []
   });
 
@@ -43,8 +42,7 @@ export class ProfileUpdateComponent implements OnInit {
   updateForm(profile: IProfile): void {
     this.editForm.patchValue({
       id: profile.id,
-      name: profile.name,
-      value: profile.value,
+      phone: profile.phone,
       userId: profile.userId
     });
   }
@@ -67,8 +65,7 @@ export class ProfileUpdateComponent implements OnInit {
     return {
       ...new Profile(),
       id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      value: this.editForm.get(['value'])!.value,
+      phone: this.editForm.get(['phone'])!.value,
       userId: this.editForm.get(['userId'])!.value
     };
   }

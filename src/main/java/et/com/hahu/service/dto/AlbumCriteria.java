@@ -30,6 +30,8 @@ public class AlbumCriteria implements Serializable, Criteria {
 
     private LongFilter imageId;
 
+    private LongFilter userId;
+
     public AlbumCriteria() {
     }
 
@@ -37,6 +39,7 @@ public class AlbumCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
         this.imageId = other.imageId == null ? null : other.imageId.copy();
+        this.userId = other.userId == null ? null : other.userId.copy();
     }
 
     @Override
@@ -68,6 +71,14 @@ public class AlbumCriteria implements Serializable, Criteria {
         this.imageId = imageId;
     }
 
+    public LongFilter getUserId() {
+        return userId;
+    }
+
+    public void setUserId(LongFilter userId) {
+        this.userId = userId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -81,7 +92,8 @@ public class AlbumCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
-            Objects.equals(imageId, that.imageId);
+            Objects.equals(imageId, that.imageId) &&
+            Objects.equals(userId, that.userId);
     }
 
     @Override
@@ -89,7 +101,8 @@ public class AlbumCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         name,
-        imageId
+        imageId,
+        userId
         );
     }
 
@@ -99,6 +112,7 @@ public class AlbumCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (imageId != null ? "imageId=" + imageId + ", " : "") +
+                (userId != null ? "userId=" + userId + ", " : "") +
             "}";
     }
 

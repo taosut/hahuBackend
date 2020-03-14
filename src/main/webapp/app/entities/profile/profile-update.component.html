@@ -12,15 +12,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.profile.name" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                           formControlName="name"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.profile.value" for="field_value">Value</label>
-                    <input type="text" class="form-control" name="value" id="field_value"
-                           formControlName="value"/>
+                    <label class="form-control-label" jhiTranslate="hahuApp.profile.phone" for="field_phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="field_phone"
+                           formControlName="phone"/>
+                    <div *ngIf="editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('phone')?.errors?.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Phone' }">
+                            This field should follow pattern for "Phone".
+                        </small>
+                    </div>
                 </div>
 
                 <div class="form-group">

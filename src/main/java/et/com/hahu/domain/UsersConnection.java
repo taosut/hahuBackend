@@ -29,12 +29,12 @@ public class UsersConnection implements Serializable {
     private Instant registeredTime;
 
     @ManyToOne
-    @JsonIgnoreProperties("followings")
-    private AdditionalUserInfo follower;
+    @JsonIgnoreProperties("usersConnections")
+    private User follower;
 
     @ManyToOne
-    @JsonIgnoreProperties("followers")
-    private AdditionalUserInfo following;
+    @JsonIgnoreProperties("usersConnections")
+    private User following;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -58,30 +58,30 @@ public class UsersConnection implements Serializable {
         this.registeredTime = registeredTime;
     }
 
-    public AdditionalUserInfo getFollower() {
+    public User getFollower() {
         return follower;
     }
 
-    public UsersConnection follower(AdditionalUserInfo additionalUserInfo) {
-        this.follower = additionalUserInfo;
+    public UsersConnection follower(User user) {
+        this.follower = user;
         return this;
     }
 
-    public void setFollower(AdditionalUserInfo additionalUserInfo) {
-        this.follower = additionalUserInfo;
+    public void setFollower(User user) {
+        this.follower = user;
     }
 
-    public AdditionalUserInfo getFollowing() {
+    public User getFollowing() {
         return following;
     }
 
-    public UsersConnection following(AdditionalUserInfo additionalUserInfo) {
-        this.following = additionalUserInfo;
+    public UsersConnection following(User user) {
+        this.following = user;
         return this;
     }
 
-    public void setFollowing(AdditionalUserInfo additionalUserInfo) {
-        this.following = additionalUserInfo;
+    public void setFollowing(User user) {
+        this.following = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

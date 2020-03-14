@@ -22,6 +22,7 @@
       "featuredImage": "Featured Image",
       "postedDate": "Posted Date",
       "modifiedDate": "Modified Date",
+      "postMetaData": "Post Meta Data",
       "comment": "Comment",
       "like": "Like",
       "user": "User",

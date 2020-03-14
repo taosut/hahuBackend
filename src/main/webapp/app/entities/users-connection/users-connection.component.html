@@ -24,8 +24,8 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="registeredTime"><span jhiTranslate="hahuApp.usersConnection.registeredTime">Registered Time</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="followerId"><span jhiTranslate="hahuApp.usersConnection.follower">Follower</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="followingId"><span jhiTranslate="hahuApp.usersConnection.following">Following</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="followerLogin"><span jhiTranslate="hahuApp.usersConnection.follower">Follower</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="followingLogin"><span jhiTranslate="hahuApp.usersConnection.following">Following</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -34,14 +34,10 @@
                     <td><a [routerLink]="['/users-connection', usersConnection.id, 'view']">{{ usersConnection.id }}</a></td>
                     <td>{{ usersConnection.registeredTime | date:'medium' }}</td>
                     <td>
-                        <div *ngIf="usersConnection.followerId">
-                            <a [routerLink]="['/additional-user-info', usersConnection.followerId , 'view']" >{{ usersConnection.followerId }}</a>
-                        </div>
+                        {{ usersConnection.followerLogin }}
                     </td>
                     <td>
-                        <div *ngIf="usersConnection.followingId">
-                            <a [routerLink]="['/additional-user-info', usersConnection.followingId , 'view']" >{{ usersConnection.followingId }}</a>
-                        </div>
+                        {{ usersConnection.followingLogin }}
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

@@ -103,6 +103,10 @@ public class PostQueryService extends QueryService<Post> {
             if (criteria.getModifiedDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getModifiedDate(), Post_.modifiedDate));
             }
+            if (criteria.getPostMetaDataId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPostMetaDataId(),
+                    root -> root.join(Post_.postMetaData, JoinType.LEFT).get(PostMetaData_.id)));
+            }
             if (criteria.getCommentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCommentId(),
                     root -> root.join(Post_.comments, JoinType.LEFT).get(Comment_.id)));

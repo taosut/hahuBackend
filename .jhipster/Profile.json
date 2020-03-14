@@ -2,12 +2,12 @@
     "name": "Profile",
     "fields": [
         {
-            "fieldName": "name",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "value",
-            "fieldType": "String"
+            "fieldName": "phone",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^\\+[0-9]{12}$"
         }
     ],
     "relationships": [

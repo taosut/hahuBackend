@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -57,7 +58,7 @@ public class ProfileResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/profiles")
-    public ResponseEntity<ProfileDTO> createProfile(@RequestBody ProfileDTO profileDTO) throws URISyntaxException {
+    public ResponseEntity<ProfileDTO> createProfile(@Valid @RequestBody ProfileDTO profileDTO) throws URISyntaxException {
         log.debug("REST request to save Profile : {}", profileDTO);
         if (profileDTO.getId() != null) {
             throw new BadRequestAlertException("A new profile cannot already have an ID", ENTITY_NAME, "idexists");
@@ -81,7 +82,7 @@ public class ProfileResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/profiles")
-    public ResponseEntity<ProfileDTO> updateProfile(@RequestBody ProfileDTO profileDTO) throws URISyntaxException {
+    public ResponseEntity<ProfileDTO> updateProfile(@Valid @RequestBody ProfileDTO profileDTO) throws URISyntaxException {
         log.debug("REST request to update Profile : {}", profileDTO);
         if (profileDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

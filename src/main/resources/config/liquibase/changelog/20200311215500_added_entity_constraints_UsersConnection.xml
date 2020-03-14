@@ -12,13 +12,13 @@
                                  baseTableName="users_connection"
                                  constraintName="fk_users_connection_follower_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="additional_user_info"/>
+                                 referencedTableName="jhi_user"/>
 
         <addForeignKeyConstraint baseColumnNames="following_id"
                                  baseTableName="users_connection"
                                  constraintName="fk_users_connection_following_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="additional_user_info"/>
+                                 referencedTableName="jhi_user"/>
 
     </changeSet>
 </databaseChangeLog>
