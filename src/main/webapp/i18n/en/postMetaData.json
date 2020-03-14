@@ -1,0 +1,25 @@
+{
+  "hahuApp": {
+    "postMetaData": {
+      "home": {
+        "title": "Post Meta Data",
+        "createLabel": "Create a new Post Meta Data",
+        "createOrEditLabel": "Create or edit a Post Meta Data",
+        "notFound": "No Post Meta Data found"
+      },
+      "created": "A new Post Meta Data is created with identifier {{ param }}",
+      "updated": "A Post Meta Data is updated with identifier {{ param }}",
+      "deleted": "A Post Meta Data is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Post Meta Data {{ id }}?"
+      },
+      "detail": {
+        "title": "Post Meta Data"
+      },
+      "name": "Name",
+      "value": "Value",
+      "blobValue": "Blob Value",
+      "post": "Post"
+    }
+  }
+}

@@ -1,0 +1,79 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="hahuApp.imageMetaData.home.title">Image Meta Data</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-image-meta-data" [routerLink]="['/image-meta-data/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="hahuApp.imageMetaData.home.createLabel">
+            Create a new Image Meta Data
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="imageMetaData?.length === 0">
+        <span jhiTranslate="hahuApp.imageMetaData.home.notFound">No imageMetaData found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="imageMetaData?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="hahuApp.imageMetaData.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="value"><span jhiTranslate="hahuApp.imageMetaData.value">Value</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="imageId"><span jhiTranslate="hahuApp.imageMetaData.image">Image</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let imageMetaData of imageMetaData ;trackBy: trackId">
+                    <td><a [routerLink]="['/image-meta-data', imageMetaData.id, 'view']">{{ imageMetaData.id }}</a></td>
+                    <td>{{ imageMetaData.name }}</td>
+                    <td>{{ imageMetaData.value }}</td>
+                    <td>
+                        <div *ngIf="imageMetaData.imageId">
+                            <a [routerLink]="['/image', imageMetaData.imageId , 'view']" >{{ imageMetaData.imageId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/image-meta-data', imageMetaData.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/image-meta-data', imageMetaData.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(imageMetaData)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="imageMetaData?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="hahuApp.postMetaData.home.title">Post Meta Data</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-post-meta-data" [routerLink]="['/post-meta-data/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="hahuApp.postMetaData.home.createLabel">
+            Create a new Post Meta Data
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="postMetaData?.length === 0">
+        <span jhiTranslate="hahuApp.postMetaData.home.notFound">No postMetaData found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="postMetaData?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="hahuApp.postMetaData.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="value"><span jhiTranslate="hahuApp.postMetaData.value">Value</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="blobValue"><span jhiTranslate="hahuApp.postMetaData.blobValue">Blob Value</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="postId"><span jhiTranslate="hahuApp.postMetaData.post">Post</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let postMetaData of postMetaData ;trackBy: trackId">
+                    <td><a [routerLink]="['/post-meta-data', postMetaData.id, 'view']">{{ postMetaData.id }}</a></td>
+                    <td>{{ postMetaData.name }}</td>
+                    <td>{{ postMetaData.value }}</td>
+                    <td>
+                        <a *ngIf="postMetaData.blobValue" (click)="openFile(postMetaData.blobValueContentType, postMetaData.blobValue)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="postMetaData.blobValue">{{ postMetaData.blobValueContentType }}, {{ byteSize(postMetaData.blobValue) }}</span>
+                    </td>
+                    <td>
+                        <div *ngIf="postMetaData.postId">
+                            <a [routerLink]="['/post', postMetaData.postId , 'view']" >{{ postMetaData.postId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/post-meta-data', postMetaData.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/post-meta-data', postMetaData.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(postMetaData)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="postMetaData?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

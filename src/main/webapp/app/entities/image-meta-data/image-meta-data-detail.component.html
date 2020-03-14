@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="imageMetaData">
+            <h2><span jhiTranslate="hahuApp.imageMetaData.detail.title">Image Meta Data</span> {{ imageMetaData.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.imageMetaData.name">Name</span></dt>
+                <dd>
+                    <span>{{ imageMetaData.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.imageMetaData.value">Value</span></dt>
+                <dd>
+                    <span>{{ imageMetaData.value }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.imageMetaData.image">Image</span></dt>
+                <dd>
+                    <div *ngIf="imageMetaData.imageId">
+                        <a [routerLink]="['/image', imageMetaData.imageId, 'view']">{{ imageMetaData.imageId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/image-meta-data', imageMetaData.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
