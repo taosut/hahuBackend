@@ -42,6 +42,10 @@ public class Schedule implements Serializable {
     @JsonIgnoreProperties("schedules")
     private UserGroup userGroup;
 
+    @ManyToOne
+    @JsonIgnoreProperties("schedules")
+    private ScheduleType scheduleType;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -114,6 +118,19 @@ public class Schedule implements Serializable {
 
     public void setUserGroup(UserGroup userGroup) {
         this.userGroup = userGroup;
+    }
+
+    public ScheduleType getScheduleType() {
+        return scheduleType;
+    }
+
+    public Schedule scheduleType(ScheduleType scheduleType) {
+        this.scheduleType = scheduleType;
+        return this;
+    }
+
+    public void setScheduleType(ScheduleType scheduleType) {
+        this.scheduleType = scheduleType;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

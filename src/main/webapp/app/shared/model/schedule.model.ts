@@ -9,6 +9,8 @@ export interface ISchedule {
   userId?: number;
   userGroupName?: string;
   userGroupId?: number;
+  scheduleTypeName?: string;
+  scheduleTypeId?: number;
 }
 
 export class Schedule implements ISchedule {
@@ -20,6 +22,8 @@ export class Schedule implements ISchedule {
     public userLogin?: string,
     public userId?: number,
     public userGroupName?: string,
-    public userGroupId?: number
+    public userGroupId?: number,
+    public scheduleTypeName?: string,
+    public scheduleTypeId?: number
   ) {}
 }

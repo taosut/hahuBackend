@@ -20,7 +20,8 @@
       "startTime": "Start Time",
       "endTime": "End Time",
       "user": "User",
-      "userGroup": "User Group"
+      "userGroup": "User Group",
+      "scheduleType": "Schedule Type"
     }
   }
 }

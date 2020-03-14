@@ -28,6 +28,7 @@
                     <th scope="col"  jhiSortBy="endTime"><span jhiTranslate="hahuApp.schedule.endTime">End Time</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="hahuApp.schedule.user">User</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userGroupName"><span jhiTranslate="hahuApp.schedule.userGroup">User Group</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="scheduleTypeName"><span jhiTranslate="hahuApp.schedule.scheduleType">Schedule Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -43,6 +44,11 @@
                     <td>
                         <div *ngIf="schedule.userGroupId">
                             <a [routerLink]="['/user-group', schedule.userGroupId , 'view']" >{{ schedule.userGroupName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="schedule.scheduleTypeId">
+                            <a [routerLink]="['/schedule-type', schedule.scheduleTypeId , 'view']" >{{ schedule.scheduleTypeName }}</a>
                         </div>
                     </td>
                     <td class="text-right">

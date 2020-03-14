@@ -16,8 +16,14 @@
       "detail": {
         "title": "Notification"
       },
+      "featuredImage": "Featured Image",
+      "title": "Title",
       "content": "Content",
       "contentType": "Content Type",
+      "link": "Link",
+      "date": "Date",
+      "markAsRead": "Mark As Read",
+      "notificationMetaData": "Notification Meta Data",
       "user": "User",
       "userGroup": "User Group"
     }

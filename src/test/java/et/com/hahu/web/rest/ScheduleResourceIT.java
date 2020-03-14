@@ -4,6 +4,7 @@ import et.com.hahu.HahuApp;
 import et.com.hahu.domain.Schedule;
 import et.com.hahu.domain.User;
 import et.com.hahu.domain.UserGroup;
+import et.com.hahu.domain.ScheduleType;
 import et.com.hahu.repository.ScheduleRepository;
 import et.com.hahu.service.ScheduleService;
 import et.com.hahu.service.dto.ScheduleDTO;
@@ -413,6 +414,26 @@ public class ScheduleResourceIT {
 
         // Get all the scheduleList where userGroup equals to userGroupId + 1
         defaultScheduleShouldNotBeFound("userGroupId.equals=" + (userGroupId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllSchedulesByScheduleTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        scheduleRepository.saveAndFlush(schedule);
+        ScheduleType scheduleType = ScheduleTypeResourceIT.createEntity(em);
+        em.persist(scheduleType);
+        em.flush();
+        schedule.setScheduleType(scheduleType);
+        scheduleRepository.saveAndFlush(schedule);
+        Long scheduleTypeId = scheduleType.getId();
+
+        // Get all the scheduleList where scheduleType equals to scheduleTypeId
+        defaultScheduleShouldBeFound("scheduleTypeId.equals=" + scheduleTypeId);
+
+        // Get all the scheduleList where scheduleType equals to scheduleTypeId + 1
+        defaultScheduleShouldNotBeFound("scheduleTypeId.equals=" + (scheduleTypeId + 1));
     }
 
     /**

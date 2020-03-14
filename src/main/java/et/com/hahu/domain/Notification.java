@@ -9,6 +9,9 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import et.com.hahu.domain.enumeration.ContentType;
 
@@ -28,6 +31,16 @@ public class Notification implements Serializable {
     private Long id;
 
     @Lob
+    @Column(name = "featured_image")
+    private byte[] featuredImage;
+
+    @Column(name = "featured_image_content_type")
+    private String featuredImageContentType;
+
+    @Column(name = "title")
+    private String title;
+
+    @Lob
     @Type(type = "org.hibernate.type.TextType")
     @Column(name = "content")
     private String content;
@@ -35,6 +48,19 @@ public class Notification implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "content_type")
     private ContentType contentType;
+
+    @Column(name = "link")
+    private String link;
+
+    @Column(name = "date")
+    private Instant date;
+
+    @Column(name = "mark_as_read")
+    private Boolean markAsRead;
+
+    @OneToMany(mappedBy = "notification")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<NotificationMetaData> notificationMetaData = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("notifications")
@@ -51,6 +77,45 @@ public class Notification implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public byte[] getFeaturedImage() {
+        return featuredImage;
+    }
+
+    public Notification featuredImage(byte[] featuredImage) {
+        this.featuredImage = featuredImage;
+        return this;
+    }
+
+    public void setFeaturedImage(byte[] featuredImage) {
+        this.featuredImage = featuredImage;
+    }
+
+    public String getFeaturedImageContentType() {
+        return featuredImageContentType;
+    }
+
+    public Notification featuredImageContentType(String featuredImageContentType) {
+        this.featuredImageContentType = featuredImageContentType;
+        return this;
+    }
+
+    public void setFeaturedImageContentType(String featuredImageContentType) {
+        this.featuredImageContentType = featuredImageContentType;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Notification title(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -77,6 +142,70 @@ public class Notification implements Serializable {
 
     public void setContentType(ContentType contentType) {
         this.contentType = contentType;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public Notification link(String link) {
+        this.link = link;
+        return this;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public Instant getDate() {
+        return date;
+    }
+
+    public Notification date(Instant date) {
+        this.date = date;
+        return this;
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
+    }
+
+    public Boolean isMarkAsRead() {
+        return markAsRead;
+    }
+
+    public Notification markAsRead(Boolean markAsRead) {
+        this.markAsRead = markAsRead;
+        return this;
+    }
+
+    public void setMarkAsRead(Boolean markAsRead) {
+        this.markAsRead = markAsRead;
+    }
+
+    public Set<NotificationMetaData> getNotificationMetaData() {
+        return notificationMetaData;
+    }
+
+    public Notification notificationMetaData(Set<NotificationMetaData> notificationMetaData) {
+        this.notificationMetaData = notificationMetaData;
+        return this;
+    }
+
+    public Notification addNotificationMetaData(NotificationMetaData notificationMetaData) {
+        this.notificationMetaData.add(notificationMetaData);
+        notificationMetaData.setNotification(this);
+        return this;
+    }
+
+    public Notification removeNotificationMetaData(NotificationMetaData notificationMetaData) {
+        this.notificationMetaData.remove(notificationMetaData);
+        notificationMetaData.setNotification(null);
+        return this;
+    }
+
+    public void setNotificationMetaData(Set<NotificationMetaData> notificationMetaData) {
+        this.notificationMetaData = notificationMetaData;
     }
 
     public User getUser() {
@@ -126,8 +255,14 @@ public class Notification implements Serializable {
     public String toString() {
         return "Notification{" +
             "id=" + getId() +
+            ", featuredImage='" + getFeaturedImage() + "'" +
+            ", featuredImageContentType='" + getFeaturedImageContentType() + "'" +
+            ", title='" + getTitle() + "'" +
             ", content='" + getContent() + "'" +
             ", contentType='" + getContentType() + "'" +
+            ", link='" + getLink() + "'" +
+            ", date='" + getDate() + "'" +
+            ", markAsRead='" + isMarkAsRead() + "'" +
             "}";
     }
 }

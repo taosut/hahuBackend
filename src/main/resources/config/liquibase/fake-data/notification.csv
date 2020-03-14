@@ -1,11 +1,11 @@
-id;content;content_type
-1;../fake-data/blob/hipster.txt;HTML
-2;../fake-data/blob/hipster.txt;HTML
-3;../fake-data/blob/hipster.txt;HTML
-4;../fake-data/blob/hipster.txt;HTML
-5;../fake-data/blob/hipster.txt;HTML
-6;../fake-data/blob/hipster.txt;HTML
-7;../fake-data/blob/hipster.txt;HTML
-8;../fake-data/blob/hipster.txt;HTML
-9;../fake-data/blob/hipster.txt;TEXT
-10;../fake-data/blob/hipster.txt;HTML
+id;featured_image;featured_image_content_type;title;content;content_type;link;date;mark_as_read
+1;../fake-data/blob/hipster.png;image/png;Rustic bleeding-edge;../fake-data/blob/hipster.txt;TEXT;generate CSS Granite;2020-03-11T03:50:13;true
+2;../fake-data/blob/hipster.png;image/png;next-generation viral Tasty Wooden Towels;../fake-data/blob/hipster.txt;HTML;Credit Card Account Yen District;2020-03-11T21:26:26;true
+3;../fake-data/blob/hipster.png;image/png;invoice partnerships Forges;../fake-data/blob/hipster.txt;HTML;Intelligent;2020-03-11T14:27:19;false
+4;../fake-data/blob/hipster.png;image/png;withdrawal compressing Unbranded Wooden Salad;../fake-data/blob/hipster.txt;TEXT;reintermediate Health Berkshire;2020-03-11T11:54:31;true
+5;../fake-data/blob/hipster.png;image/png;Table;../fake-data/blob/hipster.txt;HTML;Spur Gorgeous Steel Bacon;2020-03-10T22:20:27;false
+6;../fake-data/blob/hipster.png;image/png;Gloves;../fake-data/blob/hipster.txt;TEXT;Kenya back up;2020-03-11T02:50:11;true
+7;../fake-data/blob/hipster.png;image/png;Pataca Checking Account;../fake-data/blob/hipster.txt;HTML;infrastructures;2020-03-11T06:34:06;true
+8;../fake-data/blob/hipster.png;image/png;Chief Money Market Account;../fake-data/blob/hipster.txt;HTML;cross-platform circuit Kwanza;2020-03-11T15:16:00;false
+9;../fake-data/blob/hipster.png;image/png;program Credit Card Account;../fake-data/blob/hipster.txt;TEXT;override;2020-03-11T04:03:46;true
+10;../fake-data/blob/hipster.png;image/png;Chips Avon AGP;../fake-data/blob/hipster.txt;HTML;multi-byte;2020-03-11T06:38:05;false

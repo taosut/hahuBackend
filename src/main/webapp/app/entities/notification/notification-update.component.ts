@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { INotification, Notification } from 'app/shared/model/notification.model';
@@ -27,8 +29,14 @@ export class NotificationUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    featuredImage: [],
+    featuredImageContentType: [],
+    title: [],
     content: [],
     contentType: [],
+    link: [],
+    date: [],
+    markAsRead: [],
     userId: [],
     userGroupId: []
   });
@@ -39,12 +47,18 @@ export class NotificationUpdateComponent implements OnInit {
     protected notificationService: NotificationService,
     protected userService: UserService,
     protected userGroupService: UserGroupService,
+    protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ notification }) => {
+      if (!notification.id) {
+        const today = moment().startOf('day');
+        notification.date = today;
+      }
+
       this.updateForm(notification);
 
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
@@ -56,8 +70,14 @@ export class NotificationUpdateComponent implements OnInit {
   updateForm(notification: INotification): void {
     this.editForm.patchValue({
       id: notification.id,
+      featuredImage: notification.featuredImage,
+      featuredImageContentType: notification.featuredImageContentType,
+      title: notification.title,
       content: notification.content,
       contentType: notification.contentType,
+      link: notification.link,
+      date: notification.date ? notification.date.format(DATE_TIME_FORMAT) : null,
+      markAsRead: notification.markAsRead,
       userId: notification.userId,
       userGroupId: notification.userGroupId
     });
@@ -79,6 +99,16 @@ export class NotificationUpdateComponent implements OnInit {
     });
   }
 
+  clearInputImage(field: string, fieldContentType: string, idInput: string): void {
+    this.editForm.patchValue({
+      [field]: null,
+      [fieldContentType]: null
+    });
+    if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
+      this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
+    }
+  }
+
   previousState(): void {
     window.history.back();
   }
@@ -97,8 +127,14 @@ export class NotificationUpdateComponent implements OnInit {
     return {
       ...new Notification(),
       id: this.editForm.get(['id'])!.value,
+      featuredImageContentType: this.editForm.get(['featuredImageContentType'])!.value,
+      featuredImage: this.editForm.get(['featuredImage'])!.value,
+      title: this.editForm.get(['title'])!.value,
       content: this.editForm.get(['content'])!.value,
       contentType: this.editForm.get(['contentType'])!.value,
+      link: this.editForm.get(['link'])!.value,
+      date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
+      markAsRead: this.editForm.get(['markAsRead'])!.value,
       userId: this.editForm.get(['userId'])!.value,
       userGroupId: this.editForm.get(['userGroupId'])!.value
     };

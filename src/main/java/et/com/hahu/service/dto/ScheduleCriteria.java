@@ -37,6 +37,8 @@ public class ScheduleCriteria implements Serializable, Criteria {
 
     private LongFilter userGroupId;
 
+    private LongFilter scheduleTypeId;
+
     public ScheduleCriteria() {
     }
 
@@ -47,6 +49,7 @@ public class ScheduleCriteria implements Serializable, Criteria {
         this.endTime = other.endTime == null ? null : other.endTime.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
         this.userGroupId = other.userGroupId == null ? null : other.userGroupId.copy();
+        this.scheduleTypeId = other.scheduleTypeId == null ? null : other.scheduleTypeId.copy();
     }
 
     @Override
@@ -102,6 +105,14 @@ public class ScheduleCriteria implements Serializable, Criteria {
         this.userGroupId = userGroupId;
     }
 
+    public LongFilter getScheduleTypeId() {
+        return scheduleTypeId;
+    }
+
+    public void setScheduleTypeId(LongFilter scheduleTypeId) {
+        this.scheduleTypeId = scheduleTypeId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -118,7 +129,8 @@ public class ScheduleCriteria implements Serializable, Criteria {
             Objects.equals(startTime, that.startTime) &&
             Objects.equals(endTime, that.endTime) &&
             Objects.equals(userId, that.userId) &&
-            Objects.equals(userGroupId, that.userGroupId);
+            Objects.equals(userGroupId, that.userGroupId) &&
+            Objects.equals(scheduleTypeId, that.scheduleTypeId);
     }
 
     @Override
@@ -129,7 +141,8 @@ public class ScheduleCriteria implements Serializable, Criteria {
         startTime,
         endTime,
         userId,
-        userGroupId
+        userGroupId,
+        scheduleTypeId
         );
     }
 
@@ -142,6 +155,7 @@ public class ScheduleCriteria implements Serializable, Criteria {
                 (endTime != null ? "endTime=" + endTime + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (userGroupId != null ? "userGroupId=" + userGroupId + ", " : "") +
+                (scheduleTypeId != null ? "scheduleTypeId=" + scheduleTypeId + ", " : "") +
             "}";
     }
 

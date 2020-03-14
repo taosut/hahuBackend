@@ -2,6 +2,15 @@
     "name": "Notification",
     "fields": [
         {
+            "fieldName": "featuredImage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "content",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "text"
@@ -10,9 +19,27 @@
             "fieldName": "contentType",
             "fieldType": "ContentType",
             "fieldValues": "TEXT,HTML"
+        },
+        {
+            "fieldName": "link",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "markAsRead",
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "notificationMetaData",
+            "otherEntityRelationshipName": "notification",
+            "relationshipName": "notificationMetaData"
+        },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "user",

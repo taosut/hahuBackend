@@ -108,6 +108,10 @@ public class ScheduleQueryService extends QueryService<Schedule> {
                 specification = specification.and(buildSpecification(criteria.getUserGroupId(),
                     root -> root.join(Schedule_.userGroup, JoinType.LEFT).get(UserGroup_.id)));
             }
+            if (criteria.getScheduleTypeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getScheduleTypeId(),
+                    root -> root.join(Schedule_.scheduleType, JoinType.LEFT).get(ScheduleType_.id)));
+            }
         }
         return specification;
     }

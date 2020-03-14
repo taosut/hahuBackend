@@ -13,8 +13,10 @@ import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { IUserGroup } from 'app/shared/model/user-group.model';
 import { UserGroupService } from 'app/entities/user-group/user-group.service';
+import { IScheduleType } from 'app/shared/model/schedule-type.model';
+import { ScheduleTypeService } from 'app/entities/schedule-type/schedule-type.service';
 
-type SelectableEntity = IUser | IUserGroup;
+type SelectableEntity = IUser | IUserGroup | IScheduleType;
 
 @Component({
   selector: 'jhi-schedule-update',
@@ -24,6 +26,7 @@ export class ScheduleUpdateComponent implements OnInit {
   isSaving = false;
   users: IUser[] = [];
   usergroups: IUserGroup[] = [];
+  scheduletypes: IScheduleType[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -31,13 +34,15 @@ export class ScheduleUpdateComponent implements OnInit {
     startTime: [],
     endTime: [],
     userId: [],
-    userGroupId: []
+    userGroupId: [],
+    scheduleTypeId: []
   });
 
   constructor(
     protected scheduleService: ScheduleService,
     protected userService: UserService,
     protected userGroupService: UserGroupService,
+    protected scheduleTypeService: ScheduleTypeService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -55,6 +60,8 @@ export class ScheduleUpdateComponent implements OnInit {
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
 
       this.userGroupService.query().subscribe((res: HttpResponse<IUserGroup[]>) => (this.usergroups = res.body || []));
+
+      this.scheduleTypeService.query().subscribe((res: HttpResponse<IScheduleType[]>) => (this.scheduletypes = res.body || []));
     });
   }
 
@@ -65,7 +72,8 @@ export class ScheduleUpdateComponent implements OnInit {
       startTime: schedule.startTime ? schedule.startTime.format(DATE_TIME_FORMAT) : null,
       endTime: schedule.endTime ? schedule.endTime.format(DATE_TIME_FORMAT) : null,
       userId: schedule.userId,
-      userGroupId: schedule.userGroupId
+      userGroupId: schedule.userGroupId,
+      scheduleTypeId: schedule.scheduleTypeId
     });
   }
 
@@ -91,7 +99,8 @@ export class ScheduleUpdateComponent implements OnInit {
       startTime: this.editForm.get(['startTime'])!.value ? moment(this.editForm.get(['startTime'])!.value, DATE_TIME_FORMAT) : undefined,
       endTime: this.editForm.get(['endTime'])!.value ? moment(this.editForm.get(['endTime'])!.value, DATE_TIME_FORMAT) : undefined,
       userId: this.editForm.get(['userId'])!.value,
-      userGroupId: this.editForm.get(['userGroupId'])!.value
+      userGroupId: this.editForm.get(['userGroupId'])!.value,
+      scheduleTypeId: this.editForm.get(['scheduleTypeId'])!.value
     };
   }
 

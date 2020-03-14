@@ -11,6 +11,7 @@ import io.github.jhipster.service.filter.FloatFilter;
 import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
+import io.github.jhipster.service.filter.InstantFilter;
 
 /**
  * Criteria class for the {@link et.com.hahu.domain.Notification} entity. This class is used
@@ -45,7 +46,17 @@ public class NotificationCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
+    private StringFilter title;
+
     private ContentTypeFilter contentType;
+
+    private StringFilter link;
+
+    private InstantFilter date;
+
+    private BooleanFilter markAsRead;
+
+    private LongFilter notificationMetaDataId;
 
     private LongFilter userId;
 
@@ -56,7 +67,12 @@ public class NotificationCriteria implements Serializable, Criteria {
 
     public NotificationCriteria(NotificationCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
+        this.title = other.title == null ? null : other.title.copy();
         this.contentType = other.contentType == null ? null : other.contentType.copy();
+        this.link = other.link == null ? null : other.link.copy();
+        this.date = other.date == null ? null : other.date.copy();
+        this.markAsRead = other.markAsRead == null ? null : other.markAsRead.copy();
+        this.notificationMetaDataId = other.notificationMetaDataId == null ? null : other.notificationMetaDataId.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
         this.userGroupId = other.userGroupId == null ? null : other.userGroupId.copy();
     }
@@ -74,12 +90,52 @@ public class NotificationCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
+    public StringFilter getTitle() {
+        return title;
+    }
+
+    public void setTitle(StringFilter title) {
+        this.title = title;
+    }
+
     public ContentTypeFilter getContentType() {
         return contentType;
     }
 
     public void setContentType(ContentTypeFilter contentType) {
         this.contentType = contentType;
+    }
+
+    public StringFilter getLink() {
+        return link;
+    }
+
+    public void setLink(StringFilter link) {
+        this.link = link;
+    }
+
+    public InstantFilter getDate() {
+        return date;
+    }
+
+    public void setDate(InstantFilter date) {
+        this.date = date;
+    }
+
+    public BooleanFilter getMarkAsRead() {
+        return markAsRead;
+    }
+
+    public void setMarkAsRead(BooleanFilter markAsRead) {
+        this.markAsRead = markAsRead;
+    }
+
+    public LongFilter getNotificationMetaDataId() {
+        return notificationMetaDataId;
+    }
+
+    public void setNotificationMetaDataId(LongFilter notificationMetaDataId) {
+        this.notificationMetaDataId = notificationMetaDataId;
     }
 
     public LongFilter getUserId() {
@@ -110,7 +166,12 @@ public class NotificationCriteria implements Serializable, Criteria {
         final NotificationCriteria that = (NotificationCriteria) o;
         return
             Objects.equals(id, that.id) &&
+            Objects.equals(title, that.title) &&
             Objects.equals(contentType, that.contentType) &&
+            Objects.equals(link, that.link) &&
+            Objects.equals(date, that.date) &&
+            Objects.equals(markAsRead, that.markAsRead) &&
+            Objects.equals(notificationMetaDataId, that.notificationMetaDataId) &&
             Objects.equals(userId, that.userId) &&
             Objects.equals(userGroupId, that.userGroupId);
     }
@@ -119,7 +180,12 @@ public class NotificationCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
+        title,
         contentType,
+        link,
+        date,
+        markAsRead,
+        notificationMetaDataId,
         userId,
         userGroupId
         );
@@ -129,7 +195,12 @@ public class NotificationCriteria implements Serializable, Criteria {
     public String toString() {
         return "NotificationCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
+                (title != null ? "title=" + title + ", " : "") +
                 (contentType != null ? "contentType=" + contentType + ", " : "") +
+                (link != null ? "link=" + link + ", " : "") +
+                (date != null ? "date=" + date + ", " : "") +
+                (markAsRead != null ? "markAsRead=" + markAsRead + ", " : "") +
+                (notificationMetaDataId != null ? "notificationMetaDataId=" + notificationMetaDataId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (userGroupId != null ? "userGroupId=" + userGroupId + ", " : "") +
             "}";

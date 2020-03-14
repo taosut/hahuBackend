@@ -63,6 +63,14 @@ import { RouterModule } from '@angular/router';
       {
         path: 'image-meta-data',
         loadChildren: () => import('./image-meta-data/image-meta-data.module').then(m => m.HahuImageMetaDataModule)
+      },
+      {
+        path: 'notification-meta-data',
+        loadChildren: () => import('./notification-meta-data/notification-meta-data.module').then(m => m.HahuNotificationMetaDataModule)
+      },
+      {
+        path: 'schedule-type',
+        loadChildren: () => import('./schedule-type/schedule-type.module').then(m => m.HahuScheduleTypeModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

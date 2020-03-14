@@ -46,6 +46,14 @@
                         <option [ngValue]="userGroupOption.id" *ngFor="let userGroupOption of usergroups; trackBy: trackById">{{ userGroupOption.name }}</option>
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hahuApp.schedule.scheduleType" for="field_scheduleType">Schedule Type</label>
+                    <select class="form-control" id="field_scheduleType" name="scheduleType" formControlName="scheduleTypeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="scheduleTypeOption.id" *ngFor="let scheduleTypeOption of scheduletypes; trackBy: trackById">{{ scheduleTypeOption.name }}</option>
+                    </select>
+                </div>
             </div>
 
             <div>

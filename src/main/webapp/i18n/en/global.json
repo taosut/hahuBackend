@@ -25,6 +25,8 @@
         "additionalUserInfo": "Additional User Info",
         "postMetaData": "Post Meta Data",
         "imageMetaData": "Image Meta Data",
+        "notificationMetaData": "Notification Meta Data",
+        "scheduleType": "Schedule Type",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

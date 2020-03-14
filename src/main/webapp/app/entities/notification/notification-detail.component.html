@@ -8,6 +8,19 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.notification.featuredImage">Featured Image</span></dt>
+                <dd>
+                    <div *ngIf="notification.featuredImage">
+                        <a (click)="openFile(notification?.featuredImageContentType!, notification?.featuredImage)">
+                            <img [src]="'data:' + notification.featuredImageContentType + ';base64,' + notification.featuredImage" style="max-width: 100%;" alt="notification image"/>
+                        </a>
+                        {{ notification.featuredImageContentType }}, {{ byteSize(notification.featuredImage) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.title">Title</span></dt>
+                <dd>
+                    <span>{{ notification.title }}</span>
+                </dd>
                 <dt><span jhiTranslate="hahuApp.notification.content">Content</span></dt>
                 <dd>
                     <span>{{ notification.content }}</span>
@@ -15,6 +28,18 @@
                 <dt><span jhiTranslate="hahuApp.notification.contentType">Content Type</span></dt>
                 <dd>
                     <span jhiTranslate="{{ 'hahuApp.ContentType.' + notification.contentType }}">{{ notification.contentType }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.link">Link</span></dt>
+                <dd>
+                    <span>{{ notification.link }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.date">Date</span></dt>
+                <dd>
+                    <span>{{ notification.date }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.markAsRead">Mark As Read</span></dt>
+                <dd>
+                    <span>{{ notification.markAsRead }}</span>
                 </dd>
                 <dt><span jhiTranslate="hahuApp.notification.user">User</span></dt>
                 <dd>

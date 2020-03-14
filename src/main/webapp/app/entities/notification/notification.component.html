@@ -23,8 +23,13 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="featuredImage"><span jhiTranslate="hahuApp.notification.featuredImage">Featured Image</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="title"><span jhiTranslate="hahuApp.notification.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="content"><span jhiTranslate="hahuApp.notification.content">Content</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="contentType"><span jhiTranslate="hahuApp.notification.contentType">Content Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="link"><span jhiTranslate="hahuApp.notification.link">Link</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date"><span jhiTranslate="hahuApp.notification.date">Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="markAsRead"><span jhiTranslate="hahuApp.notification.markAsRead">Mark As Read</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="hahuApp.notification.user">User</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userGroupName"><span jhiTranslate="hahuApp.notification.userGroup">User Group</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -33,8 +38,18 @@
             <tbody>
                 <tr *ngFor="let notification of notifications ;trackBy: trackId">
                     <td><a [routerLink]="['/notification', notification.id, 'view']">{{ notification.id }}</a></td>
+                    <td>
+                        <a *ngIf="notification.featuredImage" (click)="openFile(notification.featuredImageContentType, notification.featuredImage)">
+                            <img [src]="'data:' + notification.featuredImageContentType + ';base64,' + notification.featuredImage" style="max-height: 30px;" alt="notification image"/>
+                        </a>
+                        <span *ngIf="notification.featuredImage">{{ notification.featuredImageContentType }}, {{ byteSize(notification.featuredImage) }}</span>
+                    </td>
+                    <td>{{ notification.title }}</td>
                     <td>{{ notification.content }}</td>
                     <td jhiTranslate="{{ 'hahuApp.ContentType.' + notification.contentType }}">{{ notification.contentType }}</td>
+                    <td>{{ notification.link }}</td>
+                    <td>{{ notification.date | date:'medium' }}</td>
+                    <td>{{ notification.markAsRead }}</td>
                     <td>
                         {{ notification.userLogin }}
                     </td>

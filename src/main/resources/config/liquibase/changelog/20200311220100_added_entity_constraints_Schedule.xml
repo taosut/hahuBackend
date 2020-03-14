@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="user_group"/>
 
+        <addForeignKeyConstraint baseColumnNames="schedule_type_id"
+                                 baseTableName="schedule"
+                                 constraintName="fk_schedule_schedule_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="schedule_type"/>
+
     </changeSet>
 </databaseChangeLog>

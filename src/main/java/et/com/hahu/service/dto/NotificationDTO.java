@@ -1,6 +1,7 @@
 package et.com.hahu.service.dto;
 
 import io.swagger.annotations.ApiModel;
+import java.time.Instant;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Lob;
@@ -15,9 +16,21 @@ public class NotificationDTO implements Serializable {
     private Long id;
 
     @Lob
+    private byte[] featuredImage;
+
+    private String featuredImageContentType;
+    private String title;
+
+    @Lob
     private String content;
 
     private ContentType contentType;
+
+    private String link;
+
+    private Instant date;
+
+    private Boolean markAsRead;
 
 
     private Long userId;
@@ -36,6 +49,30 @@ public class NotificationDTO implements Serializable {
         this.id = id;
     }
 
+    public byte[] getFeaturedImage() {
+        return featuredImage;
+    }
+
+    public void setFeaturedImage(byte[] featuredImage) {
+        this.featuredImage = featuredImage;
+    }
+
+    public String getFeaturedImageContentType() {
+        return featuredImageContentType;
+    }
+
+    public void setFeaturedImageContentType(String featuredImageContentType) {
+        this.featuredImageContentType = featuredImageContentType;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getContent() {
         return content;
     }
@@ -50,6 +87,30 @@ public class NotificationDTO implements Serializable {
 
     public void setContentType(ContentType contentType) {
         this.contentType = contentType;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public Instant getDate() {
+        return date;
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
+    }
+
+    public Boolean isMarkAsRead() {
+        return markAsRead;
+    }
+
+    public void setMarkAsRead(Boolean markAsRead) {
+        this.markAsRead = markAsRead;
     }
 
     public Long getUserId() {
@@ -109,8 +170,13 @@ public class NotificationDTO implements Serializable {
     public String toString() {
         return "NotificationDTO{" +
             "id=" + getId() +
+            ", featuredImage='" + getFeaturedImage() + "'" +
+            ", title='" + getTitle() + "'" +
             ", content='" + getContent() + "'" +
             ", contentType='" + getContentType() + "'" +
+            ", link='" + getLink() + "'" +
+            ", date='" + getDate() + "'" +
+            ", markAsRead='" + isMarkAsRead() + "'" +
             ", userId=" + getUserId() +
             ", userLogin='" + getUserLogin() + "'" +
             ", userGroupId=" + getUserGroupId() +

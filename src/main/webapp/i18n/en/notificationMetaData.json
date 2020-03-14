@@ -1,0 +1,25 @@
+{
+  "hahuApp": {
+    "notificationMetaData": {
+      "home": {
+        "title": "Notification Meta Data",
+        "createLabel": "Create a new Notification Meta Data",
+        "createOrEditLabel": "Create or edit a Notification Meta Data",
+        "notFound": "No Notification Meta Data found"
+      },
+      "created": "A new Notification Meta Data is created with identifier {{ param }}",
+      "updated": "A Notification Meta Data is updated with identifier {{ param }}",
+      "deleted": "A Notification Meta Data is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Notification Meta Data {{ id }}?"
+      },
+      "detail": {
+        "title": "Notification Meta Data"
+      },
+      "name": "Name",
+      "value": "Value",
+      "blobValue": "Blob Value",
+      "notification": "Notification"
+    }
+  }
+}

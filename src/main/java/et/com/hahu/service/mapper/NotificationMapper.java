@@ -18,6 +18,8 @@ public interface NotificationMapper extends EntityMapper<NotificationDTO, Notifi
     @Mapping(source = "userGroup.name", target = "userGroupName")
     NotificationDTO toDto(Notification notification);
 
+    @Mapping(target = "notificationMetaData", ignore = true)
+    @Mapping(target = "removeNotificationMetaData", ignore = true)
     @Mapping(source = "userId", target = "user")
     @Mapping(source = "userGroupId", target = "userGroup")
     Notification toEntity(NotificationDTO notificationDTO);
