@@ -21,7 +21,8 @@ export class ProfileUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     phone: [null, [Validators.pattern('^\\+[0-9]{12}$')]],
-    userId: []
+    userId: [],
+    families: []
   });
 
   constructor(
@@ -43,7 +44,8 @@ export class ProfileUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: profile.id,
       phone: profile.phone,
-      userId: profile.userId
+      userId: profile.userId,
+      families: profile.families
     });
   }
 
@@ -66,7 +68,8 @@ export class ProfileUpdateComponent implements OnInit {
       ...new Profile(),
       id: this.editForm.get(['id'])!.value,
       phone: this.editForm.get(['phone'])!.value,
-      userId: this.editForm.get(['userId'])!.value
+      userId: this.editForm.get(['userId'])!.value,
+      families: this.editForm.get(['families'])!.value
     };
   }
 
@@ -88,5 +91,16 @@ export class ProfileUpdateComponent implements OnInit {
 
   trackById(index: number, item: IUser): any {
     return item.id;
+  }
+
+  getSelected(selectedVals: IUser[], option: IUser): IUser {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

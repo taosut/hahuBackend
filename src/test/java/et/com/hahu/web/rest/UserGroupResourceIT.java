@@ -46,6 +46,9 @@ public class UserGroupResourceIT {
     private static final String DEFAULT_GROUP_NAME = "AAAAAAAAAA";
     private static final String UPDATED_GROUP_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_OWNER = "AAAAAAAAAA";
+    private static final String UPDATED_OWNER = "BBBBBBBBBB";
+
     @Autowired
     private UserGroupRepository userGroupRepository;
 
@@ -80,7 +83,8 @@ public class UserGroupResourceIT {
      */
     public static UserGroup createEntity(EntityManager em) {
         UserGroup userGroup = new UserGroup()
-            .groupName(DEFAULT_GROUP_NAME);
+            .groupName(DEFAULT_GROUP_NAME)
+            .owner(DEFAULT_OWNER);
         return userGroup;
     }
     /**
@@ -91,7 +95,8 @@ public class UserGroupResourceIT {
      */
     public static UserGroup createUpdatedEntity(EntityManager em) {
         UserGroup userGroup = new UserGroup()
-            .groupName(UPDATED_GROUP_NAME);
+            .groupName(UPDATED_GROUP_NAME)
+            .owner(UPDATED_OWNER);
         return userGroup;
     }
 
@@ -117,6 +122,7 @@ public class UserGroupResourceIT {
         assertThat(userGroupList).hasSize(databaseSizeBeforeCreate + 1);
         UserGroup testUserGroup = userGroupList.get(userGroupList.size() - 1);
         assertThat(testUserGroup.getGroupName()).isEqualTo(DEFAULT_GROUP_NAME);
+        assertThat(testUserGroup.getOwner()).isEqualTo(DEFAULT_OWNER);
     }
 
     @Test
@@ -151,7 +157,8 @@ public class UserGroupResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(userGroup.getId().intValue())))
-            .andExpect(jsonPath("$.[*].groupName").value(hasItem(DEFAULT_GROUP_NAME)));
+            .andExpect(jsonPath("$.[*].groupName").value(hasItem(DEFAULT_GROUP_NAME)))
+            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER)));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -185,7 +192,8 @@ public class UserGroupResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(userGroup.getId().intValue()))
-            .andExpect(jsonPath("$.groupName").value(DEFAULT_GROUP_NAME));
+            .andExpect(jsonPath("$.groupName").value(DEFAULT_GROUP_NAME))
+            .andExpect(jsonPath("$.owner").value(DEFAULT_OWNER));
     }
 
 
@@ -288,6 +296,84 @@ public class UserGroupResourceIT {
 
     @Test
     @Transactional
+    public void getAllUserGroupsByOwnerIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+
+        // Get all the userGroupList where owner equals to DEFAULT_OWNER
+        defaultUserGroupShouldBeFound("owner.equals=" + DEFAULT_OWNER);
+
+        // Get all the userGroupList where owner equals to UPDATED_OWNER
+        defaultUserGroupShouldNotBeFound("owner.equals=" + UPDATED_OWNER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsByOwnerIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+
+        // Get all the userGroupList where owner not equals to DEFAULT_OWNER
+        defaultUserGroupShouldNotBeFound("owner.notEquals=" + DEFAULT_OWNER);
+
+        // Get all the userGroupList where owner not equals to UPDATED_OWNER
+        defaultUserGroupShouldBeFound("owner.notEquals=" + UPDATED_OWNER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsByOwnerIsInShouldWork() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+
+        // Get all the userGroupList where owner in DEFAULT_OWNER or UPDATED_OWNER
+        defaultUserGroupShouldBeFound("owner.in=" + DEFAULT_OWNER + "," + UPDATED_OWNER);
+
+        // Get all the userGroupList where owner equals to UPDATED_OWNER
+        defaultUserGroupShouldNotBeFound("owner.in=" + UPDATED_OWNER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsByOwnerIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+
+        // Get all the userGroupList where owner is not null
+        defaultUserGroupShouldBeFound("owner.specified=true");
+
+        // Get all the userGroupList where owner is null
+        defaultUserGroupShouldNotBeFound("owner.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllUserGroupsByOwnerContainsSomething() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+
+        // Get all the userGroupList where owner contains DEFAULT_OWNER
+        defaultUserGroupShouldBeFound("owner.contains=" + DEFAULT_OWNER);
+
+        // Get all the userGroupList where owner contains UPDATED_OWNER
+        defaultUserGroupShouldNotBeFound("owner.contains=" + UPDATED_OWNER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsByOwnerNotContainsSomething() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+
+        // Get all the userGroupList where owner does not contain DEFAULT_OWNER
+        defaultUserGroupShouldNotBeFound("owner.doesNotContain=" + DEFAULT_OWNER);
+
+        // Get all the userGroupList where owner does not contain UPDATED_OWNER
+        defaultUserGroupShouldBeFound("owner.doesNotContain=" + UPDATED_OWNER);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllUserGroupsByUserIsEqualToSomething() throws Exception {
         // Initialize the database
         userGroupRepository.saveAndFlush(userGroup);
@@ -313,7 +399,8 @@ public class UserGroupResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(userGroup.getId().intValue())))
-            .andExpect(jsonPath("$.[*].groupName").value(hasItem(DEFAULT_GROUP_NAME)));
+            .andExpect(jsonPath("$.[*].groupName").value(hasItem(DEFAULT_GROUP_NAME)))
+            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER)));
 
         // Check, that the count call also returns 1
         restUserGroupMockMvc.perform(get("/api/user-groups/count?sort=id,desc&" + filter))
@@ -361,7 +448,8 @@ public class UserGroupResourceIT {
         // Disconnect from session so that the updates on updatedUserGroup are not directly saved in db
         em.detach(updatedUserGroup);
         updatedUserGroup
-            .groupName(UPDATED_GROUP_NAME);
+            .groupName(UPDATED_GROUP_NAME)
+            .owner(UPDATED_OWNER);
         UserGroupDTO userGroupDTO = userGroupMapper.toDto(updatedUserGroup);
 
         restUserGroupMockMvc.perform(put("/api/user-groups")
@@ -374,6 +462,7 @@ public class UserGroupResourceIT {
         assertThat(userGroupList).hasSize(databaseSizeBeforeUpdate);
         UserGroup testUserGroup = userGroupList.get(userGroupList.size() - 1);
         assertThat(testUserGroup.getGroupName()).isEqualTo(UPDATED_GROUP_NAME);
+        assertThat(testUserGroup.getOwner()).isEqualTo(UPDATED_OWNER);
     }
 
     @Test

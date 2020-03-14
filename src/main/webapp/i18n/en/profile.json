@@ -17,7 +17,8 @@
         "title": "Profile"
       },
       "phone": "Phone",
-      "user": "User"
+      "user": "User",
+      "family": "Family"
     }
   }
 }

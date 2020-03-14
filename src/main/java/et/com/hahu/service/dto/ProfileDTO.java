@@ -2,6 +2,8 @@ package et.com.hahu.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -18,6 +20,7 @@ public class ProfileDTO implements Serializable {
     private Long userId;
 
     private String userLogin;
+    private Set<UserDTO> families = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -51,6 +54,14 @@ public class ProfileDTO implements Serializable {
         this.userLogin = userLogin;
     }
 
+    public Set<UserDTO> getFamilies() {
+        return families;
+    }
+
+    public void setFamilies(Set<UserDTO> users) {
+        this.families = users;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -79,6 +90,7 @@ public class ProfileDTO implements Serializable {
             ", phone='" + getPhone() + "'" +
             ", userId=" + getUserId() +
             ", userLogin='" + getUserLogin() + "'" +
+            ", families='" + getFamilies() + "'" +
             "}";
     }
 }

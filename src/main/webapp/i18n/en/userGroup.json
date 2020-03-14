@@ -17,6 +17,7 @@
         "title": "User Group"
       },
       "groupName": "Group Name",
+      "owner": "Owner",
       "user": "User"
     }
   }

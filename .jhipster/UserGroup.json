@@ -4,6 +4,10 @@
         {
             "fieldName": "groupName",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "owner",
+            "fieldType": "String"
         }
     ],
     "relationships": [

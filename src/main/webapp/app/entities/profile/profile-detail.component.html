@@ -16,6 +16,12 @@
                 <dd>
                     {{ profile.userLogin }}
                 </dd>
+                <dt><span jhiTranslate="hahuApp.profile.family">Family</span></dt>
+                <dd>
+                    <span *ngFor="let family of profile.families; let last = last">
+                        {{ family.login }}{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"

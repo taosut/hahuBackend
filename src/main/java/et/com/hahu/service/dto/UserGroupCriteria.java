@@ -28,6 +28,8 @@ public class UserGroupCriteria implements Serializable, Criteria {
 
     private StringFilter groupName;
 
+    private StringFilter owner;
+
     private LongFilter userId;
 
     public UserGroupCriteria() {
@@ -36,6 +38,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
     public UserGroupCriteria(UserGroupCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.groupName = other.groupName == null ? null : other.groupName.copy();
+        this.owner = other.owner == null ? null : other.owner.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
     }
 
@@ -60,6 +63,14 @@ public class UserGroupCriteria implements Serializable, Criteria {
         this.groupName = groupName;
     }
 
+    public StringFilter getOwner() {
+        return owner;
+    }
+
+    public void setOwner(StringFilter owner) {
+        this.owner = owner;
+    }
+
     public LongFilter getUserId() {
         return userId;
     }
@@ -81,6 +92,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(groupName, that.groupName) &&
+            Objects.equals(owner, that.owner) &&
             Objects.equals(userId, that.userId);
     }
 
@@ -89,6 +101,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         groupName,
+        owner,
         userId
         );
     }
@@ -98,6 +111,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return "UserGroupCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (groupName != null ? "groupName=" + groupName + ", " : "") +
+                (owner != null ? "owner=" + owner + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
             "}";
     }

@@ -12,6 +12,10 @@
                 <dd>
                     <span>{{ userGroup.groupName }}</span>
                 </dd>
+                <dt><span jhiTranslate="hahuApp.userGroup.owner">Owner</span></dt>
+                <dd>
+                    <span>{{ userGroup.owner }}</span>
+                </dd>
                 <dt><span jhiTranslate="hahuApp.userGroup.user">User</span></dt>
                 <dd>
                     <span *ngFor="let user of userGroup.users; let last = last">

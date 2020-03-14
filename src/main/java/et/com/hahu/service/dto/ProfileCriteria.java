@@ -30,6 +30,8 @@ public class ProfileCriteria implements Serializable, Criteria {
 
     private LongFilter userId;
 
+    private LongFilter familyId;
+
     public ProfileCriteria() {
     }
 
@@ -37,6 +39,7 @@ public class ProfileCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.phone = other.phone == null ? null : other.phone.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
+        this.familyId = other.familyId == null ? null : other.familyId.copy();
     }
 
     @Override
@@ -68,6 +71,14 @@ public class ProfileCriteria implements Serializable, Criteria {
         this.userId = userId;
     }
 
+    public LongFilter getFamilyId() {
+        return familyId;
+    }
+
+    public void setFamilyId(LongFilter familyId) {
+        this.familyId = familyId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -81,7 +92,8 @@ public class ProfileCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(phone, that.phone) &&
-            Objects.equals(userId, that.userId);
+            Objects.equals(userId, that.userId) &&
+            Objects.equals(familyId, that.familyId);
     }
 
     @Override
@@ -89,7 +101,8 @@ public class ProfileCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         phone,
-        userId
+        userId,
+        familyId
         );
     }
 
@@ -99,6 +112,7 @@ public class ProfileCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (phone != null ? "phone=" + phone + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
+                (familyId != null ? "familyId=" + familyId + ", " : "") +
             "}";
     }
 

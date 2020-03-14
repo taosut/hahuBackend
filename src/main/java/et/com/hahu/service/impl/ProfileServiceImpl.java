@@ -68,6 +68,15 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     /**
+     * Get all the profiles with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page<ProfileDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return profileRepository.findAllWithEagerRelationships(pageable).map(profileMapper::toDto);
+    }
+
+    /**
      * Get one profile by id.
      *
      * @param id the id of the entity.
@@ -77,7 +86,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Transactional(readOnly = true)
     public Optional<ProfileDTO> findOne(Long id) {
         log.debug("Request to get Profile : {}", id);
-        return profileRepository.findById(id)
+        return profileRepository.findOneWithEagerRelationships(id)
             .map(profileMapper::toDto);
     }
 

@@ -17,6 +17,7 @@ public interface ProfileMapper extends EntityMapper<ProfileDTO, Profile> {
     ProfileDTO toDto(Profile profile);
 
     @Mapping(source = "userId", target = "user")
+    @Mapping(target = "removeFamily", ignore = true)
     Profile toEntity(ProfileDTO profileDTO);
 
     default Profile fromId(Long id) {

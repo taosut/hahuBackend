@@ -24,6 +24,17 @@
 
     <changeSet id="20200311220400-1-relations" author="jhipster">
 
+        <createTable tableName="profile_family">
+            <column name="family_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profile_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="profile_id, family_id" tableName="profile_family"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 

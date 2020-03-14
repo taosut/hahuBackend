@@ -28,6 +28,9 @@ public class UserGroup implements Serializable {
     @Column(name = "group_name")
     private String groupName;
 
+    @Column(name = "owner")
+    private String owner;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "user_group_user",
@@ -55,6 +58,19 @@ public class UserGroup implements Serializable {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public UserGroup owner(String owner) {
+        this.owner = owner;
+        return this;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public Set<User> getUsers() {
@@ -102,6 +118,7 @@ public class UserGroup implements Serializable {
         return "UserGroup{" +
             "id=" + getId() +
             ", groupName='" + getGroupName() + "'" +
+            ", owner='" + getOwner() + "'" +
             "}";
     }
 }

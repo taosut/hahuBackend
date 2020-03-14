@@ -8,6 +8,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Profile.
@@ -31,6 +33,13 @@ public class Profile implements Serializable {
     @MapsId
     @JoinColumn(name = "id")
     private User user;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "profile_family",
+               joinColumns = @JoinColumn(name = "profile_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "family_id", referencedColumnName = "id"))
+    private Set<User> families = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -65,6 +74,29 @@ public class Profile implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<User> getFamilies() {
+        return families;
+    }
+
+    public Profile families(Set<User> users) {
+        this.families = users;
+        return this;
+    }
+
+    public Profile addFamily(User user) {
+        this.families.add(user);
+        return this;
+    }
+
+    public Profile removeFamily(User user) {
+        this.families.remove(user);
+        return this;
+    }
+
+    public void setFamilies(Set<User> users) {
+        this.families = users;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

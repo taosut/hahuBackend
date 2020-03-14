@@ -16,6 +16,8 @@ public class UserGroupDTO implements Serializable {
 
     private String groupName;
 
+    private String owner;
+
     private Set<UserDTO> users = new HashSet<>();
     
     public Long getId() {
@@ -32,6 +34,14 @@ public class UserGroupDTO implements Serializable {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public Set<UserDTO> getUsers() {
@@ -68,6 +78,7 @@ public class UserGroupDTO implements Serializable {
         return "UserGroupDTO{" +
             "id=" + getId() +
             ", groupName='" + getGroupName() + "'" +
+            ", owner='" + getOwner() + "'" +
             ", users='" + getUsers() + "'" +
             "}";
     }
