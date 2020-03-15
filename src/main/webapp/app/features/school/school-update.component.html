@@ -41,13 +41,13 @@
                               formControlName="about"></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.school.aboutType" for="field_aboutType">About Type</label>
-                    <select class="form-control" name="aboutType" formControlName="aboutType" id="field_aboutType">
-                        <option value="TEXT">{{ 'hahuApp.ContentType.TEXT' | translate }}</option>
-                        <option value="HTML">{{ 'hahuApp.ContentType.HTML' | translate }}</option>
-                    </select>
-                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" jhiTranslate="hahuApp.school.aboutType" for="field_aboutType">About Type</label>-->
+                    <!--<select class="form-control" name="aboutType" formControlName="aboutType" id="field_aboutType">-->
+                        <!--<option value="TEXT">{{ 'hahuApp.ContentType.TEXT' | translate }}</option>-->
+                        <!--<option value="HTML">{{ 'hahuApp.ContentType.HTML' | translate }}</option>-->
+                    <!--</select>-->
+                <!--</div>-->
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="hahuApp.school.location" for="field_location">Location</label>
@@ -55,20 +55,20 @@
                               formControlName="location"></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.school.locationType" for="field_locationType">Location Type</label>
-                    <select class="form-control" name="locationType" formControlName="locationType" id="field_locationType">
-                        <option value="TEXT">{{ 'hahuApp.ContentType.TEXT' | translate }}</option>
-                        <option value="HTML">{{ 'hahuApp.ContentType.HTML' | translate }}</option>
-                    </select>
-                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" jhiTranslate="hahuApp.school.locationType" for="field_locationType">Location Type</label>-->
+                    <!--<select class="form-control" name="locationType" formControlName="locationType" id="field_locationType">-->
+                        <!--<option value="TEXT">{{ 'hahuApp.ContentType.TEXT' | translate }}</option>-->
+                        <!--<option value="HTML">{{ 'hahuApp.ContentType.HTML' | translate }}</option>-->
+                    <!--</select>-->
+                <!--</div>-->
 
-                <div class="form-group">
-                    <label jhiTranslate="hahuApp.school.user" for="field_users">User</label>
-                    <select class="form-control" id="field_users" multiple name="users" formControlName="users">
-                        <option [ngValue]="getSelected(editForm.get('users')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
-                    </select>
-                </div>
+                <!--<div class="form-group">-->
+                    <!--<label jhiTranslate="hahuApp.school.user" for="field_users">User</label>-->
+                    <!--<select class="form-control" id="field_users" multiple name="users" formControlName="users">-->
+                        <!--<option [ngValue]="getSelected(editForm.get('users')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>-->
+                    <!--</select>-->
+                <!--</div>-->
             </div>
 
             <div>

@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span jhiTranslate="hahuApp.school.home.title">Schools</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-school" [routerLink]="['/school/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-school" [routerLink]="['./new']">
             <fa-icon icon="plus"></fa-icon>
             <span  jhiTranslate="hahuApp.school.home.createLabel">
             Create a new School
@@ -24,11 +24,6 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="hahuApp.school.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="featuredImage"><span jhiTranslate="hahuApp.school.featuredImage">Featured Image</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="about"><span jhiTranslate="hahuApp.school.about">About</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="aboutType"><span jhiTranslate="hahuApp.school.aboutType">About Type</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="location"><span jhiTranslate="hahuApp.school.location">Location</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="locationType"><span jhiTranslate="hahuApp.school.locationType">Location Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -36,27 +31,17 @@
                 <tr *ngFor="let school of schools ;trackBy: trackId">
                     <td><a [routerLink]="['/school', school.id, 'view']">{{ school.id }}</a></td>
                     <td>{{ school.name }}</td>
-                    <td>
-                        <a *ngIf="school.featuredImage" (click)="openFile(school.featuredImageContentType, school.featuredImage)">
-                            <img [src]="'data:' + school.featuredImageContentType + ';base64,' + school.featuredImage" style="max-height: 30px;" alt="school image"/>
-                        </a>
-                        <span *ngIf="school.featuredImage">{{ school.featuredImageContentType }}, {{ byteSize(school.featuredImage) }}</span>
-                    </td>
-                    <td>{{ school.about }}</td>
-                    <td jhiTranslate="{{ 'hahuApp.ContentType.' + school.aboutType }}">{{ school.aboutType }}</td>
-                    <td>{{ school.location }}</td>
-                    <td jhiTranslate="{{ 'hahuApp.ContentType.' + school.locationType }}">{{ school.locationType }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
-                                    [routerLink]="['/school', school.id, 'view']"
+                                    [routerLink]="['./', school.id, 'view']"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
                             <button type="submit"
-                                    [routerLink]="['/school', school.id, 'edit']"
+                                    [routerLink]="['./', school.id, 'edit']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
