@@ -29,6 +29,7 @@
                     <th scope="col"  jhiSortBy="featuredImage"><span jhiTranslate="hahuApp.post.featuredImage">Featured Image</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="postedDate"><span jhiTranslate="hahuApp.post.postedDate">Posted Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="modifiedDate"><span jhiTranslate="hahuApp.post.modifiedDate">Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="instantPostEndDate"><span jhiTranslate="hahuApp.post.instantPostEndDate">Instant Post End Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="hahuApp.post.user">User</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -47,6 +48,7 @@
                     </td>
                     <td>{{ post.postedDate | date:'medium' }}</td>
                     <td>{{ post.modifiedDate | date:'medium' }}</td>
+                    <td>{{ post.instantPostEndDate | date:'medium' }}</td>
                     <td>
                         {{ post.userLogin }}
                     </td>

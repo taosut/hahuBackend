@@ -48,6 +48,12 @@ public class SchoolCriteria implements Serializable, Criteria {
 
     private StringFilter name;
 
+    private StringFilter phone;
+
+    private StringFilter email;
+
+    private StringFilter website;
+
     private ContentTypeFilter aboutType;
 
     private ContentTypeFilter locationType;
@@ -62,6 +68,9 @@ public class SchoolCriteria implements Serializable, Criteria {
     public SchoolCriteria(SchoolCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
+        this.phone = other.phone == null ? null : other.phone.copy();
+        this.email = other.email == null ? null : other.email.copy();
+        this.website = other.website == null ? null : other.website.copy();
         this.aboutType = other.aboutType == null ? null : other.aboutType.copy();
         this.locationType = other.locationType == null ? null : other.locationType.copy();
         this.userGroupId = other.userGroupId == null ? null : other.userGroupId.copy();
@@ -87,6 +96,30 @@ public class SchoolCriteria implements Serializable, Criteria {
 
     public void setName(StringFilter name) {
         this.name = name;
+    }
+
+    public StringFilter getPhone() {
+        return phone;
+    }
+
+    public void setPhone(StringFilter phone) {
+        this.phone = phone;
+    }
+
+    public StringFilter getEmail() {
+        return email;
+    }
+
+    public void setEmail(StringFilter email) {
+        this.email = email;
+    }
+
+    public StringFilter getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(StringFilter website) {
+        this.website = website;
     }
 
     public ContentTypeFilter getAboutType() {
@@ -134,6 +167,9 @@ public class SchoolCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
+            Objects.equals(phone, that.phone) &&
+            Objects.equals(email, that.email) &&
+            Objects.equals(website, that.website) &&
             Objects.equals(aboutType, that.aboutType) &&
             Objects.equals(locationType, that.locationType) &&
             Objects.equals(userGroupId, that.userGroupId) &&
@@ -145,6 +181,9 @@ public class SchoolCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         name,
+        phone,
+        email,
+        website,
         aboutType,
         locationType,
         userGroupId,
@@ -157,6 +196,9 @@ public class SchoolCriteria implements Serializable, Criteria {
         return "SchoolCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
+                (phone != null ? "phone=" + phone + ", " : "") +
+                (email != null ? "email=" + email + ", " : "") +
+                (website != null ? "website=" + website + ", " : "") +
                 (aboutType != null ? "aboutType=" + aboutType + ", " : "") +
                 (locationType != null ? "locationType=" + locationType + ", " : "") +
                 (userGroupId != null ? "userGroupId=" + userGroupId + ", " : "") +

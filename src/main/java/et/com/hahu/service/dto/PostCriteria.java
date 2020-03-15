@@ -54,6 +54,8 @@ public class PostCriteria implements Serializable, Criteria {
 
     private InstantFilter modifiedDate;
 
+    private InstantFilter instantPostEndDate;
+
     private LongFilter postMetaDataId;
 
     private LongFilter commentId;
@@ -75,6 +77,7 @@ public class PostCriteria implements Serializable, Criteria {
         this.contentType = other.contentType == null ? null : other.contentType.copy();
         this.postedDate = other.postedDate == null ? null : other.postedDate.copy();
         this.modifiedDate = other.modifiedDate == null ? null : other.modifiedDate.copy();
+        this.instantPostEndDate = other.instantPostEndDate == null ? null : other.instantPostEndDate.copy();
         this.postMetaDataId = other.postMetaDataId == null ? null : other.postMetaDataId.copy();
         this.commentId = other.commentId == null ? null : other.commentId.copy();
         this.likeId = other.likeId == null ? null : other.likeId.copy();
@@ -126,6 +129,14 @@ public class PostCriteria implements Serializable, Criteria {
 
     public void setModifiedDate(InstantFilter modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public InstantFilter getInstantPostEndDate() {
+        return instantPostEndDate;
+    }
+
+    public void setInstantPostEndDate(InstantFilter instantPostEndDate) {
+        this.instantPostEndDate = instantPostEndDate;
     }
 
     public LongFilter getPostMetaDataId() {
@@ -192,6 +203,7 @@ public class PostCriteria implements Serializable, Criteria {
             Objects.equals(contentType, that.contentType) &&
             Objects.equals(postedDate, that.postedDate) &&
             Objects.equals(modifiedDate, that.modifiedDate) &&
+            Objects.equals(instantPostEndDate, that.instantPostEndDate) &&
             Objects.equals(postMetaDataId, that.postMetaDataId) &&
             Objects.equals(commentId, that.commentId) &&
             Objects.equals(likeId, that.likeId) &&
@@ -208,6 +220,7 @@ public class PostCriteria implements Serializable, Criteria {
         contentType,
         postedDate,
         modifiedDate,
+        instantPostEndDate,
         postMetaDataId,
         commentId,
         likeId,
@@ -225,6 +238,7 @@ public class PostCriteria implements Serializable, Criteria {
                 (contentType != null ? "contentType=" + contentType + ", " : "") +
                 (postedDate != null ? "postedDate=" + postedDate + ", " : "") +
                 (modifiedDate != null ? "modifiedDate=" + modifiedDate + ", " : "") +
+                (instantPostEndDate != null ? "instantPostEndDate=" + instantPostEndDate + ", " : "") +
                 (postMetaDataId != null ? "postMetaDataId=" + postMetaDataId + ", " : "") +
                 (commentId != null ? "commentId=" + commentId + ", " : "") +
                 (likeId != null ? "likeId=" + likeId + ", " : "") +

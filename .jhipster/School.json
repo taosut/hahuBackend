@@ -11,6 +11,26 @@
             "fieldTypeBlobContent": "image"
         },
         {
+            "fieldName": "phone",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^\\+[0-9]{12}$"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+        },
+        {
+            "fieldName": "website",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "about",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "text"

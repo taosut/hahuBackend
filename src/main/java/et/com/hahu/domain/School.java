@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -37,6 +38,17 @@ public class School implements Serializable {
 
     @Column(name = "featured_image_content_type")
     private String featuredImageContentType;
+
+    @Pattern(regexp = "^\\+[0-9]{12}$")
+    @Column(name = "phone")
+    private String phone;
+
+    @Pattern(regexp = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "website")
+    private String website;
 
     @Lob
     @Type(type = "org.hibernate.type.TextType")
@@ -113,6 +125,45 @@ public class School implements Serializable {
 
     public void setFeaturedImageContentType(String featuredImageContentType) {
         this.featuredImageContentType = featuredImageContentType;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public School phone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public School email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public School website(String website) {
+        this.website = website;
+        return this;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public String getAbout() {
@@ -239,6 +290,9 @@ public class School implements Serializable {
             ", name='" + getName() + "'" +
             ", featuredImage='" + getFeaturedImage() + "'" +
             ", featuredImageContentType='" + getFeaturedImageContentType() + "'" +
+            ", phone='" + getPhone() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", website='" + getWebsite() + "'" +
             ", about='" + getAbout() + "'" +
             ", aboutType='" + getAboutType() + "'" +
             ", location='" + getLocation() + "'" +

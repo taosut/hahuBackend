@@ -55,6 +55,15 @@ public class SchoolResourceIT {
     private static final String DEFAULT_FEATURED_IMAGE_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_FEATURED_IMAGE_CONTENT_TYPE = "image/png";
 
+    private static final String DEFAULT_PHONE = "+313241834374";
+    private static final String UPDATED_PHONE = "+487472667745";
+
+    private static final String DEFAULT_EMAIL = "\"p^@pH.w[L";
+    private static final String UPDATED_EMAIL = "16>iF@r.<l";
+
+    private static final String DEFAULT_WEBSITE = "AAAAAAAAAA";
+    private static final String UPDATED_WEBSITE = "BBBBBBBBBB";
+
     private static final String DEFAULT_ABOUT = "AAAAAAAAAA";
     private static final String UPDATED_ABOUT = "BBBBBBBBBB";
 
@@ -104,6 +113,9 @@ public class SchoolResourceIT {
             .name(DEFAULT_NAME)
             .featuredImage(DEFAULT_FEATURED_IMAGE)
             .featuredImageContentType(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE)
+            .phone(DEFAULT_PHONE)
+            .email(DEFAULT_EMAIL)
+            .website(DEFAULT_WEBSITE)
             .about(DEFAULT_ABOUT)
             .aboutType(DEFAULT_ABOUT_TYPE)
             .location(DEFAULT_LOCATION)
@@ -121,6 +133,9 @@ public class SchoolResourceIT {
             .name(UPDATED_NAME)
             .featuredImage(UPDATED_FEATURED_IMAGE)
             .featuredImageContentType(UPDATED_FEATURED_IMAGE_CONTENT_TYPE)
+            .phone(UPDATED_PHONE)
+            .email(UPDATED_EMAIL)
+            .website(UPDATED_WEBSITE)
             .about(UPDATED_ABOUT)
             .aboutType(UPDATED_ABOUT_TYPE)
             .location(UPDATED_LOCATION)
@@ -152,6 +167,9 @@ public class SchoolResourceIT {
         assertThat(testSchool.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testSchool.getFeaturedImage()).isEqualTo(DEFAULT_FEATURED_IMAGE);
         assertThat(testSchool.getFeaturedImageContentType()).isEqualTo(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE);
+        assertThat(testSchool.getPhone()).isEqualTo(DEFAULT_PHONE);
+        assertThat(testSchool.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testSchool.getWebsite()).isEqualTo(DEFAULT_WEBSITE);
         assertThat(testSchool.getAbout()).isEqualTo(DEFAULT_ABOUT);
         assertThat(testSchool.getAboutType()).isEqualTo(DEFAULT_ABOUT_TYPE);
         assertThat(testSchool.getLocation()).isEqualTo(DEFAULT_LOCATION);
@@ -193,6 +211,9 @@ public class SchoolResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].featuredImageContentType").value(hasItem(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].featuredImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE))))
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
+            .andExpect(jsonPath("$.[*].website").value(hasItem(DEFAULT_WEBSITE)))
             .andExpect(jsonPath("$.[*].about").value(hasItem(DEFAULT_ABOUT.toString())))
             .andExpect(jsonPath("$.[*].aboutType").value(hasItem(DEFAULT_ABOUT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
@@ -233,6 +254,9 @@ public class SchoolResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.featuredImageContentType").value(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE))
             .andExpect(jsonPath("$.featuredImage").value(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE)))
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
+            .andExpect(jsonPath("$.website").value(DEFAULT_WEBSITE))
             .andExpect(jsonPath("$.about").value(DEFAULT_ABOUT.toString()))
             .andExpect(jsonPath("$.aboutType").value(DEFAULT_ABOUT_TYPE.toString()))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
@@ -334,6 +358,240 @@ public class SchoolResourceIT {
 
         // Get all the schoolList where name does not contain UPDATED_NAME
         defaultSchoolShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByPhoneIsEqualToSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where phone equals to DEFAULT_PHONE
+        defaultSchoolShouldBeFound("phone.equals=" + DEFAULT_PHONE);
+
+        // Get all the schoolList where phone equals to UPDATED_PHONE
+        defaultSchoolShouldNotBeFound("phone.equals=" + UPDATED_PHONE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByPhoneIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where phone not equals to DEFAULT_PHONE
+        defaultSchoolShouldNotBeFound("phone.notEquals=" + DEFAULT_PHONE);
+
+        // Get all the schoolList where phone not equals to UPDATED_PHONE
+        defaultSchoolShouldBeFound("phone.notEquals=" + UPDATED_PHONE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByPhoneIsInShouldWork() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where phone in DEFAULT_PHONE or UPDATED_PHONE
+        defaultSchoolShouldBeFound("phone.in=" + DEFAULT_PHONE + "," + UPDATED_PHONE);
+
+        // Get all the schoolList where phone equals to UPDATED_PHONE
+        defaultSchoolShouldNotBeFound("phone.in=" + UPDATED_PHONE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByPhoneIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where phone is not null
+        defaultSchoolShouldBeFound("phone.specified=true");
+
+        // Get all the schoolList where phone is null
+        defaultSchoolShouldNotBeFound("phone.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllSchoolsByPhoneContainsSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where phone contains DEFAULT_PHONE
+        defaultSchoolShouldBeFound("phone.contains=" + DEFAULT_PHONE);
+
+        // Get all the schoolList where phone contains UPDATED_PHONE
+        defaultSchoolShouldNotBeFound("phone.contains=" + UPDATED_PHONE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByPhoneNotContainsSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where phone does not contain DEFAULT_PHONE
+        defaultSchoolShouldNotBeFound("phone.doesNotContain=" + DEFAULT_PHONE);
+
+        // Get all the schoolList where phone does not contain UPDATED_PHONE
+        defaultSchoolShouldBeFound("phone.doesNotContain=" + UPDATED_PHONE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByEmailIsEqualToSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where email equals to DEFAULT_EMAIL
+        defaultSchoolShouldBeFound("email.equals=" + DEFAULT_EMAIL);
+
+        // Get all the schoolList where email equals to UPDATED_EMAIL
+        defaultSchoolShouldNotBeFound("email.equals=" + UPDATED_EMAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByEmailIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where email not equals to DEFAULT_EMAIL
+        defaultSchoolShouldNotBeFound("email.notEquals=" + DEFAULT_EMAIL);
+
+        // Get all the schoolList where email not equals to UPDATED_EMAIL
+        defaultSchoolShouldBeFound("email.notEquals=" + UPDATED_EMAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByEmailIsInShouldWork() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where email in DEFAULT_EMAIL or UPDATED_EMAIL
+        defaultSchoolShouldBeFound("email.in=" + DEFAULT_EMAIL + "," + UPDATED_EMAIL);
+
+        // Get all the schoolList where email equals to UPDATED_EMAIL
+        defaultSchoolShouldNotBeFound("email.in=" + UPDATED_EMAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByEmailIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where email is not null
+        defaultSchoolShouldBeFound("email.specified=true");
+
+        // Get all the schoolList where email is null
+        defaultSchoolShouldNotBeFound("email.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllSchoolsByEmailContainsSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where email contains DEFAULT_EMAIL
+        defaultSchoolShouldBeFound("email.contains=" + DEFAULT_EMAIL);
+
+        // Get all the schoolList where email contains UPDATED_EMAIL
+        defaultSchoolShouldNotBeFound("email.contains=" + UPDATED_EMAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByEmailNotContainsSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where email does not contain DEFAULT_EMAIL
+        defaultSchoolShouldNotBeFound("email.doesNotContain=" + DEFAULT_EMAIL);
+
+        // Get all the schoolList where email does not contain UPDATED_EMAIL
+        defaultSchoolShouldBeFound("email.doesNotContain=" + UPDATED_EMAIL);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByWebsiteIsEqualToSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where website equals to DEFAULT_WEBSITE
+        defaultSchoolShouldBeFound("website.equals=" + DEFAULT_WEBSITE);
+
+        // Get all the schoolList where website equals to UPDATED_WEBSITE
+        defaultSchoolShouldNotBeFound("website.equals=" + UPDATED_WEBSITE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByWebsiteIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where website not equals to DEFAULT_WEBSITE
+        defaultSchoolShouldNotBeFound("website.notEquals=" + DEFAULT_WEBSITE);
+
+        // Get all the schoolList where website not equals to UPDATED_WEBSITE
+        defaultSchoolShouldBeFound("website.notEquals=" + UPDATED_WEBSITE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByWebsiteIsInShouldWork() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where website in DEFAULT_WEBSITE or UPDATED_WEBSITE
+        defaultSchoolShouldBeFound("website.in=" + DEFAULT_WEBSITE + "," + UPDATED_WEBSITE);
+
+        // Get all the schoolList where website equals to UPDATED_WEBSITE
+        defaultSchoolShouldNotBeFound("website.in=" + UPDATED_WEBSITE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByWebsiteIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where website is not null
+        defaultSchoolShouldBeFound("website.specified=true");
+
+        // Get all the schoolList where website is null
+        defaultSchoolShouldNotBeFound("website.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllSchoolsByWebsiteContainsSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where website contains DEFAULT_WEBSITE
+        defaultSchoolShouldBeFound("website.contains=" + DEFAULT_WEBSITE);
+
+        // Get all the schoolList where website contains UPDATED_WEBSITE
+        defaultSchoolShouldNotBeFound("website.contains=" + UPDATED_WEBSITE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchoolsByWebsiteNotContainsSomething() throws Exception {
+        // Initialize the database
+        schoolRepository.saveAndFlush(school);
+
+        // Get all the schoolList where website does not contain DEFAULT_WEBSITE
+        defaultSchoolShouldNotBeFound("website.doesNotContain=" + DEFAULT_WEBSITE);
+
+        // Get all the schoolList where website does not contain UPDATED_WEBSITE
+        defaultSchoolShouldBeFound("website.doesNotContain=" + UPDATED_WEBSITE);
     }
 
 
@@ -491,6 +749,9 @@ public class SchoolResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].featuredImageContentType").value(hasItem(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].featuredImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE))))
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
+            .andExpect(jsonPath("$.[*].website").value(hasItem(DEFAULT_WEBSITE)))
             .andExpect(jsonPath("$.[*].about").value(hasItem(DEFAULT_ABOUT.toString())))
             .andExpect(jsonPath("$.[*].aboutType").value(hasItem(DEFAULT_ABOUT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
@@ -545,6 +806,9 @@ public class SchoolResourceIT {
             .name(UPDATED_NAME)
             .featuredImage(UPDATED_FEATURED_IMAGE)
             .featuredImageContentType(UPDATED_FEATURED_IMAGE_CONTENT_TYPE)
+            .phone(UPDATED_PHONE)
+            .email(UPDATED_EMAIL)
+            .website(UPDATED_WEBSITE)
             .about(UPDATED_ABOUT)
             .aboutType(UPDATED_ABOUT_TYPE)
             .location(UPDATED_LOCATION)
@@ -563,6 +827,9 @@ public class SchoolResourceIT {
         assertThat(testSchool.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testSchool.getFeaturedImage()).isEqualTo(UPDATED_FEATURED_IMAGE);
         assertThat(testSchool.getFeaturedImageContentType()).isEqualTo(UPDATED_FEATURED_IMAGE_CONTENT_TYPE);
+        assertThat(testSchool.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testSchool.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testSchool.getWebsite()).isEqualTo(UPDATED_WEBSITE);
         assertThat(testSchool.getAbout()).isEqualTo(UPDATED_ABOUT);
         assertThat(testSchool.getAboutType()).isEqualTo(UPDATED_ABOUT_TYPE);
         assertThat(testSchool.getLocation()).isEqualTo(UPDATED_LOCATION);

@@ -25,7 +25,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Post(0, 'AAAAAAA', 'AAAAAAA', ContentType.TEXT, 'image/png', 'AAAAAAA', currentDate, currentDate);
+      elemDefault = new Post(0, 'AAAAAAA', 'AAAAAAA', ContentType.TEXT, 'image/png', 'AAAAAAA', currentDate, currentDate, currentDate);
     });
 
     describe('Service methods', () => {
@@ -33,7 +33,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             postedDate: currentDate.format(DATE_TIME_FORMAT),
-            modifiedDate: currentDate.format(DATE_TIME_FORMAT)
+            modifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -50,7 +51,8 @@ describe('Service Tests', () => {
           {
             id: 0,
             postedDate: currentDate.format(DATE_TIME_FORMAT),
-            modifiedDate: currentDate.format(DATE_TIME_FORMAT)
+            modifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -58,7 +60,8 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             postedDate: currentDate,
-            modifiedDate: currentDate
+            modifiedDate: currentDate,
+            instantPostEndDate: currentDate
           },
           returnedFromService
         );
@@ -78,7 +81,8 @@ describe('Service Tests', () => {
             contentType: 'BBBBBB',
             featuredImage: 'BBBBBB',
             postedDate: currentDate.format(DATE_TIME_FORMAT),
-            modifiedDate: currentDate.format(DATE_TIME_FORMAT)
+            modifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -86,7 +90,8 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             postedDate: currentDate,
-            modifiedDate: currentDate
+            modifiedDate: currentDate,
+            instantPostEndDate: currentDate
           },
           returnedFromService
         );
@@ -106,7 +111,8 @@ describe('Service Tests', () => {
             contentType: 'BBBBBB',
             featuredImage: 'BBBBBB',
             postedDate: currentDate.format(DATE_TIME_FORMAT),
-            modifiedDate: currentDate.format(DATE_TIME_FORMAT)
+            modifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -114,7 +120,8 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             postedDate: currentDate,
-            modifiedDate: currentDate
+            modifiedDate: currentDate,
+            instantPostEndDate: currentDate
           },
           returnedFromService
         );

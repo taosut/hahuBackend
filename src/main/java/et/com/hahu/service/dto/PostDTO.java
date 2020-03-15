@@ -32,6 +32,8 @@ public class PostDTO implements Serializable {
 
     private Instant modifiedDate;
 
+    private Instant instantPostEndDate;
+
 
     private Long userId;
 
@@ -103,6 +105,14 @@ public class PostDTO implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
+    public Instant getInstantPostEndDate() {
+        return instantPostEndDate;
+    }
+
+    public void setInstantPostEndDate(Instant instantPostEndDate) {
+        this.instantPostEndDate = instantPostEndDate;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -166,6 +176,7 @@ public class PostDTO implements Serializable {
             ", featuredImage='" + getFeaturedImage() + "'" +
             ", postedDate='" + getPostedDate() + "'" +
             ", modifiedDate='" + getModifiedDate() + "'" +
+            ", instantPostEndDate='" + getInstantPostEndDate() + "'" +
             ", userId=" + getUserId() +
             ", userLogin='" + getUserLogin() + "'" +
             ", categories='" + getCategories() + "'" +

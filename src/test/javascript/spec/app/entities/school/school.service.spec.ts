@@ -21,7 +21,19 @@ describe('Service Tests', () => {
       service = injector.get(SchoolService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new School(0, 'AAAAAAA', 'image/png', 'AAAAAAA', 'AAAAAAA', ContentType.TEXT, 'AAAAAAA', ContentType.TEXT);
+      elemDefault = new School(
+        0,
+        'AAAAAAA',
+        'image/png',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        ContentType.TEXT,
+        'AAAAAAA',
+        ContentType.TEXT
+      );
     });
 
     describe('Service methods', () => {
@@ -57,6 +69,9 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             featuredImage: 'BBBBBB',
+            phone: 'BBBBBB',
+            email: 'BBBBBB',
+            website: 'BBBBBB',
             about: 'BBBBBB',
             aboutType: 'BBBBBB',
             location: 'BBBBBB',
@@ -79,6 +94,9 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             featuredImage: 'BBBBBB',
+            phone: 'BBBBBB',
+            email: 'BBBBBB',
+            website: 'BBBBBB',
             about: 'BBBBBB',
             aboutType: 'BBBBBB',
             location: 'BBBBBB',

@@ -94,6 +94,15 @@ public class SchoolQueryService extends QueryService<School> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), School_.name));
             }
+            if (criteria.getPhone() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPhone(), School_.phone));
+            }
+            if (criteria.getEmail() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getEmail(), School_.email));
+            }
+            if (criteria.getWebsite() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getWebsite(), School_.website));
+            }
             if (criteria.getAboutType() != null) {
                 specification = specification.and(buildSpecification(criteria.getAboutType(), School_.aboutType));
             }

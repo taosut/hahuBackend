@@ -15,6 +15,7 @@ export interface IPost {
   featuredImage?: any;
   postedDate?: Moment;
   modifiedDate?: Moment;
+  instantPostEndDate?: Moment;
   postMetaData?: IPostMetaData[];
   comments?: IComment[];
   likes?: ILikes[];
@@ -34,6 +35,7 @@ export class Post implements IPost {
     public featuredImage?: any,
     public postedDate?: Moment,
     public modifiedDate?: Moment,
+    public instantPostEndDate?: Moment,
     public postMetaData?: IPostMetaData[],
     public comments?: IComment[],
     public likes?: ILikes[],

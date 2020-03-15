@@ -41,6 +41,7 @@ export class PostUpdateComponent implements OnInit {
     featuredImageContentType: [],
     postedDate: [],
     modifiedDate: [],
+    instantPostEndDate: [],
     userId: [],
     categories: [],
     tags: []
@@ -64,6 +65,7 @@ export class PostUpdateComponent implements OnInit {
         const today = moment().startOf('day');
         post.postedDate = today;
         post.modifiedDate = today;
+        post.instantPostEndDate = today;
       }
 
       this.updateForm(post);
@@ -86,6 +88,7 @@ export class PostUpdateComponent implements OnInit {
       featuredImageContentType: post.featuredImageContentType,
       postedDate: post.postedDate ? post.postedDate.format(DATE_TIME_FORMAT) : null,
       modifiedDate: post.modifiedDate ? post.modifiedDate.format(DATE_TIME_FORMAT) : null,
+      instantPostEndDate: post.instantPostEndDate ? post.instantPostEndDate.format(DATE_TIME_FORMAT) : null,
       userId: post.userId,
       categories: post.categories,
       tags: post.tags
@@ -144,6 +147,9 @@ export class PostUpdateComponent implements OnInit {
       postedDate: this.editForm.get(['postedDate'])!.value ? moment(this.editForm.get(['postedDate'])!.value, DATE_TIME_FORMAT) : undefined,
       modifiedDate: this.editForm.get(['modifiedDate'])!.value
         ? moment(this.editForm.get(['modifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      instantPostEndDate: this.editForm.get(['instantPostEndDate'])!.value
+        ? moment(this.editForm.get(['instantPostEndDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
       userId: this.editForm.get(['userId'])!.value,
       categories: this.editForm.get(['categories'])!.value,

@@ -51,7 +51,8 @@ export class PostService {
   protected convertDateFromClient(post: IPost): IPost {
     const copy: IPost = Object.assign({}, post, {
       postedDate: post.postedDate && post.postedDate.isValid() ? post.postedDate.toJSON() : undefined,
-      modifiedDate: post.modifiedDate && post.modifiedDate.isValid() ? post.modifiedDate.toJSON() : undefined
+      modifiedDate: post.modifiedDate && post.modifiedDate.isValid() ? post.modifiedDate.toJSON() : undefined,
+      instantPostEndDate: post.instantPostEndDate && post.instantPostEndDate.isValid() ? post.instantPostEndDate.toJSON() : undefined
     });
     return copy;
   }
@@ -60,6 +61,7 @@ export class PostService {
     if (res.body) {
       res.body.postedDate = res.body.postedDate ? moment(res.body.postedDate) : undefined;
       res.body.modifiedDate = res.body.modifiedDate ? moment(res.body.modifiedDate) : undefined;
+      res.body.instantPostEndDate = res.body.instantPostEndDate ? moment(res.body.instantPostEndDate) : undefined;
     }
     return res;
   }
@@ -69,6 +71,7 @@ export class PostService {
       res.body.forEach((post: IPost) => {
         post.postedDate = post.postedDate ? moment(post.postedDate) : undefined;
         post.modifiedDate = post.modifiedDate ? moment(post.modifiedDate) : undefined;
+        post.instantPostEndDate = post.instantPostEndDate ? moment(post.instantPostEndDate) : undefined;
       });
     }
     return res;

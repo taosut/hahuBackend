@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -56,7 +57,7 @@ public class SchoolResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/schools")
-    public ResponseEntity<SchoolDTO> createSchool(@RequestBody SchoolDTO schoolDTO) throws URISyntaxException {
+    public ResponseEntity<SchoolDTO> createSchool(@Valid @RequestBody SchoolDTO schoolDTO) throws URISyntaxException {
         log.debug("REST request to save School : {}", schoolDTO);
         if (schoolDTO.getId() != null) {
             throw new BadRequestAlertException("A new school cannot already have an ID", ENTITY_NAME, "idexists");
@@ -77,7 +78,7 @@ public class SchoolResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/schools")
-    public ResponseEntity<SchoolDTO> updateSchool(@RequestBody SchoolDTO schoolDTO) throws URISyntaxException {
+    public ResponseEntity<SchoolDTO> updateSchool(@Valid @RequestBody SchoolDTO schoolDTO) throws URISyntaxException {
         log.debug("REST request to update School : {}", schoolDTO);
         if (schoolDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

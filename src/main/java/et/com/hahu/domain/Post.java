@@ -55,6 +55,9 @@ public class Post implements Serializable {
     @Column(name = "modified_date")
     private Instant modifiedDate;
 
+    @Column(name = "instant_post_end_date")
+    private Instant instantPostEndDate;
+
     @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PostMetaData> postMetaData = new HashSet<>();
@@ -183,6 +186,19 @@ public class Post implements Serializable {
 
     public void setModifiedDate(Instant modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public Instant getInstantPostEndDate() {
+        return instantPostEndDate;
+    }
+
+    public Post instantPostEndDate(Instant instantPostEndDate) {
+        this.instantPostEndDate = instantPostEndDate;
+        return this;
+    }
+
+    public void setInstantPostEndDate(Instant instantPostEndDate) {
+        this.instantPostEndDate = instantPostEndDate;
     }
 
     public Set<PostMetaData> getPostMetaData() {
@@ -351,6 +367,7 @@ public class Post implements Serializable {
             ", featuredImageContentType='" + getFeaturedImageContentType() + "'" +
             ", postedDate='" + getPostedDate() + "'" +
             ", modifiedDate='" + getModifiedDate() + "'" +
+            ", instantPostEndDate='" + getInstantPostEndDate() + "'" +
             "}";
     }
 }

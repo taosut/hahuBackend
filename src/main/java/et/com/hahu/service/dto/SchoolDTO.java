@@ -1,5 +1,6 @@
 package et.com.hahu.service.dto;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +21,14 @@ public class SchoolDTO implements Serializable {
     private byte[] featuredImage;
 
     private String featuredImageContentType;
+    @Pattern(regexp = "^\\+[0-9]{12}$")
+    private String phone;
+
+    @Pattern(regexp = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")
+    private String email;
+
+    private String website;
+
     @Lob
     private String about;
 
@@ -62,6 +71,30 @@ public class SchoolDTO implements Serializable {
 
     public void setFeaturedImageContentType(String featuredImageContentType) {
         this.featuredImageContentType = featuredImageContentType;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public String getAbout() {
@@ -131,6 +164,9 @@ public class SchoolDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", featuredImage='" + getFeaturedImage() + "'" +
+            ", phone='" + getPhone() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", website='" + getWebsite() + "'" +
             ", about='" + getAbout() + "'" +
             ", aboutType='" + getAboutType() + "'" +
             ", location='" + getLocation() + "'" +

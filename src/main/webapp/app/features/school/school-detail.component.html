@@ -3,7 +3,7 @@
     <!-- Portfolio Item Heading -->
     <h4 class="my-2">
         <fa-icon (click)="previousState()" [icon]="'arrow-left'"></fa-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span>{{school.name}}</span>
+        <span>{{school?.name}}</span>
         <!--<small>Secondary Text</small>-->
     </h4>
     <jhi-alert></jhi-alert>
@@ -15,15 +15,14 @@
             <div class="card p-2">
                 <p class="my-2">Description</p>
                 <p>
-                    <small>{{school.about}}</small>
+                    <small>{{school?.about}}</small>
                 </p>
             </div>
-            <br>
             <br>
             <div class="card p-2">
                 <p class="my-2">Location</p>
                 <p>
-                    <small>{{school.location}}</small>
+                    <small>{{school?.location}}</small>
                 </p>
             </div>
         </div>

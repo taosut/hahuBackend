@@ -72,6 +72,9 @@ public class PostResourceIT {
     private static final Instant DEFAULT_MODIFIED_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Instant DEFAULT_INSTANT_POST_END_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_INSTANT_POST_END_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
     @Autowired
     private PostRepository postRepository;
 
@@ -112,7 +115,8 @@ public class PostResourceIT {
             .featuredImage(DEFAULT_FEATURED_IMAGE)
             .featuredImageContentType(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE)
             .postedDate(DEFAULT_POSTED_DATE)
-            .modifiedDate(DEFAULT_MODIFIED_DATE);
+            .modifiedDate(DEFAULT_MODIFIED_DATE)
+            .instantPostEndDate(DEFAULT_INSTANT_POST_END_DATE);
         return post;
     }
     /**
@@ -129,7 +133,8 @@ public class PostResourceIT {
             .featuredImage(UPDATED_FEATURED_IMAGE)
             .featuredImageContentType(UPDATED_FEATURED_IMAGE_CONTENT_TYPE)
             .postedDate(UPDATED_POSTED_DATE)
-            .modifiedDate(UPDATED_MODIFIED_DATE);
+            .modifiedDate(UPDATED_MODIFIED_DATE)
+            .instantPostEndDate(UPDATED_INSTANT_POST_END_DATE);
         return post;
     }
 
@@ -161,6 +166,7 @@ public class PostResourceIT {
         assertThat(testPost.getFeaturedImageContentType()).isEqualTo(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE);
         assertThat(testPost.getPostedDate()).isEqualTo(DEFAULT_POSTED_DATE);
         assertThat(testPost.getModifiedDate()).isEqualTo(DEFAULT_MODIFIED_DATE);
+        assertThat(testPost.getInstantPostEndDate()).isEqualTo(DEFAULT_INSTANT_POST_END_DATE);
     }
 
     @Test
@@ -201,7 +207,8 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].featuredImageContentType").value(hasItem(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].featuredImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE))))
             .andExpect(jsonPath("$.[*].postedDate").value(hasItem(DEFAULT_POSTED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].modifiedDate").value(hasItem(DEFAULT_MODIFIED_DATE.toString())));
+            .andExpect(jsonPath("$.[*].modifiedDate").value(hasItem(DEFAULT_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].instantPostEndDate").value(hasItem(DEFAULT_INSTANT_POST_END_DATE.toString())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -241,7 +248,8 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.featuredImageContentType").value(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE))
             .andExpect(jsonPath("$.featuredImage").value(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE)))
             .andExpect(jsonPath("$.postedDate").value(DEFAULT_POSTED_DATE.toString()))
-            .andExpect(jsonPath("$.modifiedDate").value(DEFAULT_MODIFIED_DATE.toString()));
+            .andExpect(jsonPath("$.modifiedDate").value(DEFAULT_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.instantPostEndDate").value(DEFAULT_INSTANT_POST_END_DATE.toString()));
     }
 
 
@@ -500,6 +508,58 @@ public class PostResourceIT {
 
     @Test
     @Transactional
+    public void getAllPostsByInstantPostEndDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where instantPostEndDate equals to DEFAULT_INSTANT_POST_END_DATE
+        defaultPostShouldBeFound("instantPostEndDate.equals=" + DEFAULT_INSTANT_POST_END_DATE);
+
+        // Get all the postList where instantPostEndDate equals to UPDATED_INSTANT_POST_END_DATE
+        defaultPostShouldNotBeFound("instantPostEndDate.equals=" + UPDATED_INSTANT_POST_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByInstantPostEndDateIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where instantPostEndDate not equals to DEFAULT_INSTANT_POST_END_DATE
+        defaultPostShouldNotBeFound("instantPostEndDate.notEquals=" + DEFAULT_INSTANT_POST_END_DATE);
+
+        // Get all the postList where instantPostEndDate not equals to UPDATED_INSTANT_POST_END_DATE
+        defaultPostShouldBeFound("instantPostEndDate.notEquals=" + UPDATED_INSTANT_POST_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByInstantPostEndDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where instantPostEndDate in DEFAULT_INSTANT_POST_END_DATE or UPDATED_INSTANT_POST_END_DATE
+        defaultPostShouldBeFound("instantPostEndDate.in=" + DEFAULT_INSTANT_POST_END_DATE + "," + UPDATED_INSTANT_POST_END_DATE);
+
+        // Get all the postList where instantPostEndDate equals to UPDATED_INSTANT_POST_END_DATE
+        defaultPostShouldNotBeFound("instantPostEndDate.in=" + UPDATED_INSTANT_POST_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByInstantPostEndDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where instantPostEndDate is not null
+        defaultPostShouldBeFound("instantPostEndDate.specified=true");
+
+        // Get all the postList where instantPostEndDate is null
+        defaultPostShouldNotBeFound("instantPostEndDate.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllPostsByPostMetaDataIsEqualToSomething() throws Exception {
         // Initialize the database
         postRepository.saveAndFlush(post);
@@ -631,7 +691,8 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].featuredImageContentType").value(hasItem(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].featuredImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE))))
             .andExpect(jsonPath("$.[*].postedDate").value(hasItem(DEFAULT_POSTED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].modifiedDate").value(hasItem(DEFAULT_MODIFIED_DATE.toString())));
+            .andExpect(jsonPath("$.[*].modifiedDate").value(hasItem(DEFAULT_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].instantPostEndDate").value(hasItem(DEFAULT_INSTANT_POST_END_DATE.toString())));
 
         // Check, that the count call also returns 1
         restPostMockMvc.perform(get("/api/posts/count?sort=id,desc&" + filter))
@@ -685,7 +746,8 @@ public class PostResourceIT {
             .featuredImage(UPDATED_FEATURED_IMAGE)
             .featuredImageContentType(UPDATED_FEATURED_IMAGE_CONTENT_TYPE)
             .postedDate(UPDATED_POSTED_DATE)
-            .modifiedDate(UPDATED_MODIFIED_DATE);
+            .modifiedDate(UPDATED_MODIFIED_DATE)
+            .instantPostEndDate(UPDATED_INSTANT_POST_END_DATE);
         PostDTO postDTO = postMapper.toDto(updatedPost);
 
         restPostMockMvc.perform(put("/api/posts")
@@ -704,6 +766,7 @@ public class PostResourceIT {
         assertThat(testPost.getFeaturedImageContentType()).isEqualTo(UPDATED_FEATURED_IMAGE_CONTENT_TYPE);
         assertThat(testPost.getPostedDate()).isEqualTo(UPDATED_POSTED_DATE);
         assertThat(testPost.getModifiedDate()).isEqualTo(UPDATED_MODIFIED_DATE);
+        assertThat(testPost.getInstantPostEndDate()).isEqualTo(UPDATED_INSTANT_POST_END_DATE);
     }
 
     @Test

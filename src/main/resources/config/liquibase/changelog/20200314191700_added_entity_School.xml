@@ -24,6 +24,15 @@
             <column name="featured_image_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="phone" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="website" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="about" type="${clobType}">
                 <constraints nullable="true" />
             </column>
@@ -73,6 +82,9 @@
             <column name="name" type="string"/>
             <column name="featured_image" type="blob"/>
             <column name="featured_image_content_type" type="string"/>
+            <column name="phone" type="string"/>
+            <column name="email" type="string"/>
+            <column name="website" type="string"/>
             <column name="about" type="clob"/>
             <column name="about_type" type="string"/>
             <column name="location" type="clob"/>

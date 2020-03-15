@@ -25,6 +25,9 @@
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="hahuApp.school.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="featuredImage"><span jhiTranslate="hahuApp.school.featuredImage">Featured Image</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="phone"><span jhiTranslate="hahuApp.school.phone">Phone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="email"><span jhiTranslate="hahuApp.school.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="website"><span jhiTranslate="hahuApp.school.website">Website</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="about"><span jhiTranslate="hahuApp.school.about">About</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="aboutType"><span jhiTranslate="hahuApp.school.aboutType">About Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="location"><span jhiTranslate="hahuApp.school.location">Location</span> <fa-icon icon="sort"></fa-icon></th>
@@ -42,6 +45,9 @@
                         </a>
                         <span *ngIf="school.featuredImage">{{ school.featuredImageContentType }}, {{ byteSize(school.featuredImage) }}</span>
                     </td>
+                    <td>{{ school.phone }}</td>
+                    <td>{{ school.email }}</td>
+                    <td>{{ school.website }}</td>
                     <td>{{ school.about }}</td>
                     <td jhiTranslate="{{ 'hahuApp.ContentType.' + school.aboutType }}">{{ school.aboutType }}</td>
                     <td>{{ school.location }}</td>

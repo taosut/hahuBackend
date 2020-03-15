@@ -7,6 +7,9 @@ export interface ISchool {
   name?: string;
   featuredImageContentType?: string;
   featuredImage?: any;
+  phone?: string;
+  email?: string;
+  website?: string;
   about?: any;
   aboutType?: ContentType;
   location?: any;
@@ -21,6 +24,9 @@ export class School implements ISchool {
     public name?: string,
     public featuredImageContentType?: string,
     public featuredImage?: any,
+    public phone?: string,
+    public email?: string,
+    public website?: string,
     public about?: any,
     public aboutType?: ContentType,
     public location?: any,
