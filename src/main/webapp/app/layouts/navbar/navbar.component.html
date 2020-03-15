@@ -16,7 +16,7 @@
                     </span>
                 </a>
             </li>
-            <li *jhiHasAnyAuthority="'ROLE_SCHOOL'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <li *jhiHasAnyAuthority="'ROLE_SCHOOL_ADMIN'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/school-user-management" (click)="collapseNavbar()">
                     <span>
                         <fa-icon icon="user-plus"></fa-icon>
@@ -24,7 +24,7 @@
                     </span>
                 </a>
             </li>
-            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/school-user-group" (click)="collapseNavbar()">
                     <span>
                         <fa-icon icon="users"></fa-icon>
@@ -32,7 +32,7 @@
                     </span>
                 </a>
             </li>
-            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/school-schedule" (click)="collapseNavbar()">
                     <span>
                         <fa-icon icon="calendar"></fa-icon>
@@ -40,7 +40,7 @@
                     </span>
                 </a>
             </li>
-            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/school-progress-add" (click)="collapseNavbar()">
                     <span>
                         <fa-icon icon="chart-bar"></fa-icon>
@@ -48,7 +48,7 @@
                     </span>
                 </a>
             </li>
-            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/school-notification" (click)="collapseNavbar()">
                     <span>
                         <fa-icon icon="bell"></fa-icon>

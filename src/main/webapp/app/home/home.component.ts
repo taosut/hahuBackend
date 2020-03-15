@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (this.account.authorities.includes('ROLE_ADMIN')) {
           this.router.navigate(['/homeHahu']);
         }
-        if (this.account.authorities.includes('ROLE_SCHOOL')) {
+        if (this.account.authorities.includes('ROLE_SCHOOL_ADMIN')) {
           this.router.navigate(['/homeCompany']);
         }
         if (this.account.authorities.includes('ROLE_TEACHER')) {
