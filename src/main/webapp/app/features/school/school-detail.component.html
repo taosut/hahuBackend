@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="school">
+            <h2><span jhiTranslate="hahuApp.school.detail.title">School</span> {{ school.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.school.name">Name</span></dt>
+                <dd>
+                    <span>{{ school.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.school.featuredImage">Featured Image</span></dt>
+                <dd>
+                    <div *ngIf="school.featuredImage">
+                        <a (click)="openFile(school?.featuredImageContentType!, school?.featuredImage)">
+                            <img [src]="'data:' + school.featuredImageContentType + ';base64,' + school.featuredImage" style="max-width: 100%;" alt="school image"/>
+                        </a>
+                        {{ school.featuredImageContentType }}, {{ byteSize(school.featuredImage) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.school.about">About</span></dt>
+                <dd>
+                    <span>{{ school.about }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.school.aboutType">About Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hahuApp.ContentType.' + school.aboutType }}">{{ school.aboutType }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.school.location">Location</span></dt>
+                <dd>
+                    <span>{{ school.location }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.school.locationType">Location Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hahuApp.ContentType.' + school.locationType }}">{{ school.locationType }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.school.user">User</span></dt>
+                <dd>
+                    <span *ngFor="let user of school.users; let last = last">
+                        {{ user.login }}{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/school', school.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

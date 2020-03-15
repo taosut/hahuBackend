@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="notification">
+            <h2><span jhiTranslate="hahuApp.notification.detail.title">Notification</span> {{ notification.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.notification.featuredImage">Featured Image</span></dt>
+                <dd>
+                    <div *ngIf="notification.featuredImage">
+                        <a (click)="openFile(notification?.featuredImageContentType!, notification?.featuredImage)">
+                            <img [src]="'data:' + notification.featuredImageContentType + ';base64,' + notification.featuredImage" style="max-width: 100%;" alt="notification image"/>
+                        </a>
+                        {{ notification.featuredImageContentType }}, {{ byteSize(notification.featuredImage) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.title">Title</span></dt>
+                <dd>
+                    <span>{{ notification.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.content">Content</span></dt>
+                <dd>
+                    <span>{{ notification.content }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.contentType">Content Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hahuApp.ContentType.' + notification.contentType }}">{{ notification.contentType }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.link">Link</span></dt>
+                <dd>
+                    <span>{{ notification.link }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.date">Date</span></dt>
+                <dd>
+                    <span>{{ notification.date }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.markAsRead">Mark As Read</span></dt>
+                <dd>
+                    <span>{{ notification.markAsRead }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.user">User</span></dt>
+                <dd>
+                    {{ notification.userLogin }}
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notification.userGroup">User Group</span></dt>
+                <dd>
+                    <div *ngIf="notification.userGroupId">
+                        <a [routerLink]="['/user-group', notification.userGroupId, 'view']">{{ notification.userGroupName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/notification', notification.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

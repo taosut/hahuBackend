@@ -35,7 +35,9 @@ import {
   faHome,
   faCalendar,
   faChartBar,
-  faUsers
+  faUsers,
+  faArrowCircleRight,
+  faArrowCircleLeft
   // jhipster-needle-add-icon-import
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -76,6 +78,8 @@ export const fontAwesomeIcons = [
   faAsterisk,
   faCalendar,
   faChartBar,
-  faUsers
+  faUsers,
+  faArrowCircleLeft,
+  faArrowCircleRight
   // jhipster-needle-add-icon-import
 ];

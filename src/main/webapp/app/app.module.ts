@@ -14,6 +14,9 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
+import { HahuFeatureModule } from 'app/features/feature.module';
+import { HahuHomeHahuModule } from 'app/homeHahu/home.module';
+import { HahuHomeCompanyModule } from 'app/homeCompany/home.module';
 
 @NgModule({
   imports: [
@@ -23,6 +26,9 @@ import { ErrorComponent } from './layouts/error/error.component';
     HahuHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     HahuEntityModule,
+    HahuFeatureModule,
+    HahuHomeHahuModule,
+    HahuHomeCompanyModule,
     HahuAppRoutingModule
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
