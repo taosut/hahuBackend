@@ -16,6 +16,54 @@
                     </span>
                 </a>
             </li>
+            <li *jhiHasAnyAuthority="'ROLE_SCHOOL'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="user-plus"></fa-icon>
+                        <span>Users</span>
+                    </span>
+                </a>
+            </li>
+            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="users"></fa-icon>
+                        <span>Groups</span>
+                    </span>
+                </a>
+            </li>
+            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="calendar"></fa-icon>
+                        <span>Schedule</span>
+                    </span>
+                </a>
+            </li>
+            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="chart-bar"></fa-icon>
+                        <span>Student Progress</span>
+                    </span>
+                </a>
+            </li>
+            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="bell"></fa-icon>
+                        <span>Notifications</span>
+                    </span>
+                </a>
+            </li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="users"></fa-icon>
+                        <span>Schools</span>
+                    </span>
+                </a>
+            </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
