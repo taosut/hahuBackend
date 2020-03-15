@@ -1,5 +1,6 @@
 package et.com.hahu.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
@@ -10,6 +11,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
+
+import et.com.hahu.domain.enumeration.GroupType;
 
 /**
  * The UserGroup entity will store user groups.\n@author A true hailemaryam
@@ -41,6 +44,10 @@ public class UserGroup implements Serializable {
     @Column(name = "profile_pic_content_type")
     private String profilePicContentType;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "group_type")
+    private GroupType groupType;
+
     @OneToMany(mappedBy = "userGroup")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Notification> notifications = new HashSet<>();
@@ -62,6 +69,10 @@ public class UserGroup implements Serializable {
                joinColumns = @JoinColumn(name = "user_group_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "owner_id", referencedColumnName = "id"))
     private Set<User> owners = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("userGroups")
+    private School school;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -122,6 +133,19 @@ public class UserGroup implements Serializable {
 
     public void setProfilePicContentType(String profilePicContentType) {
         this.profilePicContentType = profilePicContentType;
+    }
+
+    public GroupType getGroupType() {
+        return groupType;
+    }
+
+    public UserGroup groupType(GroupType groupType) {
+        this.groupType = groupType;
+        return this;
+    }
+
+    public void setGroupType(GroupType groupType) {
+        this.groupType = groupType;
     }
 
     public Set<Notification> getNotifications() {
@@ -219,6 +243,19 @@ public class UserGroup implements Serializable {
     public void setOwners(Set<User> users) {
         this.owners = users;
     }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public UserGroup school(School school) {
+        this.school = school;
+        return this;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -245,6 +282,7 @@ public class UserGroup implements Serializable {
             ", detail='" + getDetail() + "'" +
             ", profilePic='" + getProfilePic() + "'" +
             ", profilePicContentType='" + getProfilePicContentType() + "'" +
+            ", groupType='" + getGroupType() + "'" +
             "}";
     }
 }

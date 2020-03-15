@@ -71,6 +71,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'schedule-type',
         loadChildren: () => import('./schedule-type/schedule-type.module').then(m => m.HahuScheduleTypeModule)
+      },
+      {
+        path: 'school',
+        loadChildren: () => import('./school/school.module').then(m => m.HahuSchoolModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

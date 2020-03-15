@@ -3,6 +3,7 @@ package et.com.hahu.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import io.github.jhipster.service.Criteria;
+import et.com.hahu.domain.enumeration.GroupType;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -21,12 +22,32 @@ import io.github.jhipster.service.filter.StringFilter;
  * fix type specific filters.
  */
 public class UserGroupCriteria implements Serializable, Criteria {
+    /**
+     * Class for filtering GroupType
+     */
+    public static class GroupTypeFilter extends Filter<GroupType> {
+
+        public GroupTypeFilter() {
+        }
+
+        public GroupTypeFilter(GroupTypeFilter filter) {
+            super(filter);
+        }
+
+        @Override
+        public GroupTypeFilter copy() {
+            return new GroupTypeFilter(this);
+        }
+
+    }
 
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;
 
     private StringFilter name;
+
+    private GroupTypeFilter groupType;
 
     private LongFilter notificationId;
 
@@ -36,16 +57,20 @@ public class UserGroupCriteria implements Serializable, Criteria {
 
     private LongFilter ownerId;
 
+    private LongFilter schoolId;
+
     public UserGroupCriteria() {
     }
 
     public UserGroupCriteria(UserGroupCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
+        this.groupType = other.groupType == null ? null : other.groupType.copy();
         this.notificationId = other.notificationId == null ? null : other.notificationId.copy();
         this.scheduleId = other.scheduleId == null ? null : other.scheduleId.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
         this.ownerId = other.ownerId == null ? null : other.ownerId.copy();
+        this.schoolId = other.schoolId == null ? null : other.schoolId.copy();
     }
 
     @Override
@@ -67,6 +92,14 @@ public class UserGroupCriteria implements Serializable, Criteria {
 
     public void setName(StringFilter name) {
         this.name = name;
+    }
+
+    public GroupTypeFilter getGroupType() {
+        return groupType;
+    }
+
+    public void setGroupType(GroupTypeFilter groupType) {
+        this.groupType = groupType;
     }
 
     public LongFilter getNotificationId() {
@@ -101,6 +134,14 @@ public class UserGroupCriteria implements Serializable, Criteria {
         this.ownerId = ownerId;
     }
 
+    public LongFilter getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(LongFilter schoolId) {
+        this.schoolId = schoolId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -114,10 +155,12 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
+            Objects.equals(groupType, that.groupType) &&
             Objects.equals(notificationId, that.notificationId) &&
             Objects.equals(scheduleId, that.scheduleId) &&
             Objects.equals(userId, that.userId) &&
-            Objects.equals(ownerId, that.ownerId);
+            Objects.equals(ownerId, that.ownerId) &&
+            Objects.equals(schoolId, that.schoolId);
     }
 
     @Override
@@ -125,10 +168,12 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         name,
+        groupType,
         notificationId,
         scheduleId,
         userId,
-        ownerId
+        ownerId,
+        schoolId
         );
     }
 
@@ -137,10 +182,12 @@ public class UserGroupCriteria implements Serializable, Criteria {
         return "UserGroupCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
+                (groupType != null ? "groupType=" + groupType + ", " : "") +
                 (notificationId != null ? "notificationId=" + notificationId + ", " : "") +
                 (scheduleId != null ? "scheduleId=" + scheduleId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
+                (schoolId != null ? "schoolId=" + schoolId + ", " : "") +
             "}";
     }
 

@@ -14,6 +14,11 @@
             "fieldName": "profilePic",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "groupType",
+            "fieldType": "GroupType",
+            "fieldValues": "PUBLIC,PRIVATE"
         }
     ],
     "relationships": [
@@ -44,6 +49,13 @@
             "relationshipName": "owner",
             "otherEntityField": "login",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "school",
+            "otherEntityRelationshipName": "userGroup",
+            "relationshipName": "school",
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20200311215800",

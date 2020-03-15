@@ -1,16 +1,16 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UserGroupService } from 'app/entities/user-group/user-group.service';
-import { IUserGroup, UserGroup } from 'app/shared/model/user-group.model';
-import { GroupType } from 'app/shared/model/enumerations/group-type.model';
+import { SchoolService } from 'app/entities/school/school.service';
+import { ISchool, School } from 'app/shared/model/school.model';
+import { ContentType } from 'app/shared/model/enumerations/content-type.model';
 
 describe('Service Tests', () => {
-  describe('UserGroup Service', () => {
+  describe('School Service', () => {
     let injector: TestBed;
-    let service: UserGroupService;
+    let service: SchoolService;
     let httpMock: HttpTestingController;
-    let elemDefault: IUserGroup;
-    let expectedResult: IUserGroup | IUserGroup[] | boolean | null;
+    let elemDefault: ISchool;
+    let expectedResult: ISchool | ISchool[] | boolean | null;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -18,10 +18,10 @@ describe('Service Tests', () => {
       });
       expectedResult = null;
       injector = getTestBed();
-      service = injector.get(UserGroupService);
+      service = injector.get(SchoolService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new UserGroup(0, 'AAAAAAA', 'AAAAAAA', 'image/png', 'AAAAAAA', GroupType.PUBLIC);
+      elemDefault = new School(0, 'AAAAAAA', 'image/png', 'AAAAAAA', 'AAAAAAA', ContentType.TEXT, 'AAAAAAA', ContentType.TEXT);
     });
 
     describe('Service methods', () => {
@@ -35,7 +35,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a UserGroup', () => {
+      it('should create a School', () => {
         const returnedFromService = Object.assign(
           {
             id: 0
@@ -45,20 +45,22 @@ describe('Service Tests', () => {
 
         const expected = Object.assign({}, returnedFromService);
 
-        service.create(new UserGroup()).subscribe(resp => (expectedResult = resp.body));
+        service.create(new School()).subscribe(resp => (expectedResult = resp.body));
 
         const req = httpMock.expectOne({ method: 'POST' });
         req.flush(returnedFromService);
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a UserGroup', () => {
+      it('should update a School', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
-            detail: 'BBBBBB',
-            profilePic: 'BBBBBB',
-            groupType: 'BBBBBB'
+            featuredImage: 'BBBBBB',
+            about: 'BBBBBB',
+            aboutType: 'BBBBBB',
+            location: 'BBBBBB',
+            locationType: 'BBBBBB'
           },
           elemDefault
         );
@@ -72,13 +74,15 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of UserGroup', () => {
+      it('should return a list of School', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
-            detail: 'BBBBBB',
-            profilePic: 'BBBBBB',
-            groupType: 'BBBBBB'
+            featuredImage: 'BBBBBB',
+            about: 'BBBBBB',
+            aboutType: 'BBBBBB',
+            location: 'BBBBBB',
+            locationType: 'BBBBBB'
           },
           elemDefault
         );
@@ -93,7 +97,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a UserGroup', () => {
+      it('should delete a School', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });

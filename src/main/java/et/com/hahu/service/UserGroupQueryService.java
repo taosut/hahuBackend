@@ -94,6 +94,9 @@ public class UserGroupQueryService extends QueryService<UserGroup> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), UserGroup_.name));
             }
+            if (criteria.getGroupType() != null) {
+                specification = specification.and(buildSpecification(criteria.getGroupType(), UserGroup_.groupType));
+            }
             if (criteria.getNotificationId() != null) {
                 specification = specification.and(buildSpecification(criteria.getNotificationId(),
                     root -> root.join(UserGroup_.notifications, JoinType.LEFT).get(Notification_.id)));
@@ -109,6 +112,10 @@ public class UserGroupQueryService extends QueryService<UserGroup> {
             if (criteria.getOwnerId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOwnerId(),
                     root -> root.join(UserGroup_.owners, JoinType.LEFT).get(User_.id)));
+            }
+            if (criteria.getSchoolId() != null) {
+                specification = specification.and(buildSpecification(criteria.getSchoolId(),
+                    root -> root.join(UserGroup_.school, JoinType.LEFT).get(School_.id)));
             }
         }
         return specification;

@@ -31,6 +31,7 @@
     <include file="config/liquibase/changelog/20200314101100_added_entity_ImageMetaData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200314180500_added_entity_NotificationMetaData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200314180800_added_entity_ScheduleType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200314191700_added_entity_School.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200311215200_added_entity_constraints_Post.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200311215300_added_entity_constraints_Comment.xml" relativeToChangelogFile="false"/>
@@ -46,5 +47,6 @@
     <include file="config/liquibase/changelog/20200314101100_added_entity_constraints_ImageMetaData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200311215800_added_entity_constraints_UserGroup.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200314180500_added_entity_constraints_NotificationMetaData.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200314191700_added_entity_constraints_School.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

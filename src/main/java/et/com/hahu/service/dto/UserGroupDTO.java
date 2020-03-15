@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 import javax.persistence.Lob;
+import et.com.hahu.domain.enumeration.GroupType;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.UserGroup} entity.
@@ -24,8 +25,14 @@ public class UserGroupDTO implements Serializable {
     private byte[] profilePic;
 
     private String profilePicContentType;
+    private GroupType groupType;
+
     private Set<UserDTO> users = new HashSet<>();
     private Set<UserDTO> owners = new HashSet<>();
+
+    private Long schoolId;
+
+    private String schoolName;
     
     public Long getId() {
         return id;
@@ -67,6 +74,14 @@ public class UserGroupDTO implements Serializable {
         this.profilePicContentType = profilePicContentType;
     }
 
+    public GroupType getGroupType() {
+        return groupType;
+    }
+
+    public void setGroupType(GroupType groupType) {
+        this.groupType = groupType;
+    }
+
     public Set<UserDTO> getUsers() {
         return users;
     }
@@ -81,6 +96,22 @@ public class UserGroupDTO implements Serializable {
 
     public void setOwners(Set<UserDTO> users) {
         this.owners = users;
+    }
+
+    public Long getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
     }
 
     @Override
@@ -111,8 +142,11 @@ public class UserGroupDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", detail='" + getDetail() + "'" +
             ", profilePic='" + getProfilePic() + "'" +
+            ", groupType='" + getGroupType() + "'" +
             ", users='" + getUsers() + "'" +
             ", owners='" + getOwners() + "'" +
+            ", schoolId=" + getSchoolId() +
+            ", schoolName='" + getSchoolName() + "'" +
             "}";
     }
 }

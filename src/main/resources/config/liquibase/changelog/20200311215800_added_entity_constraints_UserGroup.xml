@@ -32,5 +32,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
         
+        <addForeignKeyConstraint baseColumnNames="school_id"
+                                 baseTableName="user_group"
+                                 constraintName="fk_user_group_school_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school"/>
+
     </changeSet>
 </databaseChangeLog>

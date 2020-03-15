@@ -27,6 +27,7 @@
         "imageMetaData": "Image Meta Data",
         "notificationMetaData": "Notification Meta Data",
         "scheduleType": "Schedule Type",
+        "school": "School",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

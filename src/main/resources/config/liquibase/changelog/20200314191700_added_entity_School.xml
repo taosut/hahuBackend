@@ -8,58 +8,50 @@
 
     
     <!--
-        Added the entity UserGroup.
+        Added the entity School.
     -->
-    <changeSet id="20200311215800-1" author="jhipster">
-        <createTable tableName="user_group" remarks="The UserGroup entity will store user groups.\n@author A true hailemaryam">
+    <changeSet id="20200314191700-1" author="jhipster">
+        <createTable tableName="school">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="detail" type="${clobType}">
+            <column name="featured_image" type="longblob">
                 <constraints nullable="true" />
             </column>
-            <column name="profile_pic" type="longblob">
+            <column name="featured_image_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="profile_pic_content_type" type="varchar(255)">
+            <column name="about" type="${clobType}">
                 <constraints nullable="true" />
             </column>
-            <column name="group_type" type="varchar(255)">
+            <column name="about_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="school_id" type="bigint">
+            <column name="location" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="location_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
     </changeSet>
 
-    <changeSet id="20200311215800-1-relations" author="jhipster">
+    <changeSet id="20200314191700-1-relations" author="jhipster">
 
-        <createTable tableName="user_group_user">
+        <createTable tableName="school_user">
             <column name="user_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="user_group_id" type="bigint">
+            <column name="school_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="user_group_id, user_id" tableName="user_group_user"/>
-        
-        <createTable tableName="user_group_owner">
-            <column name="owner_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="user_group_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="user_group_id, owner_id" tableName="user_group_owner"/>
+        <addPrimaryKey columnNames="school_id, user_id" tableName="school_user"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
@@ -72,17 +64,19 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20200311215800-1-data" author="jhipster" context="faker">
+    <changeSet id="20200314191700-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/user_group.csv"
+                  file="config/liquibase/fake-data/school.csv"
                   separator=";"
-                  tableName="user_group">
+                  tableName="school">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="detail" type="clob"/>
-            <column name="profile_pic" type="blob"/>
-            <column name="profile_pic_content_type" type="string"/>
-            <column name="group_type" type="string"/>
+            <column name="featured_image" type="blob"/>
+            <column name="featured_image_content_type" type="string"/>
+            <column name="about" type="clob"/>
+            <column name="about_type" type="string"/>
+            <column name="location" type="clob"/>
+            <column name="location_type" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

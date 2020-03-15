@@ -19,10 +19,12 @@
       "name": "Name",
       "detail": "Detail",
       "profilePic": "Profile Pic",
+      "groupType": "Group Type",
       "notification": "Notification",
       "schedule": "Schedule",
       "user": "User",
-      "owner": "Owner"
+      "owner": "Owner",
+      "school": "School"
     }
   }
 }

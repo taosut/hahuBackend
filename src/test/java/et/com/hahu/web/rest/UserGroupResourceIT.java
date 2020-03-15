@@ -5,6 +5,7 @@ import et.com.hahu.domain.UserGroup;
 import et.com.hahu.domain.Notification;
 import et.com.hahu.domain.Schedule;
 import et.com.hahu.domain.User;
+import et.com.hahu.domain.School;
 import et.com.hahu.repository.UserGroupRepository;
 import et.com.hahu.service.UserGroupService;
 import et.com.hahu.service.dto.UserGroupDTO;
@@ -37,6 +38,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import et.com.hahu.domain.enumeration.GroupType;
 /**
  * Integration tests for the {@link UserGroupResource} REST controller.
  */
@@ -56,6 +58,9 @@ public class UserGroupResourceIT {
     private static final byte[] UPDATED_PROFILE_PIC = TestUtil.createByteArray(1, "1");
     private static final String DEFAULT_PROFILE_PIC_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_PROFILE_PIC_CONTENT_TYPE = "image/png";
+
+    private static final GroupType DEFAULT_GROUP_TYPE = GroupType.PUBLIC;
+    private static final GroupType UPDATED_GROUP_TYPE = GroupType.PRIVATE;
 
     @Autowired
     private UserGroupRepository userGroupRepository;
@@ -94,7 +99,8 @@ public class UserGroupResourceIT {
             .name(DEFAULT_NAME)
             .detail(DEFAULT_DETAIL)
             .profilePic(DEFAULT_PROFILE_PIC)
-            .profilePicContentType(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
+            .profilePicContentType(DEFAULT_PROFILE_PIC_CONTENT_TYPE)
+            .groupType(DEFAULT_GROUP_TYPE);
         return userGroup;
     }
     /**
@@ -108,7 +114,8 @@ public class UserGroupResourceIT {
             .name(UPDATED_NAME)
             .detail(UPDATED_DETAIL)
             .profilePic(UPDATED_PROFILE_PIC)
-            .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE);
+            .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE)
+            .groupType(UPDATED_GROUP_TYPE);
         return userGroup;
     }
 
@@ -137,6 +144,7 @@ public class UserGroupResourceIT {
         assertThat(testUserGroup.getDetail()).isEqualTo(DEFAULT_DETAIL);
         assertThat(testUserGroup.getProfilePic()).isEqualTo(DEFAULT_PROFILE_PIC);
         assertThat(testUserGroup.getProfilePicContentType()).isEqualTo(DEFAULT_PROFILE_PIC_CONTENT_TYPE);
+        assertThat(testUserGroup.getGroupType()).isEqualTo(DEFAULT_GROUP_TYPE);
     }
 
     @Test
@@ -174,7 +182,8 @@ public class UserGroupResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].detail").value(hasItem(DEFAULT_DETAIL.toString())))
             .andExpect(jsonPath("$.[*].profilePicContentType").value(hasItem(DEFAULT_PROFILE_PIC_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))));
+            .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))))
+            .andExpect(jsonPath("$.[*].groupType").value(hasItem(DEFAULT_GROUP_TYPE.toString())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -211,7 +220,8 @@ public class UserGroupResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.detail").value(DEFAULT_DETAIL.toString()))
             .andExpect(jsonPath("$.profilePicContentType").value(DEFAULT_PROFILE_PIC_CONTENT_TYPE))
-            .andExpect(jsonPath("$.profilePic").value(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC)));
+            .andExpect(jsonPath("$.profilePic").value(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC)))
+            .andExpect(jsonPath("$.groupType").value(DEFAULT_GROUP_TYPE.toString()));
     }
 
 
@@ -314,6 +324,58 @@ public class UserGroupResourceIT {
 
     @Test
     @Transactional
+    public void getAllUserGroupsByGroupTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+
+        // Get all the userGroupList where groupType equals to DEFAULT_GROUP_TYPE
+        defaultUserGroupShouldBeFound("groupType.equals=" + DEFAULT_GROUP_TYPE);
+
+        // Get all the userGroupList where groupType equals to UPDATED_GROUP_TYPE
+        defaultUserGroupShouldNotBeFound("groupType.equals=" + UPDATED_GROUP_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsByGroupTypeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+
+        // Get all the userGroupList where groupType not equals to DEFAULT_GROUP_TYPE
+        defaultUserGroupShouldNotBeFound("groupType.notEquals=" + DEFAULT_GROUP_TYPE);
+
+        // Get all the userGroupList where groupType not equals to UPDATED_GROUP_TYPE
+        defaultUserGroupShouldBeFound("groupType.notEquals=" + UPDATED_GROUP_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsByGroupTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+
+        // Get all the userGroupList where groupType in DEFAULT_GROUP_TYPE or UPDATED_GROUP_TYPE
+        defaultUserGroupShouldBeFound("groupType.in=" + DEFAULT_GROUP_TYPE + "," + UPDATED_GROUP_TYPE);
+
+        // Get all the userGroupList where groupType equals to UPDATED_GROUP_TYPE
+        defaultUserGroupShouldNotBeFound("groupType.in=" + UPDATED_GROUP_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsByGroupTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+
+        // Get all the userGroupList where groupType is not null
+        defaultUserGroupShouldBeFound("groupType.specified=true");
+
+        // Get all the userGroupList where groupType is null
+        defaultUserGroupShouldNotBeFound("groupType.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllUserGroupsByNotificationIsEqualToSomething() throws Exception {
         // Initialize the database
         userGroupRepository.saveAndFlush(userGroup);
@@ -391,6 +453,26 @@ public class UserGroupResourceIT {
         defaultUserGroupShouldNotBeFound("ownerId.equals=" + (ownerId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllUserGroupsBySchoolIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userGroupRepository.saveAndFlush(userGroup);
+        School school = SchoolResourceIT.createEntity(em);
+        em.persist(school);
+        em.flush();
+        userGroup.setSchool(school);
+        userGroupRepository.saveAndFlush(userGroup);
+        Long schoolId = school.getId();
+
+        // Get all the userGroupList where school equals to schoolId
+        defaultUserGroupShouldBeFound("schoolId.equals=" + schoolId);
+
+        // Get all the userGroupList where school equals to schoolId + 1
+        defaultUserGroupShouldNotBeFound("schoolId.equals=" + (schoolId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -402,7 +484,8 @@ public class UserGroupResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].detail").value(hasItem(DEFAULT_DETAIL.toString())))
             .andExpect(jsonPath("$.[*].profilePicContentType").value(hasItem(DEFAULT_PROFILE_PIC_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))));
+            .andExpect(jsonPath("$.[*].profilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_PROFILE_PIC))))
+            .andExpect(jsonPath("$.[*].groupType").value(hasItem(DEFAULT_GROUP_TYPE.toString())));
 
         // Check, that the count call also returns 1
         restUserGroupMockMvc.perform(get("/api/user-groups/count?sort=id,desc&" + filter))
@@ -453,7 +536,8 @@ public class UserGroupResourceIT {
             .name(UPDATED_NAME)
             .detail(UPDATED_DETAIL)
             .profilePic(UPDATED_PROFILE_PIC)
-            .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE);
+            .profilePicContentType(UPDATED_PROFILE_PIC_CONTENT_TYPE)
+            .groupType(UPDATED_GROUP_TYPE);
         UserGroupDTO userGroupDTO = userGroupMapper.toDto(updatedUserGroup);
 
         restUserGroupMockMvc.perform(put("/api/user-groups")
@@ -469,6 +553,7 @@ public class UserGroupResourceIT {
         assertThat(testUserGroup.getDetail()).isEqualTo(UPDATED_DETAIL);
         assertThat(testUserGroup.getProfilePic()).isEqualTo(UPDATED_PROFILE_PIC);
         assertThat(testUserGroup.getProfilePicContentType()).isEqualTo(UPDATED_PROFILE_PIC_CONTENT_TYPE);
+        assertThat(testUserGroup.getGroupType()).isEqualTo(UPDATED_GROUP_TYPE);
     }
 
     @Test

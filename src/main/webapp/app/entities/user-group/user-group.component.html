@@ -26,6 +26,8 @@
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="hahuApp.userGroup.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="detail"><span jhiTranslate="hahuApp.userGroup.detail">Detail</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="profilePic"><span jhiTranslate="hahuApp.userGroup.profilePic">Profile Pic</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="groupType"><span jhiTranslate="hahuApp.userGroup.groupType">Group Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="schoolName"><span jhiTranslate="hahuApp.userGroup.school">School</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -39,6 +41,12 @@
                             <img [src]="'data:' + userGroup.profilePicContentType + ';base64,' + userGroup.profilePic" style="max-height: 30px;" alt="userGroup image"/>
                         </a>
                         <span *ngIf="userGroup.profilePic">{{ userGroup.profilePicContentType }}, {{ byteSize(userGroup.profilePic) }}</span>
+                    </td>
+                    <td jhiTranslate="{{ 'hahuApp.GroupType.' + userGroup.groupType }}">{{ userGroup.groupType }}</td>
+                    <td>
+                        <div *ngIf="userGroup.schoolId">
+                            <a [routerLink]="['/school', userGroup.schoolId , 'view']" >{{ userGroup.schoolName }}</a>
+                        </div>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

@@ -42,6 +42,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.groupType" for="field_groupType">Group Type</label>
+                    <select class="form-control" name="groupType" formControlName="groupType" id="field_groupType">
+                        <option value="PUBLIC">{{ 'hahuApp.GroupType.PUBLIC' | translate }}</option>
+                        <option value="PRIVATE">{{ 'hahuApp.GroupType.PRIVATE' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label jhiTranslate="hahuApp.userGroup.user" for="field_users">User</label>
                     <select class="form-control" id="field_users" multiple name="users" formControlName="users">
                         <option [ngValue]="getSelected(editForm.get('users')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
@@ -52,6 +60,14 @@
                     <label jhiTranslate="hahuApp.userGroup.owner" for="field_owners">Owner</label>
                     <select class="form-control" id="field_owners" multiple name="owners" formControlName="owners">
                         <option [ngValue]="getSelected(editForm.get('owners')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.school" for="field_school">School</label>
+                    <select class="form-control" id="field_school" name="school" formControlName="schoolId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="schoolOption.id" *ngFor="let schoolOption of schools; trackBy: trackById">{{ schoolOption.name }}</option>
                     </select>
                 </div>
             </div>
