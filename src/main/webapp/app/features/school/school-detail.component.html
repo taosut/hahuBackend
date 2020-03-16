@@ -25,7 +25,7 @@
             <br>
             <h5>
                 <span id="user-management-page-heading">School Administrators</span>
-                <button class="btn btn-primary btn-sm float-right jh-create-entity" [routerLink]="['./new']">
+                <button class="btn btn-primary btn-sm float-right jh-create-entity" (click)="addNewUser()">
                     <fa-icon icon="plus"></fa-icon> <span jhiTranslate="userManagement.home.createLabel">Create a new User</span>
                 </button>
                 <span class="float-right">&nbsp;&nbsp;</span>

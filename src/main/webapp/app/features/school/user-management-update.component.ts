@@ -3,15 +3,19 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { LANGUAGES } from 'app/core/language/language.constants';
-import { User } from 'app/core/user/user.model';
+import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ISchool } from 'app/shared/model/school.model';
+import { SchoolService } from 'app/features/school/school.service';
+import { Authority } from 'app/shared/constants/authority.constants';
 
 @Component({
   selector: 'jhi-user-mgmt-update',
   templateUrl: './user-management-update.component.html'
 })
 export class UserManagementUpdateComponent implements OnInit {
-  user!: User;
+  school!: ISchool | null;
   languages = LANGUAGES;
   authorities: string[] = [];
   isSaving = false;
@@ -27,72 +31,44 @@ export class UserManagementUpdateComponent implements OnInit {
     authorities: []
   });
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    private schoolService: SchoolService,
+    public activeModal: NgbActiveModal,
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe(({ user }) => {
-      if (user) {
-        this.user = user;
-        if (this.user.id === undefined) {
-          this.user.activated = true;
-        }
-        this.updateForm(user);
-      }
-    });
     this.userService.authorities().subscribe(authorities => {
       this.authorities = authorities;
     });
   }
-
-  previousState(): void {
-    window.history.back();
-  }
-
   save(): void {
     this.isSaving = true;
-    this.updateUser(this.user);
-    if (this.user.id !== undefined) {
-      this.userService.update(this.user).subscribe(
-        () => this.onSaveSuccess(),
-        () => this.onSaveError()
-      );
-    } else {
-      this.userService.create(this.user).subscribe(
-        () => this.onSaveSuccess(),
-        () => this.onSaveError()
-      );
-    }
-  }
-
-  private updateForm(user: User): void {
     this.editForm.patchValue({
-      id: user.id,
-      login: user.login,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      activated: user.activated,
-      langKey: user.langKey,
-      authorities: user.authorities
+      authorities: [Authority.SCHOOL_ADMIN]
     });
+    this.userService.create(this.editForm.value).subscribe(
+      res => this.onSaveSuccess(res),
+      () => this.onSaveError()
+    );
   }
-
-  private updateUser(user: User): void {
-    user.login = this.editForm.get(['login'])!.value;
-    user.firstName = this.editForm.get(['firstName'])!.value;
-    user.lastName = this.editForm.get(['lastName'])!.value;
-    user.email = this.editForm.get(['email'])!.value;
-    user.activated = this.editForm.get(['activated'])!.value;
-    user.langKey = this.editForm.get(['langKey'])!.value;
-    user.authorities = this.editForm.get(['authorities'])!.value;
-  }
-
-  private onSaveSuccess(): void {
+  private onSaveSuccess(user: IUser): void {
+    if (this.school && this.school.users) {
+      user.authorities = [Authority.SCHOOL_ADMIN];
+      this.school.users.push(user);
+      this.schoolService.update(this.school).subscribe(res => (this.school = res.body));
+    }
     this.isSaving = false;
-    this.previousState();
+    this.activeModal.dismiss();
   }
 
   private onSaveError(): void {
     this.isSaving = false;
+  }
+
+  cancel(): void {
+    this.activeModal.dismiss();
   }
 }
