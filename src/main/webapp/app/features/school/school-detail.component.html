@@ -1,29 +1,76 @@
 <!-- Page Content -->
 <div class="container">
     <!-- Portfolio Item Heading -->
-    <h4 class="my-2">
+    <h4>
         <fa-icon (click)="previousState()" [icon]="'arrow-left'"></fa-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>{{school?.name}}</span>
-        <!--<small>Secondary Text</small>-->
     </h4>
-    <jhi-alert></jhi-alert>
     <!-- Portfolio Item Row -->
     <div class="row">
-        <div class="col-md-8">
-        </div>
         <div class="col-md-4">
+            <br>
+            <div class="card p-2">
+                <p class="my-2">Phone: {{school?.name}}</p>
+                <p class="my-2">Email: {{school?.email}}</p>
+            </div>
+            <br>
             <div class="card p-2">
                 <p class="my-2">Description</p>
                 <p>
                     <small>{{school?.about}}</small>
                 </p>
             </div>
+        </div>
+        <div class="col-md-8">
             <br>
-            <div class="card p-2">
-                <p class="my-2">Location</p>
-                <p>
-                    <small>{{school?.location}}</small>
-                </p>
+            <h5>
+                <span id="user-management-page-heading">School Administrators</span>
+                <button class="btn btn-primary btn-sm float-right jh-create-entity" [routerLink]="['./new']">
+                    <fa-icon icon="plus"></fa-icon> <span jhiTranslate="userManagement.home.createLabel">Create a new User</span>
+                </button>
+                <span class="float-right">&nbsp;&nbsp;</span>
+                <button class="btn btn-secondary btn-sm float-right jh-create-entity" (click)="addFromExisting()">
+                    <fa-icon icon="plus"></fa-icon> <span>Choose From Existin</span>
+                </button>
+            </h5>
+            <br>
+            <jhi-alert></jhi-alert>
+            <div class="alert alert-warning" id="no-result" *ngIf="school?.users?.length === 0">
+                <span>No user found in this school</span>
+            </div>
+            <div class="table-responsive" *ngIf="school?.users.length > 0">
+                <table class="table table-striped table-sm" aria-describedby="user-management-page-heading">
+                    <thead>
+                    <tr>
+                        <th><span jhiTranslate="userManagement.login">Login</span>
+                        </th>
+                        <th><span jhiTranslate="userManagement.email">Email</span>
+                        </th>
+                        <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody *ngIf="school?.users">
+                    <tr *ngFor="let user of school?.users">
+                        <td>{{ user.login }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <div *ngFor="let authority of user.authorities">
+                                <span class="badge badge-info">{{ authority }}</span>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="button" (click)="deleteUser(user)"
+                                        class="btn btn-danger btn-sm">
+                                    <fa-icon icon="times"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

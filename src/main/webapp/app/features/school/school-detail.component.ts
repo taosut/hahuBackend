@@ -3,6 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
 import { ISchool } from 'app/shared/model/school.model';
+import { SchoolService } from 'app/features/school/school.service';
+import { IUser } from 'app/core/user/user.model';
+import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserManagementComponent } from 'app/features/school/user-management.component';
 
 @Component({
   selector: 'jhi-school-detail',
@@ -10,8 +16,14 @@ import { ISchool } from 'app/shared/model/school.model';
 })
 export class SchoolDetailComponent implements OnInit {
   school: ISchool | null = null;
+  isSaving = false;
 
-  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
+  constructor(
+    protected modalService: NgbModal,
+    protected schoolService: SchoolService,
+    protected dataUtils: JhiDataUtils,
+    protected activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ school }) => (this.school = school));
@@ -27,5 +39,32 @@ export class SchoolDetailComponent implements OnInit {
 
   previousState(): void {
     window.history.back();
+  }
+
+  addFromExisting(): void {
+    const modalRef = this.modalService.open(UserManagementComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.school = this.school;
+  }
+
+  deleteUser(user: IUser): void {
+    if (this.school && this.school.users) {
+      this.school.users.splice(this.school.users.indexOf(user), 1);
+      this.subscribeToSaveResponse(this.schoolService.update(this.school));
+    }
+  }
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<ISchool>>): void {
+    result.subscribe(
+      res => this.onSaveSuccess(res.body),
+      () => this.onSaveError()
+    );
+  }
+
+  protected onSaveSuccess(school: ISchool | null): void {
+    this.isSaving = false;
+    this.school = school;
+  }
+
+  protected onSaveError(): void {
+    this.isSaving = false;
   }
 }
