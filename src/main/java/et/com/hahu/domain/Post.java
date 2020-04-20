@@ -15,6 +15,8 @@ import java.util.Set;
 
 import et.com.hahu.domain.enumeration.ContentType;
 
+import et.com.hahu.domain.enumeration.PostType;
+
 /**
  * The Post\nentity will contain both pages and posts.\n@author A true hailemaryam
  */
@@ -41,6 +43,10 @@ public class Post implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "content_type")
     private ContentType contentType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "post_type")
+    private PostType postType;
 
     @Lob
     @Column(name = "featured_image")
@@ -134,6 +140,19 @@ public class Post implements Serializable {
 
     public void setContentType(ContentType contentType) {
         this.contentType = contentType;
+    }
+
+    public PostType getPostType() {
+        return postType;
+    }
+
+    public Post postType(PostType postType) {
+        this.postType = postType;
+        return this;
+    }
+
+    public void setPostType(PostType postType) {
+        this.postType = postType;
     }
 
     public byte[] getFeaturedImage() {
@@ -363,6 +382,7 @@ public class Post implements Serializable {
             ", title='" + getTitle() + "'" +
             ", content='" + getContent() + "'" +
             ", contentType='" + getContentType() + "'" +
+            ", postType='" + getPostType() + "'" +
             ", featuredImage='" + getFeaturedImage() + "'" +
             ", featuredImageContentType='" + getFeaturedImageContentType() + "'" +
             ", postedDate='" + getPostedDate() + "'" +

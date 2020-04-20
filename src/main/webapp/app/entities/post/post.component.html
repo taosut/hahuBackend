@@ -26,6 +26,7 @@
                     <th scope="col"  jhiSortBy="title"><span jhiTranslate="hahuApp.post.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="content"><span jhiTranslate="hahuApp.post.content">Content</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="contentType"><span jhiTranslate="hahuApp.post.contentType">Content Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="postType"><span jhiTranslate="hahuApp.post.postType">Post Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="featuredImage"><span jhiTranslate="hahuApp.post.featuredImage">Featured Image</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="postedDate"><span jhiTranslate="hahuApp.post.postedDate">Posted Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="modifiedDate"><span jhiTranslate="hahuApp.post.modifiedDate">Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
@@ -40,6 +41,7 @@
                     <td>{{ post.title }}</td>
                     <td>{{ post.content }}</td>
                     <td jhiTranslate="{{ 'hahuApp.ContentType.' + post.contentType }}">{{ post.contentType }}</td>
+                    <td jhiTranslate="{{ 'hahuApp.PostType.' + post.postType }}">{{ post.postType }}</td>
                     <td>
                         <a *ngIf="post.featuredImage" (click)="openFile(post.featuredImageContentType, post.featuredImage)">
                             <img [src]="'data:' + post.featuredImageContentType + ';base64,' + post.featuredImage" style="max-height: 30px;" alt="post image"/>

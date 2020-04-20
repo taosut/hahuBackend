@@ -43,6 +43,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import et.com.hahu.domain.enumeration.ContentType;
+import et.com.hahu.domain.enumeration.PostType;
 /**
  * Integration tests for the {@link PostResource} REST controller.
  */
@@ -60,6 +61,9 @@ public class PostResourceIT {
 
     private static final ContentType DEFAULT_CONTENT_TYPE = ContentType.TEXT;
     private static final ContentType UPDATED_CONTENT_TYPE = ContentType.HTML;
+
+    private static final PostType DEFAULT_POST_TYPE = PostType.PAGE;
+    private static final PostType UPDATED_POST_TYPE = PostType.POST;
 
     private static final byte[] DEFAULT_FEATURED_IMAGE = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_FEATURED_IMAGE = TestUtil.createByteArray(1, "1");
@@ -112,6 +116,7 @@ public class PostResourceIT {
             .title(DEFAULT_TITLE)
             .content(DEFAULT_CONTENT)
             .contentType(DEFAULT_CONTENT_TYPE)
+            .postType(DEFAULT_POST_TYPE)
             .featuredImage(DEFAULT_FEATURED_IMAGE)
             .featuredImageContentType(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE)
             .postedDate(DEFAULT_POSTED_DATE)
@@ -130,6 +135,7 @@ public class PostResourceIT {
             .title(UPDATED_TITLE)
             .content(UPDATED_CONTENT)
             .contentType(UPDATED_CONTENT_TYPE)
+            .postType(UPDATED_POST_TYPE)
             .featuredImage(UPDATED_FEATURED_IMAGE)
             .featuredImageContentType(UPDATED_FEATURED_IMAGE_CONTENT_TYPE)
             .postedDate(UPDATED_POSTED_DATE)
@@ -162,6 +168,7 @@ public class PostResourceIT {
         assertThat(testPost.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testPost.getContent()).isEqualTo(DEFAULT_CONTENT);
         assertThat(testPost.getContentType()).isEqualTo(DEFAULT_CONTENT_TYPE);
+        assertThat(testPost.getPostType()).isEqualTo(DEFAULT_POST_TYPE);
         assertThat(testPost.getFeaturedImage()).isEqualTo(DEFAULT_FEATURED_IMAGE);
         assertThat(testPost.getFeaturedImageContentType()).isEqualTo(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE);
         assertThat(testPost.getPostedDate()).isEqualTo(DEFAULT_POSTED_DATE);
@@ -204,6 +211,7 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].contentType").value(hasItem(DEFAULT_CONTENT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].postType").value(hasItem(DEFAULT_POST_TYPE.toString())))
             .andExpect(jsonPath("$.[*].featuredImageContentType").value(hasItem(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].featuredImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE))))
             .andExpect(jsonPath("$.[*].postedDate").value(hasItem(DEFAULT_POSTED_DATE.toString())))
@@ -245,6 +253,7 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
             .andExpect(jsonPath("$.contentType").value(DEFAULT_CONTENT_TYPE.toString()))
+            .andExpect(jsonPath("$.postType").value(DEFAULT_POST_TYPE.toString()))
             .andExpect(jsonPath("$.featuredImageContentType").value(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE))
             .andExpect(jsonPath("$.featuredImage").value(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE)))
             .andExpect(jsonPath("$.postedDate").value(DEFAULT_POSTED_DATE.toString()))
@@ -400,6 +409,58 @@ public class PostResourceIT {
 
         // Get all the postList where contentType is null
         defaultPostShouldNotBeFound("contentType.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPostTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where postType equals to DEFAULT_POST_TYPE
+        defaultPostShouldBeFound("postType.equals=" + DEFAULT_POST_TYPE);
+
+        // Get all the postList where postType equals to UPDATED_POST_TYPE
+        defaultPostShouldNotBeFound("postType.equals=" + UPDATED_POST_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPostTypeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where postType not equals to DEFAULT_POST_TYPE
+        defaultPostShouldNotBeFound("postType.notEquals=" + DEFAULT_POST_TYPE);
+
+        // Get all the postList where postType not equals to UPDATED_POST_TYPE
+        defaultPostShouldBeFound("postType.notEquals=" + UPDATED_POST_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPostTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where postType in DEFAULT_POST_TYPE or UPDATED_POST_TYPE
+        defaultPostShouldBeFound("postType.in=" + DEFAULT_POST_TYPE + "," + UPDATED_POST_TYPE);
+
+        // Get all the postList where postType equals to UPDATED_POST_TYPE
+        defaultPostShouldNotBeFound("postType.in=" + UPDATED_POST_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPostTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where postType is not null
+        defaultPostShouldBeFound("postType.specified=true");
+
+        // Get all the postList where postType is null
+        defaultPostShouldNotBeFound("postType.specified=false");
     }
 
     @Test
@@ -688,6 +749,7 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].contentType").value(hasItem(DEFAULT_CONTENT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].postType").value(hasItem(DEFAULT_POST_TYPE.toString())))
             .andExpect(jsonPath("$.[*].featuredImageContentType").value(hasItem(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].featuredImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE))))
             .andExpect(jsonPath("$.[*].postedDate").value(hasItem(DEFAULT_POSTED_DATE.toString())))
@@ -743,6 +805,7 @@ public class PostResourceIT {
             .title(UPDATED_TITLE)
             .content(UPDATED_CONTENT)
             .contentType(UPDATED_CONTENT_TYPE)
+            .postType(UPDATED_POST_TYPE)
             .featuredImage(UPDATED_FEATURED_IMAGE)
             .featuredImageContentType(UPDATED_FEATURED_IMAGE_CONTENT_TYPE)
             .postedDate(UPDATED_POSTED_DATE)
@@ -762,6 +825,7 @@ public class PostResourceIT {
         assertThat(testPost.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testPost.getContent()).isEqualTo(UPDATED_CONTENT);
         assertThat(testPost.getContentType()).isEqualTo(UPDATED_CONTENT_TYPE);
+        assertThat(testPost.getPostType()).isEqualTo(UPDATED_POST_TYPE);
         assertThat(testPost.getFeaturedImage()).isEqualTo(UPDATED_FEATURED_IMAGE);
         assertThat(testPost.getFeaturedImageContentType()).isEqualTo(UPDATED_FEATURED_IMAGE_CONTENT_TYPE);
         assertThat(testPost.getPostedDate()).isEqualTo(UPDATED_POSTED_DATE);

@@ -20,6 +20,10 @@
                 <dd>
                     <span jhiTranslate="{{ 'hahuApp.ContentType.' + post.contentType }}">{{ post.contentType }}</span>
                 </dd>
+                <dt><span jhiTranslate="hahuApp.post.postType">Post Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hahuApp.PostType.' + post.postType }}">{{ post.postType }}</span>
+                </dd>
                 <dt><span jhiTranslate="hahuApp.post.featuredImage">Featured Image</span></dt>
                 <dd>
                     <div *ngIf="post.featuredImage">

@@ -97,6 +97,9 @@ public class PostQueryService extends QueryService<Post> {
             if (criteria.getContentType() != null) {
                 specification = specification.and(buildSpecification(criteria.getContentType(), Post_.contentType));
             }
+            if (criteria.getPostType() != null) {
+                specification = specification.and(buildSpecification(criteria.getPostType(), Post_.postType));
+            }
             if (criteria.getPostedDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPostedDate(), Post_.postedDate));
             }

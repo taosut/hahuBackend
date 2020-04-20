@@ -32,6 +32,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hahuApp.post.postType" for="field_postType">Post Type</label>
+                    <select class="form-control" name="postType" formControlName="postType" id="field_postType">
+                        <option value="PAGE">{{ 'hahuApp.PostType.PAGE' | translate }}</option>
+                        <option value="POST">{{ 'hahuApp.PostType.POST' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="hahuApp.post.featuredImage" for="field_featuredImage">Featured Image</label>
                     <div>
                         <img [src]="'data:' + editForm.get('featuredImageContentType')!.value + ';base64,' + editForm.get('featuredImage')!.value" style="max-height: 100px;" *ngIf="editForm.get('featuredImage')!.value" alt="post image"/>

@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.Objects;
 import javax.persistence.Lob;
 import et.com.hahu.domain.enumeration.ContentType;
+import et.com.hahu.domain.enumeration.PostType;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.Post} entity.
@@ -23,6 +24,8 @@ public class PostDTO implements Serializable {
     private String content;
 
     private ContentType contentType;
+
+    private PostType postType;
 
     @Lob
     private byte[] featuredImage;
@@ -71,6 +74,14 @@ public class PostDTO implements Serializable {
 
     public void setContentType(ContentType contentType) {
         this.contentType = contentType;
+    }
+
+    public PostType getPostType() {
+        return postType;
+    }
+
+    public void setPostType(PostType postType) {
+        this.postType = postType;
     }
 
     public byte[] getFeaturedImage() {
@@ -173,6 +184,7 @@ public class PostDTO implements Serializable {
             ", title='" + getTitle() + "'" +
             ", content='" + getContent() + "'" +
             ", contentType='" + getContentType() + "'" +
+            ", postType='" + getPostType() + "'" +
             ", featuredImage='" + getFeaturedImage() + "'" +
             ", postedDate='" + getPostedDate() + "'" +
             ", modifiedDate='" + getModifiedDate() + "'" +

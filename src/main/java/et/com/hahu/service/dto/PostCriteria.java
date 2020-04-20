@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import io.github.jhipster.service.Criteria;
 import et.com.hahu.domain.enumeration.ContentType;
+import et.com.hahu.domain.enumeration.PostType;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -41,6 +42,24 @@ public class PostCriteria implements Serializable, Criteria {
         }
 
     }
+    /**
+     * Class for filtering PostType
+     */
+    public static class PostTypeFilter extends Filter<PostType> {
+
+        public PostTypeFilter() {
+        }
+
+        public PostTypeFilter(PostTypeFilter filter) {
+            super(filter);
+        }
+
+        @Override
+        public PostTypeFilter copy() {
+            return new PostTypeFilter(this);
+        }
+
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -49,6 +68,8 @@ public class PostCriteria implements Serializable, Criteria {
     private StringFilter title;
 
     private ContentTypeFilter contentType;
+
+    private PostTypeFilter postType;
 
     private InstantFilter postedDate;
 
@@ -75,6 +96,7 @@ public class PostCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.title = other.title == null ? null : other.title.copy();
         this.contentType = other.contentType == null ? null : other.contentType.copy();
+        this.postType = other.postType == null ? null : other.postType.copy();
         this.postedDate = other.postedDate == null ? null : other.postedDate.copy();
         this.modifiedDate = other.modifiedDate == null ? null : other.modifiedDate.copy();
         this.instantPostEndDate = other.instantPostEndDate == null ? null : other.instantPostEndDate.copy();
@@ -113,6 +135,14 @@ public class PostCriteria implements Serializable, Criteria {
 
     public void setContentType(ContentTypeFilter contentType) {
         this.contentType = contentType;
+    }
+
+    public PostTypeFilter getPostType() {
+        return postType;
+    }
+
+    public void setPostType(PostTypeFilter postType) {
+        this.postType = postType;
     }
 
     public InstantFilter getPostedDate() {
@@ -201,6 +231,7 @@ public class PostCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(title, that.title) &&
             Objects.equals(contentType, that.contentType) &&
+            Objects.equals(postType, that.postType) &&
             Objects.equals(postedDate, that.postedDate) &&
             Objects.equals(modifiedDate, that.modifiedDate) &&
             Objects.equals(instantPostEndDate, that.instantPostEndDate) &&
@@ -218,6 +249,7 @@ public class PostCriteria implements Serializable, Criteria {
         id,
         title,
         contentType,
+        postType,
         postedDate,
         modifiedDate,
         instantPostEndDate,
@@ -236,6 +268,7 @@ public class PostCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (title != null ? "title=" + title + ", " : "") +
                 (contentType != null ? "contentType=" + contentType + ", " : "") +
+                (postType != null ? "postType=" + postType + ", " : "") +
                 (postedDate != null ? "postedDate=" + postedDate + ", " : "") +
                 (modifiedDate != null ? "modifiedDate=" + modifiedDate + ", " : "") +
                 (instantPostEndDate != null ? "instantPostEndDate=" + instantPostEndDate + ", " : "") +

@@ -5,6 +5,7 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { PostService } from 'app/entities/post/post.service';
 import { IPost, Post } from 'app/shared/model/post.model';
 import { ContentType } from 'app/shared/model/enumerations/content-type.model';
+import { PostType } from 'app/shared/model/enumerations/post-type.model';
 
 describe('Service Tests', () => {
   describe('Post Service', () => {
@@ -25,7 +26,18 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Post(0, 'AAAAAAA', 'AAAAAAA', ContentType.TEXT, 'image/png', 'AAAAAAA', currentDate, currentDate, currentDate);
+      elemDefault = new Post(
+        0,
+        'AAAAAAA',
+        'AAAAAAA',
+        ContentType.TEXT,
+        PostType.PAGE,
+        'image/png',
+        'AAAAAAA',
+        currentDate,
+        currentDate,
+        currentDate
+      );
     });
 
     describe('Service methods', () => {
@@ -79,6 +91,7 @@ describe('Service Tests', () => {
             title: 'BBBBBB',
             content: 'BBBBBB',
             contentType: 'BBBBBB',
+            postType: 'BBBBBB',
             featuredImage: 'BBBBBB',
             postedDate: currentDate.format(DATE_TIME_FORMAT),
             modifiedDate: currentDate.format(DATE_TIME_FORMAT),
@@ -109,6 +122,7 @@ describe('Service Tests', () => {
             title: 'BBBBBB',
             content: 'BBBBBB',
             contentType: 'BBBBBB',
+            postType: 'BBBBBB',
             featuredImage: 'BBBBBB',
             postedDate: currentDate.format(DATE_TIME_FORMAT),
             modifiedDate: currentDate.format(DATE_TIME_FORMAT),

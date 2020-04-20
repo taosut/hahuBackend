@@ -19,6 +19,7 @@
       "title": "Title",
       "content": "Content",
       "contentType": "Content Type",
+      "postType": "Post Type",
       "featuredImage": "Featured Image",
       "postedDate": "Posted Date",
       "modifiedDate": "Modified Date",

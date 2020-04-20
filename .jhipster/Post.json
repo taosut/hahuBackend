@@ -16,6 +16,11 @@
             "fieldValues": "TEXT,HTML"
         },
         {
+            "fieldName": "postType",
+            "fieldType": "PostType",
+            "fieldValues": "PAGE,POST"
+        },
+        {
             "fieldName": "featuredImage",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "image"

@@ -5,12 +5,14 @@ import { ILikes } from 'app/shared/model/likes.model';
 import { ICategory } from 'app/shared/model/category.model';
 import { ITag } from 'app/shared/model/tag.model';
 import { ContentType } from 'app/shared/model/enumerations/content-type.model';
+import { PostType } from 'app/shared/model/enumerations/post-type.model';
 
 export interface IPost {
   id?: number;
   title?: string;
   content?: any;
   contentType?: ContentType;
+  postType?: PostType;
   featuredImageContentType?: string;
   featuredImage?: any;
   postedDate?: Moment;
@@ -31,6 +33,7 @@ export class Post implements IPost {
     public title?: string,
     public content?: any,
     public contentType?: ContentType,
+    public postType?: PostType,
     public featuredImageContentType?: string,
     public featuredImage?: any,
     public postedDate?: Moment,
