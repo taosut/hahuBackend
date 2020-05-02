@@ -10,7 +10,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { UserService } from 'app/core/user/user.service';
 import { IUser, User } from 'app/core/user/user.model';
-import { SchoolService } from 'app/features/school/school.service';
+import { SchoolService } from './school.service';
 import { ISchool } from 'app/shared/model/school.model';
 
 @Component({

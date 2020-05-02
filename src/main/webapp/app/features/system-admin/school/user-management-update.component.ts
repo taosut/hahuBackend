@@ -7,7 +7,7 @@ import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ISchool } from 'app/shared/model/school.model';
-import { SchoolService } from 'app/features/school/school.service';
+import { SchoolService } from './school.service';
 import { Authority } from 'app/shared/constants/authority.constants';
 
 @Component({

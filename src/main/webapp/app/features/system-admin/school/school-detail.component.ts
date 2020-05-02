@@ -3,13 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
 import { ISchool } from 'app/shared/model/school.model';
-import { SchoolService } from 'app/features/school/school.service';
+import { SchoolService } from './school.service';
 import { IUser } from 'app/core/user/user.model';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserManagementComponent } from 'app/features/school/user-management.component';
-import { UserManagementUpdateComponent } from 'app/features/school/user-management-update.component';
+import { UserManagementComponent } from './user-management.component';
+import { UserManagementUpdateComponent } from './user-management-update.component';
 
 @Component({
   selector: 'jhi-school-detail',

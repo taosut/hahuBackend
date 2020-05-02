@@ -26,13 +26,9 @@ import { RouterModule } from '@angular/router';
       {
         path: 'school-schedule',
         loadChildren: () => import('./schedule/schedule.module').then(m => m.HahuScheduleModule)
-      },
-      {
-        path: 'school-management',
-        loadChildren: () => import('./school/school.module').then(m => m.HahuSchoolModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])
   ]
 })
-export class HahuFeatureModule {}
+export class HahuSchoolAdminModule {}
