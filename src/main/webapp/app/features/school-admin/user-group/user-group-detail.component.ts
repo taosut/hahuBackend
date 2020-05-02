@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { JhiDataUtils, JhiEventManager } from 'ng-jhipster';
+import { JhiDataUtils } from 'ng-jhipster';
 
 import { IUserGroup } from 'app/shared/model/user-group.model';
-import { UserGroupService } from 'app/features/school-admin/user-group/user-group.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
