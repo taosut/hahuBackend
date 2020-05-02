@@ -8,8 +8,6 @@ import { IUser } from 'app/core/user/user.model';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserManagementComponent } from './user-management.component';
-import { UserManagementUpdateComponent } from './user-management-update.component';
 
 @Component({
   selector: 'jhi-school-detail',
@@ -45,13 +43,13 @@ export class SchoolDetailComponent implements OnInit {
   }
 
   addFromExisting(): void {
-    const modalRef = this.modalService.open(UserManagementComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.school = this.school;
+    // const modalRef = this.modalService.open(UserManagementComponent, { size: 'lg', backdrop: 'static' });
+    // modalRef.componentInstance.school = this.school;
   }
 
   addNewUser(): void {
-    const modalRef = this.modalService.open(UserManagementUpdateComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.school = this.school;
+    // const modalRef = this.modalService.open(UserManagementUpdateComponent, { size: 'lg', backdrop: 'static' });
+    // modalRef.componentInstance.school = this.school;
   }
 
   deleteUser(user: IUser): void {
