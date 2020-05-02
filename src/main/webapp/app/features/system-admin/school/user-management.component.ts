@@ -78,8 +78,10 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   finish(): void {
     if (this.school) {
       this.selectedUsers.forEach(user => {
-        if (this.school && this.school.users && !this.isThereFromSchool(user)) {
-          user.authorities.push(Authority.SCHOOL_ADMIN);
+        if (user && this.school && this.school.users && !this.isThereFromSchool(user)) {
+          if (user.authorities) {
+            user.authorities.push(Authority.SCHOOL_ADMIN);
+          }
           this.school.users.push(user);
           this.subscribeToSaveResponseUser(this.userService.update(user));
         }
