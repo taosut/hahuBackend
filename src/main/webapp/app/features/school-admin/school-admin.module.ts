@@ -6,10 +6,7 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       {
         path: 'school-user-management',
-        loadChildren: () => import('./user-management/user-management.module').then(m => m.UserManagementModule),
-        data: {
-          pageTitle: 'userManagement.home.title'
-        }
+        loadChildren: () => import('./school/school.module').then(m => m.HahuSchoolModule)
       },
       {
         path: 'school-user-group',
