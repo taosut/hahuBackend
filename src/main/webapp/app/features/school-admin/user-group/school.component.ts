@@ -114,16 +114,9 @@ export class SchoolComponent implements OnInit, OnDestroy {
   protected onSuccess(data: ISchool[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    // this.router.navigate(['/school'], {
-    //   queryParams: {
-    //     page: this.page,
-    //     size: this.itemsPerPage,
-    //     sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
-    //   }
-    // });
     this.schools = data || [];
     if (this.schools.length === 1) {
-      this.router.navigate(['/school-user-management', this.schools[0].id, 'view', 1]);
+      this.router.navigate(['/school-user-group', this.schools[0].id, 'view', 1]);
     }
   }
 

@@ -1,0 +1,80 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="hahuApp.userGroup.home.title">User Groups</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-group" [routerLink]="['/user-group/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="hahuApp.userGroup.home.createLabel">
+            Create a new User Group
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="userGroups?.length === 0">
+        <span jhiTranslate="hahuApp.userGroup.home.notFound">No userGroups found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="userGroups?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="hahuApp.userGroup.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="profilePic"><span jhiTranslate="hahuApp.userGroup.profilePic">Profile Pic</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="groupType"><span jhiTranslate="hahuApp.userGroup.groupType">Group Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let userGroup of userGroups ;trackBy: trackId">
+                    <td><a [routerLink]="['/user-group', userGroup.id, 'view']">{{ userGroup.id }}</a></td>
+                    <td>{{ userGroup.name }}</td>
+                    <td>
+                        <a *ngIf="userGroup.profilePic" (click)="openFile(userGroup.profilePicContentType, userGroup.profilePic)">
+                            <img [src]="'data:' + userGroup.profilePicContentType + ';base64,' + userGroup.profilePic" style="max-height: 30px;" alt="userGroup image"/>
+                        </a>
+                        <span *ngIf="userGroup.profilePic">{{ userGroup.profilePicContentType }}, {{ byteSize(userGroup.profilePic) }}</span>
+                    </td>
+                    <td jhiTranslate="{{ 'hahuApp.GroupType.' + userGroup.groupType }}">{{ userGroup.groupType }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/user-group', userGroup.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/user-group', userGroup.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(userGroup)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="userGroups?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>
