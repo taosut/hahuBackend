@@ -43,7 +43,7 @@ export const schoolRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       defaultSort: 'id,asc',
       pageTitle: 'hahuApp.school.home.title'
     },
@@ -57,7 +57,7 @@ export const schoolRoute: Routes = [
       school: SchoolResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       defaultSort: 'id,asc',
       pageTitle: 'hahuApp.school.home.title'
     },
@@ -70,7 +70,7 @@ export const schoolRoute: Routes = [
       school: SchoolResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       pageTitle: 'hahuApp.school.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -82,7 +82,7 @@ export const schoolRoute: Routes = [
       school: SchoolResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       pageTitle: 'hahuApp.school.home.title'
     },
     canActivate: [UserRouteAccessService]

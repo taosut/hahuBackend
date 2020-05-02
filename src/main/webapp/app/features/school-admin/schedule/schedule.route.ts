@@ -43,7 +43,7 @@ export const scheduleRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       defaultSort: 'id,asc',
       pageTitle: 'hahuApp.schedule.home.title'
     },
@@ -56,7 +56,7 @@ export const scheduleRoute: Routes = [
       schedule: ScheduleResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       pageTitle: 'hahuApp.schedule.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -68,7 +68,7 @@ export const scheduleRoute: Routes = [
       schedule: ScheduleResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       pageTitle: 'hahuApp.schedule.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -80,7 +80,7 @@ export const scheduleRoute: Routes = [
       schedule: ScheduleResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       pageTitle: 'hahuApp.schedule.home.title'
     },
     canActivate: [UserRouteAccessService]

@@ -43,7 +43,7 @@ export const userGroupRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       defaultSort: 'id,asc',
       pageTitle: 'hahuApp.userGroup.home.title'
     },
@@ -56,7 +56,7 @@ export const userGroupRoute: Routes = [
       userGroup: UserGroupResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       pageTitle: 'hahuApp.userGroup.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -68,7 +68,7 @@ export const userGroupRoute: Routes = [
       userGroup: UserGroupResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       pageTitle: 'hahuApp.userGroup.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -80,7 +80,7 @@ export const userGroupRoute: Routes = [
       userGroup: UserGroupResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.SCHOOL_ADMIN],
       pageTitle: 'hahuApp.userGroup.home.title'
     },
     canActivate: [UserRouteAccessService]
