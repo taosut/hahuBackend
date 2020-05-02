@@ -12,6 +12,7 @@ import { UserService } from 'app/core/user/user.service';
 import { IUser, User } from 'app/core/user/user.model';
 import { SchoolService } from './school.service';
 import { ISchool } from 'app/shared/model/school.model';
+import { Authority } from 'app/shared/constants/authority.constants';
 
 @Component({
   selector: 'jhi-user-mgmt',
@@ -78,7 +79,9 @@ export class UserManagementComponent implements OnInit, OnDestroy {
     if (this.school) {
       this.selectedUsers.forEach(user => {
         if (this.school && this.school.users && !this.isThereFromSchool(user)) {
+          user.authorities.push(Authority.SCHOOL_ADMIN);
           this.school.users.push(user);
+          this.subscribeToSaveResponseUser(this.userService.update(user));
         }
       });
       this.subscribeToSaveResponse(this.schoolService.update(this.school));
@@ -87,6 +90,12 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ISchool>>): void {
     result.subscribe(
       res => this.onSaveSuccess(res.body),
+      () => this.onSaveError()
+    );
+  }
+  protected subscribeToSaveResponseUser(result: Observable<IUser>): void {
+    result.subscribe(
+      () => {},
       () => this.onSaveError()
     );
   }
