@@ -6,69 +6,67 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
-import { IUserGroup, UserGroup } from 'app/shared/model/user-group.model';
-import { UserGroupService } from './user-group.service';
+import { ISchool, School } from 'app/shared/model/school.model';
+import { SchoolService } from './school.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
-import { ISchool } from 'app/shared/model/school.model';
-import { SchoolService } from 'app/entities/school/school.service';
-
-type SelectableEntity = IUser | ISchool;
 
 @Component({
-  selector: 'jhi-user-group-update',
-  templateUrl: './user-group-update.component.html'
+  selector: 'jhi-school-update',
+  templateUrl: './school-update.component.html'
 })
-export class UserGroupUpdateComponent implements OnInit {
+export class SchoolUpdateComponent implements OnInit {
   isSaving = false;
   users: IUser[] = [];
-  schools: ISchool[] = [];
 
   editForm = this.fb.group({
     id: [],
     name: [],
-    detail: [],
-    profilePic: [],
-    profilePicContentType: [],
-    groupType: [],
-    users: [],
-    owners: [],
-    schoolId: []
+    featuredImage: [],
+    featuredImageContentType: [],
+    phone: [null, [Validators.pattern('^\\+[0-9]{12}$')]],
+    email: [null, [Validators.pattern('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')]],
+    website: [],
+    about: [],
+    aboutType: [],
+    location: [],
+    locationType: [],
+    users: []
   });
 
   constructor(
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
-    protected userGroupService: UserGroupService,
-    protected userService: UserService,
     protected schoolService: SchoolService,
+    protected userService: UserService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ userGroup }) => {
-      this.updateForm(userGroup);
+    this.activatedRoute.data.subscribe(({ school }) => {
+      this.updateForm(school);
 
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
-
-      this.schoolService.query().subscribe((res: HttpResponse<ISchool[]>) => (this.schools = res.body || []));
     });
   }
 
-  updateForm(userGroup: IUserGroup): void {
+  updateForm(school: ISchool): void {
     this.editForm.patchValue({
-      id: userGroup.id,
-      name: userGroup.name,
-      detail: userGroup.detail,
-      profilePic: userGroup.profilePic,
-      profilePicContentType: userGroup.profilePicContentType,
-      groupType: userGroup.groupType,
-      users: userGroup.users,
-      owners: userGroup.owners,
-      schoolId: userGroup.schoolId
+      id: school.id,
+      name: school.name,
+      featuredImage: school.featuredImage,
+      featuredImageContentType: school.featuredImageContentType,
+      phone: school.phone,
+      email: school.email,
+      website: school.website,
+      about: school.about,
+      aboutType: school.aboutType,
+      location: school.location,
+      locationType: school.locationType,
+      users: school.users
     });
   }
 
@@ -104,30 +102,33 @@ export class UserGroupUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const userGroup = this.createFromForm();
-    if (userGroup.id !== undefined) {
-      this.subscribeToSaveResponse(this.userGroupService.update(userGroup));
+    const school = this.createFromForm();
+    if (school.id !== undefined) {
+      this.subscribeToSaveResponse(this.schoolService.update(school));
     } else {
-      this.subscribeToSaveResponse(this.userGroupService.create(userGroup));
+      this.subscribeToSaveResponse(this.schoolService.create(school));
     }
   }
 
-  private createFromForm(): IUserGroup {
+  private createFromForm(): ISchool {
     return {
-      ...new UserGroup(),
+      ...new School(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      detail: this.editForm.get(['detail'])!.value,
-      profilePicContentType: this.editForm.get(['profilePicContentType'])!.value,
-      profilePic: this.editForm.get(['profilePic'])!.value,
-      groupType: this.editForm.get(['groupType'])!.value,
-      users: this.editForm.get(['users'])!.value,
-      owners: this.editForm.get(['owners'])!.value,
-      schoolId: this.editForm.get(['schoolId'])!.value
+      featuredImageContentType: this.editForm.get(['featuredImageContentType'])!.value,
+      featuredImage: this.editForm.get(['featuredImage'])!.value,
+      phone: this.editForm.get(['phone'])!.value,
+      email: this.editForm.get(['email'])!.value,
+      website: this.editForm.get(['website'])!.value,
+      about: this.editForm.get(['about'])!.value,
+      aboutType: this.editForm.get(['aboutType'])!.value,
+      location: this.editForm.get(['location'])!.value,
+      locationType: this.editForm.get(['locationType'])!.value,
+      users: this.editForm.get(['users'])!.value
     };
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IUserGroup>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<ISchool>>): void {
     result.subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -143,7 +144,7 @@ export class UserGroupUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: SelectableEntity): any {
+  trackById(index: number, item: IUser): any {
     return item.id;
   }
 

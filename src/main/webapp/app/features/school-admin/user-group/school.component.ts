@@ -5,18 +5,20 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IUserGroup } from 'app/shared/model/user-group.model';
+import { ISchool } from 'app/shared/model/school.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { UserGroupService } from './user-group.service';
-import { UserGroupDeleteDialogComponent } from './user-group-delete-dialog.component';
+import { SchoolService } from './school.service';
+import { SchoolDeleteDialogComponent } from './school-delete-dialog.component';
+import { AccountService } from 'app/core/auth/account.service';
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
-  selector: 'jhi-user-group',
-  templateUrl: './user-group.component.html'
+  selector: 'jhi-school',
+  templateUrl: './school.component.html'
 })
-export class UserGroupComponent implements OnInit, OnDestroy {
-  userGroups?: IUserGroup[];
+export class SchoolComponent implements OnInit, OnDestroy {
+  schools?: ISchool[];
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -24,9 +26,12 @@ export class UserGroupComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  userId!: number;
 
   constructor(
-    protected userGroupService: UserGroupService,
+    protected userService: UserService,
+    protected accountService: AccountService,
+    protected schoolService: SchoolService,
     protected activatedRoute: ActivatedRoute,
     protected dataUtils: JhiDataUtils,
     protected router: Router,
@@ -37,27 +42,37 @@ export class UserGroupComponent implements OnInit, OnDestroy {
   loadPage(page?: number): void {
     const pageToLoad: number = page || this.page;
 
-    this.userGroupService
+    this.schoolService
       .query({
+        'userId.equals': this.userId,
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort()
       })
       .subscribe(
-        (res: HttpResponse<IUserGroup[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
+        (res: HttpResponse<ISchool[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
         () => this.onError()
       );
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(data => {
-      this.page = data.pagingParams.page;
-      this.ascending = data.pagingParams.ascending;
-      this.predicate = data.pagingParams.predicate;
-      this.ngbPaginationPage = data.pagingParams.page;
-      this.loadPage();
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        this.userService.find(account.login).subscribe(user => {
+          if (user) {
+            this.userId = user.id;
+            this.activatedRoute.data.subscribe(data => {
+              this.page = data.pagingParams.page;
+              this.ascending = data.pagingParams.ascending;
+              this.predicate = data.pagingParams.predicate;
+              this.ngbPaginationPage = data.pagingParams.page;
+              this.loadPage();
+            });
+          }
+        });
+      }
     });
-    this.registerChangeInUserGroups();
+    this.registerChangeInSchools();
   }
 
   ngOnDestroy(): void {
@@ -66,7 +81,7 @@ export class UserGroupComponent implements OnInit, OnDestroy {
     }
   }
 
-  trackId(index: number, item: IUserGroup): number {
+  trackId(index: number, item: ISchool): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return item.id!;
   }
@@ -79,13 +94,13 @@ export class UserGroupComponent implements OnInit, OnDestroy {
     return this.dataUtils.openFile(contentType, base64String);
   }
 
-  registerChangeInUserGroups(): void {
-    this.eventSubscriber = this.eventManager.subscribe('userGroupListModification', () => this.loadPage());
+  registerChangeInSchools(): void {
+    this.eventSubscriber = this.eventManager.subscribe('schoolListModification', () => this.loadPage());
   }
 
-  delete(userGroup: IUserGroup): void {
-    const modalRef = this.modalService.open(UserGroupDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.userGroup = userGroup;
+  delete(school: ISchool): void {
+    const modalRef = this.modalService.open(SchoolDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.school = school;
   }
 
   sort(): string[] {
@@ -96,17 +111,20 @@ export class UserGroupComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  protected onSuccess(data: IUserGroup[] | null, headers: HttpHeaders, page: number): void {
+  protected onSuccess(data: ISchool[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    // this.router.navigate(['/user-group'], {
+    // this.router.navigate(['/school'], {
     //   queryParams: {
     //     page: this.page,
     //     size: this.itemsPerPage,
     //     sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
     //   }
     // });
-    this.userGroups = data || [];
+    this.schools = data || [];
+    if (this.schools.length === 1) {
+      this.router.navigate(['/school-user-management', this.schools[0].id, 'view', 1]);
+    }
   }
 
   protected onError(): void {
