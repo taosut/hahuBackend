@@ -64,6 +64,20 @@ export const schoolRoute: Routes = [
     canActivate: [UserRouteAccessService]
   },
   {
+    path: ':id/view/:quantity',
+    component: SchoolDetailComponent,
+    resolve: {
+      pagingParams: JhiResolvePagingParams,
+      school: SchoolResolve
+    },
+    data: {
+      authorities: [Authority.SCHOOL_ADMIN],
+      defaultSort: 'id,asc',
+      pageTitle: 'hahuApp.school.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
     path: 'new',
     component: SchoolUpdateComponent,
     resolve: {

@@ -10,6 +10,8 @@ import { ISchool } from 'app/shared/model/school.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { SchoolService } from './school.service';
 import { SchoolDeleteDialogComponent } from './school-delete-dialog.component';
+import { AccountService } from 'app/core/auth/account.service';
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-school',
@@ -24,8 +26,11 @@ export class SchoolComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  userId!: number;
 
   constructor(
+    protected userService: UserService,
+    protected accountService: AccountService,
     protected schoolService: SchoolService,
     protected activatedRoute: ActivatedRoute,
     protected dataUtils: JhiDataUtils,
@@ -39,6 +44,7 @@ export class SchoolComponent implements OnInit, OnDestroy {
 
     this.schoolService
       .query({
+        'userId.equals': this.userId,
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort()
@@ -50,12 +56,21 @@ export class SchoolComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(data => {
-      this.page = data.pagingParams.page;
-      this.ascending = data.pagingParams.ascending;
-      this.predicate = data.pagingParams.predicate;
-      this.ngbPaginationPage = data.pagingParams.page;
-      this.loadPage();
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        this.userService.find(account.login).subscribe(user => {
+          if (user) {
+            this.userId = user.id;
+            this.activatedRoute.data.subscribe(data => {
+              this.page = data.pagingParams.page;
+              this.ascending = data.pagingParams.ascending;
+              this.predicate = data.pagingParams.predicate;
+              this.ngbPaginationPage = data.pagingParams.page;
+              this.loadPage();
+            });
+          }
+        });
+      }
     });
     this.registerChangeInSchools();
   }
@@ -107,6 +122,9 @@ export class SchoolComponent implements OnInit, OnDestroy {
     //   }
     // });
     this.schools = data || [];
+    if (this.schools.length === 1) {
+      this.router.navigate(['/school-user-management', this.schools[0].id, 'view', 1]);
+    }
   }
 
   protected onError(): void {

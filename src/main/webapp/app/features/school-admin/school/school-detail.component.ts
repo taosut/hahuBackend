@@ -18,6 +18,7 @@ import { UserManagementUpdateComponent } from './user-management-update.componen
 export class SchoolDetailComponent implements OnInit {
   school: ISchool | null = null;
   isSaving = false;
+  showBack = false;
 
   constructor(
     protected modalService: NgbModal,
@@ -27,6 +28,7 @@ export class SchoolDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.showBack = +(this.activatedRoute.snapshot.paramMap.get('quantity') || 0) !== 1;
     this.activatedRoute.data.subscribe(({ school }) => (this.school = school));
   }
 
