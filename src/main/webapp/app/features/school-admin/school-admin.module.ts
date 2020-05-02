@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
       },
       {
         path: 'school-user-group',
-        loadChildren: () => import('./user-group/user-group.module').then(m => m.HahuUserGroupModule)
+        loadChildren: () => import('./user-group/school.module').then(m => m.HahuSchoolModule)
       },
       {
         path: 'school-notification',
