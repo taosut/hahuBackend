@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { JhiDataUtils } from 'ng-jhipster';
+import { JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 
 import { IUserGroup } from 'app/shared/model/user-group.model';
+import { UserGroupService } from 'app/features/school-admin/user-group/user-group.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-user-group-detail',
@@ -11,11 +12,13 @@ import { IUserGroup } from 'app/shared/model/user-group.model';
 export class UserGroupDetailComponent implements OnInit {
   userGroup: IUserGroup | null = null;
 
-  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
+  constructor(protected dataUtils: JhiDataUtils, public activeModal: NgbActiveModal) {}
 
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ userGroup }) => (this.userGroup = userGroup));
+  cancel(): void {
+    this.activeModal.dismiss();
   }
+
+  ngOnInit(): void {}
 
   byteSize(base64String: string): string {
     return this.dataUtils.byteSize(base64String);

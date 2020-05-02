@@ -12,10 +12,6 @@ import { SchoolService } from './school.service';
 import { SchoolComponent } from './school.component';
 import { SchoolDetailComponent } from './school-detail.component';
 import { SchoolUpdateComponent } from './school-update.component';
-import { UserGroupComponent } from 'app/entities/user-group/user-group.component';
-import { UserGroupDetailComponent } from 'app/entities/user-group/user-group-detail.component';
-import { UserGroupUpdateComponent } from 'app/entities/user-group/user-group-update.component';
-import { UserGroupResolve } from 'app/entities/user-group/user-group.route';
 
 @Injectable({ providedIn: 'root' })
 export class SchoolResolve implements Resolve<ISchool> {
@@ -102,55 +98,6 @@ export const schoolRoute: Routes = [
     data: {
       authorities: [Authority.SCHOOL_ADMIN],
       pageTitle: 'hahuApp.school.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: 'group',
-    component: UserGroupComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
-    data: {
-      authorities: [Authority.USER],
-      defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.userGroup.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: 'group/:id/view',
-    component: UserGroupDetailComponent,
-    resolve: {
-      userGroup: UserGroupResolve
-    },
-    data: {
-      authorities: [Authority.USER],
-      pageTitle: 'hahuApp.userGroup.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: 'group/new',
-    component: UserGroupUpdateComponent,
-    resolve: {
-      userGroup: UserGroupResolve
-    },
-    data: {
-      authorities: [Authority.USER],
-      pageTitle: 'hahuApp.userGroup.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: 'group/:id/edit',
-    component: UserGroupUpdateComponent,
-    resolve: {
-      userGroup: UserGroupResolve
-    },
-    data: {
-      authorities: [Authority.USER],
-      pageTitle: 'hahuApp.userGroup.home.title'
     },
     canActivate: [UserRouteAccessService]
   }

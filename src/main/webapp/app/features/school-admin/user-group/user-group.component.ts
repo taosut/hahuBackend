@@ -10,6 +10,8 @@ import { IUserGroup } from 'app/shared/model/user-group.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { UserGroupService } from './user-group.service';
 import { UserGroupDeleteDialogComponent } from './user-group-delete-dialog.component';
+import { UserGroupDetailComponent } from './user-group-detail.component';
+import { UserGroupUpdateComponent } from './user-group-update.component';
 
 @Component({
   selector: 'jhi-school-user-group',
@@ -88,6 +90,18 @@ export class UserGroupComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.userGroup = userGroup;
   }
 
+  detail(userGroup: IUserGroup): void {
+    const modalRef = this.modalService.open(UserGroupDetailComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.userGroup = userGroup;
+  }
+
+  update(userGroup?: IUserGroup): void {
+    const modalRef = this.modalService.open(UserGroupUpdateComponent, { size: 'lg', backdrop: 'static' });
+    if (userGroup) {
+      modalRef.componentInstance.userGroup = userGroup;
+    }
+  }
+
   sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
     if (this.predicate !== 'id') {
@@ -99,13 +113,6 @@ export class UserGroupComponent implements OnInit, OnDestroy {
   protected onSuccess(data: IUserGroup[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    // this.router.navigate(['/user-group'], {
-    //   queryParams: {
-    //     page: this.page,
-    //     size: this.itemsPerPage,
-    //     sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
-    //   }
-    // });
     this.userGroups = data || [];
   }
 

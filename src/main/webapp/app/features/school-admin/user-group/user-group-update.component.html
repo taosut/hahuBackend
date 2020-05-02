@@ -1,86 +1,103 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-user-group-heading" jhiTranslate="hahuApp.userGroup.home.createOrEditLabel">Create or edit a User Group</h2>
-
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.name" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                           formControlName="name"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.detail" for="field_detail">Detail</label>
-                    <textarea class="form-control" name="detail" id="field_detail"
-                              formControlName="detail"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.profilePic" for="field_profilePic">Profile Pic</label>
-                    <div>
-                        <img [src]="'data:' + editForm.get('profilePicContentType')!.value + ';base64,' + editForm.get('profilePic')!.value" style="max-height: 100px;" *ngIf="editForm.get('profilePic')!.value" alt="userGroup image"/>
-                        <div *ngIf="editForm.get('profilePic')!.value" class="form-text text-danger clearfix">
-                            <span class="pull-left">{{ editForm.get('profilePicContentType')!.value }}, {{ byteSize(editForm.get('profilePic')!.value) }}</span>
-                            <button type="button" (click)="clearInputImage('profilePic', 'profilePicContentType', 'file_profilePic')" class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon icon="times"></fa-icon>
-                            </button>
-                        </div>
-                        <input type="file" id="file_profilePic" (change)="setFileData($event, 'profilePic', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
-                    </div>
-                    <input type="hidden" class="form-control" name="profilePic" id="field_profilePic"
-                           formControlName="profilePic"/>
-                    <input type="hidden" class="form-control" name="profilePicContentType" id="field_profilePicContentType"
-                           formControlName="profilePicContentType" />
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.groupType" for="field_groupType">Group Type</label>
-                    <select class="form-control" name="groupType" formControlName="groupType" id="field_groupType">
-                        <option value="PUBLIC">{{ 'hahuApp.GroupType.PUBLIC' | translate }}</option>
-                        <option value="PRIVATE">{{ 'hahuApp.GroupType.PRIVATE' | translate }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label jhiTranslate="hahuApp.userGroup.user" for="field_users">User</label>
-                    <select class="form-control" id="field_users" multiple name="users" formControlName="users">
-                        <option [ngValue]="getSelected(editForm.get('users')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label jhiTranslate="hahuApp.userGroup.owner" for="field_owners">Owner</label>
-                    <select class="form-control" id="field_owners" multiple name="owners" formControlName="owners">
-                        <option [ngValue]="getSelected(editForm.get('owners')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hahuApp.userGroup.school" for="field_school">School</label>
-                    <select class="form-control" id="field_school" name="school" formControlName="schoolId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="schoolOption.id" *ngFor="let schoolOption of schools; trackBy: trackById">{{ schoolOption.name }}</option>
-                    </select>
-                </div>
-            </div>
-
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="hahuApp.userGroup.home.createOrEditLabel">Create or edit a User Group</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="cancel()">&times;
+        </button>
     </div>
-</div>
+
+    <div class="modal-body">
+        <div>
+            <jhi-alert-error></jhi-alert-error>
+
+            <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                <label for="id" jhiTranslate="global.field.id">ID</label>
+                <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly/>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="hahuApp.userGroup.name"
+                       for="field_name">Name</label>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       formControlName="name"/>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="hahuApp.userGroup.detail"
+                       for="field_detail">Detail</label>
+                <textarea class="form-control" name="detail" id="field_detail"
+                          formControlName="detail"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="hahuApp.userGroup.profilePic"
+                       for="field_profilePic">Profile Pic</label>
+                <div>
+                    <img
+                        [src]="'data:' + editForm.get('profilePicContentType')!.value + ';base64,' + editForm.get('profilePic')!.value"
+                        style="max-height: 100px;" *ngIf="editForm.get('profilePic')!.value" alt="userGroup image"/>
+                    <div *ngIf="editForm.get('profilePic')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('profilePicContentType')!.value }}
+                                , {{ byteSize(editForm.get('profilePic')!.value) }}</span>
+                        <button type="button"
+                                (click)="clearInputImage('profilePic', 'profilePicContentType', 'file_profilePic')"
+                                class="btn btn-secondary btn-xs pull-right">
+                            <fa-icon icon="times"></fa-icon>
+                        </button>
+                    </div>
+                    <input type="file" id="file_profilePic" (change)="setFileData($event, 'profilePic', true)"
+                           accept="image/*" jhiTranslate="entity.action.addimage"/>
+                </div>
+                <input type="hidden" class="form-control" name="profilePic" id="field_profilePic"
+                       formControlName="profilePic"/>
+                <input type="hidden" class="form-control" name="profilePicContentType"
+                       id="field_profilePicContentType"
+                       formControlName="profilePicContentType"/>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="hahuApp.userGroup.groupType" for="field_groupType">Group
+                    Type</label>
+                <select class="form-control" name="groupType" formControlName="groupType" id="field_groupType">
+                    <option value="PUBLIC">{{ 'hahuApp.GroupType.PUBLIC' | translate }}</option>
+                    <option value="PRIVATE">{{ 'hahuApp.GroupType.PRIVATE' | translate }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label jhiTranslate="hahuApp.userGroup.user" for="field_users">User</label>
+                <select class="form-control" id="field_users" multiple name="users" formControlName="users">
+                    <option [ngValue]="getSelected(editForm.get('users')!.value, userOption)"
+                            *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label jhiTranslate="hahuApp.userGroup.owner" for="field_owners">Owner</label>
+                <select class="form-control" id="field_owners" multiple name="owners" formControlName="owners">
+                    <option [ngValue]="getSelected(editForm.get('owners')!.value, userOption)"
+                            *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="hahuApp.userGroup.school"
+                       for="field_school">School</label>
+                <select class="form-control" id="field_school" name="school" formControlName="schoolId">
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]="schoolOption.id"
+                            *ngFor="let schoolOption of schools; trackBy: trackById">{{ schoolOption.name }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="cancel()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -24,6 +24,6 @@ import { UserGroupDeleteDialogComponent } from './user-group-delete-dialog.compo
     UserGroupUpdateComponent,
     UserGroupDeleteDialogComponent
   ],
-  entryComponents: [SchoolDeleteDialogComponent, UserGroupDeleteDialogComponent]
+  entryComponents: [SchoolDeleteDialogComponent, UserGroupDeleteDialogComponent, UserGroupDetailComponent, UserGroupUpdateComponent]
 })
 export class HahuSchoolModule {}

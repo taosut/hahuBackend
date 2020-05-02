@@ -13,6 +13,7 @@ import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { ISchool } from 'app/shared/model/school.model';
 import { SchoolService } from 'app/entities/school/school.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 type SelectableEntity = IUser | ISchool;
 
@@ -24,6 +25,7 @@ export class UserGroupUpdateComponent implements OnInit {
   isSaving = false;
   users: IUser[] = [];
   schools: ISchool[] = [];
+  userGroup!: IUserGroup;
 
   editForm = this.fb.group({
     id: [],
@@ -45,17 +47,20 @@ export class UserGroupUpdateComponent implements OnInit {
     protected schoolService: SchoolService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public activeModal: NgbActiveModal
   ) {}
 
+  cancel(): void {
+    this.activeModal.dismiss();
+  }
+
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ userGroup }) => {
-      this.updateForm(userGroup);
-
-      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
-
-      this.schoolService.query().subscribe((res: HttpResponse<ISchool[]>) => (this.schools = res.body || []));
-    });
+    if (this.userGroup) {
+      this.updateForm(this.userGroup);
+    }
+    this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+    this.schoolService.query().subscribe((res: HttpResponse<ISchool[]>) => (this.schools = res.body || []));
   }
 
   updateForm(userGroup: IUserGroup): void {
@@ -98,14 +103,10 @@ export class UserGroupUpdateComponent implements OnInit {
     }
   }
 
-  previousState(): void {
-    window.history.back();
-  }
-
   save(): void {
     this.isSaving = true;
     const userGroup = this.createFromForm();
-    if (userGroup.id !== undefined) {
+    if (userGroup.id) {
       this.subscribeToSaveResponse(this.userGroupService.update(userGroup));
     } else {
       this.subscribeToSaveResponse(this.userGroupService.create(userGroup));
@@ -136,7 +137,8 @@ export class UserGroupUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
-    this.previousState();
+    this.eventManager.broadcast('userGroupListModification');
+    this.cancel();
   }
 
   protected onSaveError(): void {
