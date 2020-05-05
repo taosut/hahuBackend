@@ -11,6 +11,7 @@ import { SchoolService } from './school.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-school-update',
@@ -19,6 +20,7 @@ import { UserService } from 'app/core/user/user.service';
 export class SchoolUpdateComponent implements OnInit {
   isSaving = false;
   users: IUser[] = [];
+  school!: ISchool;
 
   editForm = this.fb.group({
     id: [],
@@ -36,6 +38,7 @@ export class SchoolUpdateComponent implements OnInit {
   });
 
   constructor(
+    public activeModal: NgbActiveModal,
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected schoolService: SchoolService,
@@ -46,11 +49,10 @@ export class SchoolUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ school }) => {
-      this.updateForm(school);
-
-      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
-    });
+    if (this.school) {
+      this.updateForm(this.school);
+    }
+    this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
   }
 
   updateForm(school: ISchool): void {
@@ -103,7 +105,7 @@ export class SchoolUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const school = this.createFromForm();
-    if (school.id !== undefined) {
+    if (school.id) {
       this.subscribeToSaveResponse(this.schoolService.update(school));
     } else {
       this.subscribeToSaveResponse(this.schoolService.create(school));
@@ -137,7 +139,8 @@ export class SchoolUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
-    this.previousState();
+    this.eventManager.broadcast('schoolListModification');
+    this.cancel();
   }
 
   protected onSaveError(): void {
@@ -157,5 +160,8 @@ export class SchoolUpdateComponent implements OnInit {
       }
     }
     return option;
+  }
+  cancel(): void {
+    this.activeModal.dismiss();
   }
 }

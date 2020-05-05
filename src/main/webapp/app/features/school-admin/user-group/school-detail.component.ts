@@ -8,6 +8,7 @@ import { IUser } from 'app/core/user/user.model';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SchoolUpdateComponent } from 'app/features/system-admin/school/school-update.component';
 
 @Component({
   selector: 'jhi-school-detail',
@@ -58,6 +59,11 @@ export class SchoolDetailComponent implements OnInit {
       this.subscribeToSaveResponse(this.schoolService.update(this.school));
     }
   }
+  editSchool(): void {
+    const modalRef = this.modalService.open(SchoolUpdateComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.school = this.school;
+  }
+
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ISchool>>): void {
     result.subscribe(
       res => this.onSaveSuccess(res.body),
