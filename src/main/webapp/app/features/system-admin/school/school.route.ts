@@ -74,17 +74,5 @@ export const schoolRoute: Routes = [
       pageTitle: 'hahuApp.school.home.title'
     },
     canActivate: [UserRouteAccessService]
-  },
-  {
-    path: ':id/edit',
-    component: SchoolUpdateComponent,
-    resolve: {
-      school: SchoolResolve
-    },
-    data: {
-      authorities: [Authority.ADMIN],
-      pageTitle: 'hahuApp.school.home.title'
-    },
-    canActivate: [UserRouteAccessService]
   }
 ];

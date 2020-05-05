@@ -2,7 +2,10 @@
     <h2 id="page-heading">
         <span jhiTranslate="hahuApp.school.home.title">Schools</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-school" [routerLink]="['./new']">
+        <button
+            id="jh-create-entity"
+            (click)="addSchool()"
+            class="btn btn-primary float-right jh-create-entity create-school">
             <fa-icon icon="plus"></fa-icon>
             <span  jhiTranslate="hahuApp.school.home.createLabel">
             Create a new School

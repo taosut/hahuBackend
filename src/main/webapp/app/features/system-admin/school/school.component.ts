@@ -10,6 +10,7 @@ import { ISchool } from 'app/shared/model/school.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { SchoolService } from './school.service';
 import { SchoolDeleteDialogComponent } from './school-delete-dialog.component';
+import { SchoolUpdateComponent } from 'app/features/system-admin/school/school-update.component';
 
 @Component({
   selector: 'jhi-school',
@@ -82,12 +83,14 @@ export class SchoolComponent implements OnInit, OnDestroy {
   registerChangeInSchools(): void {
     this.eventSubscriber = this.eventManager.subscribe('schoolListModification', () => this.loadPage());
   }
-
   delete(school: ISchool): void {
     const modalRef = this.modalService.open(SchoolDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.school = school;
   }
-
+  addSchool(): void {
+    const modalRef = this.modalService.open(SchoolUpdateComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.school = this.school;
+  }
   sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
     if (this.predicate !== 'id') {
@@ -95,20 +98,11 @@ export class SchoolComponent implements OnInit, OnDestroy {
     }
     return result;
   }
-
   protected onSuccess(data: ISchool[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    // this.router.navigate(['/school'], {
-    //   queryParams: {
-    //     page: this.page,
-    //     size: this.itemsPerPage,
-    //     sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
-    //   }
-    // });
     this.schools = data || [];
   }
-
   protected onError(): void {
     this.ngbPaginationPage = this.page;
   }

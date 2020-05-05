@@ -10,6 +10,7 @@ import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserManagementComponent } from './user-management.component';
 import { UserManagementUpdateComponent } from './user-management-update.component';
+import { SchoolUpdateComponent } from './school-update.component';
 
 @Component({
   selector: 'jhi-school-detail',
@@ -49,6 +50,11 @@ export class SchoolDetailComponent implements OnInit {
 
   addNewUser(): void {
     const modalRef = this.modalService.open(UserManagementUpdateComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.school = this.school;
+  }
+
+  editSchool(): void {
+    const modalRef = this.modalService.open(SchoolUpdateComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.school = this.school;
   }
 
