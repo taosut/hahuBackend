@@ -24,8 +24,9 @@ type SelectableEntity = IUser | ISchool;
 export class UserGroupUpdateComponent implements OnInit {
   isSaving = false;
   users: IUser[] = [];
-  schools: ISchool[] = [];
+  // schools: ISchool[] = [];
   userGroup!: IUserGroup;
+  school!: ISchool;
 
   editForm = this.fb.group({
     id: [],
@@ -60,7 +61,7 @@ export class UserGroupUpdateComponent implements OnInit {
       this.updateForm(this.userGroup);
     }
     this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
-    this.schoolService.query().subscribe((res: HttpResponse<ISchool[]>) => (this.schools = res.body || []));
+    // this.schoolService.query().subscribe((res: HttpResponse<ISchool[]>) => (this.schools = res.body || []));
   }
 
   updateForm(userGroup: IUserGroup): void {
@@ -109,6 +110,9 @@ export class UserGroupUpdateComponent implements OnInit {
     if (userGroup.id) {
       this.subscribeToSaveResponse(this.userGroupService.update(userGroup));
     } else {
+      if (this.school) {
+        userGroup.schoolId = this.school.id;
+      }
       this.subscribeToSaveResponse(this.userGroupService.create(userGroup));
     }
   }

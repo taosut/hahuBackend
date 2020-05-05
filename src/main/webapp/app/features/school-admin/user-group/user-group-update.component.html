@@ -80,15 +80,15 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="hahuApp.userGroup.school"
-                       for="field_school">School</label>
-                <select class="form-control" id="field_school" name="school" formControlName="schoolId">
-                    <option [ngValue]="null"></option>
-                    <option [ngValue]="schoolOption.id"
-                            *ngFor="let schoolOption of schools; trackBy: trackById">{{ schoolOption.name }}</option>
-                </select>
-            </div>
+            <!--<div class="form-group">-->
+                <!--<label class="form-control-label" jhiTranslate="hahuApp.userGroup.school"-->
+                       <!--for="field_school">School</label>-->
+                <!--<select class="form-control" id="field_school" name="school" formControlName="schoolId">-->
+                    <!--<option [ngValue]="null"></option>-->
+                    <!--<option [ngValue]="schoolOption.id"-->
+                            <!--*ngFor="let schoolOption of schools; trackBy: trackById">{{ schoolOption.name }}</option>-->
+                <!--</select>-->
+            <!--</div>-->
         </div>
     </div>
 

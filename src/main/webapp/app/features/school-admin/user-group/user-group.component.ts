@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,7 @@ import { UserGroupService } from './user-group.service';
 import { UserGroupDeleteDialogComponent } from './user-group-delete-dialog.component';
 import { UserGroupDetailComponent } from './user-group-detail.component';
 import { UserGroupUpdateComponent } from './user-group-update.component';
+import { ISchool } from 'app/shared/model/school.model';
 
 @Component({
   selector: 'jhi-school-user-group',
@@ -26,6 +27,7 @@ export class UserGroupComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  @Input() school!: ISchool;
 
   constructor(
     protected userGroupService: UserGroupService,
@@ -39,16 +41,19 @@ export class UserGroupComponent implements OnInit, OnDestroy {
   loadPage(page?: number): void {
     const pageToLoad: number = page || this.page;
 
-    this.userGroupService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort()
-      })
-      .subscribe(
-        (res: HttpResponse<IUserGroup[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
-        () => this.onError()
-      );
+    if (this.school) {
+      this.userGroupService
+        .query({
+          'schoolId.equals': this.school.id,
+          page: pageToLoad - 1,
+          size: this.itemsPerPage,
+          sort: this.sort()
+        })
+        .subscribe(
+          (res: HttpResponse<IUserGroup[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
+          () => this.onError()
+        );
+    }
   }
 
   ngOnInit(): void {
@@ -99,6 +104,8 @@ export class UserGroupComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(UserGroupUpdateComponent, { size: 'lg', backdrop: 'static' });
     if (userGroup) {
       modalRef.componentInstance.userGroup = userGroup;
+    } else {
+      modalRef.componentInstance.school = this.school;
     }
   }
 
