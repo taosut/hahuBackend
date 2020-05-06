@@ -32,30 +32,30 @@
                     </span>
                 </a>
             </li>
-            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" routerLink="/school-schedule" (click)="collapseNavbar()">
-                    <span>
-                        <fa-icon icon="calendar"></fa-icon>
-                        <span>Schedule</span>
-                    </span>
-                </a>
-            </li>
-            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" routerLink="/school-progress-add" (click)="collapseNavbar()">
-                    <span>
-                        <fa-icon icon="chart-bar"></fa-icon>
-                        <span>Student Progress</span>
-                    </span>
-                </a>
-            </li>
-            <li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" routerLink="/school-notification" (click)="collapseNavbar()">
-                    <span>
-                        <fa-icon icon="bell"></fa-icon>
-                        <span>Notifications</span>
-                    </span>
-                </a>
-            </li>
+            <!--<li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">-->
+                <!--<a class="nav-link" routerLink="/school-schedule" (click)="collapseNavbar()">-->
+                    <!--<span>-->
+                        <!--<fa-icon icon="calendar"></fa-icon>-->
+                        <!--<span>Schedule</span>-->
+                    <!--</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">-->
+                <!--<a class="nav-link" routerLink="/school-progress-add" (click)="collapseNavbar()">-->
+                    <!--<span>-->
+                        <!--<fa-icon icon="chart-bar"></fa-icon>-->
+                        <!--<span>Student Progress</span>-->
+                    <!--</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li *jhiHasAnyAuthority="['ROLE_TEACHER', 'ROLE_SCHOOL_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">-->
+                <!--<a class="nav-link" routerLink="/school-notification" (click)="collapseNavbar()">-->
+                    <!--<span>-->
+                        <!--<fa-icon icon="bell"></fa-icon>-->
+                        <!--<span>Notifications</span>-->
+                    <!--</span>-->
+                <!--</a>-->
+            <!--</li>-->
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/school-management" (click)="collapseNavbar()">
                     <span>
@@ -66,14 +66,14 @@
             </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
-                    <span>
-                        <fa-icon icon="th-list"></fa-icon>
-                        <span jhiTranslate="global.menu.entities.main">
-                            Entities
-                        </span>
-                    </span>
-                </a>
+                <!--<a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">-->
+                    <!--<span>-->
+                        <!--<fa-icon icon="th-list"></fa-icon>-->
+                        <!--<span jhiTranslate="global.menu.entities.main">-->
+                            <!--Entities-->
+                        <!--</span>-->
+                    <!--</span>-->
+                <!--</a>-->
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
                     <li>
                         <a class="dropdown-item" routerLink="category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
