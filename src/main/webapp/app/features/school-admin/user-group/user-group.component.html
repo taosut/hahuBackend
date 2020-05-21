@@ -24,7 +24,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <!--<th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>-->
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="hahuApp.userGroup.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="groupType"><span jhiTranslate="hahuApp.userGroup.groupType">Group Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -32,25 +32,41 @@
             </thead>
             <tbody>
                 <tr *ngFor="let userGroup of userGroups ;trackBy: trackId">
-                    <td><a [routerLink]="['/user-group', userGroup.id, 'view']">{{ userGroup.id }}</a></td>
+                    <!--<td><a [routerLink]="['/user-group', userGroup.id, 'view']">{{ userGroup.id }}</a></td>-->
                     <td>{{ userGroup.name }}</td>
                     <td jhiTranslate="{{ 'hahuApp.GroupType.' + userGroup.groupType }}">{{ userGroup.groupType }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
                                     (click)="detail(userGroup)"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                    class="btn btn-outline-primary btn-sm">
+                                <fa-icon icon="user"></fa-icon>
+                                <span class="d-none d-md-inline">Members</span>
                             </button>
-
+                            <button type="submit"
+                                    (click)="detail(userGroup)"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Owners</span>
+                            </button>
+                            <button type="submit"
+                                    (click)="detail(userGroup)"
+                                    class="btn btn-success btn-sm">
+                                <fa-icon icon="calendar"></fa-icon>
+                                <span class="d-none d-md-inline">Schedule</span>
+                            </button>
                             <button type="submit"
                                     (click)="update(userGroup)"
-                                    class="btn btn-primary btn-sm">
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="bell"></fa-icon>
+                                <span class="d-none d-md-inline">Notifications</span>
+                            </button>
+                            <button type="submit"
+                                    (click)="update(userGroup)"
+                                    class="btn btn-warning btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
-
                             <button type="submit" (click)="delete(userGroup)"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>

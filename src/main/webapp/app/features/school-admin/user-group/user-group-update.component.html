@@ -64,21 +64,21 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label jhiTranslate="hahuApp.userGroup.user" for="field_users">User</label>
-                <select class="form-control" id="field_users" multiple name="users" formControlName="users">
-                    <option [ngValue]="getSelected(editForm.get('users')!.value, userOption)"
-                            *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
-                </select>
-            </div>
+            <!--<div class="form-group">-->
+                <!--<label jhiTranslate="hahuApp.userGroup.user" for="field_users">User</label>-->
+                <!--<select class="form-control" id="field_users" multiple name="users" formControlName="users">-->
+                    <!--<option [ngValue]="getSelected(editForm.get('users')!.value, userOption)"-->
+                            <!--*ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>-->
+                <!--</select>-->
+            <!--</div>-->
 
-            <div class="form-group">
-                <label jhiTranslate="hahuApp.userGroup.owner" for="field_owners">Owner</label>
-                <select class="form-control" id="field_owners" multiple name="owners" formControlName="owners">
-                    <option [ngValue]="getSelected(editForm.get('owners')!.value, userOption)"
-                            *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
-                </select>
-            </div>
+            <!--<div class="form-group">-->
+                <!--<label jhiTranslate="hahuApp.userGroup.owner" for="field_owners">Owner</label>-->
+                <!--<select class="form-control" id="field_owners" multiple name="owners" formControlName="owners">-->
+                    <!--<option [ngValue]="getSelected(editForm.get('owners')!.value, userOption)"-->
+                            <!--*ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>-->
+                <!--</select>-->
+            <!--</div>-->
 
             <!--<div class="form-group">-->
                 <!--<label class="form-control-label" jhiTranslate="hahuApp.userGroup.school"-->

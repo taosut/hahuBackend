@@ -101,7 +101,7 @@ export class UserGroupComponent implements OnInit, OnDestroy {
   }
 
   update(userGroup?: IUserGroup): void {
-    const modalRef = this.modalService.open(UserGroupUpdateComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(UserGroupUpdateComponent, { size: 'xl', backdrop: 'static' });
     if (userGroup) {
       modalRef.componentInstance.userGroup = userGroup;
     } else {

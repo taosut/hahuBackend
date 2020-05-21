@@ -88,8 +88,7 @@ export class SchoolComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.school = school;
   }
   addSchool(): void {
-    const modalRef = this.modalService.open(SchoolUpdateComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.school = this.school;
+    this.modalService.open(SchoolUpdateComponent, { size: 'lg', backdrop: 'static' });
   }
   sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
