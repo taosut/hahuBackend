@@ -4,7 +4,6 @@ import { JhiDataUtils } from 'ng-jhipster';
 
 import { ISchool } from 'app/shared/model/school.model';
 import { SchoolService } from './school.service';
-import { IUser } from 'app/core/user/user.model';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -41,23 +40,6 @@ export class SchoolDetailComponent implements OnInit {
 
   previousState(): void {
     window.history.back();
-  }
-
-  addFromExisting(): void {
-    // const modalRef = this.modalService.open(UserManagementComponent, { size: 'lg', backdrop: 'static' });
-    // modalRef.componentInstance.school = this.school;
-  }
-
-  addNewUser(): void {
-    // const modalRef = this.modalService.open(UserManagementUpdateComponent, { size: 'lg', backdrop: 'static' });
-    // modalRef.componentInstance.school = this.school;
-  }
-
-  deleteUser(user: IUser): void {
-    if (this.school && this.school.users) {
-      this.school.users.splice(this.school.users.indexOf(user), 1);
-      this.subscribeToSaveResponse(this.schoolService.update(this.school));
-    }
   }
   editSchool(): void {
     const modalRef = this.modalService.open(SchoolUpdateComponent, { size: 'lg', backdrop: 'static' });
