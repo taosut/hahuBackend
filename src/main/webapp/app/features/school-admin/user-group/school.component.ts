@@ -9,7 +9,6 @@ import { ISchool } from 'app/shared/model/school.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { SchoolService } from './school.service';
-import { SchoolDeleteDialogComponent } from './school-delete-dialog.component';
 import { AccountService } from 'app/core/auth/account.service';
 import { UserService } from 'app/core/user/user.service';
 
@@ -96,11 +95,6 @@ export class SchoolComponent implements OnInit, OnDestroy {
 
   registerChangeInSchools(): void {
     this.eventSubscriber = this.eventManager.subscribe('schoolListModification', () => this.loadPage());
-  }
-
-  delete(school: ISchool): void {
-    const modalRef = this.modalService.open(SchoolDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.school = school;
   }
 
   sort(): string[] {
