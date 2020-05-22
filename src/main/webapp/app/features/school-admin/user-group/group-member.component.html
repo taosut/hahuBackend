@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h5 class="modal-title">User Group</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="cancel()">&times;</button>
+</div>
+<div class="modal-body">
+    <div *ngIf="userGroup">
+        <jhi-alert-error></jhi-alert-error>
+        <dl class="row-md jh-entity-details">
+            <dt><span jhiTranslate="hahuApp.userGroup.name">Name</span></dt>
+            <dd>
+                <span>{{ userGroup.name }}</span>
+            </dd>
+            <dt><span jhiTranslate="hahuApp.userGroup.detail">Detail</span></dt>
+            <dd>
+                <span>{{ userGroup.detail }}</span>
+            </dd>
+            <dt><span jhiTranslate="hahuApp.userGroup.profilePic">Profile Pic</span></dt>
+            <dd>
+                <div *ngIf="userGroup.profilePic">
+                    <a (click)="openFile(userGroup?.profilePicContentType!, userGroup?.profilePic)">
+                        <img [src]="'data:' + userGroup.profilePicContentType + ';base64,' + userGroup.profilePic" style="max-width: 100%;" alt="userGroup image"/>
+                    </a>
+                    {{ userGroup.profilePicContentType }}, {{ byteSize(userGroup.profilePic) }}
+                </div>
+            </dd>
+            <dt><span jhiTranslate="hahuApp.userGroup.groupType">Group Type</span></dt>
+            <dd>
+                <span jhiTranslate="{{ 'hahuApp.GroupType.' + userGroup.groupType }}">{{ userGroup.groupType }}</span>
+            </dd>
+            <dt><span jhiTranslate="hahuApp.userGroup.user">User</span></dt>
+            <dd>
+                    <span *ngFor="let user of userGroup.users; let last = last">
+                        {{ user.login }}{{ last ? '' : ', ' }}
+                    </span>
+            </dd>
+            <dt><span jhiTranslate="hahuApp.userGroup.owner">Owner</span></dt>
+            <dd>
+                    <span *ngFor="let owner of userGroup.owners; let last = last">
+                        {{ owner.login }}{{ last ? '' : ', ' }}
+                    </span>
+            </dd>
+            <dt><span jhiTranslate="hahuApp.userGroup.school">School</span></dt>
+            <dd>
+                <div *ngIf="userGroup.schoolId">
+                    <a [routerLink]="['/school', userGroup.schoolId, 'view']">{{ userGroup.schoolName }}</a>
+                </div>
+            </dd>
+        </dl>
+    </div>
+</div>
