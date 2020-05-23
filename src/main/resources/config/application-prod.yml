@@ -33,9 +33,9 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/hahu
-    username: hahu
-    password:
+    url: jdbc:postgres://qlclshyzvknnoo:1311826a67d3a7b6d126ad8ec1804cac175fef728c4008c983da5137759a7e15@ec2-54-246-90-10.eu-west-1.compute.amazonaws.com:5432/dca77du5ne21dg
+    username: qlclshyzvknnoo
+    password: 1311826a67d3a7b6d126ad8ec1804cac175fef728c4008c983da5137759a7e15
     hikari:
       poolName: Hikari
       auto-commit: false
