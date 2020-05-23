@@ -3,7 +3,6 @@ package et.com.hahu.service.dto;
 import io.swagger.annotations.ApiModel;
 import java.time.Instant;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.Likes} entity.
@@ -77,22 +76,19 @@ public class LikesDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof LikesDTO)) {
             return false;
         }
 
-        LikesDTO likesDTO = (LikesDTO) o;
-        if (likesDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), likesDTO.getId());
+        return id != null && id.equals(((LikesDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "LikesDTO{" +

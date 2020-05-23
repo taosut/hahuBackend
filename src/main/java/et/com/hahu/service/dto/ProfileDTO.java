@@ -4,7 +4,6 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.Profile} entity.
@@ -67,22 +66,19 @@ public class ProfileDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof ProfileDTO)) {
             return false;
         }
 
-        ProfileDTO profileDTO = (ProfileDTO) o;
-        if (profileDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), profileDTO.getId());
+        return id != null && id.equals(((ProfileDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "ProfileDTO{" +

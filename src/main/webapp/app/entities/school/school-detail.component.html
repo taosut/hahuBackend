@@ -15,7 +15,7 @@
                 <dt><span jhiTranslate="hahuApp.school.featuredImage">Featured Image</span></dt>
                 <dd>
                     <div *ngIf="school.featuredImage">
-                        <a (click)="openFile(school?.featuredImageContentType!, school?.featuredImage)">
+                        <a (click)="openFile(school.featuredImageContentType, school.featuredImage)">
                             <img [src]="'data:' + school.featuredImageContentType + ';base64,' + school.featuredImage" style="max-width: 100%;" alt="school image"/>
                         </a>
                         {{ school.featuredImageContentType }}, {{ byteSize(school.featuredImage) }}

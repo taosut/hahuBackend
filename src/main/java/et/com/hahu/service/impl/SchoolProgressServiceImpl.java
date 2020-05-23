@@ -61,6 +61,7 @@ public class SchoolProgressServiceImpl implements SchoolProgressService {
             .map(schoolProgressMapper::toDto);
     }
 
+
     /**
      * Get one schoolProgress by id.
      *
@@ -83,6 +84,7 @@ public class SchoolProgressServiceImpl implements SchoolProgressService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete SchoolProgress : {}", id);
+
         schoolProgressRepository.deleteById(id);
     }
 }

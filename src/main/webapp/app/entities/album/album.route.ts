@@ -40,49 +40,49 @@ export const albumRoute: Routes = [
     path: '',
     component: AlbumComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.album.home.title'
+      pageTitle: 'hahuApp.album.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: AlbumDetailComponent,
     resolve: {
-      album: AlbumResolve
+      album: AlbumResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.album.home.title'
+      pageTitle: 'hahuApp.album.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: AlbumUpdateComponent,
     resolve: {
-      album: AlbumResolve
+      album: AlbumResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.album.home.title'
+      pageTitle: 'hahuApp.album.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: AlbumUpdateComponent,
     resolve: {
-      album: AlbumResolve
+      album: AlbumResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.album.home.title'
+      pageTitle: 'hahuApp.album.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -5,7 +5,7 @@ import { ILikes } from 'app/shared/model/likes.model';
 
 @Component({
   selector: 'jhi-likes-detail',
-  templateUrl: './likes-detail.component.html'
+  templateUrl: './likes-detail.component.html',
 })
 export class LikesDetailComponent implements OnInit {
   likes: ILikes | null = null;

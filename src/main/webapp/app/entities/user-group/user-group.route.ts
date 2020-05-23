@@ -40,49 +40,49 @@ export const userGroupRoute: Routes = [
     path: '',
     component: UserGroupComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.userGroup.home.title'
+      pageTitle: 'hahuApp.userGroup.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: UserGroupDetailComponent,
     resolve: {
-      userGroup: UserGroupResolve
+      userGroup: UserGroupResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.userGroup.home.title'
+      pageTitle: 'hahuApp.userGroup.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: UserGroupUpdateComponent,
     resolve: {
-      userGroup: UserGroupResolve
+      userGroup: UserGroupResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.userGroup.home.title'
+      pageTitle: 'hahuApp.userGroup.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: UserGroupUpdateComponent,
     resolve: {
-      userGroup: UserGroupResolve
+      userGroup: UserGroupResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.userGroup.home.title'
+      pageTitle: 'hahuApp.userGroup.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -51,7 +51,7 @@ export class UsersConnectionService {
   protected convertDateFromClient(usersConnection: IUsersConnection): IUsersConnection {
     const copy: IUsersConnection = Object.assign({}, usersConnection, {
       registeredTime:
-        usersConnection.registeredTime && usersConnection.registeredTime.isValid() ? usersConnection.registeredTime.toJSON() : undefined
+        usersConnection.registeredTime && usersConnection.registeredTime.isValid() ? usersConnection.registeredTime.toJSON() : undefined,
     });
     return copy;
   }

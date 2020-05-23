@@ -1,7 +1,6 @@
 package et.com.hahu.service.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.ImageMetaData} entity.
@@ -54,22 +53,19 @@ public class ImageMetaDataDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof ImageMetaDataDTO)) {
             return false;
         }
 
-        ImageMetaDataDTO imageMetaDataDTO = (ImageMetaDataDTO) o;
-        if (imageMetaDataDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), imageMetaDataDTO.getId());
+        return id != null && id.equals(((ImageMetaDataDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "ImageMetaDataDTO{" +

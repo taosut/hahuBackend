@@ -28,6 +28,7 @@ public interface ScheduleService {
      */
     Page<ScheduleDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" schedule.
      *

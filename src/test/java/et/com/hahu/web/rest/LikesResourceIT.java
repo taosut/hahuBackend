@@ -35,7 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link LikesResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class LikesResourceIT {
@@ -95,7 +94,6 @@ public class LikesResourceIT {
     @Transactional
     public void createLikes() throws Exception {
         int databaseSizeBeforeCreate = likesRepository.findAll().size();
-
         // Create the Likes
         LikesDTO likesDTO = likesMapper.toDto(likes);
         restLikesMockMvc.perform(post("/api/likes")
@@ -323,7 +321,6 @@ public class LikesResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

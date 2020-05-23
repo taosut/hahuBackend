@@ -137,6 +137,7 @@ public class AlbumResource {
     @DeleteMapping("/albums/{id}")
     public ResponseEntity<Void> deleteAlbum(@PathVariable Long id) {
         log.debug("REST request to delete Album : {}", id);
+
         albumService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

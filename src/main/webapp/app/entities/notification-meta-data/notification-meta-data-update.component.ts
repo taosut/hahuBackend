@@ -14,7 +14,7 @@ import { NotificationService } from 'app/entities/notification/notification.serv
 
 @Component({
   selector: 'jhi-notification-meta-data-update',
-  templateUrl: './notification-meta-data-update.component.html'
+  templateUrl: './notification-meta-data-update.component.html',
 })
 export class NotificationMetaDataUpdateComponent implements OnInit {
   isSaving = false;
@@ -26,7 +26,7 @@ export class NotificationMetaDataUpdateComponent implements OnInit {
     value: [],
     blobValue: [],
     blobValueContentType: [],
-    notificationId: []
+    notificationId: [],
   });
 
   constructor(
@@ -53,7 +53,7 @@ export class NotificationMetaDataUpdateComponent implements OnInit {
       value: notificationMetaData.value,
       blobValue: notificationMetaData.blobValue,
       blobValueContentType: notificationMetaData.blobValueContentType,
-      notificationId: notificationMetaData.notificationId
+      notificationId: notificationMetaData.notificationId,
     });
   }
 
@@ -95,7 +95,7 @@ export class NotificationMetaDataUpdateComponent implements OnInit {
       value: this.editForm.get(['value'])!.value,
       blobValueContentType: this.editForm.get(['blobValueContentType'])!.value,
       blobValue: this.editForm.get(['blobValue'])!.value,
-      notificationId: this.editForm.get(['notificationId'])!.value
+      notificationId: this.editForm.get(['notificationId'])!.value,
     };
   }
 

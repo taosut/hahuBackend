@@ -7,7 +7,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "image")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Image implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,14 +33,14 @@ public class Image implements Serializable {
     private String imageContentType;
 
     @OneToMany(mappedBy = "image")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<ImageMetaData> imageMetaData = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("images")
+    @JsonIgnoreProperties(value = "images", allowSetters = true)
     private Album album;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -113,7 +112,7 @@ public class Image implements Serializable {
     public void setAlbum(Album album) {
         this.album = album;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -131,6 +130,7 @@ public class Image implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Image{" +

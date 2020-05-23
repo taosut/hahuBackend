@@ -10,7 +10,7 @@ import { TagService } from './tag.service';
 
 @Component({
   selector: 'jhi-tag-update',
-  templateUrl: './tag-update.component.html'
+  templateUrl: './tag-update.component.html',
 })
 export class TagUpdateComponent implements OnInit {
   isSaving = false;
@@ -18,7 +18,7 @@ export class TagUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [],
-    description: []
+    description: [],
   });
 
   constructor(protected tagService: TagService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -33,7 +33,7 @@ export class TagUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: tag.id,
       name: tag.name,
-      description: tag.description
+      description: tag.description,
     });
   }
 
@@ -56,7 +56,7 @@ export class TagUpdateComponent implements OnInit {
       ...new Tag(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      description: this.editForm.get(['description'])!.value
+      description: this.editForm.get(['description'])!.value,
     };
   }
 

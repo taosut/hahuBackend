@@ -12,7 +12,7 @@ import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-profile-update',
-  templateUrl: './profile-update.component.html'
+  templateUrl: './profile-update.component.html',
 })
 export class ProfileUpdateComponent implements OnInit {
   isSaving = false;
@@ -22,7 +22,7 @@ export class ProfileUpdateComponent implements OnInit {
     id: [],
     phone: [null, [Validators.pattern('^\\+[0-9]{12}$')]],
     userId: [],
-    families: []
+    families: [],
   });
 
   constructor(
@@ -45,7 +45,7 @@ export class ProfileUpdateComponent implements OnInit {
       id: profile.id,
       phone: profile.phone,
       userId: profile.userId,
-      families: profile.families
+      families: profile.families,
     });
   }
 
@@ -69,7 +69,7 @@ export class ProfileUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       phone: this.editForm.get(['phone'])!.value,
       userId: this.editForm.get(['userId'])!.value,
-      families: this.editForm.get(['families'])!.value
+      families: this.editForm.get(['families'])!.value,
     };
   }
 

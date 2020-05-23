@@ -40,49 +40,49 @@ export const scheduleRoute: Routes = [
     path: '',
     component: ScheduleComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.schedule.home.title'
+      pageTitle: 'hahuApp.schedule.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: ScheduleDetailComponent,
     resolve: {
-      schedule: ScheduleResolve
+      schedule: ScheduleResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.schedule.home.title'
+      pageTitle: 'hahuApp.schedule.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: ScheduleUpdateComponent,
     resolve: {
-      schedule: ScheduleResolve
+      schedule: ScheduleResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.schedule.home.title'
+      pageTitle: 'hahuApp.schedule.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: ScheduleUpdateComponent,
     resolve: {
-      schedule: ScheduleResolve
+      schedule: ScheduleResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.schedule.home.title'
+      pageTitle: 'hahuApp.schedule.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

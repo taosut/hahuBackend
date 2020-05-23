@@ -7,14 +7,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A NotificationMetaData.
  */
 @Entity
 @Table(name = "notification_meta_data")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class NotificationMetaData implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,10 +37,10 @@ public class NotificationMetaData implements Serializable {
     private String blobValueContentType;
 
     @ManyToOne
-    @JsonIgnoreProperties("notificationMetaData")
+    @JsonIgnoreProperties(value = "notificationMetaData", allowSetters = true)
     private Notification notification;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -114,7 +113,7 @@ public class NotificationMetaData implements Serializable {
     public void setNotification(Notification notification) {
         this.notification = notification;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -132,6 +131,7 @@ public class NotificationMetaData implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "NotificationMetaData{" +

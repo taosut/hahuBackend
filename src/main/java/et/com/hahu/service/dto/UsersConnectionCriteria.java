@@ -107,6 +107,7 @@ public class UsersConnectionCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "UsersConnectionCriteria{" +

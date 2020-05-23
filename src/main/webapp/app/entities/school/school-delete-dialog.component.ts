@@ -6,7 +6,7 @@ import { ISchool } from 'app/shared/model/school.model';
 import { SchoolService } from './school.service';
 
 @Component({
-  templateUrl: './school-delete-dialog.component.html'
+  templateUrl: './school-delete-dialog.component.html',
 })
 export class SchoolDeleteDialogComponent {
   school?: ISchool;

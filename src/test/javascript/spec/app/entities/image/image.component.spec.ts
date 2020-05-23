@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, convertToParamMap, Data } from '@angular/router';
 
 import { HahuTestModule } from '../../../test.module';
 import { ImageComponent } from 'app/entities/image/image.component';
@@ -28,13 +28,23 @@ describe('Component Tests', () => {
                     pagingParams: {
                       predicate: 'id',
                       reverse: false,
-                      page: 0
-                    }
-                  })
-              }
-            }
-          }
-        ]
+                      page: 0,
+                    },
+                  }),
+              },
+              queryParamMap: {
+                subscribe: (fn: (value: Data) => void) =>
+                  fn(
+                    convertToParamMap({
+                      page: '1',
+                      size: '1',
+                      sort: 'id,desc',
+                    })
+                  ),
+              },
+            },
+          },
+        ],
       })
         .overrideTemplate(ImageComponent, '')
         .compileComponents();
@@ -51,7 +61,7 @@ describe('Component Tests', () => {
         of(
           new HttpResponse({
             body: [new Image(123)],
-            headers
+            headers,
           })
         )
       );
@@ -71,7 +81,7 @@ describe('Component Tests', () => {
         of(
           new HttpResponse({
             body: [new Image(123)],
-            headers
+            headers,
           })
         )
       );

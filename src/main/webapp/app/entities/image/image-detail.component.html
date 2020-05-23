@@ -11,7 +11,7 @@
                 <dt><span jhiTranslate="hahuApp.image.image">Image</span></dt>
                 <dd>
                     <div *ngIf="image.image">
-                        <a (click)="openFile(image?.imageContentType!, image?.image)">
+                        <a (click)="openFile(image.imageContentType, image.image)">
                             <img [src]="'data:' + image.imageContentType + ';base64,' + image.image" style="max-width: 100%;" alt="image image"/>
                         </a>
                         {{ image.imageContentType }}, {{ byteSize(image.image) }}

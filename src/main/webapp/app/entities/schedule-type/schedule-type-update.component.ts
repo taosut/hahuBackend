@@ -10,14 +10,14 @@ import { ScheduleTypeService } from './schedule-type.service';
 
 @Component({
   selector: 'jhi-schedule-type-update',
-  templateUrl: './schedule-type-update.component.html'
+  templateUrl: './schedule-type-update.component.html',
 })
 export class ScheduleTypeUpdateComponent implements OnInit {
   isSaving = false;
 
   editForm = this.fb.group({
     id: [],
-    name: []
+    name: [],
   });
 
   constructor(protected scheduleTypeService: ScheduleTypeService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -31,7 +31,7 @@ export class ScheduleTypeUpdateComponent implements OnInit {
   updateForm(scheduleType: IScheduleType): void {
     this.editForm.patchValue({
       id: scheduleType.id,
-      name: scheduleType.name
+      name: scheduleType.name,
     });
   }
 
@@ -53,7 +53,7 @@ export class ScheduleTypeUpdateComponent implements OnInit {
     return {
       ...new ScheduleType(),
       id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value
+      name: this.editForm.get(['name'])!.value,
     };
   }
 

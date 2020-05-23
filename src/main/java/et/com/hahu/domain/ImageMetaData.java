@@ -7,14 +7,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A ImageMetaData.
  */
 @Entity
 @Table(name = "image_meta_data")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ImageMetaData implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,10 +30,10 @@ public class ImageMetaData implements Serializable {
     private String value;
 
     @ManyToOne
-    @JsonIgnoreProperties("imageMetaData")
+    @JsonIgnoreProperties(value = "imageMetaData", allowSetters = true)
     private Image image;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -81,7 +80,7 @@ public class ImageMetaData implements Serializable {
     public void setImage(Image image) {
         this.image = image;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -99,6 +98,7 @@ public class ImageMetaData implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "ImageMetaData{" +

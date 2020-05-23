@@ -31,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link SchoolProgressResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class SchoolProgressResourceIT {
@@ -108,7 +107,6 @@ public class SchoolProgressResourceIT {
     @Transactional
     public void createSchoolProgress() throws Exception {
         int databaseSizeBeforeCreate = schoolProgressRepository.findAll().size();
-
         // Create the SchoolProgress
         SchoolProgressDTO schoolProgressDTO = schoolProgressMapper.toDto(schoolProgress);
         restSchoolProgressMockMvc.perform(post("/api/school-progresses")
@@ -622,7 +620,6 @@ public class SchoolProgressResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

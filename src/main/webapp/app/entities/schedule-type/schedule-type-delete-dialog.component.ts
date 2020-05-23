@@ -6,7 +6,7 @@ import { IScheduleType } from 'app/shared/model/schedule-type.model';
 import { ScheduleTypeService } from './schedule-type.service';
 
 @Component({
-  templateUrl: './schedule-type-delete-dialog.component.html'
+  templateUrl: './schedule-type-delete-dialog.component.html',
 })
 export class ScheduleTypeDeleteDialogComponent {
   scheduleType?: IScheduleType;

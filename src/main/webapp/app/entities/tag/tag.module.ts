@@ -11,6 +11,6 @@ import { tagRoute } from './tag.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(tagRoute)],
   declarations: [TagComponent, TagDetailComponent, TagUpdateComponent, TagDeleteDialogComponent],
-  entryComponents: [TagDeleteDialogComponent]
+  entryComponents: [TagDeleteDialogComponent],
 })
 export class HahuTagModule {}

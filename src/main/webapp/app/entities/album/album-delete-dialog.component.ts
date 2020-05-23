@@ -6,7 +6,7 @@ import { IAlbum } from 'app/shared/model/album.model';
 import { AlbumService } from './album.service';
 
 @Component({
-  templateUrl: './album-delete-dialog.component.html'
+  templateUrl: './album-delete-dialog.component.html',
 })
 export class AlbumDeleteDialogComponent {
   album?: IAlbum;

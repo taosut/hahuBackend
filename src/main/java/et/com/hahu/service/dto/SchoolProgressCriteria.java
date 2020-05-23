@@ -132,6 +132,7 @@ public class SchoolProgressCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "SchoolProgressCriteria{" +

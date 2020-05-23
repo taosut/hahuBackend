@@ -40,49 +40,49 @@ export const imageRoute: Routes = [
     path: '',
     component: ImageComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.image.home.title'
+      pageTitle: 'hahuApp.image.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: ImageDetailComponent,
     resolve: {
-      image: ImageResolve
+      image: ImageResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.image.home.title'
+      pageTitle: 'hahuApp.image.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: ImageUpdateComponent,
     resolve: {
-      image: ImageResolve
+      image: ImageResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.image.home.title'
+      pageTitle: 'hahuApp.image.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: ImageUpdateComponent,
     resolve: {
-      image: ImageResolve
+      image: ImageResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.image.home.title'
+      pageTitle: 'hahuApp.image.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

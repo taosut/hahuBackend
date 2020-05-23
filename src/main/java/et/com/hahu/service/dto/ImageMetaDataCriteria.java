@@ -106,6 +106,7 @@ public class ImageMetaDataCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "ImageMetaDataCriteria{" +

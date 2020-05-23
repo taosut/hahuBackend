@@ -61,6 +61,7 @@ public class ImageServiceImpl implements ImageService {
             .map(imageMapper::toDto);
     }
 
+
     /**
      * Get one image by id.
      *
@@ -83,6 +84,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Image : {}", id);
+
         imageRepository.deleteById(id);
     }
 }

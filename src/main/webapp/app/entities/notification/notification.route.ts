@@ -40,49 +40,49 @@ export const notificationRoute: Routes = [
     path: '',
     component: NotificationComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.notification.home.title'
+      pageTitle: 'hahuApp.notification.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: NotificationDetailComponent,
     resolve: {
-      notification: NotificationResolve
+      notification: NotificationResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.notification.home.title'
+      pageTitle: 'hahuApp.notification.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: NotificationUpdateComponent,
     resolve: {
-      notification: NotificationResolve
+      notification: NotificationResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.notification.home.title'
+      pageTitle: 'hahuApp.notification.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: NotificationUpdateComponent,
     resolve: {
-      notification: NotificationResolve
+      notification: NotificationResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.notification.home.title'
+      pageTitle: 'hahuApp.notification.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

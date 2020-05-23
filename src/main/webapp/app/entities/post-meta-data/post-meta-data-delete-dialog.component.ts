@@ -6,7 +6,7 @@ import { IPostMetaData } from 'app/shared/model/post-meta-data.model';
 import { PostMetaDataService } from './post-meta-data.service';
 
 @Component({
-  templateUrl: './post-meta-data-delete-dialog.component.html'
+  templateUrl: './post-meta-data-delete-dialog.component.html',
 })
 export class PostMetaDataDeleteDialogComponent {
   postMetaData?: IPostMetaData;

@@ -6,7 +6,7 @@ import { ITag } from 'app/shared/model/tag.model';
 import { TagService } from './tag.service';
 
 @Component({
-  templateUrl: './tag-delete-dialog.component.html'
+  templateUrl: './tag-delete-dialog.component.html',
 })
 export class TagDeleteDialogComponent {
   tag?: ITag;

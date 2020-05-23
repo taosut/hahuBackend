@@ -6,7 +6,7 @@ import { INotification } from 'app/shared/model/notification.model';
 
 @Component({
   selector: 'jhi-notification-detail',
-  templateUrl: './notification-detail.component.html'
+  templateUrl: './notification-detail.component.html',
 })
 export class NotificationDetailComponent implements OnInit {
   notification: INotification | null = null;
@@ -21,7 +21,7 @@ export class NotificationDetailComponent implements OnInit {
     return this.dataUtils.byteSize(base64String);
   }
 
-  openFile(contentType: string, base64String: string): void {
+  openFile(contentType = '', base64String: string): void {
     this.dataUtils.openFile(contentType, base64String);
   }
 

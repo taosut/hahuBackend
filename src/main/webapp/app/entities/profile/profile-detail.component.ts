@@ -5,7 +5,7 @@ import { IProfile } from 'app/shared/model/profile.model';
 
 @Component({
   selector: 'jhi-profile-detail',
-  templateUrl: './profile-detail.component.html'
+  templateUrl: './profile-detail.component.html',
 })
 export class ProfileDetailComponent implements OnInit {
   profile: IProfile | null = null;

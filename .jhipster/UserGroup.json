@@ -1,73 +1,73 @@
 {
-    "name": "UserGroup",
-    "fields": [
-        {
-            "fieldName": "name",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "detail",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "text"
-        },
-        {
-            "fieldName": "profilePic",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
-        },
-        {
-            "fieldName": "groupType",
-            "fieldType": "GroupType",
-            "fieldValues": "PUBLIC,PRIVATE"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "notification",
-            "otherEntityRelationshipName": "userGroup",
-            "relationshipName": "notification"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "schedule",
-            "otherEntityRelationshipName": "userGroup",
-            "relationshipName": "schedule"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "user",
-            "otherEntityRelationshipName": "userGroup",
-            "relationshipName": "user",
-            "otherEntityField": "login",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "user",
-            "otherEntityRelationshipName": "userGroup",
-            "relationshipName": "owner",
-            "otherEntityField": "login",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "school",
-            "otherEntityRelationshipName": "userGroup",
-            "relationshipName": "school",
-            "otherEntityField": "name"
-        }
-    ],
-    "changelogDate": "20200311215800",
-    "javadoc": "The UserGroup entity will store user groups.\\n@author A true hailemaryam",
-    "entityTableName": "user_group",
-    "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl",
-    "jpaMetamodelFiltering": true,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": "*"
+  "name": "UserGroup",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "detail",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "profilePic",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "groupType",
+      "fieldType": "GroupType",
+      "fieldValues": "PUBLIC,PRIVATE"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "notification",
+      "otherEntityRelationshipName": "userGroup",
+      "relationshipName": "notification"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "schedule",
+      "otherEntityRelationshipName": "userGroup",
+      "relationshipName": "schedule"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "userGroup",
+      "relationshipName": "user",
+      "otherEntityField": "login",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "userGroup",
+      "relationshipName": "owner",
+      "otherEntityField": "login",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "school",
+      "otherEntityRelationshipName": "userGroup",
+      "relationshipName": "school",
+      "otherEntityField": "name"
+    }
+  ],
+  "changelogDate": "20200311215800",
+  "javadoc": "The UserGroup entity will store user groups.\\n@author A true hailemaryam",
+  "entityTableName": "user_group",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
 }

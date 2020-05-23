@@ -19,7 +19,7 @@
                 <dt><span jhiTranslate="hahuApp.userGroup.profilePic">Profile Pic</span></dt>
                 <dd>
                     <div *ngIf="userGroup.profilePic">
-                        <a (click)="openFile(userGroup?.profilePicContentType!, userGroup?.profilePic)">
+                        <a (click)="openFile(userGroup.profilePicContentType, userGroup.profilePic)">
                             <img [src]="'data:' + userGroup.profilePicContentType + ';base64,' + userGroup.profilePic" style="max-width: 100%;" alt="userGroup image"/>
                         </a>
                         {{ userGroup.profilePicContentType }}, {{ byteSize(userGroup.profilePic) }}

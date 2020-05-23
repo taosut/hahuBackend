@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link NotificationMetaDataResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class NotificationMetaDataResourceIT {
@@ -106,7 +105,6 @@ public class NotificationMetaDataResourceIT {
     @Transactional
     public void createNotificationMetaData() throws Exception {
         int databaseSizeBeforeCreate = notificationMetaDataRepository.findAll().size();
-
         // Create the NotificationMetaData
         NotificationMetaDataDTO notificationMetaDataDTO = notificationMetaDataMapper.toDto(notificationMetaData);
         restNotificationMetaDataMockMvc.perform(post("/api/notification-meta-data")
@@ -410,7 +408,6 @@ public class NotificationMetaDataResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

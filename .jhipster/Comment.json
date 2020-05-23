@@ -1,61 +1,59 @@
 {
-    "name": "Comment",
-    "fields": [
-        {
-            "fieldName": "content",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "text",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "postedDate",
-            "fieldType": "Instant"
-        },
-        {
-            "fieldName": "modifiedDate",
-            "fieldType": "Instant"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "comment",
-            "otherEntityRelationshipName": "comment",
-            "relationshipName": "reply"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "likes",
-            "otherEntityRelationshipName": "comment",
-            "relationshipName": "like"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "post",
-            "otherEntityRelationshipName": "comment",
-            "relationshipName": "post",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "comment",
-            "otherEntityRelationshipName": "reply",
-            "relationshipName": "comment",
-            "otherEntityField": "id"
-        }
-    ],
-    "changelogDate": "20200311215300",
-    "javadoc": "The Comment entity will contain comments on post, user or comment.\\n@author A true hailemaryam",
-    "entityTableName": "comment",
-    "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl",
-    "jpaMetamodelFiltering": true,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": "*"
+  "name": "Comment",
+  "fields": [
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "postedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "reply"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "likes",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "like"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "post",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "reply",
+      "relationshipName": "comment",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200311215300",
+  "javadoc": "The Comment entity will contain comments on post, user or comment.\\n@author A true hailemaryam",
+  "entityTableName": "comment",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
 }

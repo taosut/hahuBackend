@@ -1,37 +1,37 @@
 {
-    "name": "UsersConnection",
-    "fields": [
-        {
-            "fieldName": "registeredTime",
-            "fieldType": "Instant"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "user",
-            "otherEntityRelationshipName": "usersConnection",
-            "relationshipName": "follower",
-            "otherEntityField": "login"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "user",
-            "otherEntityRelationshipName": "usersConnection",
-            "relationshipName": "following",
-            "otherEntityField": "login"
-        }
-    ],
-    "changelogDate": "20200311215500",
-    "javadoc": "The UsersConnection entity will store a user follower and following users.\\n@author A true hailemaryam",
-    "entityTableName": "users_connection",
-    "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl",
-    "jpaMetamodelFiltering": true,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": "*"
+  "name": "UsersConnection",
+  "fields": [
+    {
+      "fieldName": "registeredTime",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "usersConnection",
+      "relationshipName": "follower",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "usersConnection",
+      "relationshipName": "following",
+      "otherEntityField": "login"
+    }
+  ],
+  "changelogDate": "20200311215500",
+  "javadoc": "The UsersConnection entity will store a user follower and following users.\\n@author A true hailemaryam",
+  "entityTableName": "users_connection",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
 }

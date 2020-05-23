@@ -7,7 +7,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 
 /**
@@ -15,7 +14,7 @@ import java.time.Instant;
  */
 @Entity
 @Table(name = "likes")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Likes implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,18 +28,18 @@ public class Likes implements Serializable {
     private Instant registeredTime;
 
     @ManyToOne
-    @JsonIgnoreProperties("likes")
+    @JsonIgnoreProperties(value = "likes", allowSetters = true)
     private User user;
 
     @ManyToOne
-    @JsonIgnoreProperties("likes")
+    @JsonIgnoreProperties(value = "likes", allowSetters = true)
     private Post post;
 
     @ManyToOne
-    @JsonIgnoreProperties("likes")
+    @JsonIgnoreProperties(value = "likes", allowSetters = true)
     private Comment comment;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -100,7 +99,7 @@ public class Likes implements Serializable {
     public void setComment(Comment comment) {
         this.comment = comment;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -118,6 +117,7 @@ public class Likes implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Likes{" +

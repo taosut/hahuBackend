@@ -40,49 +40,49 @@ export const postMetaDataRoute: Routes = [
     path: '',
     component: PostMetaDataComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.postMetaData.home.title'
+      pageTitle: 'hahuApp.postMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: PostMetaDataDetailComponent,
     resolve: {
-      postMetaData: PostMetaDataResolve
+      postMetaData: PostMetaDataResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.postMetaData.home.title'
+      pageTitle: 'hahuApp.postMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: PostMetaDataUpdateComponent,
     resolve: {
-      postMetaData: PostMetaDataResolve
+      postMetaData: PostMetaDataResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.postMetaData.home.title'
+      pageTitle: 'hahuApp.postMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: PostMetaDataUpdateComponent,
     resolve: {
-      postMetaData: PostMetaDataResolve
+      postMetaData: PostMetaDataResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.postMetaData.home.title'
+      pageTitle: 'hahuApp.postMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

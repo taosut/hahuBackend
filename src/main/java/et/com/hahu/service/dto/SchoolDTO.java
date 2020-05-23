@@ -4,7 +4,6 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 import javax.persistence.Lob;
 import et.com.hahu.domain.enumeration.ContentType;
 
@@ -142,22 +141,19 @@ public class SchoolDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof SchoolDTO)) {
             return false;
         }
 
-        SchoolDTO schoolDTO = (SchoolDTO) o;
-        if (schoolDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), schoolDTO.getId());
+        return id != null && id.equals(((SchoolDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "SchoolDTO{" +

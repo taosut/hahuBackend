@@ -61,6 +61,7 @@ public class SchoolServiceImpl implements SchoolService {
             .map(schoolMapper::toDto);
     }
 
+
     /**
      * Get all the schools with eager load of many-to-many relationships.
      *
@@ -92,6 +93,7 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete School : {}", id);
+
         schoolRepository.deleteById(id);
     }
 }

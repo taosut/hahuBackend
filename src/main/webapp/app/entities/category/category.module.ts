@@ -11,6 +11,6 @@ import { categoryRoute } from './category.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(categoryRoute)],
   declarations: [CategoryComponent, CategoryDetailComponent, CategoryUpdateComponent, CategoryDeleteDialogComponent],
-  entryComponents: [CategoryDeleteDialogComponent]
+  entryComponents: [CategoryDeleteDialogComponent],
 })
 export class HahuCategoryModule {}

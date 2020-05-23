@@ -6,7 +6,7 @@ import { IPostMetaData } from 'app/shared/model/post-meta-data.model';
 
 @Component({
   selector: 'jhi-post-meta-data-detail',
-  templateUrl: './post-meta-data-detail.component.html'
+  templateUrl: './post-meta-data-detail.component.html',
 })
 export class PostMetaDataDetailComponent implements OnInit {
   postMetaData: IPostMetaData | null = null;
@@ -21,7 +21,7 @@ export class PostMetaDataDetailComponent implements OnInit {
     return this.dataUtils.byteSize(base64String);
   }
 
-  openFile(contentType: string, base64String: string): void {
+  openFile(contentType = '', base64String: string): void {
     this.dataUtils.openFile(contentType, base64String);
   }
 

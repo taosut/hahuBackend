@@ -40,49 +40,49 @@ export const scheduleTypeRoute: Routes = [
     path: '',
     component: ScheduleTypeComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.scheduleType.home.title'
+      pageTitle: 'hahuApp.scheduleType.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: ScheduleTypeDetailComponent,
     resolve: {
-      scheduleType: ScheduleTypeResolve
+      scheduleType: ScheduleTypeResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.scheduleType.home.title'
+      pageTitle: 'hahuApp.scheduleType.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: ScheduleTypeUpdateComponent,
     resolve: {
-      scheduleType: ScheduleTypeResolve
+      scheduleType: ScheduleTypeResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.scheduleType.home.title'
+      pageTitle: 'hahuApp.scheduleType.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: ScheduleTypeUpdateComponent,
     resolve: {
-      scheduleType: ScheduleTypeResolve
+      scheduleType: ScheduleTypeResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.scheduleType.home.title'
+      pageTitle: 'hahuApp.scheduleType.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

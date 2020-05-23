@@ -191,6 +191,7 @@ public class NotificationCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "NotificationCriteria{" +

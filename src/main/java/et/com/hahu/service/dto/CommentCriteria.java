@@ -146,6 +146,7 @@ public class CommentCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "CommentCriteria{" +

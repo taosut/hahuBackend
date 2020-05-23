@@ -5,7 +5,7 @@ import { IUsersConnection } from 'app/shared/model/users-connection.model';
 
 @Component({
   selector: 'jhi-users-connection-detail',
-  templateUrl: './users-connection-detail.component.html'
+  templateUrl: './users-connection-detail.component.html',
 })
 export class UsersConnectionDetailComponent implements OnInit {
   usersConnection: IUsersConnection | null = null;

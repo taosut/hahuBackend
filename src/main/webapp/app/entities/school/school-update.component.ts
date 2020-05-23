@@ -14,7 +14,7 @@ import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-school-update',
-  templateUrl: './school-update.component.html'
+  templateUrl: './school-update.component.html',
 })
 export class SchoolUpdateComponent implements OnInit {
   isSaving = false;
@@ -32,7 +32,7 @@ export class SchoolUpdateComponent implements OnInit {
     aboutType: [],
     location: [],
     locationType: [],
-    users: []
+    users: [],
   });
 
   constructor(
@@ -66,7 +66,7 @@ export class SchoolUpdateComponent implements OnInit {
       aboutType: school.aboutType,
       location: school.location,
       locationType: school.locationType,
-      users: school.users
+      users: school.users,
     });
   }
 
@@ -89,7 +89,7 @@ export class SchoolUpdateComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -124,7 +124,7 @@ export class SchoolUpdateComponent implements OnInit {
       aboutType: this.editForm.get(['aboutType'])!.value,
       location: this.editForm.get(['location'])!.value,
       locationType: this.editForm.get(['locationType'])!.value,
-      users: this.editForm.get(['users'])!.value
+      users: this.editForm.get(['users'])!.value,
     };
   }
 

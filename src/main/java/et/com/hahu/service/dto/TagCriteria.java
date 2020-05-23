@@ -106,6 +106,7 @@ public class TagCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "TagCriteria{" +

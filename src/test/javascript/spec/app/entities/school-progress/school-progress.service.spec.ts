@@ -13,7 +13,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
       it('should create a SchoolProgress', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
           },
           elemDefault
         );
@@ -57,7 +57,7 @@ describe('Service Tests', () => {
             subject: 'BBBBBB',
             year: 1,
             semester: 'BBBBBB',
-            result: 1
+            result: 1,
           },
           elemDefault
         );
@@ -77,7 +77,7 @@ describe('Service Tests', () => {
             subject: 'BBBBBB',
             year: 1,
             semester: 'BBBBBB',
-            result: 1
+            result: 1,
           },
           elemDefault
         );

@@ -114,7 +114,6 @@ public class ProfileResourceIT {
     @Transactional
     public void createProfile() throws Exception {
         int databaseSizeBeforeCreate = profileRepository.findAll().size();
-
         // Create the Profile
         ProfileDTO profileDTO = profileMapper.toDto(profile);
         restProfileMockMvc.perform(post("/api/profiles")
@@ -404,7 +403,6 @@ public class ProfileResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

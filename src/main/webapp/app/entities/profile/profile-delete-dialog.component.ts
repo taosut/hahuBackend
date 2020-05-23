@@ -6,7 +6,7 @@ import { IProfile } from 'app/shared/model/profile.model';
 import { ProfileService } from './profile.service';
 
 @Component({
-  templateUrl: './profile-delete-dialog.component.html'
+  templateUrl: './profile-delete-dialog.component.html',
 })
 export class ProfileDeleteDialogComponent {
   profile?: IProfile;

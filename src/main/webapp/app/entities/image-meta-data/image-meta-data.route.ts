@@ -40,49 +40,49 @@ export const imageMetaDataRoute: Routes = [
     path: '',
     component: ImageMetaDataComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.imageMetaData.home.title'
+      pageTitle: 'hahuApp.imageMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: ImageMetaDataDetailComponent,
     resolve: {
-      imageMetaData: ImageMetaDataResolve
+      imageMetaData: ImageMetaDataResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.imageMetaData.home.title'
+      pageTitle: 'hahuApp.imageMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: ImageMetaDataUpdateComponent,
     resolve: {
-      imageMetaData: ImageMetaDataResolve
+      imageMetaData: ImageMetaDataResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.imageMetaData.home.title'
+      pageTitle: 'hahuApp.imageMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: ImageMetaDataUpdateComponent,
     resolve: {
-      imageMetaData: ImageMetaDataResolve
+      imageMetaData: ImageMetaDataResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.imageMetaData.home.title'
+      pageTitle: 'hahuApp.imageMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -40,49 +40,49 @@ export const commentRoute: Routes = [
     path: '',
     component: CommentComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.comment.home.title'
+      pageTitle: 'hahuApp.comment.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: CommentDetailComponent,
     resolve: {
-      comment: CommentResolve
+      comment: CommentResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.comment.home.title'
+      pageTitle: 'hahuApp.comment.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: CommentUpdateComponent,
     resolve: {
-      comment: CommentResolve
+      comment: CommentResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.comment.home.title'
+      pageTitle: 'hahuApp.comment.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: CommentUpdateComponent,
     resolve: {
-      comment: CommentResolve
+      comment: CommentResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.comment.home.title'
+      pageTitle: 'hahuApp.comment.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

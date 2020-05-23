@@ -1,7 +1,6 @@
 package et.com.hahu.service.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.SchoolProgress} entity.
@@ -84,22 +83,19 @@ public class SchoolProgressDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof SchoolProgressDTO)) {
             return false;
         }
 
-        SchoolProgressDTO schoolProgressDTO = (SchoolProgressDTO) o;
-        if (schoolProgressDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), schoolProgressDTO.getId());
+        return id != null && id.equals(((SchoolProgressDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "SchoolProgressDTO{" +

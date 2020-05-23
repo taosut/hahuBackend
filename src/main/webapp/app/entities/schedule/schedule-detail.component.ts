@@ -5,7 +5,7 @@ import { ISchedule } from 'app/shared/model/schedule.model';
 
 @Component({
   selector: 'jhi-schedule-detail',
-  templateUrl: './schedule-detail.component.html'
+  templateUrl: './schedule-detail.component.html',
 })
 export class ScheduleDetailComponent implements OnInit {
   schedule: ISchedule | null = null;

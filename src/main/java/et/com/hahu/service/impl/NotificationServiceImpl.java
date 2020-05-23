@@ -61,6 +61,7 @@ public class NotificationServiceImpl implements NotificationService {
             .map(notificationMapper::toDto);
     }
 
+
     /**
      * Get one notification by id.
      *
@@ -83,6 +84,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Notification : {}", id);
+
         notificationRepository.deleteById(id);
     }
 }

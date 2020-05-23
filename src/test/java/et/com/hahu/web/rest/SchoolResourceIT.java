@@ -152,7 +152,6 @@ public class SchoolResourceIT {
     @Transactional
     public void createSchool() throws Exception {
         int databaseSizeBeforeCreate = schoolRepository.findAll().size();
-
         // Create the School
         SchoolDTO schoolDTO = schoolMapper.toDto(school);
         restSchoolMockMvc.perform(post("/api/schools")
@@ -780,7 +779,6 @@ public class SchoolResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

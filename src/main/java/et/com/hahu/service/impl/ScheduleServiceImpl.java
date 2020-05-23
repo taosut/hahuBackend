@@ -61,6 +61,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             .map(scheduleMapper::toDto);
     }
 
+
     /**
      * Get one schedule by id.
      *
@@ -83,6 +84,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Schedule : {}", id);
+
         scheduleRepository.deleteById(id);
     }
 }

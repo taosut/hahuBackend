@@ -50,7 +50,7 @@ export class NotificationService {
 
   protected convertDateFromClient(notification: INotification): INotification {
     const copy: INotification = Object.assign({}, notification, {
-      date: notification.date && notification.date.isValid() ? notification.date.toJSON() : undefined
+      date: notification.date && notification.date.isValid() ? notification.date.toJSON() : undefined,
     });
     return copy;
   }

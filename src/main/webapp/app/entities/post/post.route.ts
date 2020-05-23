@@ -40,49 +40,49 @@ export const postRoute: Routes = [
     path: '',
     component: PostComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.post.home.title'
+      pageTitle: 'hahuApp.post.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: PostDetailComponent,
     resolve: {
-      post: PostResolve
+      post: PostResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.post.home.title'
+      pageTitle: 'hahuApp.post.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: PostUpdateComponent,
     resolve: {
-      post: PostResolve
+      post: PostResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.post.home.title'
+      pageTitle: 'hahuApp.post.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: PostUpdateComponent,
     resolve: {
-      post: PostResolve
+      post: PostResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.post.home.title'
+      pageTitle: 'hahuApp.post.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

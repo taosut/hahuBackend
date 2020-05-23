@@ -137,6 +137,7 @@ public class ScheduleTypeResource {
     @DeleteMapping("/schedule-types/{id}")
     public ResponseEntity<Void> deleteScheduleType(@PathVariable Long id) {
         log.debug("REST request to delete ScheduleType : {}", id);
+
         scheduleTypeService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

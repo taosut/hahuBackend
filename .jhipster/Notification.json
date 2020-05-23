@@ -1,70 +1,70 @@
 {
-    "name": "Notification",
-    "fields": [
-        {
-            "fieldName": "featuredImage",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
-        },
-        {
-            "fieldName": "title",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "content",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "text"
-        },
-        {
-            "fieldName": "contentType",
-            "fieldType": "ContentType",
-            "fieldValues": "TEXT,HTML"
-        },
-        {
-            "fieldName": "link",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "date",
-            "fieldType": "Instant"
-        },
-        {
-            "fieldName": "markAsRead",
-            "fieldType": "Boolean"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "notificationMetaData",
-            "otherEntityRelationshipName": "notification",
-            "relationshipName": "notificationMetaData"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "user",
-            "otherEntityRelationshipName": "notification",
-            "relationshipName": "user",
-            "otherEntityField": "login"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "userGroup",
-            "otherEntityRelationshipName": "notification",
-            "relationshipName": "userGroup",
-            "otherEntityField": "name"
-        }
-    ],
-    "changelogDate": "20200311215900",
-    "javadoc": "The Notification entity contains notificationfor user.\\n@author A true hailemaryam",
-    "entityTableName": "notification",
-    "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl",
-    "jpaMetamodelFiltering": true,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": "*"
+  "name": "Notification",
+  "fields": [
+    {
+      "fieldName": "featuredImage",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "contentType",
+      "fieldType": "ContentType",
+      "fieldValues": "TEXT,HTML"
+    },
+    {
+      "fieldName": "link",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "markAsRead",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "notificationMetaData",
+      "otherEntityRelationshipName": "notification",
+      "relationshipName": "notificationMetaData"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "notification",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "userGroup",
+      "otherEntityRelationshipName": "notification",
+      "relationshipName": "userGroup",
+      "otherEntityField": "name"
+    }
+  ],
+  "changelogDate": "20200311215900",
+  "javadoc": "The Notification entity contains notificationfor user.\\n@author A true hailemaryam",
+  "entityTableName": "notification",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
 }

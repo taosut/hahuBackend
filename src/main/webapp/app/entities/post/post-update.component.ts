@@ -24,7 +24,7 @@ type SelectableManyToManyEntity = ICategory | ITag;
 
 @Component({
   selector: 'jhi-post-update',
-  templateUrl: './post-update.component.html'
+  templateUrl: './post-update.component.html',
 })
 export class PostUpdateComponent implements OnInit {
   isSaving = false;
@@ -45,7 +45,7 @@ export class PostUpdateComponent implements OnInit {
     instantPostEndDate: [],
     userId: [],
     categories: [],
-    tags: []
+    tags: [],
   });
 
   constructor(
@@ -93,7 +93,7 @@ export class PostUpdateComponent implements OnInit {
       instantPostEndDate: post.instantPostEndDate ? post.instantPostEndDate.format(DATE_TIME_FORMAT) : null,
       userId: post.userId,
       categories: post.categories,
-      tags: post.tags
+      tags: post.tags,
     });
   }
 
@@ -116,7 +116,7 @@ export class PostUpdateComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -156,7 +156,7 @@ export class PostUpdateComponent implements OnInit {
         : undefined,
       userId: this.editForm.get(['userId'])!.value,
       categories: this.editForm.get(['categories'])!.value,
-      tags: this.editForm.get(['tags'])!.value
+      tags: this.editForm.get(['tags'])!.value,
     };
   }
 

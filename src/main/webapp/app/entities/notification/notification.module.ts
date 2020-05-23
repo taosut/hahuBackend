@@ -11,6 +11,6 @@ import { notificationRoute } from './notification.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(notificationRoute)],
   declarations: [NotificationComponent, NotificationDetailComponent, NotificationUpdateComponent, NotificationDeleteDialogComponent],
-  entryComponents: [NotificationDeleteDialogComponent]
+  entryComponents: [NotificationDeleteDialogComponent],
 })
 export class HahuNotificationModule {}

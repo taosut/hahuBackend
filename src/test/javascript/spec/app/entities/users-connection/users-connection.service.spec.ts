@@ -16,7 +16,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -31,7 +31,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            registeredTime: currentDate.format(DATE_TIME_FORMAT)
+            registeredTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -47,14 +47,14 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            registeredTime: currentDate.format(DATE_TIME_FORMAT)
+            registeredTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            registeredTime: currentDate
+            registeredTime: currentDate,
           },
           returnedFromService
         );
@@ -69,14 +69,14 @@ describe('Service Tests', () => {
       it('should update a UsersConnection', () => {
         const returnedFromService = Object.assign(
           {
-            registeredTime: currentDate.format(DATE_TIME_FORMAT)
+            registeredTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            registeredTime: currentDate
+            registeredTime: currentDate,
           },
           returnedFromService
         );
@@ -91,14 +91,14 @@ describe('Service Tests', () => {
       it('should return a list of UsersConnection', () => {
         const returnedFromService = Object.assign(
           {
-            registeredTime: currentDate.format(DATE_TIME_FORMAT)
+            registeredTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            registeredTime: currentDate
+            registeredTime: currentDate,
           },
           returnedFromService
         );

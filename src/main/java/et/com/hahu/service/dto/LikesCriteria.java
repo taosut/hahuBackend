@@ -120,6 +120,7 @@ public class LikesCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "LikesCriteria{" +

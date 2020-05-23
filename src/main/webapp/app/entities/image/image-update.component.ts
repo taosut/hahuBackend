@@ -14,7 +14,7 @@ import { AlbumService } from 'app/entities/album/album.service';
 
 @Component({
   selector: 'jhi-image-update',
-  templateUrl: './image-update.component.html'
+  templateUrl: './image-update.component.html',
 })
 export class ImageUpdateComponent implements OnInit {
   isSaving = false;
@@ -24,7 +24,7 @@ export class ImageUpdateComponent implements OnInit {
     id: [],
     image: [],
     imageContentType: [],
-    albumId: []
+    albumId: [],
   });
 
   constructor(
@@ -50,7 +50,7 @@ export class ImageUpdateComponent implements OnInit {
       id: image.id,
       image: image.image,
       imageContentType: image.imageContentType,
-      albumId: image.albumId
+      albumId: image.albumId,
     });
   }
 
@@ -73,7 +73,7 @@ export class ImageUpdateComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -100,7 +100,7 @@ export class ImageUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       imageContentType: this.editForm.get(['imageContentType'])!.value,
       image: this.editForm.get(['image'])!.value,
-      albumId: this.editForm.get(['albumId'])!.value
+      albumId: this.editForm.get(['albumId'])!.value,
     };
   }
 

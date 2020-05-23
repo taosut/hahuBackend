@@ -18,7 +18,7 @@
         <span jhiTranslate="hahuApp.profile.home.notFound">No profiles found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="profiles?.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="profiles && profiles.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
@@ -63,7 +63,7 @@
         </table>
     </div>
 
-    <div *ngIf="profiles?.length > 0">
+    <div *ngIf="profiles && profiles.length > 0">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

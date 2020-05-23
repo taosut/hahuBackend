@@ -11,6 +11,6 @@ import { likesRoute } from './likes.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(likesRoute)],
   declarations: [LikesComponent, LikesDetailComponent, LikesUpdateComponent, LikesDeleteDialogComponent],
-  entryComponents: [LikesDeleteDialogComponent]
+  entryComponents: [LikesDeleteDialogComponent],
 })
 export class HahuLikesModule {}

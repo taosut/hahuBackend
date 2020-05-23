@@ -61,6 +61,7 @@ public class PostServiceImpl implements PostService {
             .map(postMapper::toDto);
     }
 
+
     /**
      * Get all the posts with eager load of many-to-many relationships.
      *
@@ -92,6 +93,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Post : {}", id);
+
         postRepository.deleteById(id);
     }
 }

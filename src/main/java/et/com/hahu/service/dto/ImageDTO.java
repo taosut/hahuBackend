@@ -2,7 +2,6 @@ package et.com.hahu.service.dto;
 
 import io.swagger.annotations.ApiModel;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
@@ -57,22 +56,19 @@ public class ImageDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof ImageDTO)) {
             return false;
         }
 
-        ImageDTO imageDTO = (ImageDTO) o;
-        if (imageDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), imageDTO.getId());
+        return id != null && id.equals(((ImageDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "ImageDTO{" +

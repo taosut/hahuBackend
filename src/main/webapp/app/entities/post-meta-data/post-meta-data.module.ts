@@ -11,6 +11,6 @@ import { postMetaDataRoute } from './post-meta-data.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(postMetaDataRoute)],
   declarations: [PostMetaDataComponent, PostMetaDataDetailComponent, PostMetaDataUpdateComponent, PostMetaDataDeleteDialogComponent],
-  entryComponents: [PostMetaDataDeleteDialogComponent]
+  entryComponents: [PostMetaDataDeleteDialogComponent],
 })
 export class HahuPostMetaDataModule {}

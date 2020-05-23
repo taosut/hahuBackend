@@ -93,6 +93,7 @@ public class ImageCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "ImageCriteria{" +

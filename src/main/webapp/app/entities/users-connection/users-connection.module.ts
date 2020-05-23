@@ -14,8 +14,8 @@ import { usersConnectionRoute } from './users-connection.route';
     UsersConnectionComponent,
     UsersConnectionDetailComponent,
     UsersConnectionUpdateComponent,
-    UsersConnectionDeleteDialogComponent
+    UsersConnectionDeleteDialogComponent,
   ],
-  entryComponents: [UsersConnectionDeleteDialogComponent]
+  entryComponents: [UsersConnectionDeleteDialogComponent],
 })
 export class HahuUsersConnectionModule {}

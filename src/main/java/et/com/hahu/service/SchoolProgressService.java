@@ -28,6 +28,7 @@ public interface SchoolProgressService {
      */
     Page<SchoolProgressDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" schoolProgress.
      *

@@ -262,6 +262,7 @@ public class PostCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "PostCriteria{" +

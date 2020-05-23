@@ -7,7 +7,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 
 /**
@@ -15,7 +14,7 @@ import java.time.Instant;
  */
 @Entity
 @Table(name = "users_connection")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UsersConnection implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,14 +28,14 @@ public class UsersConnection implements Serializable {
     private Instant registeredTime;
 
     @ManyToOne
-    @JsonIgnoreProperties("usersConnections")
+    @JsonIgnoreProperties(value = "usersConnections", allowSetters = true)
     private User follower;
 
     @ManyToOne
-    @JsonIgnoreProperties("usersConnections")
+    @JsonIgnoreProperties(value = "usersConnections", allowSetters = true)
     private User following;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -83,7 +82,7 @@ public class UsersConnection implements Serializable {
     public void setFollowing(User user) {
         this.following = user;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -101,6 +100,7 @@ public class UsersConnection implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "UsersConnection{" +

@@ -6,7 +6,7 @@ import { INotificationMetaData } from 'app/shared/model/notification-meta-data.m
 
 @Component({
   selector: 'jhi-notification-meta-data-detail',
-  templateUrl: './notification-meta-data-detail.component.html'
+  templateUrl: './notification-meta-data-detail.component.html',
 })
 export class NotificationMetaDataDetailComponent implements OnInit {
   notificationMetaData: INotificationMetaData | null = null;
@@ -21,7 +21,7 @@ export class NotificationMetaDataDetailComponent implements OnInit {
     return this.dataUtils.byteSize(base64String);
   }
 
-  openFile(contentType: string, base64String: string): void {
+  openFile(contentType = '', base64String: string): void {
     this.dataUtils.openFile(contentType, base64String);
   }
 

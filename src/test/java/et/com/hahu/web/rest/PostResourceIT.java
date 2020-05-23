@@ -153,7 +153,6 @@ public class PostResourceIT {
     @Transactional
     public void createPost() throws Exception {
         int databaseSizeBeforeCreate = postRepository.findAll().size();
-
         // Create the Post
         PostDTO postDTO = postMapper.toDto(post);
         restPostMockMvc.perform(post("/api/posts")
@@ -779,7 +778,6 @@ public class PostResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

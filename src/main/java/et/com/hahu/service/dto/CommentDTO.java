@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModel;
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
@@ -81,22 +80,19 @@ public class CommentDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CommentDTO)) {
             return false;
         }
 
-        CommentDTO commentDTO = (CommentDTO) o;
-        if (commentDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), commentDTO.getId());
+        return id != null && id.equals(((CommentDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "CommentDTO{" +

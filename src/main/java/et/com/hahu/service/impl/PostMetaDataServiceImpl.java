@@ -61,6 +61,7 @@ public class PostMetaDataServiceImpl implements PostMetaDataService {
             .map(postMetaDataMapper::toDto);
     }
 
+
     /**
      * Get one postMetaData by id.
      *
@@ -83,6 +84,7 @@ public class PostMetaDataServiceImpl implements PostMetaDataService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete PostMetaData : {}", id);
+
         postMetaDataRepository.deleteById(id);
     }
 }

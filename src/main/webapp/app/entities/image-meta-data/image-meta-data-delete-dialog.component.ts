@@ -6,7 +6,7 @@ import { IImageMetaData } from 'app/shared/model/image-meta-data.model';
 import { ImageMetaDataService } from './image-meta-data.service';
 
 @Component({
-  templateUrl: './image-meta-data-delete-dialog.component.html'
+  templateUrl: './image-meta-data-delete-dialog.component.html',
 })
 export class ImageMetaDataDeleteDialogComponent {
   imageMetaData?: IImageMetaData;

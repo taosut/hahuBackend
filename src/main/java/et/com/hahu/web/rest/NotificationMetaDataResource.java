@@ -137,6 +137,7 @@ public class NotificationMetaDataResource {
     @DeleteMapping("/notification-meta-data/{id}")
     public ResponseEntity<Void> deleteNotificationMetaData(@PathVariable Long id) {
         log.debug("REST request to delete NotificationMetaData : {}", id);
+
         notificationMetaDataService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

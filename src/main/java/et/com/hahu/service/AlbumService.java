@@ -28,6 +28,7 @@ public interface AlbumService {
      */
     Page<AlbumDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" album.
      *
