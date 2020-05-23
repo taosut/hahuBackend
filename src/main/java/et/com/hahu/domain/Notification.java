@@ -8,7 +8,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +19,7 @@ import et.com.hahu.domain.enumeration.ContentType;
  */
 @Entity
 @Table(name = "notification")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Notification implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,18 +58,18 @@ public class Notification implements Serializable {
     private Boolean markAsRead;
 
     @OneToMany(mappedBy = "notification")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<NotificationMetaData> notificationMetaData = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("notifications")
+    @JsonIgnoreProperties(value = "notifications", allowSetters = true)
     private User user;
 
     @ManyToOne
-    @JsonIgnoreProperties("notifications")
+    @JsonIgnoreProperties(value = "notifications", allowSetters = true)
     private UserGroup userGroup;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -233,7 +232,7 @@ public class Notification implements Serializable {
     public void setUserGroup(UserGroup userGroup) {
         this.userGroup = userGroup;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -251,6 +250,7 @@ public class Notification implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Notification{" +

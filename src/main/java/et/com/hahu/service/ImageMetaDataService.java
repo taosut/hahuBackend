@@ -28,6 +28,7 @@ public interface ImageMetaDataService {
      */
     Page<ImageMetaDataDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" imageMetaData.
      *

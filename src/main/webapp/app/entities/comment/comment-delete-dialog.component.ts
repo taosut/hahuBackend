@@ -6,7 +6,7 @@ import { IComment } from 'app/shared/model/comment.model';
 import { CommentService } from './comment.service';
 
 @Component({
-  templateUrl: './comment-delete-dialog.component.html'
+  templateUrl: './comment-delete-dialog.component.html',
 })
 export class CommentDeleteDialogComponent {
   comment?: IComment;

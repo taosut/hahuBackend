@@ -61,6 +61,7 @@ public class AlbumServiceImpl implements AlbumService {
             .map(albumMapper::toDto);
     }
 
+
     /**
      * Get one album by id.
      *
@@ -83,6 +84,7 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Album : {}", id);
+
         albumRepository.deleteById(id);
     }
 }

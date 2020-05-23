@@ -31,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link ImageMetaDataResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class ImageMetaDataResourceIT {
@@ -96,7 +95,6 @@ public class ImageMetaDataResourceIT {
     @Transactional
     public void createImageMetaData() throws Exception {
         int databaseSizeBeforeCreate = imageMetaDataRepository.findAll().size();
-
         // Create the ImageMetaData
         ImageMetaDataDTO imageMetaDataDTO = imageMetaDataMapper.toDto(imageMetaData);
         restImageMetaDataMockMvc.perform(post("/api/image-meta-data")
@@ -392,7 +390,6 @@ public class ImageMetaDataResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

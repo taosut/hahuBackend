@@ -28,6 +28,7 @@ public interface CategoryService {
      */
     Page<CategoryDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" category.
      *

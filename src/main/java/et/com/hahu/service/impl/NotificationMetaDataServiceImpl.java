@@ -61,6 +61,7 @@ public class NotificationMetaDataServiceImpl implements NotificationMetaDataServ
             .map(notificationMetaDataMapper::toDto);
     }
 
+
     /**
      * Get one notificationMetaData by id.
      *
@@ -83,6 +84,7 @@ public class NotificationMetaDataServiceImpl implements NotificationMetaDataServ
     @Override
     public void delete(Long id) {
         log.debug("Request to delete NotificationMetaData : {}", id);
+
         notificationMetaDataRepository.deleteById(id);
     }
 }

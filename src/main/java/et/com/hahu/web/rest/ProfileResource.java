@@ -142,6 +142,7 @@ public class ProfileResource {
     @DeleteMapping("/profiles/{id}")
     public ResponseEntity<Void> deleteProfile(@PathVariable Long id) {
         log.debug("REST request to delete Profile : {}", id);
+
         profileService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

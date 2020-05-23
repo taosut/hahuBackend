@@ -5,7 +5,7 @@ import { ISchoolProgress } from 'app/shared/model/school-progress.model';
 
 @Component({
   selector: 'jhi-school-progress-detail',
-  templateUrl: './school-progress-detail.component.html'
+  templateUrl: './school-progress-detail.component.html',
 })
 export class SchoolProgressDetailComponent implements OnInit {
   schoolProgress: ISchoolProgress | null = null;

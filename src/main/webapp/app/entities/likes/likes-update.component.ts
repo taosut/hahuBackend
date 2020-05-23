@@ -20,7 +20,7 @@ type SelectableEntity = IUser | IPost | IComment;
 
 @Component({
   selector: 'jhi-likes-update',
-  templateUrl: './likes-update.component.html'
+  templateUrl: './likes-update.component.html',
 })
 export class LikesUpdateComponent implements OnInit {
   isSaving = false;
@@ -33,7 +33,7 @@ export class LikesUpdateComponent implements OnInit {
     registeredTime: [],
     userId: [],
     postId: [],
-    commentId: []
+    commentId: [],
   });
 
   constructor(
@@ -68,7 +68,7 @@ export class LikesUpdateComponent implements OnInit {
       registeredTime: likes.registeredTime ? likes.registeredTime.format(DATE_TIME_FORMAT) : null,
       userId: likes.userId,
       postId: likes.postId,
-      commentId: likes.commentId
+      commentId: likes.commentId,
     });
   }
 
@@ -95,7 +95,7 @@ export class LikesUpdateComponent implements OnInit {
         : undefined,
       userId: this.editForm.get(['userId'])!.value,
       postId: this.editForm.get(['postId'])!.value,
-      commentId: this.editForm.get(['commentId'])!.value
+      commentId: this.editForm.get(['commentId'])!.value,
     };
   }
 

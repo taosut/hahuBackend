@@ -20,7 +20,7 @@ type SelectableEntity = IUser | IUserGroup;
 
 @Component({
   selector: 'jhi-notification-update',
-  templateUrl: './notification-update.component.html'
+  templateUrl: './notification-update.component.html',
 })
 export class NotificationUpdateComponent implements OnInit {
   isSaving = false;
@@ -38,7 +38,7 @@ export class NotificationUpdateComponent implements OnInit {
     date: [],
     markAsRead: [],
     userId: [],
-    userGroupId: []
+    userGroupId: [],
   });
 
   constructor(
@@ -79,7 +79,7 @@ export class NotificationUpdateComponent implements OnInit {
       date: notification.date ? notification.date.format(DATE_TIME_FORMAT) : null,
       markAsRead: notification.markAsRead,
       userId: notification.userId,
-      userGroupId: notification.userGroupId
+      userGroupId: notification.userGroupId,
     });
   }
 
@@ -102,7 +102,7 @@ export class NotificationUpdateComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -136,7 +136,7 @@ export class NotificationUpdateComponent implements OnInit {
       date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
       markAsRead: this.editForm.get(['markAsRead'])!.value,
       userId: this.editForm.get(['userId'])!.value,
-      userGroupId: this.editForm.get(['userGroupId'])!.value
+      userGroupId: this.editForm.get(['userGroupId'])!.value,
     };
   }
 

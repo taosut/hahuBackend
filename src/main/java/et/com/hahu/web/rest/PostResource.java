@@ -137,6 +137,7 @@ public class PostResource {
     @DeleteMapping("/posts/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         log.debug("REST request to delete Post : {}", id);
+
         postService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

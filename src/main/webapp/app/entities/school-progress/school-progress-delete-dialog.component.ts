@@ -6,7 +6,7 @@ import { ISchoolProgress } from 'app/shared/model/school-progress.model';
 import { SchoolProgressService } from './school-progress.service';
 
 @Component({
-  templateUrl: './school-progress-delete-dialog.component.html'
+  templateUrl: './school-progress-delete-dialog.component.html',
 })
 export class SchoolProgressDeleteDialogComponent {
   schoolProgress?: ISchoolProgress;

@@ -18,7 +18,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [HahuTestModule],
         declarations: [SchoolProgressUpdateComponent],
-        providers: [FormBuilder]
+        providers: [FormBuilder],
       })
         .overrideTemplate(SchoolProgressUpdateComponent, '')
         .compileComponents();

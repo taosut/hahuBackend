@@ -8,7 +8,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +18,7 @@ import et.com.hahu.domain.enumeration.GroupType;
  */
 @Entity
 @Table(name = "user_group")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,32 +48,32 @@ public class UserGroup implements Serializable {
     private GroupType groupType;
 
     @OneToMany(mappedBy = "userGroup")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Notification> notifications = new HashSet<>();
 
     @OneToMany(mappedBy = "userGroup")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Schedule> schedules = new HashSet<>();
 
     @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "user_group_user",
                joinColumns = @JoinColumn(name = "user_group_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private Set<User> users = new HashSet<>();
 
     @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "user_group_owner",
                joinColumns = @JoinColumn(name = "user_group_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "owner_id", referencedColumnName = "id"))
     private Set<User> owners = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("userGroups")
+    @JsonIgnoreProperties(value = "userGroups", allowSetters = true)
     private School school;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -256,7 +255,7 @@ public class UserGroup implements Serializable {
     public void setSchool(School school) {
         this.school = school;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -274,6 +273,7 @@ public class UserGroup implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "UserGroup{" +

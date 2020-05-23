@@ -2,7 +2,6 @@ package et.com.hahu.service.dto;
 
 import io.swagger.annotations.ApiModel;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.Category} entity.
@@ -46,22 +45,19 @@ public class CategoryDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CategoryDTO)) {
             return false;
         }
 
-        CategoryDTO categoryDTO = (CategoryDTO) o;
-        if (categoryDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), categoryDTO.getId());
+        return id != null && id.equals(((CategoryDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "CategoryDTO{" +

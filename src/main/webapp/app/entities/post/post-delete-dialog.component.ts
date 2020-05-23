@@ -6,7 +6,7 @@ import { IPost } from 'app/shared/model/post.model';
 import { PostService } from './post.service';
 
 @Component({
-  templateUrl: './post-delete-dialog.component.html'
+  templateUrl: './post-delete-dialog.component.html',
 })
 export class PostDeleteDialogComponent {
   post?: IPost;

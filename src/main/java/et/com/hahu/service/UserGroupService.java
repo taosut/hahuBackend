@@ -35,6 +35,7 @@ public interface UserGroupService {
      */
     Page<UserGroupDTO> findAllWithEagerRelationships(Pageable pageable);
 
+
     /**
      * Get the "id" userGroup.
      *

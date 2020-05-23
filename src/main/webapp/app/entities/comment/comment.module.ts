@@ -11,6 +11,6 @@ import { commentRoute } from './comment.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(commentRoute)],
   declarations: [CommentComponent, CommentDetailComponent, CommentUpdateComponent, CommentDeleteDialogComponent],
-  entryComponents: [CommentDeleteDialogComponent]
+  entryComponents: [CommentDeleteDialogComponent],
 })
 export class HahuCommentModule {}

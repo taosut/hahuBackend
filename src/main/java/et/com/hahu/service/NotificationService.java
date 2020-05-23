@@ -28,6 +28,7 @@ public interface NotificationService {
      */
     Page<NotificationDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" notification.
      *

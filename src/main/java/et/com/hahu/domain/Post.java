@@ -8,7 +8,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +21,7 @@ import et.com.hahu.domain.enumeration.PostType;
  */
 @Entity
 @Table(name = "post")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,36 +64,36 @@ public class Post implements Serializable {
     private Instant instantPostEndDate;
 
     @OneToMany(mappedBy = "post")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<PostMetaData> postMetaData = new HashSet<>();
 
     @OneToMany(mappedBy = "post")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Comment> comments = new HashSet<>();
 
     @OneToMany(mappedBy = "post")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Likes> likes = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("posts")
+    @JsonIgnoreProperties(value = "posts", allowSetters = true)
     private User user;
 
     @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "post_category",
                joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
     private Set<Category> categories = new HashSet<>();
 
     @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "post_tag",
                joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
     private Set<Tag> tags = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -357,7 +356,7 @@ public class Post implements Serializable {
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -375,6 +374,7 @@ public class Post implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Post{" +

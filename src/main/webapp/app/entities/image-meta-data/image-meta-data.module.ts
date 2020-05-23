@@ -11,6 +11,6 @@ import { imageMetaDataRoute } from './image-meta-data.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(imageMetaDataRoute)],
   declarations: [ImageMetaDataComponent, ImageMetaDataDetailComponent, ImageMetaDataUpdateComponent, ImageMetaDataDeleteDialogComponent],
-  entryComponents: [ImageMetaDataDeleteDialogComponent]
+  entryComponents: [ImageMetaDataDeleteDialogComponent],
 })
 export class HahuImageMetaDataModule {}

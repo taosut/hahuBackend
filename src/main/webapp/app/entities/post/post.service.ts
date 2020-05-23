@@ -52,7 +52,7 @@ export class PostService {
     const copy: IPost = Object.assign({}, post, {
       postedDate: post.postedDate && post.postedDate.isValid() ? post.postedDate.toJSON() : undefined,
       modifiedDate: post.modifiedDate && post.modifiedDate.isValid() ? post.modifiedDate.toJSON() : undefined,
-      instantPostEndDate: post.instantPostEndDate && post.instantPostEndDate.isValid() ? post.instantPostEndDate.toJSON() : undefined
+      instantPostEndDate: post.instantPostEndDate && post.instantPostEndDate.isValid() ? post.instantPostEndDate.toJSON() : undefined,
     });
     return copy;
   }

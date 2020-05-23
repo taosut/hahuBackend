@@ -13,7 +13,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
       it('should create a PostMetaData', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
           },
           elemDefault
         );
@@ -56,7 +56,7 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             value: 'BBBBBB',
-            blobValue: 'BBBBBB'
+            blobValue: 'BBBBBB',
           },
           elemDefault
         );
@@ -75,7 +75,7 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             value: 'BBBBBB',
-            blobValue: 'BBBBBB'
+            blobValue: 'BBBBBB',
           },
           elemDefault
         );

@@ -12,7 +12,7 @@ import { ImageService } from 'app/entities/image/image.service';
 
 @Component({
   selector: 'jhi-image-meta-data-update',
-  templateUrl: './image-meta-data-update.component.html'
+  templateUrl: './image-meta-data-update.component.html',
 })
 export class ImageMetaDataUpdateComponent implements OnInit {
   isSaving = false;
@@ -22,7 +22,7 @@ export class ImageMetaDataUpdateComponent implements OnInit {
     id: [],
     name: [],
     value: [],
-    imageId: []
+    imageId: [],
   });
 
   constructor(
@@ -45,7 +45,7 @@ export class ImageMetaDataUpdateComponent implements OnInit {
       id: imageMetaData.id,
       name: imageMetaData.name,
       value: imageMetaData.value,
-      imageId: imageMetaData.imageId
+      imageId: imageMetaData.imageId,
     });
   }
 
@@ -69,7 +69,7 @@ export class ImageMetaDataUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       value: this.editForm.get(['value'])!.value,
-      imageId: this.editForm.get(['imageId'])!.value
+      imageId: this.editForm.get(['imageId'])!.value,
     };
   }
 

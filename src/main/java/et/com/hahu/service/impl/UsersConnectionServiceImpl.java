@@ -61,6 +61,7 @@ public class UsersConnectionServiceImpl implements UsersConnectionService {
             .map(usersConnectionMapper::toDto);
     }
 
+
     /**
      * Get one usersConnection by id.
      *
@@ -83,6 +84,7 @@ public class UsersConnectionServiceImpl implements UsersConnectionService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete UsersConnection : {}", id);
+
         usersConnectionRepository.deleteById(id);
     }
 }

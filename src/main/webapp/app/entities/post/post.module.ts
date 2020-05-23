@@ -11,6 +11,6 @@ import { postRoute } from './post.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(postRoute)],
   declarations: [PostComponent, PostDetailComponent, PostUpdateComponent, PostDeleteDialogComponent],
-  entryComponents: [PostDeleteDialogComponent]
+  entryComponents: [PostDeleteDialogComponent],
 })
 export class HahuPostModule {}

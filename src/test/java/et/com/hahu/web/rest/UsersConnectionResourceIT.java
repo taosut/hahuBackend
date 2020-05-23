@@ -33,7 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link UsersConnectionResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class UsersConnectionResourceIT {
@@ -93,7 +92,6 @@ public class UsersConnectionResourceIT {
     @Transactional
     public void createUsersConnection() throws Exception {
         int databaseSizeBeforeCreate = usersConnectionRepository.findAll().size();
-
         // Create the UsersConnection
         UsersConnectionDTO usersConnectionDTO = usersConnectionMapper.toDto(usersConnection);
         restUsersConnectionMockMvc.perform(post("/api/users-connections")
@@ -301,7 +299,6 @@ public class UsersConnectionResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

@@ -137,6 +137,7 @@ public class ImageMetaDataResource {
     @DeleteMapping("/image-meta-data/{id}")
     public ResponseEntity<Void> deleteImageMetaData(@PathVariable Long id) {
         log.debug("REST request to delete ImageMetaData : {}", id);
+
         imageMetaDataService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

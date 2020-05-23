@@ -6,7 +6,7 @@ import { ILikes } from 'app/shared/model/likes.model';
 import { LikesService } from './likes.service';
 
 @Component({
-  templateUrl: './likes-delete-dialog.component.html'
+  templateUrl: './likes-delete-dialog.component.html',
 })
 export class LikesDeleteDialogComponent {
   likes?: ILikes;

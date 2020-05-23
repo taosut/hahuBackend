@@ -5,7 +5,7 @@ import { IImageMetaData } from 'app/shared/model/image-meta-data.model';
 
 @Component({
   selector: 'jhi-image-meta-data-detail',
-  templateUrl: './image-meta-data-detail.component.html'
+  templateUrl: './image-meta-data-detail.component.html',
 })
 export class ImageMetaDataDetailComponent implements OnInit {
   imageMetaData: IImageMetaData | null = null;

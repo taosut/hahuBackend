@@ -146,6 +146,7 @@ public class ScheduleCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "ScheduleCriteria{" +

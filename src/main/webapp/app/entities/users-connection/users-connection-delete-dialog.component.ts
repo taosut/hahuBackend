@@ -6,7 +6,7 @@ import { IUsersConnection } from 'app/shared/model/users-connection.model';
 import { UsersConnectionService } from './users-connection.service';
 
 @Component({
-  templateUrl: './users-connection-delete-dialog.component.html'
+  templateUrl: './users-connection-delete-dialog.component.html',
 })
 export class UsersConnectionDeleteDialogComponent {
   usersConnection?: IUsersConnection;

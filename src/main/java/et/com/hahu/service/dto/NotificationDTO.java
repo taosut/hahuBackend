@@ -3,7 +3,6 @@ package et.com.hahu.service.dto;
 import io.swagger.annotations.ApiModel;
 import java.time.Instant;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Lob;
 import et.com.hahu.domain.enumeration.ContentType;
 
@@ -150,22 +149,19 @@ public class NotificationDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof NotificationDTO)) {
             return false;
         }
 
-        NotificationDTO notificationDTO = (NotificationDTO) o;
-        if (notificationDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), notificationDTO.getId());
+        return id != null && id.equals(((NotificationDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "NotificationDTO{" +

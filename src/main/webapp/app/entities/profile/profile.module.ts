@@ -11,6 +11,6 @@ import { profileRoute } from './profile.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(profileRoute)],
   declarations: [ProfileComponent, ProfileDetailComponent, ProfileUpdateComponent, ProfileDeleteDialogComponent],
-  entryComponents: [ProfileDeleteDialogComponent]
+  entryComponents: [ProfileDeleteDialogComponent],
 })
 export class HahuProfileModule {}

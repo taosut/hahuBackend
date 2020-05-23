@@ -1,7 +1,6 @@
 package et.com.hahu.service.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.ScheduleType} entity.
@@ -34,22 +33,19 @@ public class ScheduleTypeDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof ScheduleTypeDTO)) {
             return false;
         }
 
-        ScheduleTypeDTO scheduleTypeDTO = (ScheduleTypeDTO) o;
-        if (scheduleTypeDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), scheduleTypeDTO.getId());
+        return id != null && id.equals(((ScheduleTypeDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "ScheduleTypeDTO{" +

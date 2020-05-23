@@ -6,7 +6,7 @@ import { IComment } from 'app/shared/model/comment.model';
 
 @Component({
   selector: 'jhi-comment-detail',
-  templateUrl: './comment-detail.component.html'
+  templateUrl: './comment-detail.component.html',
 })
 export class CommentDetailComponent implements OnInit {
   comment: IComment | null = null;
@@ -21,7 +21,7 @@ export class CommentDetailComponent implements OnInit {
     return this.dataUtils.byteSize(base64String);
   }
 
-  openFile(contentType: string, base64String: string): void {
+  openFile(contentType = '', base64String: string): void {
     this.dataUtils.openFile(contentType, base64String);
   }
 

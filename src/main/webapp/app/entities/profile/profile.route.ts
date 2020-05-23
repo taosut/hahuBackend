@@ -40,49 +40,49 @@ export const profileRoute: Routes = [
     path: '',
     component: ProfileComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.profile.home.title'
+      pageTitle: 'hahuApp.profile.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: ProfileDetailComponent,
     resolve: {
-      profile: ProfileResolve
+      profile: ProfileResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.profile.home.title'
+      pageTitle: 'hahuApp.profile.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: ProfileUpdateComponent,
     resolve: {
-      profile: ProfileResolve
+      profile: ProfileResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.profile.home.title'
+      pageTitle: 'hahuApp.profile.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: ProfileUpdateComponent,
     resolve: {
-      profile: ProfileResolve
+      profile: ProfileResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.profile.home.title'
+      pageTitle: 'hahuApp.profile.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

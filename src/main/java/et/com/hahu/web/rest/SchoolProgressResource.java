@@ -137,6 +137,7 @@ public class SchoolProgressResource {
     @DeleteMapping("/school-progresses/{id}")
     public ResponseEntity<Void> deleteSchoolProgress(@PathVariable Long id) {
         log.debug("REST request to delete SchoolProgress : {}", id);
+
         schoolProgressService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

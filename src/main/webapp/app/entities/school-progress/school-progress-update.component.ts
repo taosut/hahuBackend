@@ -12,7 +12,7 @@ import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-school-progress-update',
-  templateUrl: './school-progress-update.component.html'
+  templateUrl: './school-progress-update.component.html',
 })
 export class SchoolProgressUpdateComponent implements OnInit {
   isSaving = false;
@@ -24,7 +24,7 @@ export class SchoolProgressUpdateComponent implements OnInit {
     year: [],
     semester: [],
     result: [],
-    userId: []
+    userId: [],
   });
 
   constructor(
@@ -49,7 +49,7 @@ export class SchoolProgressUpdateComponent implements OnInit {
       year: schoolProgress.year,
       semester: schoolProgress.semester,
       result: schoolProgress.result,
-      userId: schoolProgress.userId
+      userId: schoolProgress.userId,
     });
   }
 
@@ -75,7 +75,7 @@ export class SchoolProgressUpdateComponent implements OnInit {
       year: this.editForm.get(['year'])!.value,
       semester: this.editForm.get(['semester'])!.value,
       result: this.editForm.get(['result'])!.value,
-      userId: this.editForm.get(['userId'])!.value
+      userId: this.editForm.get(['userId'])!.value,
     };
   }
 

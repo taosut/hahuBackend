@@ -18,7 +18,7 @@
         <span jhiTranslate="hahuApp.album.home.notFound">No albums found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="albums?.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="albums && albums.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
@@ -63,7 +63,7 @@
         </table>
     </div>
 
-    <div *ngIf="albums?.length > 0">
+    <div *ngIf="albums && albums.length > 0">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

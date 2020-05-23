@@ -35,7 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link ScheduleResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class ScheduleResourceIT {
@@ -105,7 +104,6 @@ public class ScheduleResourceIT {
     @Transactional
     public void createSchedule() throws Exception {
         int databaseSizeBeforeCreate = scheduleRepository.findAll().size();
-
         // Create the Schedule
         ScheduleDTO scheduleDTO = scheduleMapper.toDto(schedule);
         restScheduleMockMvc.perform(post("/api/schedules")
@@ -471,7 +469,6 @@ public class ScheduleResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

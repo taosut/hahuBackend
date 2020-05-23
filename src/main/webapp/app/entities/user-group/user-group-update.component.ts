@@ -18,7 +18,7 @@ type SelectableEntity = IUser | ISchool;
 
 @Component({
   selector: 'jhi-user-group-update',
-  templateUrl: './user-group-update.component.html'
+  templateUrl: './user-group-update.component.html',
 })
 export class UserGroupUpdateComponent implements OnInit {
   isSaving = false;
@@ -34,7 +34,7 @@ export class UserGroupUpdateComponent implements OnInit {
     groupType: [],
     users: [],
     owners: [],
-    schoolId: []
+    schoolId: [],
   });
 
   constructor(
@@ -68,7 +68,7 @@ export class UserGroupUpdateComponent implements OnInit {
       groupType: userGroup.groupType,
       users: userGroup.users,
       owners: userGroup.owners,
-      schoolId: userGroup.schoolId
+      schoolId: userGroup.schoolId,
     });
   }
 
@@ -91,7 +91,7 @@ export class UserGroupUpdateComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -123,7 +123,7 @@ export class UserGroupUpdateComponent implements OnInit {
       groupType: this.editForm.get(['groupType'])!.value,
       users: this.editForm.get(['users'])!.value,
       owners: this.editForm.get(['owners'])!.value,
-      schoolId: this.editForm.get(['schoolId'])!.value
+      schoolId: this.editForm.get(['schoolId'])!.value,
     };
   }
 

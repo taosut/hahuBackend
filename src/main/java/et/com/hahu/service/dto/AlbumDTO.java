@@ -2,7 +2,6 @@ package et.com.hahu.service.dto;
 
 import io.swagger.annotations.ApiModel;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.Album} entity.
@@ -56,22 +55,19 @@ public class AlbumDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AlbumDTO)) {
             return false;
         }
 
-        AlbumDTO albumDTO = (AlbumDTO) o;
-        if (albumDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), albumDTO.getId());
+        return id != null && id.equals(((AlbumDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "AlbumDTO{" +

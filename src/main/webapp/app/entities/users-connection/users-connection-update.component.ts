@@ -14,7 +14,7 @@ import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-users-connection-update',
-  templateUrl: './users-connection-update.component.html'
+  templateUrl: './users-connection-update.component.html',
 })
 export class UsersConnectionUpdateComponent implements OnInit {
   isSaving = false;
@@ -24,7 +24,7 @@ export class UsersConnectionUpdateComponent implements OnInit {
     id: [],
     registeredTime: [],
     followerId: [],
-    followingId: []
+    followingId: [],
   });
 
   constructor(
@@ -52,7 +52,7 @@ export class UsersConnectionUpdateComponent implements OnInit {
       id: usersConnection.id,
       registeredTime: usersConnection.registeredTime ? usersConnection.registeredTime.format(DATE_TIME_FORMAT) : null,
       followerId: usersConnection.followerId,
-      followingId: usersConnection.followingId
+      followingId: usersConnection.followingId,
     });
   }
 
@@ -78,7 +78,7 @@ export class UsersConnectionUpdateComponent implements OnInit {
         ? moment(this.editForm.get(['registeredTime'])!.value, DATE_TIME_FORMAT)
         : undefined,
       followerId: this.editForm.get(['followerId'])!.value,
-      followingId: this.editForm.get(['followingId'])!.value
+      followingId: this.editForm.get(['followingId'])!.value,
     };
   }
 

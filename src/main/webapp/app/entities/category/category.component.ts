@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,7 +13,7 @@ import { CategoryDeleteDialogComponent } from './category-delete-dialog.componen
 
 @Component({
   selector: 'jhi-category',
-  templateUrl: './category.component.html'
+  templateUrl: './category.component.html',
 })
 export class CategoryComponent implements OnInit, OnDestroy {
   categories?: ICategory[];
@@ -40,7 +40,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
-        sort: this.sort()
+        sort: this.sort(),
       })
       .subscribe(
         (res: HttpResponse<ICategory[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
@@ -56,7 +56,26 @@ export class CategoryComponent implements OnInit, OnDestroy {
       this.ngbPaginationPage = data.pagingParams.page;
       this.loadPage();
     });
+    this.handleBackNavigation();
     this.registerChangeInCategories();
+  }
+
+  handleBackNavigation(): void {
+    this.activatedRoute.queryParamMap.subscribe((params: ParamMap) => {
+      const prevPage = params.get('page');
+      const prevSort = params.get('sort');
+      const prevSortSplit = prevSort?.split(',');
+      if (prevSortSplit) {
+        this.predicate = prevSortSplit[0];
+        this.ascending = prevSortSplit[1] === 'asc';
+      }
+      if (prevPage && +prevPage !== this.page) {
+        this.ngbPaginationPage = +prevPage;
+        this.loadPage(+prevPage);
+      } else {
+        this.loadPage(this.page);
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -94,8 +113,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,
-        sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
-      }
+        sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc'),
+      },
     });
     this.categories = data || [];
   }

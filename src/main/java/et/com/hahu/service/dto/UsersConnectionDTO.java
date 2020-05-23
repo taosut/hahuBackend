@@ -3,7 +3,6 @@ package et.com.hahu.service.dto;
 import io.swagger.annotations.ApiModel;
 import java.time.Instant;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.UsersConnection} entity.
@@ -77,22 +76,19 @@ public class UsersConnectionDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof UsersConnectionDTO)) {
             return false;
         }
 
-        UsersConnectionDTO usersConnectionDTO = (UsersConnectionDTO) o;
-        if (usersConnectionDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), usersConnectionDTO.getId());
+        return id != null && id.equals(((UsersConnectionDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "UsersConnectionDTO{" +

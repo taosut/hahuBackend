@@ -18,7 +18,7 @@ type SelectableEntity = IPost | IComment;
 
 @Component({
   selector: 'jhi-comment-update',
-  templateUrl: './comment-update.component.html'
+  templateUrl: './comment-update.component.html',
 })
 export class CommentUpdateComponent implements OnInit {
   isSaving = false;
@@ -31,7 +31,7 @@ export class CommentUpdateComponent implements OnInit {
     postedDate: [],
     modifiedDate: [],
     postId: [],
-    commentId: []
+    commentId: [],
   });
 
   constructor(
@@ -66,7 +66,7 @@ export class CommentUpdateComponent implements OnInit {
       postedDate: comment.postedDate ? comment.postedDate.format(DATE_TIME_FORMAT) : null,
       modifiedDate: comment.modifiedDate ? comment.modifiedDate.format(DATE_TIME_FORMAT) : null,
       postId: comment.postId,
-      commentId: comment.commentId
+      commentId: comment.commentId,
     });
   }
 
@@ -110,7 +110,7 @@ export class CommentUpdateComponent implements OnInit {
         ? moment(this.editForm.get(['modifiedDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
       postId: this.editForm.get(['postId'])!.value,
-      commentId: this.editForm.get(['commentId'])!.value
+      commentId: this.editForm.get(['commentId'])!.value,
     };
   }
 

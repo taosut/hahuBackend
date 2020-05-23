@@ -14,8 +14,8 @@ import { notificationMetaDataRoute } from './notification-meta-data.route';
     NotificationMetaDataComponent,
     NotificationMetaDataDetailComponent,
     NotificationMetaDataUpdateComponent,
-    NotificationMetaDataDeleteDialogComponent
+    NotificationMetaDataDeleteDialogComponent,
   ],
-  entryComponents: [NotificationMetaDataDeleteDialogComponent]
+  entryComponents: [NotificationMetaDataDeleteDialogComponent],
 })
 export class HahuNotificationMetaDataModule {}

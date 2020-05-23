@@ -6,7 +6,7 @@ import { ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from './category.service';
 
 @Component({
-  templateUrl: './category-delete-dialog.component.html'
+  templateUrl: './category-delete-dialog.component.html',
 })
 export class CategoryDeleteDialogComponent {
   category?: ICategory;

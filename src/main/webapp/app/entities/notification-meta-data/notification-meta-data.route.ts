@@ -40,49 +40,49 @@ export const notificationMetaDataRoute: Routes = [
     path: '',
     component: NotificationMetaDataComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.notificationMetaData.home.title'
+      pageTitle: 'hahuApp.notificationMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: NotificationMetaDataDetailComponent,
     resolve: {
-      notificationMetaData: NotificationMetaDataResolve
+      notificationMetaData: NotificationMetaDataResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.notificationMetaData.home.title'
+      pageTitle: 'hahuApp.notificationMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: NotificationMetaDataUpdateComponent,
     resolve: {
-      notificationMetaData: NotificationMetaDataResolve
+      notificationMetaData: NotificationMetaDataResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.notificationMetaData.home.title'
+      pageTitle: 'hahuApp.notificationMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: NotificationMetaDataUpdateComponent,
     resolve: {
-      notificationMetaData: NotificationMetaDataResolve
+      notificationMetaData: NotificationMetaDataResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.notificationMetaData.home.title'
+      pageTitle: 'hahuApp.notificationMetaData.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

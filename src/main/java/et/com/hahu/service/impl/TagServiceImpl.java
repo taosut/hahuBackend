@@ -61,6 +61,7 @@ public class TagServiceImpl implements TagService {
             .map(tagMapper::toDto);
     }
 
+
     /**
      * Get one tag by id.
      *
@@ -83,6 +84,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Tag : {}", id);
+
         tagRepository.deleteById(id);
     }
 }

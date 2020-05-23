@@ -128,7 +128,6 @@ public class UserGroupResourceIT {
     @Transactional
     public void createUserGroup() throws Exception {
         int databaseSizeBeforeCreate = userGroupRepository.findAll().size();
-
         // Create the UserGroup
         UserGroupDTO userGroupDTO = userGroupMapper.toDto(userGroup);
         restUserGroupMockMvc.perform(post("/api/user-groups")
@@ -510,7 +509,6 @@ public class UserGroupResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

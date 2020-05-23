@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link PostMetaDataResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class PostMetaDataResourceIT {
@@ -106,7 +105,6 @@ public class PostMetaDataResourceIT {
     @Transactional
     public void createPostMetaData() throws Exception {
         int databaseSizeBeforeCreate = postMetaDataRepository.findAll().size();
-
         // Create the PostMetaData
         PostMetaDataDTO postMetaDataDTO = postMetaDataMapper.toDto(postMetaData);
         restPostMetaDataMockMvc.perform(post("/api/post-meta-data")
@@ -410,7 +408,6 @@ public class PostMetaDataResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

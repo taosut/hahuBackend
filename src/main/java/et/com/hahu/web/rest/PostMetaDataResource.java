@@ -137,6 +137,7 @@ public class PostMetaDataResource {
     @DeleteMapping("/post-meta-data/{id}")
     public ResponseEntity<Void> deletePostMetaData(@PathVariable Long id) {
         log.debug("REST request to delete PostMetaData : {}", id);
+
         postMetaDataService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

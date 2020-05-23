@@ -40,49 +40,49 @@ export const usersConnectionRoute: Routes = [
     path: '',
     component: UsersConnectionComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.usersConnection.home.title'
+      pageTitle: 'hahuApp.usersConnection.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: UsersConnectionDetailComponent,
     resolve: {
-      usersConnection: UsersConnectionResolve
+      usersConnection: UsersConnectionResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.usersConnection.home.title'
+      pageTitle: 'hahuApp.usersConnection.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: UsersConnectionUpdateComponent,
     resolve: {
-      usersConnection: UsersConnectionResolve
+      usersConnection: UsersConnectionResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.usersConnection.home.title'
+      pageTitle: 'hahuApp.usersConnection.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: UsersConnectionUpdateComponent,
     resolve: {
-      usersConnection: UsersConnectionResolve
+      usersConnection: UsersConnectionResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.usersConnection.home.title'
+      pageTitle: 'hahuApp.usersConnection.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -138,6 +138,7 @@ public class SchoolResource {
     @DeleteMapping("/schools/{id}")
     public ResponseEntity<Void> deleteSchool(@PathVariable Long id) {
         log.debug("REST request to delete School : {}", id);
+
         schoolService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

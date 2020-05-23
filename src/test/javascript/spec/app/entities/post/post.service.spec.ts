@@ -18,7 +18,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -46,7 +46,7 @@ describe('Service Tests', () => {
           {
             postedDate: currentDate.format(DATE_TIME_FORMAT),
             modifiedDate: currentDate.format(DATE_TIME_FORMAT),
-            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT)
+            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -64,7 +64,7 @@ describe('Service Tests', () => {
             id: 0,
             postedDate: currentDate.format(DATE_TIME_FORMAT),
             modifiedDate: currentDate.format(DATE_TIME_FORMAT),
-            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT)
+            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -73,7 +73,7 @@ describe('Service Tests', () => {
           {
             postedDate: currentDate,
             modifiedDate: currentDate,
-            instantPostEndDate: currentDate
+            instantPostEndDate: currentDate,
           },
           returnedFromService
         );
@@ -95,7 +95,7 @@ describe('Service Tests', () => {
             featuredImage: 'BBBBBB',
             postedDate: currentDate.format(DATE_TIME_FORMAT),
             modifiedDate: currentDate.format(DATE_TIME_FORMAT),
-            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT)
+            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -104,7 +104,7 @@ describe('Service Tests', () => {
           {
             postedDate: currentDate,
             modifiedDate: currentDate,
-            instantPostEndDate: currentDate
+            instantPostEndDate: currentDate,
           },
           returnedFromService
         );
@@ -126,7 +126,7 @@ describe('Service Tests', () => {
             featuredImage: 'BBBBBB',
             postedDate: currentDate.format(DATE_TIME_FORMAT),
             modifiedDate: currentDate.format(DATE_TIME_FORMAT),
-            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT)
+            instantPostEndDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -135,7 +135,7 @@ describe('Service Tests', () => {
           {
             postedDate: currentDate,
             modifiedDate: currentDate,
-            instantPostEndDate: currentDate
+            instantPostEndDate: currentDate,
           },
           returnedFromService
         );

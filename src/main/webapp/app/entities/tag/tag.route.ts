@@ -40,49 +40,49 @@ export const tagRoute: Routes = [
     path: '',
     component: TagComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.tag.home.title'
+      pageTitle: 'hahuApp.tag.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: TagDetailComponent,
     resolve: {
-      tag: TagResolve
+      tag: TagResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.tag.home.title'
+      pageTitle: 'hahuApp.tag.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: TagUpdateComponent,
     resolve: {
-      tag: TagResolve
+      tag: TagResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.tag.home.title'
+      pageTitle: 'hahuApp.tag.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: TagUpdateComponent,
     resolve: {
-      tag: TagResolve
+      tag: TagResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.tag.home.title'
+      pageTitle: 'hahuApp.tag.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -1,7 +1,6 @@
 package et.com.hahu.service.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
@@ -75,22 +74,19 @@ public class NotificationMetaDataDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof NotificationMetaDataDTO)) {
             return false;
         }
 
-        NotificationMetaDataDTO notificationMetaDataDTO = (NotificationMetaDataDTO) o;
-        if (notificationMetaDataDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), notificationMetaDataDTO.getId());
+        return id != null && id.equals(((NotificationMetaDataDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "NotificationMetaDataDTO{" +

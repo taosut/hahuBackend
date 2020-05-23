@@ -14,8 +14,8 @@ import { schoolProgressRoute } from './school-progress.route';
     SchoolProgressComponent,
     SchoolProgressDetailComponent,
     SchoolProgressUpdateComponent,
-    SchoolProgressDeleteDialogComponent
+    SchoolProgressDeleteDialogComponent,
   ],
-  entryComponents: [SchoolProgressDeleteDialogComponent]
+  entryComponents: [SchoolProgressDeleteDialogComponent],
 })
 export class HahuSchoolProgressModule {}

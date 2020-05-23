@@ -36,7 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link CommentResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class CommentResourceIT {
@@ -106,7 +105,6 @@ public class CommentResourceIT {
     @Transactional
     public void createComment() throws Exception {
         int databaseSizeBeforeCreate = commentRepository.findAll().size();
-
         // Create the Comment
         CommentDTO commentDTO = commentMapper.toDto(comment);
         restCommentMockMvc.perform(post("/api/comments")
@@ -414,7 +412,6 @@ public class CommentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

@@ -19,7 +19,7 @@
                 <dt><span jhiTranslate="hahuApp.postMetaData.blobValue">Blob Value</span></dt>
                 <dd>
                     <div *ngIf="postMetaData.blobValue">
-                        <a (click)="openFile(postMetaData?.blobValueContentType!, postMetaData?.blobValue)" jhiTranslate="entity.action.open">open</a>
+                        <a (click)="openFile(postMetaData.blobValueContentType, postMetaData.blobValue)" jhiTranslate="entity.action.open">open</a>
                         {{ postMetaData.blobValueContentType }}, {{ byteSize(postMetaData.blobValue) }}
                     </div>
                 </dd>

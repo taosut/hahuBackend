@@ -35,6 +35,7 @@ public interface PostService {
      */
     Page<PostDTO> findAllWithEagerRelationships(Pageable pageable);
 
+
     /**
      * Get the "id" post.
      *

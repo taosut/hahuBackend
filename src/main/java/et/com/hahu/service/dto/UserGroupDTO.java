@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModel;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 import javax.persistence.Lob;
 import et.com.hahu.domain.enumeration.GroupType;
 
@@ -119,22 +118,19 @@ public class UserGroupDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof UserGroupDTO)) {
             return false;
         }
 
-        UserGroupDTO userGroupDTO = (UserGroupDTO) o;
-        if (userGroupDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), userGroupDTO.getId());
+        return id != null && id.equals(((UserGroupDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "UserGroupDTO{" +

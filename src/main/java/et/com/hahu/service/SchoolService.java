@@ -35,6 +35,7 @@ public interface SchoolService {
      */
     Page<SchoolDTO> findAllWithEagerRelationships(Pageable pageable);
 
+
     /**
      * Get the "id" school.
      *

@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link AlbumResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class AlbumResourceIT {
@@ -92,7 +91,6 @@ public class AlbumResourceIT {
     @Transactional
     public void createAlbum() throws Exception {
         int databaseSizeBeforeCreate = albumRepository.findAll().size();
-
         // Create the Album
         AlbumDTO albumDTO = albumMapper.toDto(album);
         restAlbumMockMvc.perform(post("/api/albums")
@@ -326,7 +324,6 @@ public class AlbumResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

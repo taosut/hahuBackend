@@ -106,6 +106,7 @@ public class AlbumCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "AlbumCriteria{" +

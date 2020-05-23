@@ -28,6 +28,7 @@ public interface TagService {
      */
     Page<TagDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" tag.
      *

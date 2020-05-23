@@ -6,7 +6,7 @@ import { INotification } from 'app/shared/model/notification.model';
 import { NotificationService } from './notification.service';
 
 @Component({
-  templateUrl: './notification-delete-dialog.component.html'
+  templateUrl: './notification-delete-dialog.component.html',
 })
 export class NotificationDeleteDialogComponent {
   notification?: INotification;

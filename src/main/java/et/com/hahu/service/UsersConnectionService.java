@@ -28,6 +28,7 @@ public interface UsersConnectionService {
      */
     Page<UsersConnectionDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" usersConnection.
      *

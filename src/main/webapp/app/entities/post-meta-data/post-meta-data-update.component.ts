@@ -14,7 +14,7 @@ import { PostService } from 'app/entities/post/post.service';
 
 @Component({
   selector: 'jhi-post-meta-data-update',
-  templateUrl: './post-meta-data-update.component.html'
+  templateUrl: './post-meta-data-update.component.html',
 })
 export class PostMetaDataUpdateComponent implements OnInit {
   isSaving = false;
@@ -26,7 +26,7 @@ export class PostMetaDataUpdateComponent implements OnInit {
     value: [],
     blobValue: [],
     blobValueContentType: [],
-    postId: []
+    postId: [],
   });
 
   constructor(
@@ -53,7 +53,7 @@ export class PostMetaDataUpdateComponent implements OnInit {
       value: postMetaData.value,
       blobValue: postMetaData.blobValue,
       blobValueContentType: postMetaData.blobValueContentType,
-      postId: postMetaData.postId
+      postId: postMetaData.postId,
     });
   }
 
@@ -95,7 +95,7 @@ export class PostMetaDataUpdateComponent implements OnInit {
       value: this.editForm.get(['value'])!.value,
       blobValueContentType: this.editForm.get(['blobValueContentType'])!.value,
       blobValue: this.editForm.get(['blobValue'])!.value,
-      postId: this.editForm.get(['postId'])!.value
+      postId: this.editForm.get(['postId'])!.value,
     };
   }
 

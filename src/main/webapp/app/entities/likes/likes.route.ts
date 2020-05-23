@@ -40,49 +40,49 @@ export const likesRoute: Routes = [
     path: '',
     component: LikesComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.likes.home.title'
+      pageTitle: 'hahuApp.likes.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: LikesDetailComponent,
     resolve: {
-      likes: LikesResolve
+      likes: LikesResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.likes.home.title'
+      pageTitle: 'hahuApp.likes.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: LikesUpdateComponent,
     resolve: {
-      likes: LikesResolve
+      likes: LikesResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.likes.home.title'
+      pageTitle: 'hahuApp.likes.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: LikesUpdateComponent,
     resolve: {
-      likes: LikesResolve
+      likes: LikesResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.likes.home.title'
+      pageTitle: 'hahuApp.likes.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

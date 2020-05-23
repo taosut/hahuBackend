@@ -33,7 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link ImageResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class ImageResourceIT {
@@ -97,7 +96,6 @@ public class ImageResourceIT {
     @Transactional
     public void createImage() throws Exception {
         int databaseSizeBeforeCreate = imageRepository.findAll().size();
-
         // Create the Image
         ImageDTO imageDTO = imageMapper.toDto(image);
         restImageMockMvc.perform(post("/api/images")
@@ -257,7 +255,6 @@ public class ImageResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

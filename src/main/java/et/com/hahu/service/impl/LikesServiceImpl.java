@@ -61,6 +61,7 @@ public class LikesServiceImpl implements LikesService {
             .map(likesMapper::toDto);
     }
 
+
     /**
      * Get one likes by id.
      *
@@ -83,6 +84,7 @@ public class LikesServiceImpl implements LikesService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Likes : {}", id);
+
         likesRepository.deleteById(id);
     }
 }

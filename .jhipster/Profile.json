@@ -1,43 +1,41 @@
 {
-    "name": "Profile",
-    "fields": [
-        {
-            "fieldName": "phone",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "pattern"
-            ],
-            "fieldValidateRulesPattern": "^\\+[0-9]{12}$"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "user",
-            "otherEntityRelationshipName": "profile",
-            "relationshipName": "user",
-            "otherEntityField": "login",
-            "ownerSide": true,
-            "useJPADerivedIdentifier": true
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "user",
-            "otherEntityRelationshipName": "profile",
-            "relationshipName": "family",
-            "otherEntityField": "login",
-            "ownerSide": true
-        }
-    ],
-    "changelogDate": "20200311220400",
-    "entityTableName": "profile",
-    "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl",
-    "jpaMetamodelFiltering": true,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": "*"
+  "name": "Profile",
+  "fields": [
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "^\\+[0-9]{12}$"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "user",
+      "otherEntityField": "login",
+      "ownerSide": true,
+      "useJPADerivedIdentifier": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "family",
+      "otherEntityField": "login",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200311220400",
+  "entityTableName": "profile",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
 }

@@ -61,6 +61,7 @@ public class UserGroupServiceImpl implements UserGroupService {
             .map(userGroupMapper::toDto);
     }
 
+
     /**
      * Get all the userGroups with eager load of many-to-many relationships.
      *
@@ -92,6 +93,7 @@ public class UserGroupServiceImpl implements UserGroupService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete UserGroup : {}", id);
+
         userGroupRepository.deleteById(id);
     }
 }

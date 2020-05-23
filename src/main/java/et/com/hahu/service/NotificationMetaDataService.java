@@ -28,6 +28,7 @@ public interface NotificationMetaDataService {
      */
     Page<NotificationMetaDataDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" notificationMetaData.
      *

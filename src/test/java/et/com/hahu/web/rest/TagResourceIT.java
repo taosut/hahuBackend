@@ -31,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link TagResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class TagResourceIT {
@@ -96,7 +95,6 @@ public class TagResourceIT {
     @Transactional
     public void createTag() throws Exception {
         int databaseSizeBeforeCreate = tagRepository.findAll().size();
-
         // Create the Tag
         TagDTO tagDTO = tagMapper.toDto(tag);
         restTagMockMvc.perform(post("/api/tags")
@@ -392,7 +390,6 @@ public class TagResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

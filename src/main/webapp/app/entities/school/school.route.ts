@@ -40,49 +40,49 @@ export const schoolRoute: Routes = [
     path: '',
     component: SchoolComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.school.home.title'
+      pageTitle: 'hahuApp.school.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: SchoolDetailComponent,
     resolve: {
-      school: SchoolResolve
+      school: SchoolResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.school.home.title'
+      pageTitle: 'hahuApp.school.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: SchoolUpdateComponent,
     resolve: {
-      school: SchoolResolve
+      school: SchoolResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.school.home.title'
+      pageTitle: 'hahuApp.school.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: SchoolUpdateComponent,
     resolve: {
-      school: SchoolResolve
+      school: SchoolResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.school.home.title'
+      pageTitle: 'hahuApp.school.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

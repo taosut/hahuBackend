@@ -20,7 +20,7 @@ type SelectableEntity = IUser | IUserGroup | IScheduleType;
 
 @Component({
   selector: 'jhi-schedule-update',
-  templateUrl: './schedule-update.component.html'
+  templateUrl: './schedule-update.component.html',
 })
 export class ScheduleUpdateComponent implements OnInit {
   isSaving = false;
@@ -35,7 +35,7 @@ export class ScheduleUpdateComponent implements OnInit {
     endTime: [],
     userId: [],
     userGroupId: [],
-    scheduleTypeId: []
+    scheduleTypeId: [],
   });
 
   constructor(
@@ -73,7 +73,7 @@ export class ScheduleUpdateComponent implements OnInit {
       endTime: schedule.endTime ? schedule.endTime.format(DATE_TIME_FORMAT) : null,
       userId: schedule.userId,
       userGroupId: schedule.userGroupId,
-      scheduleTypeId: schedule.scheduleTypeId
+      scheduleTypeId: schedule.scheduleTypeId,
     });
   }
 
@@ -100,7 +100,7 @@ export class ScheduleUpdateComponent implements OnInit {
       endTime: this.editForm.get(['endTime'])!.value ? moment(this.editForm.get(['endTime'])!.value, DATE_TIME_FORMAT) : undefined,
       userId: this.editForm.get(['userId'])!.value,
       userGroupId: this.editForm.get(['userGroupId'])!.value,
-      scheduleTypeId: this.editForm.get(['scheduleTypeId'])!.value
+      scheduleTypeId: this.editForm.get(['scheduleTypeId'])!.value,
     };
   }
 

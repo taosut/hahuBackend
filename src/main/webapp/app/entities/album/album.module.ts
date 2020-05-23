@@ -11,6 +11,6 @@ import { albumRoute } from './album.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(albumRoute)],
   declarations: [AlbumComponent, AlbumDetailComponent, AlbumUpdateComponent, AlbumDeleteDialogComponent],
-  entryComponents: [AlbumDeleteDialogComponent]
+  entryComponents: [AlbumDeleteDialogComponent],
 })
 export class HahuAlbumModule {}

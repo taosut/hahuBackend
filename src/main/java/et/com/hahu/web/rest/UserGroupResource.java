@@ -137,6 +137,7 @@ public class UserGroupResource {
     @DeleteMapping("/user-groups/{id}")
     public ResponseEntity<Void> deleteUserGroup(@PathVariable Long id) {
         log.debug("REST request to delete UserGroup : {}", id);
+
         userGroupService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

@@ -28,6 +28,7 @@ public interface PostMetaDataService {
      */
     Page<PostMetaDataDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" postMetaData.
      *

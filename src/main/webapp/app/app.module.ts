@@ -23,9 +23,9 @@ import { ErrorComponent } from './layouts/error/error.component';
     HahuHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     HahuEntityModule,
-    HahuAppRoutingModule
+    HahuAppRoutingModule,
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
-  bootstrap: [MainComponent]
+  bootstrap: [MainComponent],
 })
 export class HahuAppModule {}

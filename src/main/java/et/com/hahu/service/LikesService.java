@@ -28,6 +28,7 @@ public interface LikesService {
      */
     Page<LikesDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" likes.
      *

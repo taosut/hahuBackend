@@ -11,6 +11,6 @@ import { imageRoute } from './image.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(imageRoute)],
   declarations: [ImageComponent, ImageDetailComponent, ImageUpdateComponent, ImageDeleteDialogComponent],
-  entryComponents: [ImageDeleteDialogComponent]
+  entryComponents: [ImageDeleteDialogComponent],
 })
 export class HahuImageModule {}

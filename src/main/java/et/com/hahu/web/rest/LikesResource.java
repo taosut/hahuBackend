@@ -137,6 +137,7 @@ public class LikesResource {
     @DeleteMapping("/likes/{id}")
     public ResponseEntity<Void> deleteLikes(@PathVariable Long id) {
         log.debug("REST request to delete Likes : {}", id);
+
         likesService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

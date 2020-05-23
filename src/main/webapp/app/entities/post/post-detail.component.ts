@@ -6,7 +6,7 @@ import { IPost } from 'app/shared/model/post.model';
 
 @Component({
   selector: 'jhi-post-detail',
-  templateUrl: './post-detail.component.html'
+  templateUrl: './post-detail.component.html',
 })
 export class PostDetailComponent implements OnInit {
   post: IPost | null = null;
@@ -21,7 +21,7 @@ export class PostDetailComponent implements OnInit {
     return this.dataUtils.byteSize(base64String);
   }
 
-  openFile(contentType: string, base64String: string): void {
+  openFile(contentType = '', base64String: string): void {
     this.dataUtils.openFile(contentType, base64String);
   }
 

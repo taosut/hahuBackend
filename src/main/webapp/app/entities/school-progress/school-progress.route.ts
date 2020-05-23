@@ -40,49 +40,49 @@ export const schoolProgressRoute: Routes = [
     path: '',
     component: SchoolProgressComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'hahuApp.schoolProgress.home.title'
+      pageTitle: 'hahuApp.schoolProgress.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: SchoolProgressDetailComponent,
     resolve: {
-      schoolProgress: SchoolProgressResolve
+      schoolProgress: SchoolProgressResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.schoolProgress.home.title'
+      pageTitle: 'hahuApp.schoolProgress.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: SchoolProgressUpdateComponent,
     resolve: {
-      schoolProgress: SchoolProgressResolve
+      schoolProgress: SchoolProgressResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.schoolProgress.home.title'
+      pageTitle: 'hahuApp.schoolProgress.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: SchoolProgressUpdateComponent,
     resolve: {
-      schoolProgress: SchoolProgressResolve
+      schoolProgress: SchoolProgressResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'hahuApp.schoolProgress.home.title'
+      pageTitle: 'hahuApp.schoolProgress.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

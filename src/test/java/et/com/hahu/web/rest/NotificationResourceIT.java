@@ -37,7 +37,6 @@ import et.com.hahu.domain.enumeration.ContentType;
  * Integration tests for the {@link NotificationResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class NotificationResourceIT {
@@ -131,7 +130,6 @@ public class NotificationResourceIT {
     @Transactional
     public void createNotification() throws Exception {
         int databaseSizeBeforeCreate = notificationRepository.findAll().size();
-
         // Create the Notification
         NotificationDTO notificationDTO = notificationMapper.toDto(notification);
         restNotificationMockMvc.perform(post("/api/notifications")
@@ -647,7 +645,6 @@ public class NotificationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

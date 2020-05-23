@@ -51,7 +51,7 @@ export class CommentService {
   protected convertDateFromClient(comment: IComment): IComment {
     const copy: IComment = Object.assign({}, comment, {
       postedDate: comment.postedDate && comment.postedDate.isValid() ? comment.postedDate.toJSON() : undefined,
-      modifiedDate: comment.modifiedDate && comment.modifiedDate.isValid() ? comment.modifiedDate.toJSON() : undefined
+      modifiedDate: comment.modifiedDate && comment.modifiedDate.isValid() ? comment.modifiedDate.toJSON() : undefined,
     });
     return copy;
   }

@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +18,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "comment")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,22 +41,22 @@ public class Comment implements Serializable {
     private Instant modifiedDate;
 
     @OneToMany(mappedBy = "comment")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Comment> replies = new HashSet<>();
 
     @OneToMany(mappedBy = "comment")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Likes> likes = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("comments")
+    @JsonIgnoreProperties(value = "comments", allowSetters = true)
     private Post post;
 
     @ManyToOne
-    @JsonIgnoreProperties("replies")
+    @JsonIgnoreProperties(value = "replies", allowSetters = true)
     private Comment comment;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -180,7 +179,7 @@ public class Comment implements Serializable {
     public void setComment(Comment comment) {
         this.comment = comment;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -198,6 +197,7 @@ public class Comment implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Comment{" +

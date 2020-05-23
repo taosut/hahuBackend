@@ -35,6 +35,7 @@ public interface ProfileService {
      */
     Page<ProfileDTO> findAllWithEagerRelationships(Pageable pageable);
 
+
     /**
      * Get the "id" profile.
      *

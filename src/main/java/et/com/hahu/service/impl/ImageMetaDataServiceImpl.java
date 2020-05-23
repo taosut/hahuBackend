@@ -61,6 +61,7 @@ public class ImageMetaDataServiceImpl implements ImageMetaDataService {
             .map(imageMetaDataMapper::toDto);
     }
 
+
     /**
      * Get one imageMetaData by id.
      *
@@ -83,6 +84,7 @@ public class ImageMetaDataServiceImpl implements ImageMetaDataService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete ImageMetaData : {}", id);
+
         imageMetaDataRepository.deleteById(id);
     }
 }

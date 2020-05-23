@@ -20,7 +20,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HahuTestModule],
-        declarations: [PostMetaDataDeleteDialogComponent]
+        declarations: [PostMetaDataDeleteDialogComponent],
       })
         .overrideTemplate(PostMetaDataDeleteDialogComponent, '')
         .compileComponents();

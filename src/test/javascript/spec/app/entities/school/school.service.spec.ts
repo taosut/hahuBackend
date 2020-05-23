@@ -14,7 +14,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -50,7 +50,7 @@ describe('Service Tests', () => {
       it('should create a School', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
           },
           elemDefault
         );
@@ -75,7 +75,7 @@ describe('Service Tests', () => {
             about: 'BBBBBB',
             aboutType: 'BBBBBB',
             location: 'BBBBBB',
-            locationType: 'BBBBBB'
+            locationType: 'BBBBBB',
           },
           elemDefault
         );
@@ -100,7 +100,7 @@ describe('Service Tests', () => {
             about: 'BBBBBB',
             aboutType: 'BBBBBB',
             location: 'BBBBBB',
-            locationType: 'BBBBBB'
+            locationType: 'BBBBBB',
           },
           elemDefault
         );

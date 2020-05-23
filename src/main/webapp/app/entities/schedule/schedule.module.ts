@@ -11,6 +11,6 @@ import { scheduleRoute } from './schedule.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(scheduleRoute)],
   declarations: [ScheduleComponent, ScheduleDetailComponent, ScheduleUpdateComponent, ScheduleDeleteDialogComponent],
-  entryComponents: [ScheduleDeleteDialogComponent]
+  entryComponents: [ScheduleDeleteDialogComponent],
 })
 export class HahuScheduleModule {}

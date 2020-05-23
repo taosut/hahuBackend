@@ -31,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link CategoryResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-
 @AutoConfigureMockMvc
 @WithMockUser
 public class CategoryResourceIT {
@@ -96,7 +95,6 @@ public class CategoryResourceIT {
     @Transactional
     public void createCategory() throws Exception {
         int databaseSizeBeforeCreate = categoryRepository.findAll().size();
-
         // Create the Category
         CategoryDTO categoryDTO = categoryMapper.toDto(category);
         restCategoryMockMvc.perform(post("/api/categories")
@@ -392,7 +390,6 @@ public class CategoryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().string("0"));
     }
-
 
     @Test
     @Transactional

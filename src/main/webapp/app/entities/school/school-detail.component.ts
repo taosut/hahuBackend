@@ -6,7 +6,7 @@ import { ISchool } from 'app/shared/model/school.model';
 
 @Component({
   selector: 'jhi-school-detail',
-  templateUrl: './school-detail.component.html'
+  templateUrl: './school-detail.component.html',
 })
 export class SchoolDetailComponent implements OnInit {
   school: ISchool | null = null;
@@ -21,7 +21,7 @@ export class SchoolDetailComponent implements OnInit {
     return this.dataUtils.byteSize(base64String);
   }
 
-  openFile(contentType: string, base64String: string): void {
+  openFile(contentType = '', base64String: string): void {
     this.dataUtils.openFile(contentType, base64String);
   }
 

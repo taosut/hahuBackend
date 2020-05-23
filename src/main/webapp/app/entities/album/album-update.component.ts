@@ -12,7 +12,7 @@ import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-album-update',
-  templateUrl: './album-update.component.html'
+  templateUrl: './album-update.component.html',
 })
 export class AlbumUpdateComponent implements OnInit {
   isSaving = false;
@@ -21,7 +21,7 @@ export class AlbumUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [],
-    userId: []
+    userId: [],
   });
 
   constructor(
@@ -43,7 +43,7 @@ export class AlbumUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: album.id,
       name: album.name,
-      userId: album.userId
+      userId: album.userId,
     });
   }
 
@@ -66,7 +66,7 @@ export class AlbumUpdateComponent implements OnInit {
       ...new Album(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      userId: this.editForm.get(['userId'])!.value
+      userId: this.editForm.get(['userId'])!.value,
     };
   }
 

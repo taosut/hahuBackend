@@ -6,7 +6,7 @@ import { INotificationMetaData } from 'app/shared/model/notification-meta-data.m
 import { NotificationMetaDataService } from './notification-meta-data.service';
 
 @Component({
-  templateUrl: './notification-meta-data-delete-dialog.component.html'
+  templateUrl: './notification-meta-data-delete-dialog.component.html',
 })
 export class NotificationMetaDataDeleteDialogComponent {
   notificationMetaData?: INotificationMetaData;

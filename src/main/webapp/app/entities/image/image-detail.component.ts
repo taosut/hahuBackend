@@ -6,7 +6,7 @@ import { IImage } from 'app/shared/model/image.model';
 
 @Component({
   selector: 'jhi-image-detail',
-  templateUrl: './image-detail.component.html'
+  templateUrl: './image-detail.component.html',
 })
 export class ImageDetailComponent implements OnInit {
   image: IImage | null = null;
@@ -21,7 +21,7 @@ export class ImageDetailComponent implements OnInit {
     return this.dataUtils.byteSize(base64String);
   }
 
-  openFile(contentType: string, base64String: string): void {
+  openFile(contentType = '', base64String: string): void {
     this.dataUtils.openFile(contentType, base64String);
   }
 

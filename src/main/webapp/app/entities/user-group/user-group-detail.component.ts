@@ -6,7 +6,7 @@ import { IUserGroup } from 'app/shared/model/user-group.model';
 
 @Component({
   selector: 'jhi-user-group-detail',
-  templateUrl: './user-group-detail.component.html'
+  templateUrl: './user-group-detail.component.html',
 })
 export class UserGroupDetailComponent implements OnInit {
   userGroup: IUserGroup | null = null;
@@ -21,7 +21,7 @@ export class UserGroupDetailComponent implements OnInit {
     return this.dataUtils.byteSize(base64String);
   }
 
-  openFile(contentType: string, base64String: string): void {
+  openFile(contentType = '', base64String: string): void {
     this.dataUtils.openFile(contentType, base64String);
   }
 

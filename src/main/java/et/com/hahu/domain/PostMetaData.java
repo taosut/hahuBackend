@@ -7,14 +7,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A PostMetaData.
  */
 @Entity
 @Table(name = "post_meta_data")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class PostMetaData implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,10 +37,10 @@ public class PostMetaData implements Serializable {
     private String blobValueContentType;
 
     @ManyToOne
-    @JsonIgnoreProperties("postMetaData")
+    @JsonIgnoreProperties(value = "postMetaData", allowSetters = true)
     private Post post;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -114,7 +113,7 @@ public class PostMetaData implements Serializable {
     public void setPost(Post post) {
         this.post = post;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -132,6 +131,7 @@ public class PostMetaData implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "PostMetaData{" +

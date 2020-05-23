@@ -50,7 +50,7 @@ export class LikesService {
 
   protected convertDateFromClient(likes: ILikes): ILikes {
     const copy: ILikes = Object.assign({}, likes, {
-      registeredTime: likes.registeredTime && likes.registeredTime.isValid() ? likes.registeredTime.toJSON() : undefined
+      registeredTime: likes.registeredTime && likes.registeredTime.isValid() ? likes.registeredTime.toJSON() : undefined,
     });
     return copy;
   }

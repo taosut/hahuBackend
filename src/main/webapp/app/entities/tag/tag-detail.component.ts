@@ -5,7 +5,7 @@ import { ITag } from 'app/shared/model/tag.model';
 
 @Component({
   selector: 'jhi-tag-detail',
-  templateUrl: './tag-detail.component.html'
+  templateUrl: './tag-detail.component.html',
 })
 export class TagDetailComponent implements OnInit {
   tag: ITag | null = null;

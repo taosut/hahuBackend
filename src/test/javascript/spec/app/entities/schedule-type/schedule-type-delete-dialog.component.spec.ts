@@ -20,7 +20,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HahuTestModule],
-        declarations: [ScheduleTypeDeleteDialogComponent]
+        declarations: [ScheduleTypeDeleteDialogComponent],
       })
         .overrideTemplate(ScheduleTypeDeleteDialogComponent, '')
         .compileComponents();

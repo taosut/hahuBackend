@@ -16,7 +16,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -32,7 +32,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             startTime: currentDate.format(DATE_TIME_FORMAT),
-            endTime: currentDate.format(DATE_TIME_FORMAT)
+            endTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -49,7 +49,7 @@ describe('Service Tests', () => {
           {
             id: 0,
             startTime: currentDate.format(DATE_TIME_FORMAT),
-            endTime: currentDate.format(DATE_TIME_FORMAT)
+            endTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -57,7 +57,7 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             startTime: currentDate,
-            endTime: currentDate
+            endTime: currentDate,
           },
           returnedFromService
         );
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
           {
             title: 'BBBBBB',
             startTime: currentDate.format(DATE_TIME_FORMAT),
-            endTime: currentDate.format(DATE_TIME_FORMAT)
+            endTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -82,7 +82,7 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             startTime: currentDate,
-            endTime: currentDate
+            endTime: currentDate,
           },
           returnedFromService
         );
@@ -99,7 +99,7 @@ describe('Service Tests', () => {
           {
             title: 'BBBBBB',
             startTime: currentDate.format(DATE_TIME_FORMAT),
-            endTime: currentDate.format(DATE_TIME_FORMAT)
+            endTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -107,7 +107,7 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             startTime: currentDate,
-            endTime: currentDate
+            endTime: currentDate,
           },
           returnedFromService
         );

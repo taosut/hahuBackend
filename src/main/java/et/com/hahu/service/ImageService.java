@@ -28,6 +28,7 @@ public interface ImageService {
      */
     Page<ImageDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" image.
      *

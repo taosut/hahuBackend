@@ -47,7 +47,7 @@ public class ProfileServiceImpl implements ProfileService {
     public ProfileDTO save(ProfileDTO profileDTO) {
         log.debug("Request to save Profile : {}", profileDTO);
         Profile profile = profileMapper.toEntity(profileDTO);
-        long userId = profileDTO.getUserId();
+        Long userId = profileDTO.getUserId();
         userRepository.findById(userId).ifPresent(profile::user);
         profile = profileRepository.save(profile);
         return profileMapper.toDto(profile);
@@ -66,6 +66,7 @@ public class ProfileServiceImpl implements ProfileService {
         return profileRepository.findAll(pageable)
             .map(profileMapper::toDto);
     }
+
 
     /**
      * Get all the profiles with eager load of many-to-many relationships.
@@ -98,6 +99,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Profile : {}", id);
+
         profileRepository.deleteById(id);
     }
 }

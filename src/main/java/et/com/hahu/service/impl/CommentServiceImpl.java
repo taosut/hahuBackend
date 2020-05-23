@@ -61,6 +61,7 @@ public class CommentServiceImpl implements CommentService {
             .map(commentMapper::toDto);
     }
 
+
     /**
      * Get one comment by id.
      *
@@ -83,6 +84,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Comment : {}", id);
+
         commentRepository.deleteById(id);
     }
 }

@@ -11,6 +11,6 @@ import { userGroupRoute } from './user-group.route';
 @NgModule({
   imports: [HahuSharedModule, RouterModule.forChild(userGroupRoute)],
   declarations: [UserGroupComponent, UserGroupDetailComponent, UserGroupUpdateComponent, UserGroupDeleteDialogComponent],
-  entryComponents: [UserGroupDeleteDialogComponent]
+  entryComponents: [UserGroupDeleteDialogComponent],
 })
 export class HahuUserGroupModule {}
