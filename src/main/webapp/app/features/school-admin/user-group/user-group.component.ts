@@ -27,7 +27,7 @@ export class UserGroupComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
-  @Input() school!: ISchool;
+  @Input() school!: ISchool | null;
 
   constructor(
     protected userGroupService: UserGroupService,

@@ -43,7 +43,7 @@
             <div class="alert alert-warning" id="no-result" *ngIf="school?.users?.length === 0">
                 <span>No user found in this school</span>
             </div>
-            <div class="table-responsive" *ngIf="school?.users.length > 0">
+            <div class="table-responsive" *ngIf="school && school.users && school.users.length > 0">
                 <table class="table table-striped table-sm" aria-describedby="user-management-page-heading">
                     <thead>
                     <tr>
