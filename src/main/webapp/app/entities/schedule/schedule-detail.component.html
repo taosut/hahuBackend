@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="schedule">
+            <h2><span jhiTranslate="hahuApp.schedule.detail.title">Schedule</span> {{ schedule.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.schedule.title">Title</span></dt>
+                <dd>
+                    <span>{{ schedule.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.schedule.startTime">Start Time</span></dt>
+                <dd>
+                    <span>{{ schedule.startTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.schedule.endTime">End Time</span></dt>
+                <dd>
+                    <span>{{ schedule.endTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.schedule.user">User</span></dt>
+                <dd>
+                    {{ schedule.userLogin }}
+                </dd>
+                <dt><span jhiTranslate="hahuApp.schedule.userGroup">User Group</span></dt>
+                <dd>
+                    <div *ngIf="schedule.userGroupId">
+                        <a [routerLink]="['/user-group', schedule.userGroupId, 'view']">{{ schedule.userGroupName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.schedule.scheduleType">Schedule Type</span></dt>
+                <dd>
+                    <div *ngIf="schedule.scheduleTypeId">
+                        <a [routerLink]="['/schedule-type', schedule.scheduleTypeId, 'view']">{{ schedule.scheduleTypeName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/schedule', schedule.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

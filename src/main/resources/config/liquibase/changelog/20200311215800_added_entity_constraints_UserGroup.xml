@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!--
+        Added the constraints for entity UserGroup.
+    -->
+    <changeSet id="20200311215800-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_group_id"
+                                 baseTableName="user_group_user"
+                                 constraintName="fk_user_group_user_user_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_group_user"
+                                 constraintName="fk_user_group_user_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
+        <addForeignKeyConstraint baseColumnNames="user_group_id"
+                                 baseTableName="user_group_owner"
+                                 constraintName="fk_user_group_owner_user_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="user_group_owner"
+                                 constraintName="fk_user_group_owner_owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
+        <addForeignKeyConstraint baseColumnNames="school_id"
+                                 baseTableName="user_group"
+                                 constraintName="fk_user_group_school_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school"/>
+
+    </changeSet>
+</databaseChangeLog>

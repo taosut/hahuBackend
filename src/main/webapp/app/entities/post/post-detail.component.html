@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="post">
+            <h2><span jhiTranslate="hahuApp.post.detail.title">Post</span> {{ post.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.post.title">Title</span></dt>
+                <dd>
+                    <span>{{ post.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.post.content">Content</span></dt>
+                <dd>
+                    <span>{{ post.content }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.post.contentType">Content Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hahuApp.ContentType.' + post.contentType }}">{{ post.contentType }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.post.postType">Post Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hahuApp.PostType.' + post.postType }}">{{ post.postType }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.post.featuredImage">Featured Image</span></dt>
+                <dd>
+                    <div *ngIf="post.featuredImage">
+                        <a (click)="openFile(post?.featuredImageContentType!, post?.featuredImage)">
+                            <img [src]="'data:' + post.featuredImageContentType + ';base64,' + post.featuredImage" style="max-width: 100%;" alt="post image"/>
+                        </a>
+                        {{ post.featuredImageContentType }}, {{ byteSize(post.featuredImage) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.post.postedDate">Posted Date</span></dt>
+                <dd>
+                    <span>{{ post.postedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.post.modifiedDate">Modified Date</span></dt>
+                <dd>
+                    <span>{{ post.modifiedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.post.instantPostEndDate">Instant Post End Date</span></dt>
+                <dd>
+                    <span>{{ post.instantPostEndDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.post.user">User</span></dt>
+                <dd>
+                    {{ post.userLogin }}
+                </dd>
+                <dt><span jhiTranslate="hahuApp.post.category">Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of post.categories; let last = last">
+                        <a [routerLink]="['/category', category?.id, 'view']">{{ category.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.post.tag">Tag</span></dt>
+                <dd>
+                    <span *ngFor="let tag of post.tags; let last = last">
+                        <a [routerLink]="['/tag', tag?.id, 'view']">{{ tag.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/post', post.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

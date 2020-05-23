@@ -1,0 +1,9 @@
+{
+  "hahuApp": {
+    "GroupType": {
+      "null": "",
+      "PUBLIC": "PUBLIC",
+      "PRIVATE": "PRIVATE"
+    }
+  }
+}

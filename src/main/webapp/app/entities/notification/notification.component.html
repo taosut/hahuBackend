@@ -1,0 +1,98 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="hahuApp.notification.home.title">Notifications</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-notification" [routerLink]="['/notification/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="hahuApp.notification.home.createLabel">
+            Create a new Notification
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="notifications?.length === 0">
+        <span jhiTranslate="hahuApp.notification.home.notFound">No notifications found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="notifications?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="featuredImage"><span jhiTranslate="hahuApp.notification.featuredImage">Featured Image</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="title"><span jhiTranslate="hahuApp.notification.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="content"><span jhiTranslate="hahuApp.notification.content">Content</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="contentType"><span jhiTranslate="hahuApp.notification.contentType">Content Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="link"><span jhiTranslate="hahuApp.notification.link">Link</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date"><span jhiTranslate="hahuApp.notification.date">Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="markAsRead"><span jhiTranslate="hahuApp.notification.markAsRead">Mark As Read</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="hahuApp.notification.user">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userGroupName"><span jhiTranslate="hahuApp.notification.userGroup">User Group</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let notification of notifications ;trackBy: trackId">
+                    <td><a [routerLink]="['/notification', notification.id, 'view']">{{ notification.id }}</a></td>
+                    <td>
+                        <a *ngIf="notification.featuredImage" (click)="openFile(notification.featuredImageContentType, notification.featuredImage)">
+                            <img [src]="'data:' + notification.featuredImageContentType + ';base64,' + notification.featuredImage" style="max-height: 30px;" alt="notification image"/>
+                        </a>
+                        <span *ngIf="notification.featuredImage">{{ notification.featuredImageContentType }}, {{ byteSize(notification.featuredImage) }}</span>
+                    </td>
+                    <td>{{ notification.title }}</td>
+                    <td>{{ notification.content }}</td>
+                    <td jhiTranslate="{{ 'hahuApp.ContentType.' + notification.contentType }}">{{ notification.contentType }}</td>
+                    <td>{{ notification.link }}</td>
+                    <td>{{ notification.date | date:'medium' }}</td>
+                    <td>{{ notification.markAsRead }}</td>
+                    <td>
+                        {{ notification.userLogin }}
+                    </td>
+                    <td>
+                        <div *ngIf="notification.userGroupId">
+                            <a [routerLink]="['/user-group', notification.userGroupId , 'view']" >{{ notification.userGroupName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/notification', notification.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/notification', notification.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(notification)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="notifications?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

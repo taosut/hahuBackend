@@ -1,0 +1,24 @@
+{
+  "hahuApp": {
+    "imageMetaData": {
+      "home": {
+        "title": "Image Meta Data",
+        "createLabel": "Create a new Image Meta Data",
+        "createOrEditLabel": "Create or edit a Image Meta Data",
+        "notFound": "No Image Meta Data found"
+      },
+      "created": "A new Image Meta Data is created with identifier {{ param }}",
+      "updated": "A Image Meta Data is updated with identifier {{ param }}",
+      "deleted": "A Image Meta Data is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Image Meta Data {{ id }}?"
+      },
+      "detail": {
+        "title": "Image Meta Data"
+      },
+      "name": "Name",
+      "value": "Value",
+      "image": "Image"
+    }
+  }
+}

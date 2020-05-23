@@ -1,0 +1,11 @@
+id;name;detail;profile_pic;profile_pic_content_type;group_type
+1;Ports;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;PUBLIC
+2;fault-tolerant mobile;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;PRIVATE
+3;benchmark;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;PRIVATE
+4;British Indian Ocean Territory (Chagos Archipelago) digital;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;PUBLIC
+5;programming;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;PRIVATE
+6;system Direct;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;PUBLIC
+7;Configurable Sao Tome and Principe;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;PUBLIC
+8;Tennessee;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;PRIVATE
+9;Data initiative tertiary;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;PRIVATE
+10;Libyan Dinar;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;PUBLIC

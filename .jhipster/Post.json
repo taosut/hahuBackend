@@ -1,0 +1,96 @@
+{
+    "name": "Post",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "contentType",
+            "fieldType": "ContentType",
+            "fieldValues": "TEXT,HTML"
+        },
+        {
+            "fieldName": "postType",
+            "fieldType": "PostType",
+            "fieldValues": "PAGE,POST"
+        },
+        {
+            "fieldName": "featuredImage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "postedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "modifiedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "instantPostEndDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "postMetaData",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "postMetaData"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "comment",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "comment"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "likes",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "like"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "category",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "category",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "tag",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "tag",
+            "otherEntityField": "name",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200311215200",
+    "javadoc": "The Post\\nentity will contain both pages and posts.\\n@author A true hailemaryam",
+    "entityTableName": "post",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

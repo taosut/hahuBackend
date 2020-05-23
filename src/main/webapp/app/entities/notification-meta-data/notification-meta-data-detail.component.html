@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="notificationMetaData">
+            <h2><span jhiTranslate="hahuApp.notificationMetaData.detail.title">Notification Meta Data</span> {{ notificationMetaData.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.notificationMetaData.name">Name</span></dt>
+                <dd>
+                    <span>{{ notificationMetaData.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notificationMetaData.value">Value</span></dt>
+                <dd>
+                    <span>{{ notificationMetaData.value }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notificationMetaData.blobValue">Blob Value</span></dt>
+                <dd>
+                    <div *ngIf="notificationMetaData.blobValue">
+                        <a (click)="openFile(notificationMetaData?.blobValueContentType!, notificationMetaData?.blobValue)" jhiTranslate="entity.action.open">open</a>
+                        {{ notificationMetaData.blobValueContentType }}, {{ byteSize(notificationMetaData.blobValue) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.notificationMetaData.notification">Notification</span></dt>
+                <dd>
+                    <div *ngIf="notificationMetaData.notificationId">
+                        <a [routerLink]="['/notification', notificationMetaData.notificationId, 'view']">{{ notificationMetaData.notificationId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/notification-meta-data', notificationMetaData.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
