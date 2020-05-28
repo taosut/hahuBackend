@@ -8,6 +8,8 @@ export interface IComment {
   modifiedDate?: Moment;
   replies?: IComment[];
   likes?: ILikes[];
+  userLogin?: string;
+  userId?: number;
   postId?: number;
   commentId?: number;
 }
@@ -20,6 +22,8 @@ export class Comment implements IComment {
     public modifiedDate?: Moment,
     public replies?: IComment[],
     public likes?: ILikes[],
+    public userLogin?: string,
+    public userId?: number,
     public postId?: number,
     public commentId?: number
   ) {}

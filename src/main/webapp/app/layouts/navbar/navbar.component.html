@@ -201,6 +201,18 @@
                             <span jhiTranslate="global.menu.entities.school">School</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="shares" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.shares">Shares</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="views" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.views">Views</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

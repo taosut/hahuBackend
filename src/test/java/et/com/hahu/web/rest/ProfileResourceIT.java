@@ -24,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,11 @@ public class ProfileResourceIT {
 
     private static final String DEFAULT_PHONE = "+164353837757";
     private static final String UPDATED_PHONE = "+386380583768";
+
+    private static final byte[] DEFAULT_CURENT_PROFILE_PIC = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_CURENT_PROFILE_PIC = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_CURENT_PROFILE_PIC_CONTENT_TYPE = "image/png";
 
     @Autowired
     private ProfileRepository profileRepository;
@@ -80,7 +86,9 @@ public class ProfileResourceIT {
      */
     public static Profile createEntity(EntityManager em) {
         Profile profile = new Profile()
-            .phone(DEFAULT_PHONE);
+            .phone(DEFAULT_PHONE)
+            .curentProfilePic(DEFAULT_CURENT_PROFILE_PIC)
+            .curentProfilePicContentType(DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -96,7 +104,9 @@ public class ProfileResourceIT {
      */
     public static Profile createUpdatedEntity(EntityManager em) {
         Profile profile = new Profile()
-            .phone(UPDATED_PHONE);
+            .phone(UPDATED_PHONE)
+            .curentProfilePic(UPDATED_CURENT_PROFILE_PIC)
+            .curentProfilePicContentType(UPDATED_CURENT_PROFILE_PIC_CONTENT_TYPE);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -126,6 +136,8 @@ public class ProfileResourceIT {
         assertThat(profileList).hasSize(databaseSizeBeforeCreate + 1);
         Profile testProfile = profileList.get(profileList.size() - 1);
         assertThat(testProfile.getPhone()).isEqualTo(DEFAULT_PHONE);
+        assertThat(testProfile.getCurentProfilePic()).isEqualTo(DEFAULT_CURENT_PROFILE_PIC);
+        assertThat(testProfile.getCurentProfilePicContentType()).isEqualTo(DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE);
 
         // Validate the id for MapsId, the ids must be same
         assertThat(testProfile.getId()).isEqualTo(testProfile.getUser().getId());
@@ -200,7 +212,9 @@ public class ProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(profile.getId().intValue())))
-            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)));
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
+            .andExpect(jsonPath("$.[*].curentProfilePicContentType").value(hasItem(DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].curentProfilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_CURENT_PROFILE_PIC))));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -234,7 +248,9 @@ public class ProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(profile.getId().intValue()))
-            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE));
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
+            .andExpect(jsonPath("$.curentProfilePicContentType").value(DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE))
+            .andExpect(jsonPath("$.curentProfilePic").value(Base64Utils.encodeToString(DEFAULT_CURENT_PROFILE_PIC)));
     }
 
 
@@ -378,7 +394,9 @@ public class ProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(profile.getId().intValue())))
-            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)));
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
+            .andExpect(jsonPath("$.[*].curentProfilePicContentType").value(hasItem(DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].curentProfilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_CURENT_PROFILE_PIC))));
 
         // Check, that the count call also returns 1
         restProfileMockMvc.perform(get("/api/profiles/count?sort=id,desc&" + filter))
@@ -425,7 +443,9 @@ public class ProfileResourceIT {
         // Disconnect from session so that the updates on updatedProfile are not directly saved in db
         em.detach(updatedProfile);
         updatedProfile
-            .phone(UPDATED_PHONE);
+            .phone(UPDATED_PHONE)
+            .curentProfilePic(UPDATED_CURENT_PROFILE_PIC)
+            .curentProfilePicContentType(UPDATED_CURENT_PROFILE_PIC_CONTENT_TYPE);
         ProfileDTO profileDTO = profileMapper.toDto(updatedProfile);
 
         restProfileMockMvc.perform(put("/api/profiles")
@@ -438,6 +458,8 @@ public class ProfileResourceIT {
         assertThat(profileList).hasSize(databaseSizeBeforeUpdate);
         Profile testProfile = profileList.get(profileList.size() - 1);
         assertThat(testProfile.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testProfile.getCurentProfilePic()).isEqualTo(UPDATED_CURENT_PROFILE_PIC);
+        assertThat(testProfile.getCurentProfilePicContentType()).isEqualTo(UPDATED_CURENT_PROFILE_PIC_CONTENT_TYPE);
     }
 
     @Test

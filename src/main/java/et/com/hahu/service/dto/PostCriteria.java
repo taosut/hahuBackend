@@ -77,11 +77,19 @@ public class PostCriteria implements Serializable, Criteria {
 
     private InstantFilter instantPostEndDate;
 
+    private DoubleFilter popularityIndex;
+
+    private DoubleFilter trendingIndex;
+
     private LongFilter postMetaDataId;
 
     private LongFilter commentId;
 
     private LongFilter likeId;
+
+    private LongFilter viewsId;
+
+    private LongFilter sharesId;
 
     private LongFilter userId;
 
@@ -100,9 +108,13 @@ public class PostCriteria implements Serializable, Criteria {
         this.postedDate = other.postedDate == null ? null : other.postedDate.copy();
         this.modifiedDate = other.modifiedDate == null ? null : other.modifiedDate.copy();
         this.instantPostEndDate = other.instantPostEndDate == null ? null : other.instantPostEndDate.copy();
+        this.popularityIndex = other.popularityIndex == null ? null : other.popularityIndex.copy();
+        this.trendingIndex = other.trendingIndex == null ? null : other.trendingIndex.copy();
         this.postMetaDataId = other.postMetaDataId == null ? null : other.postMetaDataId.copy();
         this.commentId = other.commentId == null ? null : other.commentId.copy();
         this.likeId = other.likeId == null ? null : other.likeId.copy();
+        this.viewsId = other.viewsId == null ? null : other.viewsId.copy();
+        this.sharesId = other.sharesId == null ? null : other.sharesId.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
         this.categoryId = other.categoryId == null ? null : other.categoryId.copy();
         this.tagId = other.tagId == null ? null : other.tagId.copy();
@@ -169,6 +181,22 @@ public class PostCriteria implements Serializable, Criteria {
         this.instantPostEndDate = instantPostEndDate;
     }
 
+    public DoubleFilter getPopularityIndex() {
+        return popularityIndex;
+    }
+
+    public void setPopularityIndex(DoubleFilter popularityIndex) {
+        this.popularityIndex = popularityIndex;
+    }
+
+    public DoubleFilter getTrendingIndex() {
+        return trendingIndex;
+    }
+
+    public void setTrendingIndex(DoubleFilter trendingIndex) {
+        this.trendingIndex = trendingIndex;
+    }
+
     public LongFilter getPostMetaDataId() {
         return postMetaDataId;
     }
@@ -191,6 +219,22 @@ public class PostCriteria implements Serializable, Criteria {
 
     public void setLikeId(LongFilter likeId) {
         this.likeId = likeId;
+    }
+
+    public LongFilter getViewsId() {
+        return viewsId;
+    }
+
+    public void setViewsId(LongFilter viewsId) {
+        this.viewsId = viewsId;
+    }
+
+    public LongFilter getSharesId() {
+        return sharesId;
+    }
+
+    public void setSharesId(LongFilter sharesId) {
+        this.sharesId = sharesId;
     }
 
     public LongFilter getUserId() {
@@ -235,9 +279,13 @@ public class PostCriteria implements Serializable, Criteria {
             Objects.equals(postedDate, that.postedDate) &&
             Objects.equals(modifiedDate, that.modifiedDate) &&
             Objects.equals(instantPostEndDate, that.instantPostEndDate) &&
+            Objects.equals(popularityIndex, that.popularityIndex) &&
+            Objects.equals(trendingIndex, that.trendingIndex) &&
             Objects.equals(postMetaDataId, that.postMetaDataId) &&
             Objects.equals(commentId, that.commentId) &&
             Objects.equals(likeId, that.likeId) &&
+            Objects.equals(viewsId, that.viewsId) &&
+            Objects.equals(sharesId, that.sharesId) &&
             Objects.equals(userId, that.userId) &&
             Objects.equals(categoryId, that.categoryId) &&
             Objects.equals(tagId, that.tagId);
@@ -253,9 +301,13 @@ public class PostCriteria implements Serializable, Criteria {
         postedDate,
         modifiedDate,
         instantPostEndDate,
+        popularityIndex,
+        trendingIndex,
         postMetaDataId,
         commentId,
         likeId,
+        viewsId,
+        sharesId,
         userId,
         categoryId,
         tagId
@@ -273,9 +325,13 @@ public class PostCriteria implements Serializable, Criteria {
                 (postedDate != null ? "postedDate=" + postedDate + ", " : "") +
                 (modifiedDate != null ? "modifiedDate=" + modifiedDate + ", " : "") +
                 (instantPostEndDate != null ? "instantPostEndDate=" + instantPostEndDate + ", " : "") +
+                (popularityIndex != null ? "popularityIndex=" + popularityIndex + ", " : "") +
+                (trendingIndex != null ? "trendingIndex=" + trendingIndex + ", " : "") +
                 (postMetaDataId != null ? "postMetaDataId=" + postMetaDataId + ", " : "") +
                 (commentId != null ? "commentId=" + commentId + ", " : "") +
                 (likeId != null ? "likeId=" + likeId + ", " : "") +
+                (viewsId != null ? "viewsId=" + viewsId + ", " : "") +
+                (sharesId != null ? "sharesId=" + sharesId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
                 (tagId != null ? "tagId=" + tagId + ", " : "") +

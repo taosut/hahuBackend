@@ -23,6 +23,10 @@ public class CommentDTO implements Serializable {
     private Instant modifiedDate;
 
 
+    private Long userId;
+
+    private String userLogin;
+
     private Long postId;
 
     private Long commentId;
@@ -57,6 +61,22 @@ public class CommentDTO implements Serializable {
 
     public void setModifiedDate(Instant modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public Long getPostId() {
@@ -100,6 +120,8 @@ public class CommentDTO implements Serializable {
             ", content='" + getContent() + "'" +
             ", postedDate='" + getPostedDate() + "'" +
             ", modifiedDate='" + getModifiedDate() + "'" +
+            ", userId=" + getUserId() +
+            ", userLogin='" + getUserLogin() + "'" +
             ", postId=" + getPostId() +
             ", commentId=" + getCommentId() +
             "}";

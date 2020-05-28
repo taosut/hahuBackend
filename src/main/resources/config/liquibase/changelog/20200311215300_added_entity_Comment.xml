@@ -24,6 +24,9 @@
             <column name="modified_date" type="datetime">
                 <constraints nullable="true" />
             </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="post_id" type="bigint">
                 <constraints nullable="true" />
             </column>

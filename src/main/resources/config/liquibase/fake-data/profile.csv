@@ -1,5 +1,5 @@
-id;phone
-1;"+888561892538"
-2;"+003257645877"
-3;"+211451639386"
-4;"+392387531594"
+id;phone;curent_profile_pic;curent_profile_pic_content_type
+1;"+888561892538";../fake-data/blob/hipster.png;image/png
+2;"+003257645877";../fake-data/blob/hipster.png;image/png
+3;"+211451639386";../fake-data/blob/hipster.png;image/png
+4;"+392387531594";../fake-data/blob/hipster.png;image/png

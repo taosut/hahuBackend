@@ -63,6 +63,12 @@ public class Post implements Serializable {
     @Column(name = "instant_post_end_date")
     private Instant instantPostEndDate;
 
+    @Column(name = "popularity_index")
+    private Double popularityIndex;
+
+    @Column(name = "trending_index")
+    private Double trendingIndex;
+
     @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<PostMetaData> postMetaData = new HashSet<>();
@@ -74,6 +80,14 @@ public class Post implements Serializable {
     @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Likes> likes = new HashSet<>();
+
+    @OneToMany(mappedBy = "post")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Views> views = new HashSet<>();
+
+    @OneToMany(mappedBy = "post")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Shares> shares = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "posts", allowSetters = true)
@@ -219,6 +233,32 @@ public class Post implements Serializable {
         this.instantPostEndDate = instantPostEndDate;
     }
 
+    public Double getPopularityIndex() {
+        return popularityIndex;
+    }
+
+    public Post popularityIndex(Double popularityIndex) {
+        this.popularityIndex = popularityIndex;
+        return this;
+    }
+
+    public void setPopularityIndex(Double popularityIndex) {
+        this.popularityIndex = popularityIndex;
+    }
+
+    public Double getTrendingIndex() {
+        return trendingIndex;
+    }
+
+    public Post trendingIndex(Double trendingIndex) {
+        this.trendingIndex = trendingIndex;
+        return this;
+    }
+
+    public void setTrendingIndex(Double trendingIndex) {
+        this.trendingIndex = trendingIndex;
+    }
+
     public Set<PostMetaData> getPostMetaData() {
         return postMetaData;
     }
@@ -292,6 +332,56 @@ public class Post implements Serializable {
 
     public void setLikes(Set<Likes> likes) {
         this.likes = likes;
+    }
+
+    public Set<Views> getViews() {
+        return views;
+    }
+
+    public Post views(Set<Views> views) {
+        this.views = views;
+        return this;
+    }
+
+    public Post addViews(Views views) {
+        this.views.add(views);
+        views.setPost(this);
+        return this;
+    }
+
+    public Post removeViews(Views views) {
+        this.views.remove(views);
+        views.setPost(null);
+        return this;
+    }
+
+    public void setViews(Set<Views> views) {
+        this.views = views;
+    }
+
+    public Set<Shares> getShares() {
+        return shares;
+    }
+
+    public Post shares(Set<Shares> shares) {
+        this.shares = shares;
+        return this;
+    }
+
+    public Post addShares(Shares shares) {
+        this.shares.add(shares);
+        shares.setPost(this);
+        return this;
+    }
+
+    public Post removeShares(Shares shares) {
+        this.shares.remove(shares);
+        shares.setPost(null);
+        return this;
+    }
+
+    public void setShares(Set<Shares> shares) {
+        this.shares = shares;
     }
 
     public User getUser() {
@@ -388,6 +478,8 @@ public class Post implements Serializable {
             ", postedDate='" + getPostedDate() + "'" +
             ", modifiedDate='" + getModifiedDate() + "'" +
             ", instantPostEndDate='" + getInstantPostEndDate() + "'" +
+            ", popularityIndex=" + getPopularityIndex() +
+            ", trendingIndex=" + getTrendingIndex() +
             "}";
     }
 }

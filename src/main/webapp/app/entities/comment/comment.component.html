@@ -26,6 +26,7 @@
                     <th scope="col"  jhiSortBy="content"><span jhiTranslate="hahuApp.comment.content">Content</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="postedDate"><span jhiTranslate="hahuApp.comment.postedDate">Posted Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="modifiedDate"><span jhiTranslate="hahuApp.comment.modifiedDate">Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="hahuApp.comment.user">User</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="postId"><span jhiTranslate="hahuApp.comment.post">Post</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="commentId"><span jhiTranslate="hahuApp.comment.comment">Comment</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -37,6 +38,9 @@
                     <td>{{ comment.content }}</td>
                     <td>{{ comment.postedDate | date:'medium' }}</td>
                     <td>{{ comment.modifiedDate | date:'medium' }}</td>
+                    <td>
+                        {{ comment.userLogin }}
+                    </td>
                     <td>
                         <div *ngIf="comment.postId">
                             <a [routerLink]="['/post', comment.postId , 'view']" >{{ comment.postId }}</a>

@@ -9,9 +9,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Comment} and its DTO {@link CommentDTO}.
  */
-@Mapper(componentModel = "spring", uses = {PostMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class, PostMapper.class})
 public interface CommentMapper extends EntityMapper<CommentDTO, Comment> {
 
+    @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.login", target = "userLogin")
     @Mapping(source = "post.id", target = "postId")
     @Mapping(source = "comment.id", target = "commentId")
     CommentDTO toDto(Comment comment);
@@ -20,6 +22,7 @@ public interface CommentMapper extends EntityMapper<CommentDTO, Comment> {
     @Mapping(target = "removeReply", ignore = true)
     @Mapping(target = "likes", ignore = true)
     @Mapping(target = "removeLike", ignore = true)
+    @Mapping(source = "userId", target = "user")
     @Mapping(source = "postId", target = "post")
     @Mapping(source = "commentId", target = "comment")
     Comment toEntity(CommentDTO commentDTO);

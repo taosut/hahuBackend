@@ -4,6 +4,7 @@ import et.com.hahu.HahuApp;
 import et.com.hahu.domain.Comment;
 import et.com.hahu.domain.Comment;
 import et.com.hahu.domain.Likes;
+import et.com.hahu.domain.User;
 import et.com.hahu.domain.Post;
 import et.com.hahu.repository.CommentRepository;
 import et.com.hahu.service.CommentService;
@@ -335,6 +336,26 @@ public class CommentResourceIT {
 
         // Get all the commentList where like equals to likeId + 1
         defaultCommentShouldNotBeFound("likeId.equals=" + (likeId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCommentsByUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        commentRepository.saveAndFlush(comment);
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        comment.setUser(user);
+        commentRepository.saveAndFlush(comment);
+        Long userId = user.getId();
+
+        // Get all the commentList where user equals to userId
+        defaultCommentShouldBeFound("userId.equals=" + userId);
+
+        // Get all the commentList where user equals to userId + 1
+        defaultCommentShouldNotBeFound("userId.equals=" + (userId + 1));
     }
 
 

@@ -79,6 +79,18 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hahuApp.post.popularityIndex" for="field_popularityIndex">Popularity Index</label>
+                    <input type="number" class="form-control" name="popularityIndex" id="field_popularityIndex"
+                           formControlName="popularityIndex"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hahuApp.post.trendingIndex" for="field_trendingIndex">Trending Index</label>
+                    <input type="number" class="form-control" name="trendingIndex" id="field_trendingIndex"
+                           formControlName="trendingIndex"/>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="hahuApp.post.user" for="field_user">User</label>
                     <select class="form-control" id="field_user" name="user" formControlName="userId">
                         <option [ngValue]="null"></option>

@@ -6,6 +6,11 @@
       "fieldType": "String",
       "fieldValidateRules": ["pattern"],
       "fieldValidateRulesPattern": "^\\+[0-9]{12}$"
+    },
+    {
+      "fieldName": "curentProfilePic",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
     }
   ],
   "relationships": [

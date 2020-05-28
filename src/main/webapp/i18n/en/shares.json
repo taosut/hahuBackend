@@ -1,0 +1,24 @@
+{
+  "hahuApp": {
+    "shares": {
+      "home": {
+        "title": "Shares",
+        "createLabel": "Create a new Shares",
+        "createOrEditLabel": "Create or edit a Shares",
+        "notFound": "No Shares found"
+      },
+      "created": "A new Shares is created with identifier {{ param }}",
+      "updated": "A Shares is updated with identifier {{ param }}",
+      "deleted": "A Shares is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Shares {{ id }}?"
+      },
+      "detail": {
+        "title": "Shares"
+      },
+      "registeredTime": "Registered Time",
+      "user": "User",
+      "post": "Post"
+    }
+  }
+}

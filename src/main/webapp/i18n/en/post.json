@@ -24,9 +24,13 @@
       "postedDate": "Posted Date",
       "modifiedDate": "Modified Date",
       "instantPostEndDate": "Instant Post End Date",
+      "popularityIndex": "Popularity Index",
+      "trendingIndex": "Trending Index",
       "postMetaData": "Post Meta Data",
       "comment": "Comment",
       "like": "Like",
+      "views": "Views",
+      "shares": "Shares",
       "user": "User",
       "category": "Category",
       "tag": "Tag"

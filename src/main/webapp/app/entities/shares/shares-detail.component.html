@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="shares">
+            <h2><span jhiTranslate="hahuApp.shares.detail.title">Shares</span> {{ shares.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.shares.registeredTime">Registered Time</span></dt>
+                <dd>
+                    <span>{{ shares.registeredTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.shares.user">User</span></dt>
+                <dd>
+                    {{ shares.userLogin }}
+                </dd>
+                <dt><span jhiTranslate="hahuApp.shares.post">Post</span></dt>
+                <dd>
+                    <div *ngIf="shares.postId">
+                        <a [routerLink]="['/post', shares.postId, 'view']">{{ shares.postId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/shares', shares.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

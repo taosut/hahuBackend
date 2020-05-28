@@ -5,6 +5,8 @@ import et.com.hahu.domain.Post;
 import et.com.hahu.domain.PostMetaData;
 import et.com.hahu.domain.Comment;
 import et.com.hahu.domain.Likes;
+import et.com.hahu.domain.Views;
+import et.com.hahu.domain.Shares;
 import et.com.hahu.domain.User;
 import et.com.hahu.domain.Category;
 import et.com.hahu.domain.Tag;
@@ -79,6 +81,14 @@ public class PostResourceIT {
     private static final Instant DEFAULT_INSTANT_POST_END_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_INSTANT_POST_END_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Double DEFAULT_POPULARITY_INDEX = 1D;
+    private static final Double UPDATED_POPULARITY_INDEX = 2D;
+    private static final Double SMALLER_POPULARITY_INDEX = 1D - 1D;
+
+    private static final Double DEFAULT_TRENDING_INDEX = 1D;
+    private static final Double UPDATED_TRENDING_INDEX = 2D;
+    private static final Double SMALLER_TRENDING_INDEX = 1D - 1D;
+
     @Autowired
     private PostRepository postRepository;
 
@@ -121,7 +131,9 @@ public class PostResourceIT {
             .featuredImageContentType(DEFAULT_FEATURED_IMAGE_CONTENT_TYPE)
             .postedDate(DEFAULT_POSTED_DATE)
             .modifiedDate(DEFAULT_MODIFIED_DATE)
-            .instantPostEndDate(DEFAULT_INSTANT_POST_END_DATE);
+            .instantPostEndDate(DEFAULT_INSTANT_POST_END_DATE)
+            .popularityIndex(DEFAULT_POPULARITY_INDEX)
+            .trendingIndex(DEFAULT_TRENDING_INDEX);
         return post;
     }
     /**
@@ -140,7 +152,9 @@ public class PostResourceIT {
             .featuredImageContentType(UPDATED_FEATURED_IMAGE_CONTENT_TYPE)
             .postedDate(UPDATED_POSTED_DATE)
             .modifiedDate(UPDATED_MODIFIED_DATE)
-            .instantPostEndDate(UPDATED_INSTANT_POST_END_DATE);
+            .instantPostEndDate(UPDATED_INSTANT_POST_END_DATE)
+            .popularityIndex(UPDATED_POPULARITY_INDEX)
+            .trendingIndex(UPDATED_TRENDING_INDEX);
         return post;
     }
 
@@ -173,6 +187,8 @@ public class PostResourceIT {
         assertThat(testPost.getPostedDate()).isEqualTo(DEFAULT_POSTED_DATE);
         assertThat(testPost.getModifiedDate()).isEqualTo(DEFAULT_MODIFIED_DATE);
         assertThat(testPost.getInstantPostEndDate()).isEqualTo(DEFAULT_INSTANT_POST_END_DATE);
+        assertThat(testPost.getPopularityIndex()).isEqualTo(DEFAULT_POPULARITY_INDEX);
+        assertThat(testPost.getTrendingIndex()).isEqualTo(DEFAULT_TRENDING_INDEX);
     }
 
     @Test
@@ -215,7 +231,9 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].featuredImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE))))
             .andExpect(jsonPath("$.[*].postedDate").value(hasItem(DEFAULT_POSTED_DATE.toString())))
             .andExpect(jsonPath("$.[*].modifiedDate").value(hasItem(DEFAULT_MODIFIED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].instantPostEndDate").value(hasItem(DEFAULT_INSTANT_POST_END_DATE.toString())));
+            .andExpect(jsonPath("$.[*].instantPostEndDate").value(hasItem(DEFAULT_INSTANT_POST_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].popularityIndex").value(hasItem(DEFAULT_POPULARITY_INDEX.doubleValue())))
+            .andExpect(jsonPath("$.[*].trendingIndex").value(hasItem(DEFAULT_TRENDING_INDEX.doubleValue())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -257,7 +275,9 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.featuredImage").value(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE)))
             .andExpect(jsonPath("$.postedDate").value(DEFAULT_POSTED_DATE.toString()))
             .andExpect(jsonPath("$.modifiedDate").value(DEFAULT_MODIFIED_DATE.toString()))
-            .andExpect(jsonPath("$.instantPostEndDate").value(DEFAULT_INSTANT_POST_END_DATE.toString()));
+            .andExpect(jsonPath("$.instantPostEndDate").value(DEFAULT_INSTANT_POST_END_DATE.toString()))
+            .andExpect(jsonPath("$.popularityIndex").value(DEFAULT_POPULARITY_INDEX.doubleValue()))
+            .andExpect(jsonPath("$.trendingIndex").value(DEFAULT_TRENDING_INDEX.doubleValue()));
     }
 
 
@@ -620,6 +640,216 @@ public class PostResourceIT {
 
     @Test
     @Transactional
+    public void getAllPostsByPopularityIndexIsEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where popularityIndex equals to DEFAULT_POPULARITY_INDEX
+        defaultPostShouldBeFound("popularityIndex.equals=" + DEFAULT_POPULARITY_INDEX);
+
+        // Get all the postList where popularityIndex equals to UPDATED_POPULARITY_INDEX
+        defaultPostShouldNotBeFound("popularityIndex.equals=" + UPDATED_POPULARITY_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPopularityIndexIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where popularityIndex not equals to DEFAULT_POPULARITY_INDEX
+        defaultPostShouldNotBeFound("popularityIndex.notEquals=" + DEFAULT_POPULARITY_INDEX);
+
+        // Get all the postList where popularityIndex not equals to UPDATED_POPULARITY_INDEX
+        defaultPostShouldBeFound("popularityIndex.notEquals=" + UPDATED_POPULARITY_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPopularityIndexIsInShouldWork() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where popularityIndex in DEFAULT_POPULARITY_INDEX or UPDATED_POPULARITY_INDEX
+        defaultPostShouldBeFound("popularityIndex.in=" + DEFAULT_POPULARITY_INDEX + "," + UPDATED_POPULARITY_INDEX);
+
+        // Get all the postList where popularityIndex equals to UPDATED_POPULARITY_INDEX
+        defaultPostShouldNotBeFound("popularityIndex.in=" + UPDATED_POPULARITY_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPopularityIndexIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where popularityIndex is not null
+        defaultPostShouldBeFound("popularityIndex.specified=true");
+
+        // Get all the postList where popularityIndex is null
+        defaultPostShouldNotBeFound("popularityIndex.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPopularityIndexIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where popularityIndex is greater than or equal to DEFAULT_POPULARITY_INDEX
+        defaultPostShouldBeFound("popularityIndex.greaterThanOrEqual=" + DEFAULT_POPULARITY_INDEX);
+
+        // Get all the postList where popularityIndex is greater than or equal to UPDATED_POPULARITY_INDEX
+        defaultPostShouldNotBeFound("popularityIndex.greaterThanOrEqual=" + UPDATED_POPULARITY_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPopularityIndexIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where popularityIndex is less than or equal to DEFAULT_POPULARITY_INDEX
+        defaultPostShouldBeFound("popularityIndex.lessThanOrEqual=" + DEFAULT_POPULARITY_INDEX);
+
+        // Get all the postList where popularityIndex is less than or equal to SMALLER_POPULARITY_INDEX
+        defaultPostShouldNotBeFound("popularityIndex.lessThanOrEqual=" + SMALLER_POPULARITY_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPopularityIndexIsLessThanSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where popularityIndex is less than DEFAULT_POPULARITY_INDEX
+        defaultPostShouldNotBeFound("popularityIndex.lessThan=" + DEFAULT_POPULARITY_INDEX);
+
+        // Get all the postList where popularityIndex is less than UPDATED_POPULARITY_INDEX
+        defaultPostShouldBeFound("popularityIndex.lessThan=" + UPDATED_POPULARITY_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByPopularityIndexIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where popularityIndex is greater than DEFAULT_POPULARITY_INDEX
+        defaultPostShouldNotBeFound("popularityIndex.greaterThan=" + DEFAULT_POPULARITY_INDEX);
+
+        // Get all the postList where popularityIndex is greater than SMALLER_POPULARITY_INDEX
+        defaultPostShouldBeFound("popularityIndex.greaterThan=" + SMALLER_POPULARITY_INDEX);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllPostsByTrendingIndexIsEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where trendingIndex equals to DEFAULT_TRENDING_INDEX
+        defaultPostShouldBeFound("trendingIndex.equals=" + DEFAULT_TRENDING_INDEX);
+
+        // Get all the postList where trendingIndex equals to UPDATED_TRENDING_INDEX
+        defaultPostShouldNotBeFound("trendingIndex.equals=" + UPDATED_TRENDING_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByTrendingIndexIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where trendingIndex not equals to DEFAULT_TRENDING_INDEX
+        defaultPostShouldNotBeFound("trendingIndex.notEquals=" + DEFAULT_TRENDING_INDEX);
+
+        // Get all the postList where trendingIndex not equals to UPDATED_TRENDING_INDEX
+        defaultPostShouldBeFound("trendingIndex.notEquals=" + UPDATED_TRENDING_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByTrendingIndexIsInShouldWork() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where trendingIndex in DEFAULT_TRENDING_INDEX or UPDATED_TRENDING_INDEX
+        defaultPostShouldBeFound("trendingIndex.in=" + DEFAULT_TRENDING_INDEX + "," + UPDATED_TRENDING_INDEX);
+
+        // Get all the postList where trendingIndex equals to UPDATED_TRENDING_INDEX
+        defaultPostShouldNotBeFound("trendingIndex.in=" + UPDATED_TRENDING_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByTrendingIndexIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where trendingIndex is not null
+        defaultPostShouldBeFound("trendingIndex.specified=true");
+
+        // Get all the postList where trendingIndex is null
+        defaultPostShouldNotBeFound("trendingIndex.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByTrendingIndexIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where trendingIndex is greater than or equal to DEFAULT_TRENDING_INDEX
+        defaultPostShouldBeFound("trendingIndex.greaterThanOrEqual=" + DEFAULT_TRENDING_INDEX);
+
+        // Get all the postList where trendingIndex is greater than or equal to UPDATED_TRENDING_INDEX
+        defaultPostShouldNotBeFound("trendingIndex.greaterThanOrEqual=" + UPDATED_TRENDING_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByTrendingIndexIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where trendingIndex is less than or equal to DEFAULT_TRENDING_INDEX
+        defaultPostShouldBeFound("trendingIndex.lessThanOrEqual=" + DEFAULT_TRENDING_INDEX);
+
+        // Get all the postList where trendingIndex is less than or equal to SMALLER_TRENDING_INDEX
+        defaultPostShouldNotBeFound("trendingIndex.lessThanOrEqual=" + SMALLER_TRENDING_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByTrendingIndexIsLessThanSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where trendingIndex is less than DEFAULT_TRENDING_INDEX
+        defaultPostShouldNotBeFound("trendingIndex.lessThan=" + DEFAULT_TRENDING_INDEX);
+
+        // Get all the postList where trendingIndex is less than UPDATED_TRENDING_INDEX
+        defaultPostShouldBeFound("trendingIndex.lessThan=" + UPDATED_TRENDING_INDEX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPostsByTrendingIndexIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList where trendingIndex is greater than DEFAULT_TRENDING_INDEX
+        defaultPostShouldNotBeFound("trendingIndex.greaterThan=" + DEFAULT_TRENDING_INDEX);
+
+        // Get all the postList where trendingIndex is greater than SMALLER_TRENDING_INDEX
+        defaultPostShouldBeFound("trendingIndex.greaterThan=" + SMALLER_TRENDING_INDEX);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllPostsByPostMetaDataIsEqualToSomething() throws Exception {
         // Initialize the database
         postRepository.saveAndFlush(post);
@@ -675,6 +905,46 @@ public class PostResourceIT {
 
         // Get all the postList where like equals to likeId + 1
         defaultPostShouldNotBeFound("likeId.equals=" + (likeId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllPostsByViewsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+        Views views = ViewsResourceIT.createEntity(em);
+        em.persist(views);
+        em.flush();
+        post.addViews(views);
+        postRepository.saveAndFlush(post);
+        Long viewsId = views.getId();
+
+        // Get all the postList where views equals to viewsId
+        defaultPostShouldBeFound("viewsId.equals=" + viewsId);
+
+        // Get all the postList where views equals to viewsId + 1
+        defaultPostShouldNotBeFound("viewsId.equals=" + (viewsId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllPostsBySharesIsEqualToSomething() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+        Shares shares = SharesResourceIT.createEntity(em);
+        em.persist(shares);
+        em.flush();
+        post.addShares(shares);
+        postRepository.saveAndFlush(post);
+        Long sharesId = shares.getId();
+
+        // Get all the postList where shares equals to sharesId
+        defaultPostShouldBeFound("sharesId.equals=" + sharesId);
+
+        // Get all the postList where shares equals to sharesId + 1
+        defaultPostShouldNotBeFound("sharesId.equals=" + (sharesId + 1));
     }
 
 
@@ -753,7 +1023,9 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].featuredImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_FEATURED_IMAGE))))
             .andExpect(jsonPath("$.[*].postedDate").value(hasItem(DEFAULT_POSTED_DATE.toString())))
             .andExpect(jsonPath("$.[*].modifiedDate").value(hasItem(DEFAULT_MODIFIED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].instantPostEndDate").value(hasItem(DEFAULT_INSTANT_POST_END_DATE.toString())));
+            .andExpect(jsonPath("$.[*].instantPostEndDate").value(hasItem(DEFAULT_INSTANT_POST_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].popularityIndex").value(hasItem(DEFAULT_POPULARITY_INDEX.doubleValue())))
+            .andExpect(jsonPath("$.[*].trendingIndex").value(hasItem(DEFAULT_TRENDING_INDEX.doubleValue())));
 
         // Check, that the count call also returns 1
         restPostMockMvc.perform(get("/api/posts/count?sort=id,desc&" + filter))
@@ -808,7 +1080,9 @@ public class PostResourceIT {
             .featuredImageContentType(UPDATED_FEATURED_IMAGE_CONTENT_TYPE)
             .postedDate(UPDATED_POSTED_DATE)
             .modifiedDate(UPDATED_MODIFIED_DATE)
-            .instantPostEndDate(UPDATED_INSTANT_POST_END_DATE);
+            .instantPostEndDate(UPDATED_INSTANT_POST_END_DATE)
+            .popularityIndex(UPDATED_POPULARITY_INDEX)
+            .trendingIndex(UPDATED_TRENDING_INDEX);
         PostDTO postDTO = postMapper.toDto(updatedPost);
 
         restPostMockMvc.perform(put("/api/posts")
@@ -829,6 +1103,8 @@ public class PostResourceIT {
         assertThat(testPost.getPostedDate()).isEqualTo(UPDATED_POSTED_DATE);
         assertThat(testPost.getModifiedDate()).isEqualTo(UPDATED_MODIFIED_DATE);
         assertThat(testPost.getInstantPostEndDate()).isEqualTo(UPDATED_INSTANT_POST_END_DATE);
+        assertThat(testPost.getPopularityIndex()).isEqualTo(UPDATED_POPULARITY_INDEX);
+        assertThat(testPost.getTrendingIndex()).isEqualTo(UPDATED_TRENDING_INDEX);
     }
 
     @Test

@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(ProfileService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Profile(0, 'AAAAAAA');
+      elemDefault = new Profile(0, 'AAAAAAA', 'image/png', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -55,6 +55,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             phone: 'BBBBBB',
+            curentProfilePic: 'BBBBBB',
           },
           elemDefault
         );
@@ -72,6 +73,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             phone: 'BBBBBB',
+            curentProfilePic: 'BBBBBB',
           },
           elemDefault
         );

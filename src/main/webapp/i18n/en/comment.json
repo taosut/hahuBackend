@@ -21,6 +21,7 @@
       "modifiedDate": "Modified Date",
       "reply": "Reply",
       "like": "Like",
+      "user": "User",
       "post": "Post",
       "comment": "Comment"
     }

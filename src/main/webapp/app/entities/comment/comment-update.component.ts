@@ -11,10 +11,12 @@ import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } 
 import { IComment, Comment } from 'app/shared/model/comment.model';
 import { CommentService } from './comment.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
 import { IPost } from 'app/shared/model/post.model';
 import { PostService } from 'app/entities/post/post.service';
 
-type SelectableEntity = IPost | IComment;
+type SelectableEntity = IUser | IPost | IComment;
 
 @Component({
   selector: 'jhi-comment-update',
@@ -22,6 +24,7 @@ type SelectableEntity = IPost | IComment;
 })
 export class CommentUpdateComponent implements OnInit {
   isSaving = false;
+  users: IUser[] = [];
   posts: IPost[] = [];
   comments: IComment[] = [];
 
@@ -30,6 +33,7 @@ export class CommentUpdateComponent implements OnInit {
     content: [null, [Validators.required]],
     postedDate: [],
     modifiedDate: [],
+    userId: [],
     postId: [],
     commentId: [],
   });
@@ -38,6 +42,7 @@ export class CommentUpdateComponent implements OnInit {
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected commentService: CommentService,
+    protected userService: UserService,
     protected postService: PostService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -53,6 +58,8 @@ export class CommentUpdateComponent implements OnInit {
 
       this.updateForm(comment);
 
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
       this.postService.query().subscribe((res: HttpResponse<IPost[]>) => (this.posts = res.body || []));
 
       this.commentService.query().subscribe((res: HttpResponse<IComment[]>) => (this.comments = res.body || []));
@@ -65,6 +72,7 @@ export class CommentUpdateComponent implements OnInit {
       content: comment.content,
       postedDate: comment.postedDate ? comment.postedDate.format(DATE_TIME_FORMAT) : null,
       modifiedDate: comment.modifiedDate ? comment.modifiedDate.format(DATE_TIME_FORMAT) : null,
+      userId: comment.userId,
       postId: comment.postId,
       commentId: comment.commentId,
     });
@@ -109,6 +117,7 @@ export class CommentUpdateComponent implements OnInit {
       modifiedDate: this.editForm.get(['modifiedDate'])!.value
         ? moment(this.editForm.get(['modifiedDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
+      userId: this.editForm.get(['userId'])!.value,
       postId: this.editForm.get(['postId'])!.value,
       commentId: this.editForm.get(['commentId'])!.value,
     };

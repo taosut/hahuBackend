@@ -1,0 +1,24 @@
+{
+  "hahuApp": {
+    "views": {
+      "home": {
+        "title": "Views",
+        "createLabel": "Create a new Views",
+        "createOrEditLabel": "Create or edit a Views",
+        "notFound": "No Views found"
+      },
+      "created": "A new Views is created with identifier {{ param }}",
+      "updated": "A Views is updated with identifier {{ param }}",
+      "deleted": "A Views is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Views {{ id }}?"
+      },
+      "detail": {
+        "title": "Views"
+      },
+      "registeredTime": "Registered Time",
+      "user": "User",
+      "post": "Post"
+    }
+  }
+}

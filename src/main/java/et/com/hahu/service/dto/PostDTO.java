@@ -36,6 +36,10 @@ public class PostDTO implements Serializable {
 
     private Instant instantPostEndDate;
 
+    private Double popularityIndex;
+
+    private Double trendingIndex;
+
 
     private Long userId;
 
@@ -123,6 +127,22 @@ public class PostDTO implements Serializable {
         this.instantPostEndDate = instantPostEndDate;
     }
 
+    public Double getPopularityIndex() {
+        return popularityIndex;
+    }
+
+    public void setPopularityIndex(Double popularityIndex) {
+        this.popularityIndex = popularityIndex;
+    }
+
+    public Double getTrendingIndex() {
+        return trendingIndex;
+    }
+
+    public void setTrendingIndex(Double trendingIndex) {
+        this.trendingIndex = trendingIndex;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -185,6 +205,8 @@ public class PostDTO implements Serializable {
             ", postedDate='" + getPostedDate() + "'" +
             ", modifiedDate='" + getModifiedDate() + "'" +
             ", instantPostEndDate='" + getInstantPostEndDate() + "'" +
+            ", popularityIndex=" + getPopularityIndex() +
+            ", trendingIndex=" + getTrendingIndex() +
             ", userId=" + getUserId() +
             ", userLogin='" + getUserLogin() + "'" +
             ", categories='" + getCategories() + "'" +

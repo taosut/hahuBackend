@@ -50,6 +50,10 @@ public class Comment implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = "comments", allowSetters = true)
+    private User user;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "comments", allowSetters = true)
     private Post post;
 
     @ManyToOne
@@ -152,6 +156,19 @@ public class Comment implements Serializable {
 
     public void setLikes(Set<Likes> likes) {
         this.likes = likes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Comment user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Post getPost() {

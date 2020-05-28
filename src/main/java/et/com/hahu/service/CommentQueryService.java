@@ -105,6 +105,10 @@ public class CommentQueryService extends QueryService<Comment> {
                 specification = specification.and(buildSpecification(criteria.getLikeId(),
                     root -> root.join(Comment_.likes, JoinType.LEFT).get(Likes_.id)));
             }
+            if (criteria.getUserId() != null) {
+                specification = specification.and(buildSpecification(criteria.getUserId(),
+                    root -> root.join(Comment_.user, JoinType.LEFT).get(User_.id)));
+            }
             if (criteria.getPostId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPostId(),
                     root -> root.join(Comment_.post, JoinType.LEFT).get(Post_.id)));

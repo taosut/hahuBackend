@@ -12,6 +12,15 @@
                 <dd>
                     <span>{{ profile.phone }}</span>
                 </dd>
+                <dt><span jhiTranslate="hahuApp.profile.curentProfilePic">Curent Profile Pic</span></dt>
+                <dd>
+                    <div *ngIf="profile.curentProfilePic">
+                        <a (click)="openFile(profile.curentProfilePicContentType, profile.curentProfilePic)">
+                            <img [src]="'data:' + profile.curentProfilePicContentType + ';base64,' + profile.curentProfilePic" style="max-width: 100%;" alt="profile image"/>
+                        </a>
+                        {{ profile.curentProfilePicContentType }}, {{ byteSize(profile.curentProfilePic) }}
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="hahuApp.profile.user">User</span></dt>
                 <dd>
                     {{ profile.userLogin }}

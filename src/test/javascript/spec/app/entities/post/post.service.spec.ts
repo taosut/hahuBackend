@@ -36,7 +36,9 @@ describe('Service Tests', () => {
         'AAAAAAA',
         currentDate,
         currentDate,
-        currentDate
+        currentDate,
+        0,
+        0
       );
     });
 
@@ -96,6 +98,8 @@ describe('Service Tests', () => {
             postedDate: currentDate.format(DATE_TIME_FORMAT),
             modifiedDate: currentDate.format(DATE_TIME_FORMAT),
             instantPostEndDate: currentDate.format(DATE_TIME_FORMAT),
+            popularityIndex: 1,
+            trendingIndex: 1,
           },
           elemDefault
         );
@@ -127,6 +131,8 @@ describe('Service Tests', () => {
             postedDate: currentDate.format(DATE_TIME_FORMAT),
             modifiedDate: currentDate.format(DATE_TIME_FORMAT),
             instantPostEndDate: currentDate.format(DATE_TIME_FORMAT),
+            popularityIndex: 1,
+            trendingIndex: 1,
           },
           elemDefault
         );

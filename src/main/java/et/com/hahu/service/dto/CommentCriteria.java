@@ -35,6 +35,8 @@ public class CommentCriteria implements Serializable, Criteria {
 
     private LongFilter likeId;
 
+    private LongFilter userId;
+
     private LongFilter postId;
 
     private LongFilter commentId;
@@ -48,6 +50,7 @@ public class CommentCriteria implements Serializable, Criteria {
         this.modifiedDate = other.modifiedDate == null ? null : other.modifiedDate.copy();
         this.replyId = other.replyId == null ? null : other.replyId.copy();
         this.likeId = other.likeId == null ? null : other.likeId.copy();
+        this.userId = other.userId == null ? null : other.userId.copy();
         this.postId = other.postId == null ? null : other.postId.copy();
         this.commentId = other.commentId == null ? null : other.commentId.copy();
     }
@@ -97,6 +100,14 @@ public class CommentCriteria implements Serializable, Criteria {
         this.likeId = likeId;
     }
 
+    public LongFilter getUserId() {
+        return userId;
+    }
+
+    public void setUserId(LongFilter userId) {
+        this.userId = userId;
+    }
+
     public LongFilter getPostId() {
         return postId;
     }
@@ -129,6 +140,7 @@ public class CommentCriteria implements Serializable, Criteria {
             Objects.equals(modifiedDate, that.modifiedDate) &&
             Objects.equals(replyId, that.replyId) &&
             Objects.equals(likeId, that.likeId) &&
+            Objects.equals(userId, that.userId) &&
             Objects.equals(postId, that.postId) &&
             Objects.equals(commentId, that.commentId);
     }
@@ -141,6 +153,7 @@ public class CommentCriteria implements Serializable, Criteria {
         modifiedDate,
         replyId,
         likeId,
+        userId,
         postId,
         commentId
         );
@@ -155,6 +168,7 @@ public class CommentCriteria implements Serializable, Criteria {
                 (modifiedDate != null ? "modifiedDate=" + modifiedDate + ", " : "") +
                 (replyId != null ? "replyId=" + replyId + ", " : "") +
                 (likeId != null ? "likeId=" + likeId + ", " : "") +
+                (userId != null ? "userId=" + userId + ", " : "") +
                 (postId != null ? "postId=" + postId + ", " : "") +
                 (commentId != null ? "commentId=" + commentId + ", " : "") +
             "}";

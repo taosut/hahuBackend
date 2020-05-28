@@ -109,6 +109,12 @@ public class PostQueryService extends QueryService<Post> {
             if (criteria.getInstantPostEndDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getInstantPostEndDate(), Post_.instantPostEndDate));
             }
+            if (criteria.getPopularityIndex() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getPopularityIndex(), Post_.popularityIndex));
+            }
+            if (criteria.getTrendingIndex() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTrendingIndex(), Post_.trendingIndex));
+            }
             if (criteria.getPostMetaDataId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPostMetaDataId(),
                     root -> root.join(Post_.postMetaData, JoinType.LEFT).get(PostMetaData_.id)));
@@ -120,6 +126,14 @@ public class PostQueryService extends QueryService<Post> {
             if (criteria.getLikeId() != null) {
                 specification = specification.and(buildSpecification(criteria.getLikeId(),
                     root -> root.join(Post_.likes, JoinType.LEFT).get(Likes_.id)));
+            }
+            if (criteria.getViewsId() != null) {
+                specification = specification.and(buildSpecification(criteria.getViewsId(),
+                    root -> root.join(Post_.views, JoinType.LEFT).get(Views_.id)));
+            }
+            if (criteria.getSharesId() != null) {
+                specification = specification.and(buildSpecification(criteria.getSharesId(),
+                    root -> root.join(Post_.shares, JoinType.LEFT).get(Shares_.id)));
             }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUserId(),

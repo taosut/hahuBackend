@@ -42,6 +42,12 @@
             <column name="instant_post_end_date" type="datetime">
                 <constraints nullable="true" />
             </column>
+            <column name="popularity_index" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="trending_index" type="double">
+                <constraints nullable="true" />
+            </column>
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -102,6 +108,8 @@
             <column name="posted_date" type="datetime"/>
             <column name="modified_date" type="datetime"/>
             <column name="instant_post_end_date" type="datetime"/>
+            <column name="popularity_index" type="numeric"/>
+            <column name="trending_index" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

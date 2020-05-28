@@ -27,6 +27,13 @@ public class Profile implements Serializable {
     @Column(name = "phone")
     private String phone;
 
+    @Lob
+    @Column(name = "curent_profile_pic")
+    private byte[] curentProfilePic;
+
+    @Column(name = "curent_profile_pic_content_type")
+    private String curentProfilePicContentType;
+
     @OneToOne
 
     @MapsId
@@ -60,6 +67,32 @@ public class Profile implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public byte[] getCurentProfilePic() {
+        return curentProfilePic;
+    }
+
+    public Profile curentProfilePic(byte[] curentProfilePic) {
+        this.curentProfilePic = curentProfilePic;
+        return this;
+    }
+
+    public void setCurentProfilePic(byte[] curentProfilePic) {
+        this.curentProfilePic = curentProfilePic;
+    }
+
+    public String getCurentProfilePicContentType() {
+        return curentProfilePicContentType;
+    }
+
+    public Profile curentProfilePicContentType(String curentProfilePicContentType) {
+        this.curentProfilePicContentType = curentProfilePicContentType;
+        return this;
+    }
+
+    public void setCurentProfilePicContentType(String curentProfilePicContentType) {
+        this.curentProfilePicContentType = curentProfilePicContentType;
     }
 
     public User getUser() {
@@ -121,6 +154,8 @@ public class Profile implements Serializable {
         return "Profile{" +
             "id=" + getId() +
             ", phone='" + getPhone() + "'" +
+            ", curentProfilePic='" + getCurentProfilePic() + "'" +
+            ", curentProfilePicContentType='" + getCurentProfilePicContentType() + "'" +
             "}";
     }
 }

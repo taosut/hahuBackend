@@ -4,6 +4,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the {@link et.com.hahu.domain.Profile} entity.
@@ -15,6 +16,10 @@ public class ProfileDTO implements Serializable {
     @Pattern(regexp = "^\\+[0-9]{12}$")
     private String phone;
 
+    @Lob
+    private byte[] curentProfilePic;
+
+    private String curentProfilePicContentType;
 
     private Long userId;
 
@@ -35,6 +40,22 @@ public class ProfileDTO implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public byte[] getCurentProfilePic() {
+        return curentProfilePic;
+    }
+
+    public void setCurentProfilePic(byte[] curentProfilePic) {
+        this.curentProfilePic = curentProfilePic;
+    }
+
+    public String getCurentProfilePicContentType() {
+        return curentProfilePicContentType;
+    }
+
+    public void setCurentProfilePicContentType(String curentProfilePicContentType) {
+        this.curentProfilePicContentType = curentProfilePicContentType;
     }
 
     public Long getUserId() {
@@ -84,6 +105,7 @@ public class ProfileDTO implements Serializable {
         return "ProfileDTO{" +
             "id=" + getId() +
             ", phone='" + getPhone() + "'" +
+            ", curentProfilePic='" + getCurentProfilePic() + "'" +
             ", userId=" + getUserId() +
             ", userLogin='" + getUserLogin() + "'" +
             ", families='" + getFamilies() + "'" +

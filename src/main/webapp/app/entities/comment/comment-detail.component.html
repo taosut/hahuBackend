@@ -20,6 +20,10 @@
                 <dd>
                     <span>{{ comment.modifiedDate }}</span>
                 </dd>
+                <dt><span jhiTranslate="hahuApp.comment.user">User</span></dt>
+                <dd>
+                    {{ comment.userLogin }}
+                </dd>
                 <dt><span jhiTranslate="hahuApp.comment.post">Post</span></dt>
                 <dd>
                     <div *ngIf="comment.postId">

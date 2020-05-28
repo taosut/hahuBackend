@@ -36,6 +36,14 @@
     {
       "fieldName": "instantPostEndDate",
       "fieldType": "Instant"
+    },
+    {
+      "fieldName": "popularityIndex",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "trendingIndex",
+      "fieldType": "Double"
     }
   ],
   "relationships": [
@@ -56,6 +64,18 @@
       "otherEntityName": "likes",
       "otherEntityRelationshipName": "post",
       "relationshipName": "like"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "views",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "views"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "shares",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "shares"
     },
     {
       "relationshipType": "many-to-one",

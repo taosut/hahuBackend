@@ -28,6 +28,8 @@
         "notificationMetaData": "Notification Meta Data",
         "scheduleType": "Schedule Type",
         "school": "School",
+        "shares": "Shares",
+        "views": "Views",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

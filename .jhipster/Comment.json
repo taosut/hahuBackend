@@ -31,6 +31,13 @@
     },
     {
       "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
       "otherEntityName": "post",
       "otherEntityRelationshipName": "comment",
       "relationshipName": "post",
