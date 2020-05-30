@@ -13,17 +13,9 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./user-group/school.module').then(m => m.HahuSchoolModule)
       },
       {
-        path: 'school-notification',
-        loadChildren: () => import('./notification/notification.module').then(m => m.HahuNotificationModule)
+        path: 'school-user-group-manage',
+        loadChildren: () => import('./user-group-manage/user-group-manage.module').then(m => m.HahuUserGroupManageModule)
       },
-      {
-        path: 'school-progress-add',
-        loadChildren: () => import('./school-progress/school-progress.module').then(m => m.HahuSchoolProgressModule)
-      },
-      {
-        path: 'school-schedule',
-        loadChildren: () => import('./schedule/schedule.module').then(m => m.HahuScheduleModule)
-      }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])
   ]
