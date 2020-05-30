@@ -18,6 +18,7 @@ import {UserGroupService} from "./user-group.service";
   templateUrl: './user-management.component.html'
 })
 export class UserManagementComponent implements OnInit, OnDestroy {
+  ownerSelection!: boolean;
   userGroup!: IUserGroup | null;
   currentAccount: Account | null = null;
   users: User[] | null = null;
@@ -56,9 +57,19 @@ export class UserManagementComponent implements OnInit, OnDestroy {
     }
     return false;
   }
-  isThereFromUserGroupUser(user: IUser): boolean {
+  isThereInsideUsers(user: IUser): boolean {
     if (this.userGroup && this.userGroup.users) {
       for (const item of this.userGroup.users) {
+        if (item.id === user.id) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  isThereInsideOwners(user: IUser): boolean {
+    if (this.userGroup && this.userGroup.owners){
+      for (const item of this.userGroup.owners) {
         if (item.id === user.id) {
           return true;
         }
@@ -77,8 +88,14 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   finish(): void {
     if (this.userGroup) {
       this.selectedUsers.forEach(user => {
-        if (user && this.userGroup && this.userGroup.users && !this.isThereFromUserGroupUser(user)) {
-          this.userGroup.users.push(user);
+        if (!this.ownerSelection) {
+          if (user && this.userGroup && this.userGroup.users && !this.isThereInsideUsers(user)) {
+            this.userGroup.users.push(user);
+          }
+        } else {
+          if (user && this.userGroup && this.userGroup.owners && !this.isThereInsideOwners(user)) {
+            this.userGroup.owners.push(user);
+          }
         }
       });
       this.subscribeToSaveResponse(this.userGroupService.update(this.userGroup));

@@ -1,59 +1,56 @@
 <div class="modal-header">
-    <h4 class="modal-title">Select User To Add To The Group</h4>
+    <h4 class="modal-title">Select <span *ngIf="!ownerSelection">Group Member</span> <span *ngIf="ownerSelection">Group Admin</span>
+        To Add</h4>
 
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-            (click)="cancel()">&times;</button>
+            (click)="cancel()">&times;
+    </button>
 </div>
 
 <div class="modal-body">
-    <div>
-        <div class="table-responsive" *ngIf="users">
-            <table class="table table-striped" aria-describedby="user-management-page-heading">
-                <thead>
-                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
-                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"></th>
-                    <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody *ngIf="users">
-                <tr *ngFor="let user of users; trackBy: trackIdentity">
-                    <td><a [routerLink]="['./', user.login, 'view']">{{ user.id }}</a></td>
-                    <td>{{ user.login }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
-                                jhiTranslate="userManagement.deactivated">Deactivated</button>
-                        <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
-                                [disabled]="!currentAccount || currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
-                    </td>
-                    <td>
-                        <div *ngFor="let authority of user.authorities">
-                            <span class="badge badge-info">{{ authority }}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <input type="checkbox" (change)="selectUser(user)" [value]="isThere(user)">
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="table-responsive" *ngIf="users">
+        <table class="table table-striped" aria-describedby="user-management-page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
+                <th scope="col" jhiSortBy="login"><span>First Name</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="login"><span>Last Name</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody *ngIf="users">
+            <tr *ngFor="let user of users; trackBy: trackIdentity">
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.login }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <input type="checkbox" (change)="selectUser(user)" [value]="isThere(user)">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-        <div *ngIf="users">
-            <div *ngIf="users.length > itemsPerPage">
-                <div class="row justify-content-center">
-                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-                </div>
+    <div *ngIf="users">
+        <div *ngIf="users.length > itemsPerPage">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
 
-                <div class="row justify-content-center">
-                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"
-                                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
-                                    (pageChange)="loadPage(page)"></ngb-pagination>
-                </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"
+                                [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                                (pageChange)="loadPage(page)"></ngb-pagination>
             </div>
         </div>
     </div>

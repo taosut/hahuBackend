@@ -20,6 +20,7 @@ export class MemberListComponent implements OnInit {
   addFromExisting(): void {
     const modalRef = this.modalService.open(UserManagementComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.userGroup = this.userGroup;
+    modalRef.componentInstance.ownerSelection = false;
   }
   removeUser(user: IUser): void{
     if (this.userGroup && this.userGroup.users) {
