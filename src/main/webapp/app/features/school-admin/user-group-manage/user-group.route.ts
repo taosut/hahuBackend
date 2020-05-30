@@ -9,7 +9,6 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
 import { IUserGroup, UserGroup } from 'app/shared/model/user-group.model';
 import { UserGroupService } from './user-group.service';
 import { UserGroupDetailComponent } from './user-group-detail.component';
-import { UserGroupUpdateComponent } from './user-group-update.component';
 
 @Injectable({ providedIn: 'root' })
 export class UserGroupResolve implements Resolve<IUserGroup> {
@@ -37,30 +36,6 @@ export const userGroupRoute: Routes = [
   {
     path: ':id/view',
     component: UserGroupDetailComponent,
-    resolve: {
-      userGroup: UserGroupResolve,
-    },
-    data: {
-      authorities: [Authority.SCHOOL_ADMIN],
-      pageTitle: 'hahuApp.userGroup.home.title',
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: 'new',
-    component: UserGroupUpdateComponent,
-    resolve: {
-      userGroup: UserGroupResolve,
-    },
-    data: {
-      authorities: [Authority.SCHOOL_ADMIN],
-      pageTitle: 'hahuApp.userGroup.home.title',
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: ':id/edit',
-    component: UserGroupUpdateComponent,
     resolve: {
       userGroup: UserGroupResolve,
     },

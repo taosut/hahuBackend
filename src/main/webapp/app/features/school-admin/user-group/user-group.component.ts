@@ -108,7 +108,7 @@ export class UserGroupComponent implements OnInit, OnDestroy {
       modalRef.componentInstance.school = this.school;
     }
   }
-  manage(userGroup?: IUserGroup): void{
+  manage(userGroup: IUserGroup): void{
     this.router.navigate(['school-user-group-manage', userGroup.id , 'view']);
   }
 
