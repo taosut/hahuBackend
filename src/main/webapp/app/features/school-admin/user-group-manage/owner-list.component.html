@@ -19,7 +19,7 @@
         </thead>
         <tbody *ngIf="userGroup?.owners">
         <tr *ngFor="let user of userGroup?.owners">
-            <td>{{ user.firstName + user.lastName}}</td>
+            <td>{{ user.firstName + ' '+ user.lastName}}</td>
             <td class="text-right">
                 <div class="btn-group">
                     <button type="button" (click)="removeUser(user)"
