@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Family.
+    -->
+    <changeSet id="20200602120341-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="id"
+                                 baseTableName="family"
+                                 constraintName="fk_family_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="family_id"
+                                 baseTableName="family_parent"
+                                 constraintName="fk_family_parent_family_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="family"/>
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="family_parent"
+                                 constraintName="fk_family_parent_parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
+    </changeSet>
+</databaseChangeLog>

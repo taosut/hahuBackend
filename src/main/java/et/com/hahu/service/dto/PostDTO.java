@@ -46,6 +46,8 @@ public class PostDTO implements Serializable {
     private String userLogin;
     private Set<CategoryDTO> categories = new HashSet<>();
     private Set<TagDTO> tags = new HashSet<>();
+
+    private Long pageId;
     
     public Long getId() {
         return id;
@@ -175,6 +177,14 @@ public class PostDTO implements Serializable {
         this.tags = tags;
     }
 
+    public Long getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(Long postId) {
+        this.pageId = postId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -211,6 +221,7 @@ public class PostDTO implements Serializable {
             ", userLogin='" + getUserLogin() + "'" +
             ", categories='" + getCategories() + "'" +
             ", tags='" + getTags() + "'" +
+            ", pageId=" + getPageId() +
             "}";
     }
 }

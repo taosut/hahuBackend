@@ -18,7 +18,7 @@ import { CategoryService } from 'app/entities/category/category.service';
 import { ITag } from 'app/shared/model/tag.model';
 import { TagService } from 'app/entities/tag/tag.service';
 
-type SelectableEntity = IUser | ICategory | ITag;
+type SelectableEntity = IUser | ICategory | ITag | IPost;
 
 type SelectableManyToManyEntity = ICategory | ITag;
 
@@ -31,6 +31,7 @@ export class PostUpdateComponent implements OnInit {
   users: IUser[] = [];
   categories: ICategory[] = [];
   tags: ITag[] = [];
+  posts: IPost[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -48,6 +49,7 @@ export class PostUpdateComponent implements OnInit {
     userId: [],
     categories: [],
     tags: [],
+    pageId: [],
   });
 
   constructor(
@@ -78,6 +80,8 @@ export class PostUpdateComponent implements OnInit {
       this.categoryService.query().subscribe((res: HttpResponse<ICategory[]>) => (this.categories = res.body || []));
 
       this.tagService.query().subscribe((res: HttpResponse<ITag[]>) => (this.tags = res.body || []));
+
+      this.postService.query().subscribe((res: HttpResponse<IPost[]>) => (this.posts = res.body || []));
     });
   }
 
@@ -98,6 +102,7 @@ export class PostUpdateComponent implements OnInit {
       userId: post.userId,
       categories: post.categories,
       tags: post.tags,
+      pageId: post.pageId,
     });
   }
 
@@ -163,6 +168,7 @@ export class PostUpdateComponent implements OnInit {
       userId: this.editForm.get(['userId'])!.value,
       categories: this.editForm.get(['categories'])!.value,
       tags: this.editForm.get(['tags'])!.value,
+      pageId: this.editForm.get(['pageId'])!.value,
     };
   }
 

@@ -1,11 +1,11 @@
-id;name;description
-1;Table;projection Versatile
-2;Integration;bypassing SCSI applications
-3;e-commerce;Fresh
-4;transmitting XML orchestrate;Nevada enterprise Belarussian Ruble
-5;fuchsia;Soap Chad Regional
-6;architectures red;Dominica
-7;Program Identity;fresh-thinking Designer
-8;array;Chicken violet
-9;Home Loan Account deposit;HDD
-10;pink Investor;compress
+id;name;description;recomendation_category
+1;Table;projection Versatile;false
+2;ivory bypassing SCSI;HTTP e-commerce;false
+3;Chief;programming Berkshire Chips;true
+4;enterprise Belarussian Ruble;fuchsia;true
+5;Nevada;Regional;false
+6;Georgia Games;Persevering Program;true
+7;Indiana web services;Realigned front-end;false
+8;violet New Mexico North Carolina;Fresh;true
+9;pink Investor;compress;false
+10;plug-and-play;Versatile real-time Rustic;true

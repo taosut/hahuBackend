@@ -20,6 +20,8 @@ public interface UserGroupMapper extends EntityMapper<UserGroupDTO, UserGroup> {
     @Mapping(target = "removeNotification", ignore = true)
     @Mapping(target = "schedules", ignore = true)
     @Mapping(target = "removeSchedule", ignore = true)
+    @Mapping(target = "schoolProgresses", ignore = true)
+    @Mapping(target = "removeSchoolProgress", ignore = true)
     @Mapping(target = "removeUser", ignore = true)
     @Mapping(target = "removeOwner", ignore = true)
     @Mapping(source = "schoolId", target = "school")

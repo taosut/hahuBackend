@@ -22,11 +22,11 @@ export class ProfileUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    age: [],
     phone: [null, [Validators.pattern('^\\+[0-9]{12}$')]],
     curentProfilePic: [],
     curentProfilePicContentType: [],
     userId: [],
-    families: [],
   });
 
   constructor(
@@ -50,11 +50,11 @@ export class ProfileUpdateComponent implements OnInit {
   updateForm(profile: IProfile): void {
     this.editForm.patchValue({
       id: profile.id,
+      age: profile.age,
       phone: profile.phone,
       curentProfilePic: profile.curentProfilePic,
       curentProfilePicContentType: profile.curentProfilePicContentType,
       userId: profile.userId,
-      families: profile.families,
     });
   }
 
@@ -102,11 +102,11 @@ export class ProfileUpdateComponent implements OnInit {
     return {
       ...new Profile(),
       id: this.editForm.get(['id'])!.value,
+      age: this.editForm.get(['age'])!.value,
       phone: this.editForm.get(['phone'])!.value,
       curentProfilePicContentType: this.editForm.get(['curentProfilePicContentType'])!.value,
       curentProfilePic: this.editForm.get(['curentProfilePic'])!.value,
       userId: this.editForm.get(['userId'])!.value,
-      families: this.editForm.get(['families'])!.value,
     };
   }
 
@@ -128,16 +128,5 @@ export class ProfileUpdateComponent implements OnInit {
 
   trackById(index: number, item: IUser): any {
     return item.id;
-  }
-
-  getSelected(selectedVals: IUser[], option: IUser): IUser {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
   }
 }

@@ -107,6 +107,10 @@ public class SchoolProgressQueryService extends QueryService<SchoolProgress> {
                 specification = specification.and(buildSpecification(criteria.getUserId(),
                     root -> root.join(SchoolProgress_.user, JoinType.LEFT).get(User_.id)));
             }
+            if (criteria.getUserGroupId() != null) {
+                specification = specification.and(buildSpecification(criteria.getUserGroupId(),
+                    root -> root.join(SchoolProgress_.userGroup, JoinType.LEFT).get(UserGroup_.id)));
+            }
         }
         return specification;
     }

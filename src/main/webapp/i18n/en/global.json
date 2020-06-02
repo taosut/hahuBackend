@@ -30,6 +30,7 @@
         "school": "School",
         "shares": "Shares",
         "views": "Views",
+        "family": "Family",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

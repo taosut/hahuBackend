@@ -22,6 +22,7 @@
       "groupType": "Group Type",
       "notification": "Notification",
       "schedule": "Schedule",
+      "schoolProgress": "School Progress",
       "user": "User",
       "owner": "Owner",
       "school": "School"

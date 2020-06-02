@@ -2,6 +2,10 @@
   "name": "Profile",
   "fields": [
     {
+      "fieldName": "age",
+      "fieldType": "Integer"
+    },
+    {
       "fieldName": "phone",
       "fieldType": "String",
       "fieldValidateRules": ["pattern"],
@@ -22,14 +26,6 @@
       "otherEntityField": "login",
       "ownerSide": true,
       "useJPADerivedIdentifier": true
-    },
-    {
-      "relationshipType": "many-to-many",
-      "otherEntityName": "user",
-      "otherEntityRelationshipName": "profile",
-      "relationshipName": "family",
-      "otherEntityField": "login",
-      "ownerSide": true
     }
   ],
   "changelogDate": "20200311220400",

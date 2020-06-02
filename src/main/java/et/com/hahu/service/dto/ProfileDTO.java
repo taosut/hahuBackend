@@ -2,8 +2,6 @@ package et.com.hahu.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Lob;
 
 /**
@@ -12,6 +10,8 @@ import javax.persistence.Lob;
 public class ProfileDTO implements Serializable {
     
     private Long id;
+
+    private Integer age;
 
     @Pattern(regexp = "^\\+[0-9]{12}$")
     private String phone;
@@ -24,7 +24,6 @@ public class ProfileDTO implements Serializable {
     private Long userId;
 
     private String userLogin;
-    private Set<UserDTO> families = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -32,6 +31,14 @@ public class ProfileDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public String getPhone() {
@@ -74,14 +81,6 @@ public class ProfileDTO implements Serializable {
         this.userLogin = userLogin;
     }
 
-    public Set<UserDTO> getFamilies() {
-        return families;
-    }
-
-    public void setFamilies(Set<UserDTO> users) {
-        this.families = users;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -104,11 +103,11 @@ public class ProfileDTO implements Serializable {
     public String toString() {
         return "ProfileDTO{" +
             "id=" + getId() +
+            ", age=" + getAge() +
             ", phone='" + getPhone() + "'" +
             ", curentProfilePic='" + getCurentProfilePic() + "'" +
             ", userId=" + getUserId() +
             ", userLogin='" + getUserLogin() + "'" +
-            ", families='" + getFamilies() + "'" +
             "}";
     }
 }

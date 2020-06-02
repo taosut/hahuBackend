@@ -78,6 +78,12 @@
       "relationshipName": "shares"
     },
     {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "page",
+      "relationshipName": "post"
+    },
+    {
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "post",
@@ -99,6 +105,13 @@
       "relationshipName": "tag",
       "otherEntityField": "name",
       "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "page",
+      "otherEntityField": "id"
     }
   ],
   "changelogDate": "20200311215200",

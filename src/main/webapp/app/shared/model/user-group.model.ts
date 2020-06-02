@@ -1,5 +1,6 @@
 import { INotification } from 'app/shared/model/notification.model';
 import { ISchedule } from 'app/shared/model/schedule.model';
+import { ISchoolProgress } from 'app/shared/model/school-progress.model';
 import { IUser } from 'app/core/user/user.model';
 import { GroupType } from 'app/shared/model/enumerations/group-type.model';
 
@@ -12,6 +13,7 @@ export interface IUserGroup {
   groupType?: GroupType;
   notifications?: INotification[];
   schedules?: ISchedule[];
+  schoolProgresses?: ISchoolProgress[];
   users?: IUser[];
   owners?: IUser[];
   schoolName?: string;
@@ -28,6 +30,7 @@ export class UserGroup implements IUserGroup {
     public groupType?: GroupType,
     public notifications?: INotification[],
     public schedules?: ISchedule[],
+    public schoolProgresses?: ISchoolProgress[],
     public users?: IUser[],
     public owners?: IUser[],
     public schoolName?: string,

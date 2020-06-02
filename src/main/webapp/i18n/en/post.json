@@ -31,9 +31,11 @@
       "like": "Like",
       "views": "Views",
       "shares": "Shares",
+      "post": "Post",
       "user": "User",
       "category": "Category",
-      "tag": "Tag"
+      "tag": "Tag",
+      "page": "Page"
     }
   }
 }

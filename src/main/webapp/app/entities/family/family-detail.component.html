@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="family">
+            <h2><span jhiTranslate="hahuApp.family.detail.title">Family</span> {{ family.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hahuApp.family.hasFamilyControl">Has Family Control</span></dt>
+                <dd>
+                    <span>{{ family.hasFamilyControl }}</span>
+                </dd>
+                <dt><span jhiTranslate="hahuApp.family.user">User</span></dt>
+                <dd>
+                    {{ family.userLogin }}
+                </dd>
+                <dt><span jhiTranslate="hahuApp.family.parent">Parent</span></dt>
+                <dd>
+                    <span *ngFor="let parent of family.parents; let last = last">
+                        {{ parent.login }}{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/family', family.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,9 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="age" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="phone" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -30,17 +33,6 @@
 
     <changeSet id="20200311220400-1-relations" author="jhipster">
 
-        <createTable tableName="profile_family">
-            <column name="family_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="profile_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="profile_id, family_id" tableName="profile_family"/>
-        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
@@ -58,6 +50,7 @@
                   separator=";"
                   tableName="profile">
             <column name="id" type="numeric"/>
+            <column name="age" type="numeric"/>
             <column name="phone" type="string"/>
             <column name="curent_profile_pic" type="blob"/>
             <column name="curent_profile_pic_content_type" type="string"/>

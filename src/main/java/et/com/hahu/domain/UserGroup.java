@@ -55,6 +55,10 @@ public class UserGroup implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Schedule> schedules = new HashSet<>();
 
+    @OneToMany(mappedBy = "userGroup")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<SchoolProgress> schoolProgresses = new HashSet<>();
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "user_group_user",
@@ -195,6 +199,31 @@ public class UserGroup implements Serializable {
 
     public void setSchedules(Set<Schedule> schedules) {
         this.schedules = schedules;
+    }
+
+    public Set<SchoolProgress> getSchoolProgresses() {
+        return schoolProgresses;
+    }
+
+    public UserGroup schoolProgresses(Set<SchoolProgress> schoolProgresses) {
+        this.schoolProgresses = schoolProgresses;
+        return this;
+    }
+
+    public UserGroup addSchoolProgress(SchoolProgress schoolProgress) {
+        this.schoolProgresses.add(schoolProgress);
+        schoolProgress.setUserGroup(this);
+        return this;
+    }
+
+    public UserGroup removeSchoolProgress(SchoolProgress schoolProgress) {
+        this.schoolProgresses.remove(schoolProgress);
+        schoolProgress.setUserGroup(null);
+        return this;
+    }
+
+    public void setSchoolProgresses(Set<SchoolProgress> schoolProgresses) {
+        this.schoolProgresses = schoolProgresses;
     }
 
     public Set<User> getUsers() {

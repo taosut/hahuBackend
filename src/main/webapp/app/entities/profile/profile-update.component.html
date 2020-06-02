@@ -12,6 +12,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hahuApp.profile.age" for="field_age">Age</label>
+                    <input type="number" class="form-control" name="age" id="field_age"
+                           formControlName="age"/>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="hahuApp.profile.phone" for="field_phone">Phone</label>
                     <input type="text" class="form-control" name="phone" id="field_phone"
                            formControlName="phone"/>
@@ -46,13 +52,6 @@
                     <select class="form-control" id="field_user" name="user" formControlName="userId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label jhiTranslate="hahuApp.profile.family" for="field_families">Family</label>
-                    <select class="form-control" id="field_families" multiple name="families" formControlName="families">
-                        <option [ngValue]="getSelected(editForm.get('families')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
                     </select>
                 </div>
             </div>

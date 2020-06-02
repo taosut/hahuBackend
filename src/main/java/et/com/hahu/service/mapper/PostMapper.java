@@ -14,6 +14,7 @@ public interface PostMapper extends EntityMapper<PostDTO, Post> {
 
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.login", target = "userLogin")
+    @Mapping(source = "page.id", target = "pageId")
     PostDTO toDto(Post post);
 
     @Mapping(target = "postMetaData", ignore = true)
@@ -26,9 +27,12 @@ public interface PostMapper extends EntityMapper<PostDTO, Post> {
     @Mapping(target = "removeViews", ignore = true)
     @Mapping(target = "shares", ignore = true)
     @Mapping(target = "removeShares", ignore = true)
+    @Mapping(target = "posts", ignore = true)
+    @Mapping(target = "removePost", ignore = true)
     @Mapping(source = "userId", target = "user")
     @Mapping(target = "removeCategory", ignore = true)
     @Mapping(target = "removeTag", ignore = true)
+    @Mapping(source = "pageId", target = "page")
     Post toEntity(PostDTO postDTO);
 
     default Post fromId(Long id) {

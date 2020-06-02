@@ -111,6 +111,14 @@
                         <option [ngValue]="getSelected(editForm.get('tags')!.value, tagOption)" *ngFor="let tagOption of tags; trackBy: trackById">{{ tagOption.name }}</option>
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hahuApp.post.page" for="field_page">Page</label>
+                    <select class="form-control" id="field_page" name="page" formControlName="pageId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="postOption.id" *ngFor="let postOption of posts; trackBy: trackById">{{ postOption.id }}</option>
+                    </select>
+                </div>
             </div>
 
             <div>

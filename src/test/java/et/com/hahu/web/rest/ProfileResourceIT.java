@@ -12,26 +12,19 @@ import et.com.hahu.service.ProfileQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -39,13 +32,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link ProfileResource} REST controller.
  */
 @SpringBootTest(classes = HahuApp.class)
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class ProfileResourceIT {
 
-    private static final String DEFAULT_PHONE = "+164353837757";
-    private static final String UPDATED_PHONE = "+386380583768";
+    private static final Integer DEFAULT_AGE = 1;
+    private static final Integer UPDATED_AGE = 2;
+    private static final Integer SMALLER_AGE = 1 - 1;
+
+    private static final String DEFAULT_PHONE = "+775733863805";
+    private static final String UPDATED_PHONE = "+376852504341";
 
     private static final byte[] DEFAULT_CURENT_PROFILE_PIC = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_CURENT_PROFILE_PIC = TestUtil.createByteArray(1, "1");
@@ -55,14 +51,8 @@ public class ProfileResourceIT {
     @Autowired
     private ProfileRepository profileRepository;
 
-    @Mock
-    private ProfileRepository profileRepositoryMock;
-
     @Autowired
     private ProfileMapper profileMapper;
-
-    @Mock
-    private ProfileService profileServiceMock;
 
     @Autowired
     private ProfileService profileService;
@@ -86,6 +76,7 @@ public class ProfileResourceIT {
      */
     public static Profile createEntity(EntityManager em) {
         Profile profile = new Profile()
+            .age(DEFAULT_AGE)
             .phone(DEFAULT_PHONE)
             .curentProfilePic(DEFAULT_CURENT_PROFILE_PIC)
             .curentProfilePicContentType(DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE);
@@ -104,6 +95,7 @@ public class ProfileResourceIT {
      */
     public static Profile createUpdatedEntity(EntityManager em) {
         Profile profile = new Profile()
+            .age(UPDATED_AGE)
             .phone(UPDATED_PHONE)
             .curentProfilePic(UPDATED_CURENT_PROFILE_PIC)
             .curentProfilePicContentType(UPDATED_CURENT_PROFILE_PIC_CONTENT_TYPE);
@@ -135,6 +127,7 @@ public class ProfileResourceIT {
         List<Profile> profileList = profileRepository.findAll();
         assertThat(profileList).hasSize(databaseSizeBeforeCreate + 1);
         Profile testProfile = profileList.get(profileList.size() - 1);
+        assertThat(testProfile.getAge()).isEqualTo(DEFAULT_AGE);
         assertThat(testProfile.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testProfile.getCurentProfilePic()).isEqualTo(DEFAULT_CURENT_PROFILE_PIC);
         assertThat(testProfile.getCurentProfilePicContentType()).isEqualTo(DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE);
@@ -212,31 +205,12 @@ public class ProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(profile.getId().intValue())))
+            .andExpect(jsonPath("$.[*].age").value(hasItem(DEFAULT_AGE)))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
             .andExpect(jsonPath("$.[*].curentProfilePicContentType").value(hasItem(DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].curentProfilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_CURENT_PROFILE_PIC))));
     }
     
-    @SuppressWarnings({"unchecked"})
-    public void getAllProfilesWithEagerRelationshipsIsEnabled() throws Exception {
-        when(profileServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restProfileMockMvc.perform(get("/api/profiles?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(profileServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public void getAllProfilesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(profileServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restProfileMockMvc.perform(get("/api/profiles?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(profileServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
     @Test
     @Transactional
     public void getProfile() throws Exception {
@@ -248,6 +222,7 @@ public class ProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(profile.getId().intValue()))
+            .andExpect(jsonPath("$.age").value(DEFAULT_AGE))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
             .andExpect(jsonPath("$.curentProfilePicContentType").value(DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE))
             .andExpect(jsonPath("$.curentProfilePic").value(Base64Utils.encodeToString(DEFAULT_CURENT_PROFILE_PIC)));
@@ -270,6 +245,111 @@ public class ProfileResourceIT {
 
         defaultProfileShouldBeFound("id.lessThanOrEqual=" + id);
         defaultProfileShouldNotBeFound("id.lessThan=" + id);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProfilesByAgeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where age equals to DEFAULT_AGE
+        defaultProfileShouldBeFound("age.equals=" + DEFAULT_AGE);
+
+        // Get all the profileList where age equals to UPDATED_AGE
+        defaultProfileShouldNotBeFound("age.equals=" + UPDATED_AGE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByAgeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where age not equals to DEFAULT_AGE
+        defaultProfileShouldNotBeFound("age.notEquals=" + DEFAULT_AGE);
+
+        // Get all the profileList where age not equals to UPDATED_AGE
+        defaultProfileShouldBeFound("age.notEquals=" + UPDATED_AGE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByAgeIsInShouldWork() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where age in DEFAULT_AGE or UPDATED_AGE
+        defaultProfileShouldBeFound("age.in=" + DEFAULT_AGE + "," + UPDATED_AGE);
+
+        // Get all the profileList where age equals to UPDATED_AGE
+        defaultProfileShouldNotBeFound("age.in=" + UPDATED_AGE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByAgeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where age is not null
+        defaultProfileShouldBeFound("age.specified=true");
+
+        // Get all the profileList where age is null
+        defaultProfileShouldNotBeFound("age.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByAgeIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where age is greater than or equal to DEFAULT_AGE
+        defaultProfileShouldBeFound("age.greaterThanOrEqual=" + DEFAULT_AGE);
+
+        // Get all the profileList where age is greater than or equal to UPDATED_AGE
+        defaultProfileShouldNotBeFound("age.greaterThanOrEqual=" + UPDATED_AGE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByAgeIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where age is less than or equal to DEFAULT_AGE
+        defaultProfileShouldBeFound("age.lessThanOrEqual=" + DEFAULT_AGE);
+
+        // Get all the profileList where age is less than or equal to SMALLER_AGE
+        defaultProfileShouldNotBeFound("age.lessThanOrEqual=" + SMALLER_AGE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByAgeIsLessThanSomething() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where age is less than DEFAULT_AGE
+        defaultProfileShouldNotBeFound("age.lessThan=" + DEFAULT_AGE);
+
+        // Get all the profileList where age is less than UPDATED_AGE
+        defaultProfileShouldBeFound("age.lessThan=" + UPDATED_AGE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProfilesByAgeIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        profileRepository.saveAndFlush(profile);
+
+        // Get all the profileList where age is greater than DEFAULT_AGE
+        defaultProfileShouldNotBeFound("age.greaterThan=" + DEFAULT_AGE);
+
+        // Get all the profileList where age is greater than SMALLER_AGE
+        defaultProfileShouldBeFound("age.greaterThan=" + SMALLER_AGE);
     }
 
 
@@ -366,26 +446,6 @@ public class ProfileResourceIT {
         defaultProfileShouldNotBeFound("userId.equals=" + (userId + 1));
     }
 
-
-    @Test
-    @Transactional
-    public void getAllProfilesByFamilyIsEqualToSomething() throws Exception {
-        // Initialize the database
-        profileRepository.saveAndFlush(profile);
-        User family = UserResourceIT.createEntity(em);
-        em.persist(family);
-        em.flush();
-        profile.addFamily(family);
-        profileRepository.saveAndFlush(profile);
-        Long familyId = family.getId();
-
-        // Get all the profileList where family equals to familyId
-        defaultProfileShouldBeFound("familyId.equals=" + familyId);
-
-        // Get all the profileList where family equals to familyId + 1
-        defaultProfileShouldNotBeFound("familyId.equals=" + (familyId + 1));
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -394,6 +454,7 @@ public class ProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(profile.getId().intValue())))
+            .andExpect(jsonPath("$.[*].age").value(hasItem(DEFAULT_AGE)))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
             .andExpect(jsonPath("$.[*].curentProfilePicContentType").value(hasItem(DEFAULT_CURENT_PROFILE_PIC_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].curentProfilePic").value(hasItem(Base64Utils.encodeToString(DEFAULT_CURENT_PROFILE_PIC))));
@@ -443,6 +504,7 @@ public class ProfileResourceIT {
         // Disconnect from session so that the updates on updatedProfile are not directly saved in db
         em.detach(updatedProfile);
         updatedProfile
+            .age(UPDATED_AGE)
             .phone(UPDATED_PHONE)
             .curentProfilePic(UPDATED_CURENT_PROFILE_PIC)
             .curentProfilePicContentType(UPDATED_CURENT_PROFILE_PIC_CONTENT_TYPE);
@@ -457,6 +519,7 @@ public class ProfileResourceIT {
         List<Profile> profileList = profileRepository.findAll();
         assertThat(profileList).hasSize(databaseSizeBeforeUpdate);
         Profile testProfile = profileList.get(profileList.size() - 1);
+        assertThat(testProfile.getAge()).isEqualTo(UPDATED_AGE);
         assertThat(testProfile.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testProfile.getCurentProfilePic()).isEqualTo(UPDATED_CURENT_PROFILE_PIC);
         assertThat(testProfile.getCurentProfilePicContentType()).isEqualTo(UPDATED_CURENT_PROFILE_PIC_CONTENT_TYPE);

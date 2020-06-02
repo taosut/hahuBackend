@@ -91,6 +91,17 @@ public class CacheConfiguration {
             createCache(cm, et.com.hahu.domain.Post.class.getName() + ".shares");
             createCache(cm, et.com.hahu.domain.Shares.class.getName());
             createCache(cm, et.com.hahu.domain.Views.class.getName());
+            createCache(cm, et.com.hahu.domain.UserGroup.class.getName() + ".schoolProgresses");
+            createCache(cm, et.com.hahu.domain.Post.class.getName() + ".posts");
+            createCache(cm, et.com.hahu.domain.Category.class.getName() + ".profiles");
+            createCache(cm, et.com.hahu.domain.Profile.class.getName() + ".categories");
+            createCache(cm, et.com.hahu.domain.Preference.class.getName());
+            createCache(cm, et.com.hahu.domain.Preference.class.getName() + ".categories");
+            createCache(cm, et.com.hahu.domain.Family.class.getName());
+            createCache(cm, et.com.hahu.domain.Family.class.getName() + ".families");
+            createCache(cm, et.com.hahu.domain.Category.class.getName() + ".preferences");
+            createCache(cm, et.com.hahu.domain.Family.class.getName() + ".users");
+            createCache(cm, et.com.hahu.domain.Family.class.getName() + ".parents");
             // jhipster-needle-ehcache-add-entry
         };
     }

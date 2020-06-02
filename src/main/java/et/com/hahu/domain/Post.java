@@ -89,6 +89,10 @@ public class Post implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Shares> shares = new HashSet<>();
 
+    @OneToMany(mappedBy = "page")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Post> posts = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties(value = "posts", allowSetters = true)
     private User user;
@@ -106,6 +110,10 @@ public class Post implements Serializable {
                joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
     private Set<Tag> tags = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "posts", allowSetters = true)
+    private Post page;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -384,6 +392,31 @@ public class Post implements Serializable {
         this.shares = shares;
     }
 
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public Post posts(Set<Post> posts) {
+        this.posts = posts;
+        return this;
+    }
+
+    public Post addPost(Post post) {
+        this.posts.add(post);
+        post.setPage(this);
+        return this;
+    }
+
+    public Post removePost(Post post) {
+        this.posts.remove(post);
+        post.setPage(null);
+        return this;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
     public User getUser() {
         return user;
     }
@@ -445,6 +478,19 @@ public class Post implements Serializable {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    public Post getPage() {
+        return page;
+    }
+
+    public Post page(Post post) {
+        this.page = post;
+        return this;
+    }
+
+    public void setPage(Post post) {
+        this.page = post;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -38,5 +38,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="tag"/>
         
+        <addForeignKeyConstraint baseColumnNames="page_id"
+                                 baseTableName="post"
+                                 constraintName="fk_post_page_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="post"/>
+
     </changeSet>
 </databaseChangeLog>

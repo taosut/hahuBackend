@@ -25,6 +25,13 @@
       "otherEntityRelationshipName": "schoolProgress",
       "relationshipName": "user",
       "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "userGroup",
+      "otherEntityRelationshipName": "schoolProgress",
+      "relationshipName": "userGroup",
+      "otherEntityField": "name"
     }
   ],
   "changelogDate": "20200311220000",

@@ -3,6 +3,7 @@ package et.com.hahu.web.rest;
 import et.com.hahu.HahuApp;
 import et.com.hahu.domain.SchoolProgress;
 import et.com.hahu.domain.User;
+import et.com.hahu.domain.UserGroup;
 import et.com.hahu.repository.SchoolProgressRepository;
 import et.com.hahu.service.SchoolProgressService;
 import et.com.hahu.service.dto.SchoolProgressDTO;
@@ -582,6 +583,26 @@ public class SchoolProgressResourceIT {
 
         // Get all the schoolProgressList where user equals to userId + 1
         defaultSchoolProgressShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllSchoolProgressesByUserGroupIsEqualToSomething() throws Exception {
+        // Initialize the database
+        schoolProgressRepository.saveAndFlush(schoolProgress);
+        UserGroup userGroup = UserGroupResourceIT.createEntity(em);
+        em.persist(userGroup);
+        em.flush();
+        schoolProgress.setUserGroup(userGroup);
+        schoolProgressRepository.saveAndFlush(schoolProgress);
+        Long userGroupId = userGroup.getId();
+
+        // Get all the schoolProgressList where userGroup equals to userGroupId
+        defaultSchoolProgressShouldBeFound("userGroupId.equals=" + userGroupId);
+
+        // Get all the schoolProgressList where userGroup equals to userGroupId + 1
+        defaultSchoolProgressShouldNotBeFound("userGroupId.equals=" + (userGroupId + 1));
     }
 
     /**

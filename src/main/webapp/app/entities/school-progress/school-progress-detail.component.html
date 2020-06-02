@@ -28,6 +28,12 @@
                 <dd>
                     {{ schoolProgress.userLogin }}
                 </dd>
+                <dt><span jhiTranslate="hahuApp.schoolProgress.userGroup">User Group</span></dt>
+                <dd>
+                    <div *ngIf="schoolProgress.userGroupId">
+                        <a [routerLink]="['/user-group', schoolProgress.userGroupId, 'view']">{{ schoolProgress.userGroupName }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

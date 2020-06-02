@@ -69,6 +69,12 @@
                         <a [routerLink]="['/tag', tag?.id, 'view']">{{ tag.name }}</a>{{ last ? '' : ', ' }}
                     </span>
                 </dd>
+                <dt><span jhiTranslate="hahuApp.post.page">Page</span></dt>
+                <dd>
+                    <div *ngIf="post.pageId">
+                        <a [routerLink]="['/post', post.pageId, 'view']">{{ post.pageId }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

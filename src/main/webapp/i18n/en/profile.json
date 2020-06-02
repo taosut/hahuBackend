@@ -16,10 +16,10 @@
       "detail": {
         "title": "Profile"
       },
+      "age": "Age",
       "phone": "Phone",
       "curentProfilePic": "Curent Profile Pic",
-      "user": "User",
-      "family": "Family"
+      "user": "User"
     }
   }
 }

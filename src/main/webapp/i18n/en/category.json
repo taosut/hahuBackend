@@ -18,7 +18,9 @@
       },
       "name": "Name",
       "description": "Description",
-      "post": "Post"
+      "recomendationCategory": "Recomendation Category",
+      "post": "Post",
+      "preference": "Preference"
     }
   }
 }

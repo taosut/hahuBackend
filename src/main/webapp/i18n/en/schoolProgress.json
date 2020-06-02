@@ -20,7 +20,8 @@
       "year": "Year",
       "semester": "Semester",
       "result": "Result",
-      "user": "User"
+      "user": "User",
+      "userGroup": "User Group"
     }
   }
 }

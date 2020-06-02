@@ -3,6 +3,7 @@ package et.com.hahu.web.rest;
 import et.com.hahu.HahuApp;
 import et.com.hahu.domain.Category;
 import et.com.hahu.domain.Post;
+import et.com.hahu.domain.Preference;
 import et.com.hahu.repository.CategoryRepository;
 import et.com.hahu.service.CategoryService;
 import et.com.hahu.service.dto.CategoryDTO;
@@ -41,6 +42,9 @@ public class CategoryResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_RECOMENDATION_CATEGORY = false;
+    private static final Boolean UPDATED_RECOMENDATION_CATEGORY = true;
+
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -70,7 +74,8 @@ public class CategoryResourceIT {
     public static Category createEntity(EntityManager em) {
         Category category = new Category()
             .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .recomendationCategory(DEFAULT_RECOMENDATION_CATEGORY);
         return category;
     }
     /**
@@ -82,7 +87,8 @@ public class CategoryResourceIT {
     public static Category createUpdatedEntity(EntityManager em) {
         Category category = new Category()
             .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .recomendationCategory(UPDATED_RECOMENDATION_CATEGORY);
         return category;
     }
 
@@ -108,6 +114,7 @@ public class CategoryResourceIT {
         Category testCategory = categoryList.get(categoryList.size() - 1);
         assertThat(testCategory.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCategory.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testCategory.isRecomendationCategory()).isEqualTo(DEFAULT_RECOMENDATION_CATEGORY);
     }
 
     @Test
@@ -143,7 +150,8 @@ public class CategoryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(category.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].recomendationCategory").value(hasItem(DEFAULT_RECOMENDATION_CATEGORY.booleanValue())));
     }
     
     @Test
@@ -158,7 +166,8 @@ public class CategoryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(category.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.recomendationCategory").value(DEFAULT_RECOMENDATION_CATEGORY.booleanValue()));
     }
 
 
@@ -339,6 +348,58 @@ public class CategoryResourceIT {
 
     @Test
     @Transactional
+    public void getAllCategoriesByRecomendationCategoryIsEqualToSomething() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where recomendationCategory equals to DEFAULT_RECOMENDATION_CATEGORY
+        defaultCategoryShouldBeFound("recomendationCategory.equals=" + DEFAULT_RECOMENDATION_CATEGORY);
+
+        // Get all the categoryList where recomendationCategory equals to UPDATED_RECOMENDATION_CATEGORY
+        defaultCategoryShouldNotBeFound("recomendationCategory.equals=" + UPDATED_RECOMENDATION_CATEGORY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByRecomendationCategoryIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where recomendationCategory not equals to DEFAULT_RECOMENDATION_CATEGORY
+        defaultCategoryShouldNotBeFound("recomendationCategory.notEquals=" + DEFAULT_RECOMENDATION_CATEGORY);
+
+        // Get all the categoryList where recomendationCategory not equals to UPDATED_RECOMENDATION_CATEGORY
+        defaultCategoryShouldBeFound("recomendationCategory.notEquals=" + UPDATED_RECOMENDATION_CATEGORY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByRecomendationCategoryIsInShouldWork() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where recomendationCategory in DEFAULT_RECOMENDATION_CATEGORY or UPDATED_RECOMENDATION_CATEGORY
+        defaultCategoryShouldBeFound("recomendationCategory.in=" + DEFAULT_RECOMENDATION_CATEGORY + "," + UPDATED_RECOMENDATION_CATEGORY);
+
+        // Get all the categoryList where recomendationCategory equals to UPDATED_RECOMENDATION_CATEGORY
+        defaultCategoryShouldNotBeFound("recomendationCategory.in=" + UPDATED_RECOMENDATION_CATEGORY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByRecomendationCategoryIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where recomendationCategory is not null
+        defaultCategoryShouldBeFound("recomendationCategory.specified=true");
+
+        // Get all the categoryList where recomendationCategory is null
+        defaultCategoryShouldNotBeFound("recomendationCategory.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllCategoriesByPostIsEqualToSomething() throws Exception {
         // Initialize the database
         categoryRepository.saveAndFlush(category);
@@ -356,6 +417,26 @@ public class CategoryResourceIT {
         defaultCategoryShouldNotBeFound("postId.equals=" + (postId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByPreferenceIsEqualToSomething() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+        Preference preference = PreferenceResourceIT.createEntity(em);
+        em.persist(preference);
+        em.flush();
+        category.addPreference(preference);
+        categoryRepository.saveAndFlush(category);
+        Long preferenceId = preference.getId();
+
+        // Get all the categoryList where preference equals to preferenceId
+        defaultCategoryShouldBeFound("preferenceId.equals=" + preferenceId);
+
+        // Get all the categoryList where preference equals to preferenceId + 1
+        defaultCategoryShouldNotBeFound("preferenceId.equals=" + (preferenceId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -365,7 +446,8 @@ public class CategoryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(category.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].recomendationCategory").value(hasItem(DEFAULT_RECOMENDATION_CATEGORY.booleanValue())));
 
         // Check, that the count call also returns 1
         restCategoryMockMvc.perform(get("/api/categories/count?sort=id,desc&" + filter))
@@ -413,7 +495,8 @@ public class CategoryResourceIT {
         em.detach(updatedCategory);
         updatedCategory
             .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .recomendationCategory(UPDATED_RECOMENDATION_CATEGORY);
         CategoryDTO categoryDTO = categoryMapper.toDto(updatedCategory);
 
         restCategoryMockMvc.perform(put("/api/categories")
@@ -427,6 +510,7 @@ public class CategoryResourceIT {
         Category testCategory = categoryList.get(categoryList.size() - 1);
         assertThat(testCategory.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCategory.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testCategory.isRecomendationCategory()).isEqualTo(UPDATED_RECOMENDATION_CATEGORY);
     }
 
     @Test

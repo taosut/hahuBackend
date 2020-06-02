@@ -21,6 +21,10 @@ public class SchoolProgressDTO implements Serializable {
     private Long userId;
 
     private String userLogin;
+
+    private Long userGroupId;
+
+    private String userGroupName;
     
     public Long getId() {
         return id;
@@ -78,6 +82,22 @@ public class SchoolProgressDTO implements Serializable {
         this.userLogin = userLogin;
     }
 
+    public Long getUserGroupId() {
+        return userGroupId;
+    }
+
+    public void setUserGroupId(Long userGroupId) {
+        this.userGroupId = userGroupId;
+    }
+
+    public String getUserGroupName() {
+        return userGroupName;
+    }
+
+    public void setUserGroupName(String userGroupName) {
+        this.userGroupName = userGroupName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -106,6 +126,8 @@ public class SchoolProgressDTO implements Serializable {
             ", result=" + getResult() +
             ", userId=" + getUserId() +
             ", userLogin='" + getUserLogin() + "'" +
+            ", userGroupId=" + getUserGroupId() +
+            ", userGroupName='" + getUserGroupName() + "'" +
             "}";
     }
 }

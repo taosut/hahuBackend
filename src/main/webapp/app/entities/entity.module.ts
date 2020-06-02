@@ -84,6 +84,14 @@ import { RouterModule } from '@angular/router';
         path: 'views',
         loadChildren: () => import('./views/views.module').then(m => m.HahuViewsModule),
       },
+      {
+        path: 'preference',
+        loadChildren: () => import('./preference/preference.module').then(m => m.HahuPreferenceModule),
+      },
+      {
+        path: 'family',
+        loadChildren: () => import('./family/family.module').then(m => m.HahuFamilyModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

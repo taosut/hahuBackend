@@ -15,6 +15,8 @@ public interface CategoryMapper extends EntityMapper<CategoryDTO, Category> {
 
     @Mapping(target = "posts", ignore = true)
     @Mapping(target = "removePost", ignore = true)
+    @Mapping(target = "preferences", ignore = true)
+    @Mapping(target = "removePreference", ignore = true)
     Category toEntity(CategoryDTO categoryDTO);
 
     default Category fromId(Long id) {

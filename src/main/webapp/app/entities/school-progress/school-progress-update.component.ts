@@ -9,6 +9,10 @@ import { ISchoolProgress, SchoolProgress } from 'app/shared/model/school-progres
 import { SchoolProgressService } from './school-progress.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { IUserGroup } from 'app/shared/model/user-group.model';
+import { UserGroupService } from 'app/entities/user-group/user-group.service';
+
+type SelectableEntity = IUser | IUserGroup;
 
 @Component({
   selector: 'jhi-school-progress-update',
@@ -17,6 +21,7 @@ import { UserService } from 'app/core/user/user.service';
 export class SchoolProgressUpdateComponent implements OnInit {
   isSaving = false;
   users: IUser[] = [];
+  usergroups: IUserGroup[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -25,11 +30,13 @@ export class SchoolProgressUpdateComponent implements OnInit {
     semester: [],
     result: [],
     userId: [],
+    userGroupId: [],
   });
 
   constructor(
     protected schoolProgressService: SchoolProgressService,
     protected userService: UserService,
+    protected userGroupService: UserGroupService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -39,6 +46,8 @@ export class SchoolProgressUpdateComponent implements OnInit {
       this.updateForm(schoolProgress);
 
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.userGroupService.query().subscribe((res: HttpResponse<IUserGroup[]>) => (this.usergroups = res.body || []));
     });
   }
 
@@ -50,6 +59,7 @@ export class SchoolProgressUpdateComponent implements OnInit {
       semester: schoolProgress.semester,
       result: schoolProgress.result,
       userId: schoolProgress.userId,
+      userGroupId: schoolProgress.userGroupId,
     });
   }
 
@@ -76,6 +86,7 @@ export class SchoolProgressUpdateComponent implements OnInit {
       semester: this.editForm.get(['semester'])!.value,
       result: this.editForm.get(['result'])!.value,
       userId: this.editForm.get(['userId'])!.value,
+      userGroupId: this.editForm.get(['userGroupId'])!.value,
     };
   }
 
@@ -95,7 +106,7 @@ export class SchoolProgressUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IUser): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
 }

@@ -26,20 +26,20 @@ public class ProfileCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
+    private IntegerFilter age;
+
     private StringFilter phone;
 
     private LongFilter userId;
-
-    private LongFilter familyId;
 
     public ProfileCriteria() {
     }
 
     public ProfileCriteria(ProfileCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
+        this.age = other.age == null ? null : other.age.copy();
         this.phone = other.phone == null ? null : other.phone.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
-        this.familyId = other.familyId == null ? null : other.familyId.copy();
     }
 
     @Override
@@ -53,6 +53,14 @@ public class ProfileCriteria implements Serializable, Criteria {
 
     public void setId(LongFilter id) {
         this.id = id;
+    }
+
+    public IntegerFilter getAge() {
+        return age;
+    }
+
+    public void setAge(IntegerFilter age) {
+        this.age = age;
     }
 
     public StringFilter getPhone() {
@@ -71,14 +79,6 @@ public class ProfileCriteria implements Serializable, Criteria {
         this.userId = userId;
     }
 
-    public LongFilter getFamilyId() {
-        return familyId;
-    }
-
-    public void setFamilyId(LongFilter familyId) {
-        this.familyId = familyId;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -91,18 +91,18 @@ public class ProfileCriteria implements Serializable, Criteria {
         final ProfileCriteria that = (ProfileCriteria) o;
         return
             Objects.equals(id, that.id) &&
+            Objects.equals(age, that.age) &&
             Objects.equals(phone, that.phone) &&
-            Objects.equals(userId, that.userId) &&
-            Objects.equals(familyId, that.familyId);
+            Objects.equals(userId, that.userId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
+        age,
         phone,
-        userId,
-        familyId
+        userId
         );
     }
 
@@ -111,9 +111,9 @@ public class ProfileCriteria implements Serializable, Criteria {
     public String toString() {
         return "ProfileCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
+                (age != null ? "age=" + age + ", " : "") +
                 (phone != null ? "phone=" + phone + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
-                (familyId != null ? "familyId=" + familyId + ", " : "") +
             "}";
     }
 

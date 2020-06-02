@@ -19,6 +19,7 @@ export class CategoryUpdateComponent implements OnInit {
     id: [],
     name: [],
     description: [],
+    recomendationCategory: [],
   });
 
   constructor(protected categoryService: CategoryService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -34,6 +35,7 @@ export class CategoryUpdateComponent implements OnInit {
       id: category.id,
       name: category.name,
       description: category.description,
+      recomendationCategory: category.recomendationCategory,
     });
   }
 
@@ -57,6 +59,7 @@ export class CategoryUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       description: this.editForm.get(['description'])!.value,
+      recomendationCategory: this.editForm.get(['recomendationCategory'])!.value,
     };
   }
 

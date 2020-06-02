@@ -34,6 +34,7 @@
                     <th scope="col"  jhiSortBy="popularityIndex"><span jhiTranslate="hahuApp.post.popularityIndex">Popularity Index</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="trendingIndex"><span jhiTranslate="hahuApp.post.trendingIndex">Trending Index</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="hahuApp.post.user">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="pageId"><span jhiTranslate="hahuApp.post.page">Page</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -57,6 +58,11 @@
                     <td>{{ post.trendingIndex }}</td>
                     <td>
                         {{ post.userLogin }}
+                    </td>
+                    <td>
+                        <div *ngIf="post.pageId">
+                            <a [routerLink]="['/post', post.pageId , 'view']" >{{ post.pageId }}</a>
+                        </div>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

@@ -28,6 +28,7 @@
                     <th scope="col"  jhiSortBy="semester"><span jhiTranslate="hahuApp.schoolProgress.semester">Semester</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="result"><span jhiTranslate="hahuApp.schoolProgress.result">Result</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="hahuApp.schoolProgress.user">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userGroupName"><span jhiTranslate="hahuApp.schoolProgress.userGroup">User Group</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -40,6 +41,11 @@
                     <td>{{ schoolProgress.result }}</td>
                     <td>
                         {{ schoolProgress.userLogin }}
+                    </td>
+                    <td>
+                        <div *ngIf="schoolProgress.userGroupId">
+                            <a [routerLink]="['/user-group', schoolProgress.userGroupId , 'view']" >{{ schoolProgress.userGroupName }}</a>
+                        </div>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

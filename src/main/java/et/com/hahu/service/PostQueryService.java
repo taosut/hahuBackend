@@ -135,6 +135,10 @@ public class PostQueryService extends QueryService<Post> {
                 specification = specification.and(buildSpecification(criteria.getSharesId(),
                     root -> root.join(Post_.shares, JoinType.LEFT).get(Shares_.id)));
             }
+            if (criteria.getPostId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPostId(),
+                    root -> root.join(Post_.posts, JoinType.LEFT).get(Post_.id)));
+            }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUserId(),
                     root -> root.join(Post_.user, JoinType.LEFT).get(User_.id)));
@@ -146,6 +150,10 @@ public class PostQueryService extends QueryService<Post> {
             if (criteria.getTagId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTagId(),
                     root -> root.join(Post_.tags, JoinType.LEFT).get(Tag_.id)));
+            }
+            if (criteria.getPageId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPageId(),
+                    root -> root.join(Post_.page, JoinType.LEFT).get(Post_.id)));
             }
         }
         return specification;

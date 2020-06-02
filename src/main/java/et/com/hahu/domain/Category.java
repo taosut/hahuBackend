@@ -31,10 +31,18 @@ public class Category implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "recomendation_category")
+    private Boolean recomendationCategory;
+
     @ManyToMany(mappedBy = "categories")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnore
     private Set<Post> posts = new HashSet<>();
+
+    @ManyToMany(mappedBy = "categories")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnore
+    private Set<Preference> preferences = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -71,6 +79,19 @@ public class Category implements Serializable {
         this.description = description;
     }
 
+    public Boolean isRecomendationCategory() {
+        return recomendationCategory;
+    }
+
+    public Category recomendationCategory(Boolean recomendationCategory) {
+        this.recomendationCategory = recomendationCategory;
+        return this;
+    }
+
+    public void setRecomendationCategory(Boolean recomendationCategory) {
+        this.recomendationCategory = recomendationCategory;
+    }
+
     public Set<Post> getPosts() {
         return posts;
     }
@@ -94,6 +115,31 @@ public class Category implements Serializable {
 
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
+    }
+
+    public Set<Preference> getPreferences() {
+        return preferences;
+    }
+
+    public Category preferences(Set<Preference> preferences) {
+        this.preferences = preferences;
+        return this;
+    }
+
+    public Category addPreference(Preference preference) {
+        this.preferences.add(preference);
+        preference.getCategories().add(this);
+        return this;
+    }
+
+    public Category removePreference(Preference preference) {
+        this.preferences.remove(preference);
+        preference.getCategories().remove(this);
+        return this;
+    }
+
+    public void setPreferences(Set<Preference> preferences) {
+        this.preferences = preferences;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -120,6 +166,7 @@ public class Category implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", recomendationCategory='" + isRecomendationCategory() + "'" +
             "}";
     }
 }

@@ -8,6 +8,10 @@
     {
       "fieldName": "description",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "recomendationCategory",
+      "fieldType": "Boolean"
     }
   ],
   "relationships": [
@@ -16,6 +20,14 @@
       "otherEntityName": "post",
       "otherEntityRelationshipName": "category",
       "relationshipName": "post",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "preference",
+      "otherEntityRelationshipName": "category",
+      "relationshipName": "preference",
       "otherEntityField": "id",
       "ownerSide": false
     }

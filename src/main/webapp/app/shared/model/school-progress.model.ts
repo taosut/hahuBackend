@@ -6,6 +6,8 @@ export interface ISchoolProgress {
   result?: number;
   userLogin?: string;
   userId?: number;
+  userGroupName?: string;
+  userGroupId?: number;
 }
 
 export class SchoolProgress implements ISchoolProgress {
@@ -16,6 +18,8 @@ export class SchoolProgress implements ISchoolProgress {
     public semester?: string,
     public result?: number,
     public userLogin?: string,
-    public userId?: number
+    public userId?: number,
+    public userGroupName?: string,
+    public userGroupId?: number
   ) {}
 }

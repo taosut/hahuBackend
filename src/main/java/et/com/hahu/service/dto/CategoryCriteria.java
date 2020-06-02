@@ -30,7 +30,11 @@ public class CategoryCriteria implements Serializable, Criteria {
 
     private StringFilter description;
 
+    private BooleanFilter recomendationCategory;
+
     private LongFilter postId;
+
+    private LongFilter preferenceId;
 
     public CategoryCriteria() {
     }
@@ -39,7 +43,9 @@ public class CategoryCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
         this.description = other.description == null ? null : other.description.copy();
+        this.recomendationCategory = other.recomendationCategory == null ? null : other.recomendationCategory.copy();
         this.postId = other.postId == null ? null : other.postId.copy();
+        this.preferenceId = other.preferenceId == null ? null : other.preferenceId.copy();
     }
 
     @Override
@@ -71,12 +77,28 @@ public class CategoryCriteria implements Serializable, Criteria {
         this.description = description;
     }
 
+    public BooleanFilter getRecomendationCategory() {
+        return recomendationCategory;
+    }
+
+    public void setRecomendationCategory(BooleanFilter recomendationCategory) {
+        this.recomendationCategory = recomendationCategory;
+    }
+
     public LongFilter getPostId() {
         return postId;
     }
 
     public void setPostId(LongFilter postId) {
         this.postId = postId;
+    }
+
+    public LongFilter getPreferenceId() {
+        return preferenceId;
+    }
+
+    public void setPreferenceId(LongFilter preferenceId) {
+        this.preferenceId = preferenceId;
     }
 
 
@@ -93,7 +115,9 @@ public class CategoryCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
             Objects.equals(description, that.description) &&
-            Objects.equals(postId, that.postId);
+            Objects.equals(recomendationCategory, that.recomendationCategory) &&
+            Objects.equals(postId, that.postId) &&
+            Objects.equals(preferenceId, that.preferenceId);
     }
 
     @Override
@@ -102,7 +126,9 @@ public class CategoryCriteria implements Serializable, Criteria {
         id,
         name,
         description,
-        postId
+        recomendationCategory,
+        postId,
+        preferenceId
         );
     }
 
@@ -113,7 +139,9 @@ public class CategoryCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
+                (recomendationCategory != null ? "recomendationCategory=" + recomendationCategory + ", " : "") +
                 (postId != null ? "postId=" + postId + ", " : "") +
+                (preferenceId != null ? "preferenceId=" + preferenceId + ", " : "") +
             "}";
     }
 

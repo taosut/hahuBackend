@@ -15,6 +15,8 @@ public class CategoryDTO implements Serializable {
 
     private String description;
 
+    private Boolean recomendationCategory;
+
     
     public Long getId() {
         return id;
@@ -38,6 +40,14 @@ public class CategoryDTO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean isRecomendationCategory() {
+        return recomendationCategory;
+    }
+
+    public void setRecomendationCategory(Boolean recomendationCategory) {
+        this.recomendationCategory = recomendationCategory;
     }
 
     @Override
@@ -64,6 +74,7 @@ public class CategoryDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", recomendationCategory='" + isRecomendationCategory() + "'" +
             "}";
     }
 }

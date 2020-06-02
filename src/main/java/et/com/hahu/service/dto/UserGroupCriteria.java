@@ -53,6 +53,8 @@ public class UserGroupCriteria implements Serializable, Criteria {
 
     private LongFilter scheduleId;
 
+    private LongFilter schoolProgressId;
+
     private LongFilter userId;
 
     private LongFilter ownerId;
@@ -68,6 +70,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
         this.groupType = other.groupType == null ? null : other.groupType.copy();
         this.notificationId = other.notificationId == null ? null : other.notificationId.copy();
         this.scheduleId = other.scheduleId == null ? null : other.scheduleId.copy();
+        this.schoolProgressId = other.schoolProgressId == null ? null : other.schoolProgressId.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
         this.ownerId = other.ownerId == null ? null : other.ownerId.copy();
         this.schoolId = other.schoolId == null ? null : other.schoolId.copy();
@@ -118,6 +121,14 @@ public class UserGroupCriteria implements Serializable, Criteria {
         this.scheduleId = scheduleId;
     }
 
+    public LongFilter getSchoolProgressId() {
+        return schoolProgressId;
+    }
+
+    public void setSchoolProgressId(LongFilter schoolProgressId) {
+        this.schoolProgressId = schoolProgressId;
+    }
+
     public LongFilter getUserId() {
         return userId;
     }
@@ -158,6 +169,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
             Objects.equals(groupType, that.groupType) &&
             Objects.equals(notificationId, that.notificationId) &&
             Objects.equals(scheduleId, that.scheduleId) &&
+            Objects.equals(schoolProgressId, that.schoolProgressId) &&
             Objects.equals(userId, that.userId) &&
             Objects.equals(ownerId, that.ownerId) &&
             Objects.equals(schoolId, that.schoolId);
@@ -171,6 +183,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
         groupType,
         notificationId,
         scheduleId,
+        schoolProgressId,
         userId,
         ownerId,
         schoolId
@@ -186,6 +199,7 @@ public class UserGroupCriteria implements Serializable, Criteria {
                 (groupType != null ? "groupType=" + groupType + ", " : "") +
                 (notificationId != null ? "notificationId=" + notificationId + ", " : "") +
                 (scheduleId != null ? "scheduleId=" + scheduleId + ", " : "") +
+                (schoolProgressId != null ? "schoolProgressId=" + schoolProgressId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
                 (schoolId != null ? "schoolId=" + schoolId + ", " : "") +

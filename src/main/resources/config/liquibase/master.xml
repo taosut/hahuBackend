@@ -34,6 +34,8 @@
     <include file="config/liquibase/changelog/20200314191700_added_entity_School.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200528075152_added_entity_Shares.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200528075252_added_entity_Views.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200602120241_added_entity_Preference.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200602120341_added_entity_Family.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200311215200_added_entity_constraints_Post.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200311215300_added_entity_constraints_Comment.xml" relativeToChangelogFile="false"/>
@@ -52,6 +54,8 @@
     <include file="config/liquibase/changelog/20200314191700_added_entity_constraints_School.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200528075152_added_entity_constraints_Shares.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200528075252_added_entity_constraints_Views.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200602120241_added_entity_constraints_Preference.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200602120341_added_entity_constraints_Family.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

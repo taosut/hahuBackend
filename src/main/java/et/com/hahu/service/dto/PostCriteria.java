@@ -91,11 +91,15 @@ public class PostCriteria implements Serializable, Criteria {
 
     private LongFilter sharesId;
 
+    private LongFilter postId;
+
     private LongFilter userId;
 
     private LongFilter categoryId;
 
     private LongFilter tagId;
+
+    private LongFilter pageId;
 
     public PostCriteria() {
     }
@@ -115,9 +119,11 @@ public class PostCriteria implements Serializable, Criteria {
         this.likeId = other.likeId == null ? null : other.likeId.copy();
         this.viewsId = other.viewsId == null ? null : other.viewsId.copy();
         this.sharesId = other.sharesId == null ? null : other.sharesId.copy();
+        this.postId = other.postId == null ? null : other.postId.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
         this.categoryId = other.categoryId == null ? null : other.categoryId.copy();
         this.tagId = other.tagId == null ? null : other.tagId.copy();
+        this.pageId = other.pageId == null ? null : other.pageId.copy();
     }
 
     @Override
@@ -237,6 +243,14 @@ public class PostCriteria implements Serializable, Criteria {
         this.sharesId = sharesId;
     }
 
+    public LongFilter getPostId() {
+        return postId;
+    }
+
+    public void setPostId(LongFilter postId) {
+        this.postId = postId;
+    }
+
     public LongFilter getUserId() {
         return userId;
     }
@@ -259,6 +273,14 @@ public class PostCriteria implements Serializable, Criteria {
 
     public void setTagId(LongFilter tagId) {
         this.tagId = tagId;
+    }
+
+    public LongFilter getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(LongFilter pageId) {
+        this.pageId = pageId;
     }
 
 
@@ -286,9 +308,11 @@ public class PostCriteria implements Serializable, Criteria {
             Objects.equals(likeId, that.likeId) &&
             Objects.equals(viewsId, that.viewsId) &&
             Objects.equals(sharesId, that.sharesId) &&
+            Objects.equals(postId, that.postId) &&
             Objects.equals(userId, that.userId) &&
             Objects.equals(categoryId, that.categoryId) &&
-            Objects.equals(tagId, that.tagId);
+            Objects.equals(tagId, that.tagId) &&
+            Objects.equals(pageId, that.pageId);
     }
 
     @Override
@@ -308,9 +332,11 @@ public class PostCriteria implements Serializable, Criteria {
         likeId,
         viewsId,
         sharesId,
+        postId,
         userId,
         categoryId,
-        tagId
+        tagId,
+        pageId
         );
     }
 
@@ -332,9 +358,11 @@ public class PostCriteria implements Serializable, Criteria {
                 (likeId != null ? "likeId=" + likeId + ", " : "") +
                 (viewsId != null ? "viewsId=" + viewsId + ", " : "") +
                 (sharesId != null ? "sharesId=" + sharesId + ", " : "") +
+                (postId != null ? "postId=" + postId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
                 (tagId != null ? "tagId=" + tagId + ", " : "") +
+                (pageId != null ? "pageId=" + pageId + ", " : "") +
             "}";
     }
 

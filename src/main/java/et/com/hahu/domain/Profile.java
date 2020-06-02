@@ -7,8 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A Profile.
@@ -22,6 +20,9 @@ public class Profile implements Serializable {
 
     @Id
     private Long id;
+
+    @Column(name = "age")
+    private Integer age;
 
     @Pattern(regexp = "^\\+[0-9]{12}$")
     @Column(name = "phone")
@@ -40,13 +41,6 @@ public class Profile implements Serializable {
     @JoinColumn(name = "id")
     private User user;
 
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(name = "profile_family",
-               joinColumns = @JoinColumn(name = "profile_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "family_id", referencedColumnName = "id"))
-    private Set<User> families = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -54,6 +48,19 @@ public class Profile implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public Profile age(Integer age) {
+        this.age = age;
+        return this;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public String getPhone() {
@@ -107,29 +114,6 @@ public class Profile implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public Set<User> getFamilies() {
-        return families;
-    }
-
-    public Profile families(Set<User> users) {
-        this.families = users;
-        return this;
-    }
-
-    public Profile addFamily(User user) {
-        this.families.add(user);
-        return this;
-    }
-
-    public Profile removeFamily(User user) {
-        this.families.remove(user);
-        return this;
-    }
-
-    public void setFamilies(Set<User> users) {
-        this.families = users;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -153,6 +137,7 @@ public class Profile implements Serializable {
     public String toString() {
         return "Profile{" +
             "id=" + getId() +
+            ", age=" + getAge() +
             ", phone='" + getPhone() + "'" +
             ", curentProfilePic='" + getCurentProfilePic() + "'" +
             ", curentProfilePicContentType='" + getCurentProfilePicContentType() + "'" +

@@ -36,6 +36,8 @@ public class SchoolProgressCriteria implements Serializable, Criteria {
 
     private LongFilter userId;
 
+    private LongFilter userGroupId;
+
     public SchoolProgressCriteria() {
     }
 
@@ -46,6 +48,7 @@ public class SchoolProgressCriteria implements Serializable, Criteria {
         this.semester = other.semester == null ? null : other.semester.copy();
         this.result = other.result == null ? null : other.result.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
+        this.userGroupId = other.userGroupId == null ? null : other.userGroupId.copy();
     }
 
     @Override
@@ -101,6 +104,14 @@ public class SchoolProgressCriteria implements Serializable, Criteria {
         this.userId = userId;
     }
 
+    public LongFilter getUserGroupId() {
+        return userGroupId;
+    }
+
+    public void setUserGroupId(LongFilter userGroupId) {
+        this.userGroupId = userGroupId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -117,7 +128,8 @@ public class SchoolProgressCriteria implements Serializable, Criteria {
             Objects.equals(year, that.year) &&
             Objects.equals(semester, that.semester) &&
             Objects.equals(result, that.result) &&
-            Objects.equals(userId, that.userId);
+            Objects.equals(userId, that.userId) &&
+            Objects.equals(userGroupId, that.userGroupId);
     }
 
     @Override
@@ -128,7 +140,8 @@ public class SchoolProgressCriteria implements Serializable, Criteria {
         year,
         semester,
         result,
-        userId
+        userId,
+        userGroupId
         );
     }
 
@@ -142,6 +155,7 @@ public class SchoolProgressCriteria implements Serializable, Criteria {
                 (semester != null ? "semester=" + semester + ", " : "") +
                 (result != null ? "result=" + result + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
+                (userGroupId != null ? "userGroupId=" + userGroupId + ", " : "") +
             "}";
     }
 

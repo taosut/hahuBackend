@@ -39,6 +39,10 @@ public class SchoolProgress implements Serializable {
     @JsonIgnoreProperties(value = "schoolProgresses", allowSetters = true)
     private User user;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = "schoolProgresses", allowSetters = true)
+    private UserGroup userGroup;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -111,6 +115,19 @@ public class SchoolProgress implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public UserGroup getUserGroup() {
+        return userGroup;
+    }
+
+    public SchoolProgress userGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
+        return this;
+    }
+
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

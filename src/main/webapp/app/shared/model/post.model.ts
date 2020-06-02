@@ -27,10 +27,12 @@ export interface IPost {
   likes?: ILikes[];
   views?: IViews[];
   shares?: IShares[];
+  posts?: IPost[];
   userLogin?: string;
   userId?: number;
   categories?: ICategory[];
   tags?: ITag[];
+  pageId?: number;
 }
 
 export class Post implements IPost {
@@ -52,9 +54,11 @@ export class Post implements IPost {
     public likes?: ILikes[],
     public views?: IViews[],
     public shares?: IShares[],
+    public posts?: IPost[],
     public userLogin?: string,
     public userId?: number,
     public categories?: ICategory[],
-    public tags?: ITag[]
+    public tags?: ITag[],
+    public pageId?: number
   ) {}
 }

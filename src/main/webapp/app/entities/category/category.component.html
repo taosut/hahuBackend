@@ -25,6 +25,7 @@
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="hahuApp.category.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="description"><span jhiTranslate="hahuApp.category.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="recomendationCategory"><span jhiTranslate="hahuApp.category.recomendationCategory">Recomendation Category</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -33,6 +34,7 @@
                     <td><a [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a></td>
                     <td>{{ category.name }}</td>
                     <td>{{ category.description }}</td>
+                    <td>{{ category.recomendationCategory }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

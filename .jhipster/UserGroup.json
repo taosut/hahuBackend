@@ -35,6 +35,12 @@
       "relationshipName": "schedule"
     },
     {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "schoolProgress",
+      "otherEntityRelationshipName": "userGroup",
+      "relationshipName": "schoolProgress"
+    },
+    {
       "relationshipType": "many-to-many",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "userGroup",

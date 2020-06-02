@@ -23,6 +23,7 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="age"><span jhiTranslate="hahuApp.profile.age">Age</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="phone"><span jhiTranslate="hahuApp.profile.phone">Phone</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="curentProfilePic"><span jhiTranslate="hahuApp.profile.curentProfilePic">Curent Profile Pic</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="hahuApp.profile.user">User</span> <fa-icon icon="sort"></fa-icon></th>
@@ -32,6 +33,7 @@
             <tbody>
                 <tr *ngFor="let profile of profiles ;trackBy: trackId">
                     <td><a [routerLink]="['/profile', profile.id, 'view']">{{ profile.id }}</a></td>
+                    <td>{{ profile.age }}</td>
                     <td>{{ profile.phone }}</td>
                     <td>
                         <a *ngIf="profile.curentProfilePic" (click)="openFile(profile.curentProfilePicContentType, profile.curentProfilePic)">
